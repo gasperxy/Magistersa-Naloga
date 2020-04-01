@@ -351,7 +351,7 @@ Vozliščno barvanje grafa $G=(V, E)$ je preslikava $ c: V \rightarrow $, za kat
 Povezavam grafa velikokrat priredimo t.i. uteži, ponavadi iz množice pozitivnih realnih števil. Take utežitve grafa imajo v praksi veliko uporabnost. Poleg tega, da uteži priredimo povezavam, lahko uteži priredimo tudi vozliščem. z namenom, da bomo ločili med rezličnimi utežitvami grafa, definirajmo povezavno utežitev kot preslikavo $\omega : E(G) \rightarrow S$. Na podoben način definiramo vozliščno utežitev kot preslikavo $\omega : V(G) \rightarrow S$. V kolikor graf utežimo tako povezavno kot vozliščno rečemo, da imamo polno utežitev grafa $G$. V našem primeru bo množica uteži $S$ vedno končna množica prvih $k$ naravnih števil, kar lahko označimo kot $S = \left[k\right] = \{1,2, \ldots, k\}$. S pomočjo zgornjih dejstev lahko definiramo naslednjo definicijo.
 \begin{definicija}
 	Definiramo \textbf{$k$-utežitev} grafa $G$ kot preslikavo 
-	$$ \omega : D \rightarrow {1,2,\ldots, k},$$
+	$$ \omega : D \rightarrow \{1,2,\ldots, k\},$$
 	kjer za množico $D$ vzamemo $E(G)$, $V(G)$ ali $V(G) \cup E(G)$.
 \end{definicija}
 Hitro lahko vidimo, da nam $k$-utežitev $\omega$ lahko inducira neko barvanje grafa $G$, tako da za barvo nekega vozlišča $v$ vzamemo vsoto uteži na povezavah incidenčnih $v$. Označimo
@@ -370,7 +370,7 @@ Označimo najmanjši tak $k$, da za graf $G$ obstaja $k$-utežitev, ki je pravil
 \end{domneva}
 Za sedaj še niti vemo, ali obstaja fiksna zgornja meja za vsak graf. V članku ~\cite{base}, kjer je bila zastavljena zgornja domneva so pokazali, da obstaja končna množica realnih števil, tako da utežitev z temi števili inducira pravilno barvanje vsakega grafa. Vendar je ta rezultat še vedno precej odmaknjen od željene domneve. Kasneje je bil v ~\cite{weigheting12345} predstavljen eleganten algoritem, ki doseže zahtevano utežitev z utežmi v $\{1,2,3,4,5\}$. To je do sedaj tudi najboljši razultat za splošne grafe. Tekom naloge bomo spoznali nekaj metod s katerimi se lahko lotimo zgornjega problema za neke specifične družine grafov ter se probamo čim bolj približati željenemu rezultatu. Za začetek pa si oglejmo nekaj preprostih družin, za katere pokaže, da zgornja meja velja.
 \subsection{Izračun $\mu$ za nekatere družine grafov}
-Večina tega razdelka je povzeta po ~\cite{examples}. Primere sem predelal in jih mislim da precej jasno razložil. V članku so rezultati napisani precej
+Večina tega razdelka je povzeta po ~\cite{examples}. Primere sem predelal in jih mislim da precej jasno razložil. nekatere rezultate sem tudi razložil na malo drugačen način.
 
 \subsubsection{$\mu(P_n)$}
 
@@ -592,9 +592,20 @@ n + 1 + i; \text{ } i < n \\
 \lfloor \frac{5n-5}{2}\rfloor;\text{ } i=n
 \end{cases} .
  $$
- To pa ja pravilno barvanje $K_n$ in zato $\mu(K_n) = $.
+ To pa ja pravilno barvanje $K_n$ in zato $\mu(K_n) = 3$.
  
  \subsubsection{$\mu(K_{m,n})$}
+ 
+Naj bo $K_{m,n}$ polni dvodelni graf z biparticijo $A,B$. V kolikor $m \neq n$ je vsako vozlišče v $A$ različne stopnje kot vsako vozlišče v $B$. To pomeni, da če vse povezave utežimo z $1$ dobimo pravilno inducirano barvanje in torej $\mu(K_{m,n}) = 1$. V kolikor $m=n$ oštevilčimo vozlišča v $A$ kot $v_1, v_2, \ldots, v_m$ in vozlišča v $B$ kot $u_1, u_2, \ldots, u_n$. Sedaj definiramo utežitev kot
+$$
+\omega(v_i u_j) = 
+\begin{cases}
+1 ; \text { } (i, j) \in [m-1] \times [n] \\
+2; \text{ } i=m; j \in [n]
+\end{cases}.
+$$
+Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) = m + 1$ vozlišča $v_i$ pa $c_{\omega}(v_i) = m$ z izjemo $c_{\omega}(v_m) = 2n$. To je torej pravilno barvanje in $\mu(K_{m,n}) = 2$.
+
  
  \subsection{$\mu$ za grafe z posebnimi pogoji}
  V tem razdelku bomo obravnavali nekaj rezultatov za grafe, ki imajo neke dodatne pogoje.
@@ -615,6 +626,8 @@ Posledica te trditve je, da za 3-barljive grafe 1-2-3 domneva drži. Dejansko pa
 \end{posledica}
 
  \subsubsection{Dvodelni grafi in drevesa }
+ 
+ V tem razdelku bom sledil članku ~\cite{examples}.
  
  Tu si bomo ogledali zračun $\mu$ za dvodelne grafe. Ugotovili bomo, da za večino dvodelnih grafov $\mu(G) = 2$ vključno z drevesi vendar to ne velja za vse dvodelne grafe.
  
@@ -645,6 +658,14 @@ dokaz da 1-2-3 domneva velja za grafe, ki imajo dovolj velik "d" in temelji na v
  \subsection{Mogoče $\mu$ za končno mn. realnih števil}
  
  V osnovnem članku, kjer je bila zastavljena domneva, so pokazali, da za ustrezno utežitev poljubnega grafa zadošča končna množice realnih števil. Dokaz uporablja verjetnostne metode. Moje mnenje je, da bi ta del sicer sodil bolj na začetek metode saj je bil en izmed prvih rezultatov, ki motivira iskanje meje za $\mu$.
+ 
+ \section{Polna verzija 1-2-3 Domneve}
+ 
+ V zgornjih primerih smo vedno vzeli utežitev povezav in nato gledali inducirano barvanje. Polna verzija dovoljuje tudi utežitve vozlišč iz iste množice kot uteži za povezave, inducirano barvanje pa je potem vsota uteži na povezavah + utež na vozlišču. Domneva se na tak način nekako preimenuje v 1-2 domnevo, kar naj bi pomenilo, da v polni verziji potrebujemo le uteži 1 in 2. Še ena variacija je, da za končno barvanje vzamemo še vsoto uteži na sosednjih vozliščih za kar je domneva zopet tipa 1-2-3. Več to tem naprimer v preglednem članku~\cite{pregledni} in v~\cite{totalv}
+ 
+ \section{Algebraične metode}
+ 
+ V članku~\cite{algebraic} je opisan algebraični pristop k temu problemu. No dejansko je "nastavitev" tam malo drugačna vendar vseeno ima veliko povezav z originalno verzijo. Tak pristop kot je opisan v tem članku mi je zelo všeč ker nekako precej "čist".
  
 % Literatura:
 % Primer navajanja na http://www.fmf.uni-lj.si/storage/24240/LiteraturaM.pdf,
