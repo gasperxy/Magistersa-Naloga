@@ -116,6 +116,8 @@
 \renewcommand{\C}{\mathbb C}
 \newcommand{\Q}{\mathbb Q}
 
+
+
 % \DeclareMathOperator{\tr}{tr}  % morda potrebuješ operator za sled ali kaj drugega?
 
 % bold matematika znotraj \textbf{ }, tudi v naslovih, kot \omega spodaj
@@ -341,21 +343,21 @@ Za $v \in V(G)$ lahko definiramo t.i. odprto soseščino vozlišča $N(v)$. To j
 V tem razdelku bi predstavil idejo 1-2-3 domneve. Tore kako pridemo iz uteženega grafa do barvanja ter argumentiram zakaj lahko pridemo do pravilnega barvanja, če nimamo omejitev na množici uteži. Na tem mestu bi tudi predstavil domnevo, povzeto po~\cite{base}.
 Nekako bo tudi treba poimenovati engleški term 'edge weighting graph coloring'. Za sedaj bom temu rekel barvanje grafa z uteženimi povezavami.
 \subsection{Barvanje grafa}
-Vozliščno barvanje grafa $G=(V, E)$ je preslikava $ c: V \rightarrow S$, za katero velja $c(v) \neq c(u)$, če $vu \in E$. Množica $S$ je množica razpoložljivih barv. Poleg vozliščnega barvanja poznamo tudi povezavno barvanje, vendar nas to tekom magisterske naloge nebo zanimalo. Zato bomo od sedaj dalje z barvanjem grafa vedno mislili vozliščno barvanje. Pri barvanju nas ponavadi predvsem zanima velikost množice $S$. Drugače povedano, zanima nas najmanjši $k \in \mathbb{N}$, tako da G premore $k$-barvanje $c : V \rightarrow \{1,2,\ldots, k\}$. Tak najmanjši $k$ označimo z $\chi(G)$ in ga imenujemo kromatično število grafa $G$. V kolikor je $ \chi(G) \le k$ rečemo, da je graf $k$-obarljiv.
+Vozliščno barvanje grafa $G=(V, E)$ je preslikava $ c: V \rightarrow $, za katero velja $c(v) \neq c(u)$, če $vu \in E$. Množica $S$ je množica razpoložljivih barv. Poleg vozliščnega barvanja poznamo tudi povezavno barvanje, vendar nas to tekom magisterske naloge nebo zanimalo. Zato bomo od sedaj dalje z barvanjem grafa vedno mislili vozliščno barvanje. Pri barvanju nas ponavadi predvsem zanima velikost množice $S$. Drugače povedano, zanima nas najmanjši $k \in \mathbb{N}$, tako da G premore $k$-barvanje $c : V \rightarrow \{1,2,\ldots, k\}$. Tak najmanjši $k$ označimo z $\chi(G)$ in ga imenujemo kromatično število grafa $G$. V kolikor je $ \chi(G) \le k$ rečemo, da je graf $k$-obarljiv.
 
-\subsection{Uteženi grafi}
-Povezavam grafa velikokrat priredimo t.i. uteži, ponavadi iz množice pozitivnih realnih števil. Take utežitve grafa imajo v praksi veliko uporabnost. Poleg tega, da uteži priredimo povezavam, lahko uteži priredimo tudi vozliščem. z namenom, da bomo ločili med rezličnimi utežitvami grafa, definirajmo povezavno utežitev kot preslikavo $\omega : E(G) \rightarrow S$. Na podoben način definiramo vozliščno utežitev kot preslikavo $\omega : V(G) \rightarrow S$. V kolikor graf utežimo tako povezavno kot vozliščno rečemo, da imamo polno utežitev grafa $G$. V našem primeru bo množica uteži $S$ vedno končna množica prvih $k$ naravnih števil, kar lahko označimo kot $S = \left[k\right] = \{1,2, \ldots, k\}$. S pomočjo zgornjih dejstev lahko definiramo naslednjo definicijo.
-\begin{definicija}
-	 Definiramo \textbf{$k$-utežitev} grafa $G$ kot preslikavo 
-	 $$ \omega : D \rightarrow {1,2,\ldots, k},$$
-	 kjer za množico $D$ vzamemo $E(G)$, $V(G)$ ali $V(G) \cup E(G)$.
-\end{definicija}
+
 
 \subsection{Barvanje grafa z utežmi}
-V prejšnem razdelku smo definirali pojem $k$-uteženega grafa. Hitro lahko vidimo, da nam $k$-utežitev $\omega$ lahko inducira neko barvanje grafa $G$, tako da za barvo nekega vozlišča $v$ vzamemo vsoto uteži na povezavah incidenčnih $v$. Označimo
+Povezavam grafa velikokrat priredimo t.i. uteži, ponavadi iz množice pozitivnih realnih števil. Take utežitve grafa imajo v praksi veliko uporabnost. Poleg tega, da uteži priredimo povezavam, lahko uteži priredimo tudi vozliščem. z namenom, da bomo ločili med rezličnimi utežitvami grafa, definirajmo povezavno utežitev kot preslikavo $\omega : E(G) \rightarrow S$. Na podoben način definiramo vozliščno utežitev kot preslikavo $\omega : V(G) \rightarrow S$. V kolikor graf utežimo tako povezavno kot vozliščno rečemo, da imamo polno utežitev grafa $G$. V našem primeru bo množica uteži $S$ vedno končna množica prvih $k$ naravnih števil, kar lahko označimo kot $S = \left[k\right] = \{1,2, \ldots, k\}$. S pomočjo zgornjih dejstev lahko definiramo naslednjo definicijo.
+\begin{definicija}
+	Definiramo \textbf{$k$-utežitev} grafa $G$ kot preslikavo 
+	$$ \omega : D \rightarrow {1,2,\ldots, k},$$
+	kjer za množico $D$ vzamemo $E(G)$, $V(G)$ ali $V(G) \cup E(G)$.
+\end{definicija}
+Hitro lahko vidimo, da nam $k$-utežitev $\omega$ lahko inducira neko barvanje grafa $G$, tako da za barvo nekega vozlišča $v$ vzamemo vsoto uteži na povezavah incidenčnih $v$. Označimo
 $$ c_{\omega} (v) = \sum_{u \in N(v)} \omega(vu). $$
- V kolikor imamo polno utežitev, prištejemo še utež vozlišča $v$. Seveda se tu porodi vprašanje, ali je tako barvanje sploh pravilno, torej ali je izpolnjena zahteva, da sta sosednji vozlišči pobarvani različno. Hitro ugotovimo, da to ni možno za graf $K_2$, zato bomo v nadaljevanju predpostavljali, da je $G$ povezan graf, ki ni $K_2$. Prepričajmo se sedaj, da za vsak graf $G$ obstaja tak $k \in \mathbb{N}$, tako da obstaja $k$-utežitev grafa $G$, ki porodi pravilno barvanje. Še več pokazali bomo, da je vsako vozlišče različne barve. V ta namen označimo $\Delta = \Delta(G)$ maksimalno stopnjo in oštevilčimo povezave grafa $G$ kot $e_1, e_2, \ldots, e_m$, kjer je $m = |E(G)|$. Sedaj definiramo utežitev kot 
-$$\omega(e_i) = \Delta ^i .$$
+ V kolikor imamo polno utežitev, prištejemo še utež vozlišča $v$. Seveda se tu porodi vprašanje, ali je tako barvanje sploh pravilno, torej ali je izpolnjena zahteva, da sta sosednji vozlišči pobarvani različno. Hitro ugotovimo, da to ni možno za graf $K_2$, zato bomo v nadaljevanju predpostavljali, da je $G$ povezan graf, ki ni $K_2$. Prepričajmo se sedaj, da za vsak graf $G$ obstaja tak $k \in \mathbb{N}$, tako da obstaja $k$-utežitev grafa $G$, ki porodi pravilno barvanje. Še več pokazali bomo, da je vsako vozlišče različne barve. V ta namen oštevilčimo povezave grafa $G$ kot $e_1, e_2, \ldots, e_m$, kjer je $m = |E(G)|$. Sedaj definiramo utežitev kot 
+$$\omega(e_i) = 2 ^i .$$
 Očitno ta utežitev porodi pravilno barvanje grafa $G$. Vendar je zgornja ocena precej slaba ter predvsem različna za vsak graf.
 \begin{definicija}
 	Rečemo, da je $k$-utežitev $\omega$ grafa $G$  \textbf{pravilno barvanje z utežmi}, če za vsak $uv \in E(G)$ velja
@@ -367,7 +369,11 @@ Označimo najmanjši tak $k$, da za graf $G$ obstaja $k$-utežitev, ki je pravil
 	(1-2-3 Domneva; Karonski– Luczak–Thomason~\cite{base}) Naj bo $G$ povezan graf, ki ni $K_2$. Tedaj je $\mu(G) \le 3.$ 
 \end{domneva}
 Za sedaj še niti vemo, ali obstaja fiksna zgornja meja za vsak graf. V članku ~\cite{base}, kjer je bila zastavljena zgornja domneva so pokazali, da obstaja končna množica realnih števil, tako da utežitev z temi števili inducira pravilno barvanje vsakega grafa. Vendar je ta rezultat še vedno precej odmaknjen od željene domneve. Kasneje je bil v ~\cite{weigheting12345} predstavljen eleganten algoritem, ki doseže zahtevano utežitev z utežmi v $\{1,2,3,4,5\}$. To je do sedaj tudi najboljši razultat za splošne grafe. Tekom naloge bomo spoznali nekaj metod s katerimi se lahko lotimo zgornjega problema za neke specifične družine grafov ter se probamo čim bolj približati željenemu rezultatu. Za začetek pa si oglejmo nekaj preprostih družin, za katere pokaže, da zgornja meja velja.
-\begin{primer}[Izračun za grafe $P_n$]
+\subsection{Izračun $\mu$ za nekatere družine grafov}
+Večina tega razdelka je povzeta po ~\cite{examples}. Primere sem predelal in jih mislim da precej jasno razložil. V članku so rezultati napisani precej
+
+\subsubsection{$\mu(P_n)$}
+
 	Ker je graf $P_2 = K_2$ bomo obravnavali le primer, ko je $n \ge 3$. Najprej oštevilčimo povezave $P_n$ na naraven način kot $e_i = v_i v_{i+1}$ za $i=1,2,\ldots, n-1$. Po kratkem premisleku ugotovimo, da je potreben pogoj za željeno utežitev
 	$$\omega(e_i) \neq \omega(e_j) \text{ v kolikor } |j-i| = 2 .$$
 	Torej povezavi, ki sta na razdalji $2$ morata imeti različne uteži. To drži, saj imata v primeru ko $\omega(e_i) = \omega(e_{i+2})$ vozlišči $v_{i+1}$ in $v_{i+2}$ enako barvo neglede na vrednost $\omega(e_{i+1})$. Polega tega, da je zgornji pogoj potreben, je tudi zadosten. To preprosto vidimo saj smo ugotovili, da povezava $e_{i}$ ne vpliva na barvo vozlišč $v_i$ in $v_{i+1}$ saj obema "pripomore" enako vrednost. Na podlagi zgornjega razmisleka ugotovimo, da $\mu(P_3) = 1$, saj $P_3$ ne vsebuje povezav na razdalji 2. Po drugi strani za $P_n$ definiramo:
@@ -410,10 +416,9 @@ Za sedaj še niti vemo, ali obstaja fiksna zgornja meja za vsak graf. V članku 
 		\caption{Primer utežitve grafa $P_n$.}
 	\end{figure}
 	Res, zgornja utežitev zadošča zgornjemu pogoju. Na sliki ~\ref{fig:pn} vidimo primer neke take utežitvne na grafu $P_n$. Glede na to, da sta zadnji uteži na povezavah $1$ in $2$ lahko sklepamo, da gre na sliki za $P_n$ z $n \equiv 3 \pmod{4}$. Prav tako opazimo, da je pravzaprav pomembno zaporednje uteži $11221\ldots 112$. V tem zaporedju se torej nujno razlikujeta elementa na razdalji 2. Tako lahko zaključimo, da je $\mu(P_n) = 2$ za $n \ge 4$. Podoben razmislem bomo uporabili v naslednjem primeru.
-\end{primer}
 
 
-\begin{primer}[Izračun za grafe $C_n$]
+\subsubsection{$\mu(C_n)$}
 	
 	V prejšnjem primeru smo izračunali število $\mu$ za grafe, ki so poti. Hitro opazimo, da med potjo in ciklom ni veliko razlike. Dodana je le ena povezava med prvim in zadnjim vozliščem. Enako kot v prejšnjem primeru bomo oštevilčili povezave cikla $C_n$ kot $e_1, e_2, \ldots, e_n$, kjer vzamemo $e_n = v_n v_1$. Poizkusimo z enako utežitvijo kot smo jo imeli za poti, torej
 		\begin{equation*}
@@ -423,13 +428,13 @@ Za sedaj še niti vemo, ali obstaja fiksna zgornja meja za vsak graf. V članku 
 	\end{cases}
 	\end{equation*}
 	
-\begin{figure}[H]
+\begin{figure}[]
 	\centering 
 	\begin{subfigure}{0.475\textwidth}
 		\centering 
 		\begin{tikzpicture}
 	
-		[scale=.6,auto=left,main node/.style={draw=none,fill=none}]
+		[scale=.8,auto=left,main node/.style={draw=none,fill=none}]
 		\def \n {7}
 		\node[
 		regular polygon,
@@ -558,81 +563,89 @@ Potreben in zadosten pogoj, ki smo ga uporabili že za primer poti velja tudi za
 
 	
 	
-\end{primer}
+\subsubsection{$\mu(K_n)$}
 
+Poglejmo najprej zakaj $\mu(K_n) \ge 3$. Recimo, da to ne drži. Torej imamo neko $2$-utežitev $\omega$ za $K_n$ iz česar sledi $c_{\omega}(v_i) \neq c_{\omega}{v_j}$ za vsak $ i \neq j$. To pomeni, da mora vsak $c_{\omega}(v_i)$ za $i=1,2,\ldots,n$ pripadati eni izmed $n$ različnih vrednosti v $\{n-1, n, \ldots, 2(n-1)\}$. Tako lahko najdemo vozlišče $v'$ za katerega $c_{\omega}(v') = n-1$ in vozlišče $u'$ za katerega $c_{\omega}(u') = 2(n-1)$, to pa je protislovje saj $\omega(v'u') = 1$ zaradi vozlišča $v'$ in $\omega(v'u') = 2$ zaradi $u'$.
 
-	
+ Pozkusimo sedaj najti $3$-utežitev $\omega$, ki je pravilno barvanje z utežmi. Sedaj imamo za $c_{\omega}(v_i)$ na voljo eno izmed $3n$ vrednosti izmed $\{n-1, n, \ldots, 3(n-1)\}$. Skonstruirali bomo utežitev $\omega$ na naslednji način. Najprej oštevilčimo vozlišča kot $v_1, v_2, \ldots, v_n$. V prvem koraku nastavimo vse uteži na 1. Uteži z vrednostjo 2 in 3 dodelimo povezavam, tako da dobimo strogo naraščajoče zaporedje $\left(c_{\omega}(v_i)\right)_{i \in [n]}$. Označimo še $N_j = \{n, n-1, \ldots, n - j + 1\} \setminus \{v_j\}$ in nastavimo
+ \begin{equation*}
+ \begin{split}
+ \omega(v_1 v_n) &= 2 \text{ za } i \in N_1 \\
+ \omega(v_2v_i) &=2 \text{ za } i \in N_2\\
+ \vdots \\
+ \omega(v_jv_i) &= 2 \text{ za } i \in N_j 
+ \end{split}
+ \end{equation*}
+Sedaj velja 
 
+$$ c_{\omega}(v_i) = \underbrace{n-1}_{\text{Uteži z vr. 1}} + \underbrace{|N_i|}_{\text{Uteži z vr. 2}}   = n-1 + 
+\begin{cases}
+ i; \text{ } i\notin N_i \iff i < n - i +1 \\
+  i - 1;\text{ } i \in N_i \iff i \ge n - i + 1
+\end{cases} $$
+Iz zgornje enačbe vidimo, da zaporedje strogo narašča do največjega $i$, za katerega $ i < n - i +1$ to pa je natanko tedaj ko $ i =  \lfloor \frac{n}{2}\rfloor$. Takrat velja
+$$|N_{i}|  =| N_{i}| \implies c_{\omega}(v_i) = c_{\omega}(v_{i+1}).$$
+Te enakosti se znebimo, tako da dodamo uteži $\omega(v_iv_n) = 3$ za $\lfloor \frac{n}{2}\rfloor < i < n$ in dobimo
+$$c_{\omega}(v_i) =
+\begin{cases}
+n + 1 + i; \text{ } i < n \\
+\lfloor \frac{5n-5}{2}\rfloor;\text{ } i=n
+\end{cases} .
+ $$
+ To pa ja pravilno barvanje $K_n$ in zato $\mu(K_n) = $.
+ 
+ \subsubsection{$\mu(K_{m,n})$}
+ 
+ \subsection{$\mu$ za grafe z posebnimi pogoji}
+ V tem razdelku bomo obravnavali nekaj rezultatov za grafe, ki imajo neke dodatne pogoje.
+ 
+ \subsubsection{3-obarljivi grafi}
+  V ~\cite{base}  sta ... zastavila vprašanje, ki je nato pripeljalo do 1-2-3 domneve in ga v njem tudi dokazala za primer 3-obarljivih grafov.
+  \begin{trditev}
+  	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-barljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
+  \end{trditev}
 
-\section{Integrali po \texorpdfstring{$\omega$}{ω}-kompleksih}
-\subsection{Definicija}
-\begin{definicija}
-  Neskončno zaporedje kompleksnih števil, označeno z $\omega = (\omega_1, \omega_2, \ldots)$,
-  se imenuje \emph{$\omega$-kompleks}.\footnote{To ime je izmišljeno.}
-
-  Črni blok zgoraj je tam namenoma. Označuje, da \LaTeX{} ni znal vrstice prelomiti pravilno
-  in vas na to opozarja. Preoblikujte stavek ali mu pomagajte deliti problematično besedo z
-  ukazom \verb|\hyphenation{an-ti-ko-mu-ta-ti-ven}| v preambuli.
-\end{definicija}
-\begin{trditev}[Znano ime ali avtor]
-  \label{trd:obstoj-omega}
-  Obstaja vsaj en $\omega$-kompleks.
-\end{trditev}
+Posledica te trditve je, da za 3-barljive grafe 1-2-3 domneva drži. Dejansko pa pove še to, če za graf obstaja $k$ barvanje, potem obstaja tudi $k$-utežitev za to barvanje.
 \begin{proof}
-  Naštejmo nekaj primerov:
-  \begin{align}
-    \omega &= (0, 0, 0, \dots), \label{eq:zero-kompleks} \\
-    \omega &= (1, i, -1, -i, 1, \ldots), \nonumber \\
-    \omega &= (0, 1, 2, 3, \ldots). \nonumber \qedhere  % postavi QED na zadnjo vrstico enačbe
-  \end{align}
+	content...
 \end{proof}
 
-\section{Tehnični napotki za pisanje}
+\begin{posledica}
+	Če je $G$ $3$-barljiv graf, potem je $\mu(G) \le 3$.
+\end{posledica}
 
-\subsection{Sklicevanje in citiranje}
-Za sklice uporabljamo \verb|\ref|, za sklice na enačbe \verb|\eqref|, za citate \verb|\cite|. Pri
-sklicevanju in citiranju sklicano številko povežemo s prejšnjo besedo z nedeljivim presledkom
-$\sim$, kot npr.\ \verb|iz trditve~\ref{trd:obstoj-omega} vidimo|.
+ \subsubsection{Dvodelni grafi in drevesa }
+ 
+ Tu si bomo ogledali zračun $\mu$ za dvodelne grafe. Ugotovili bomo, da za večino dvodelnih grafov $\mu(G) = 2$ vključno z drevesi vendar to ne velja za vse dvodelne grafe.
+ 
+ \section{1-2-3-4-5 Izrek}
+ 
+ Ta razdelek sledi članku ~\cite{proof12345}. To je do sedaj tudi najboljša splošna meja $\mu$ za poljubne grafe. Dokaz je algoritmične narave in bi morda bilo zanimivo spisati algoritem ki deluje skladno z dokazom
+ 
+ \begin{izrek}
+ 	Za vsak graf $G$, ki ni $K_2$ obstaja utežitev $\omega : E(G) \rightarrow {1,2,3,4,5}$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
+ \end{izrek}
 
-\begin{primer}
-  Zaporedje~\eqref{eq:zero-kompleks} iz dokaza trditve~\ref{trd:obstoj-omega} na
-  strani~\pageref{trd:obstoj-omega} lahko najdemo tudi v Spletni enciklopediji zaporedij~\cite{oeis}.
-  Citiramo lahko tudi bolj natančno~\cite[trditev 2.1, str.\ 23]{lebedev2009introduction}.
-\end{primer}
+\begin{proof}
+	
+\end{proof}
 
-\subsection{Okrajšave}
-Pri uporabi okrajšav \LaTeX{} za piko vstavi predolg presledek, kot npr. tukaj. Zato se za vsako
-piko, ki ni konec stavka doda presledek običajne širine z ukazom \verb*|\ |, kot npr.\ tukaj.
-Primerjaj z okrajšavo zgoraj za razliko.
+V nadaljevanju tega razdelka bi podal kakšen primer $5$ utežitve nekega grafa.
 
-\subsection{Vstavljanje slik}
-Sliko vstavimo v plavajočem okolju \texttt{figure}. Plavajoča okolja \emph{plavajo} po tekstu, in
-jih lahko postavimo na vrh strani z opcijskim parametrom `\texttt{t}', na lokacijo, kjer je v kodi s
-`\texttt{h}', in če to ne deluje, potem pa lahko rečete \LaTeX u, da ga \emph{res} želite tukaj,
-kjer ste napisali, s `\texttt{h!}'. Lepo je da so vstavljene slike vektorske (recimo \texttt{.pdf}
-ali \texttt{.eps} ali \texttt{.svg}) ali pa \texttt{.png} visoke resolucije (več kot
-\unit[300]{dpi}).  Pod vsako sliko je napis in na vsako sliko se skličemo v besedilu. Primer
-vektorske slike je na sliki~\ref{fig:sample}. Vektorsko sliko prepoznate tako, da močno
-zoomate v sliko, in še vedno ostane gladka. Več informacij je na voljo na
-\url{https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}. Če so slike bitne, kot na
-primer slika~\ref{fig:image}, poskrbite, da so v dovolj visoki resoluciji.
+\subsubsection{1-2-3-4 rezultat za d-regularne grafe}
 
-
-
-
-\subsection{Kako narediti stvarno kazalo}
-Dodate ukaze \verb|\index{polje}| na besede, kjer je pojavijo, kot tukaj\index{tukaj}.
-Več o stvarnih kazalih je na voljo na \url{https://en.wikibooks.org/wiki/LaTeX/Indexing}.
-
-\subsection{Navajanje literature}
-Članke citiramo z uporabo \verb|\cite{pregledni}|, \verb|\cite[text]{label}| ali pa več naenkrat s
-\verb|\cite\{label1, label2}|. Tudi tukaj predhodno besedo in citat povežemo z nedeljivim presledkom
-$\sim$. Na primer~\cite{maingraph}, ali pa \cite{kncoloring}, ali pa
-\cite[str.\ 12]{trobec2015parallel}, \cite[enačba (2.3)]{pereira2016convergence}.
-Vnosi iz \verb|.bib| datoteke, ki niso citirani, se ne prikažejo v seznamu literature, zato jih
-tukaj citiram.~\cite{vene2000categorical}, \cite{gregoric2017stopniceni}, \cite{slak2015induktivni},
-\cite{nsphere}, \cite{kearsley1975linearly}, \cite{STtemplate}, \cite{NunbergerTand}.
-
+Ta rzdelek najdemo v članku ~\cite{regular}. V tem članku sta 2 glavna rezultata in sicer 1-2-3-4 utežitev za d-regularne grafe, kar je narejeno na algoritmičen način. Drugi rezultat pa je,
+dokaz da 1-2-3 domneva velja za grafe, ki imajo dovolj velik "d" in temelji na verjetnostnih metodah. V tem razdelku bi predstavil prvi rezultat z nekaj primeri.
+	
+ 
+ \section{Verjetnostne metode}
+ \subsection{$d$-regularni grafi }
+ 
+ V članku ~\cite{regular} je predstavljena verjetnostna metoda s katero dokažemo 1-2-3 domnevo za regularne grafe z dovolj veliko stopnjo. Sam dokaz uporblja Chernove meje in je precej dolg. Še nisem čisto odločen ali bi vključil to ali kaj drugega
+ \subsection{Mogoče $\mu$ za končno mn. realnih števil}
+ 
+ V osnovnem članku, kjer je bila zastavljena domneva, so pokazali, da za ustrezno utežitev poljubnega grafa zadošča končna množice realnih števil. Dokaz uporablja verjetnostne metode. Moje mnenje je, da bi ta del sicer sodil bolj na začetek metode saj je bil en izmed prvih rezultatov, ki motivira iskanje meje za $\mu$.
+ 
 % Literatura:
 % Primer navajanja na http://www.fmf.uni-lj.si/storage/24240/LiteraturaM.pdf,
 % ampak bi moral stil poskrbeti za vse. Reference se uredijo po abecedi.
