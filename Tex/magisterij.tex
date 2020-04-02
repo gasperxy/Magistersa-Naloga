@@ -611,15 +611,41 @@ Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) =
  V tem razdelku bomo obravnavali nekaj rezultatov za grafe, ki imajo neke dodatne pogoje.
  
  \subsubsection{3-obarljivi grafi}
-  V ~\cite{base}  sta ... zastavila vprašanje, ki je nato pripeljalo do 1-2-3 domneve in ga v njem tudi dokazala za primer 3-obarljivih grafov.
+  V ~\cite{base}  sta ... zastavila vprašanje, ki je nato pripeljalo do 1-2-3 domneve in ga v njem tudi dokazala za primer 3-obarljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem razdelku bo močnejši kot le dokaz, da $\mu(G) = 3$ v kolikor je $G$ 3-obarljiv. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
+  \begin{trditev}
+  	Naj bo $\Gamma$ Abelova grupa z $|\Gamma| = n$ in naj $0$ označuje enoto. Tedaj za vsak $g \in \Gamma$ velja $n g = 0$.
+  \end{trditev}
+
+\begin{proof}
+	Vzemimo poljuben $g \in \Gamma$ in definirajmo preslikavo $f_g : \Gamma \rightarrow \Gamma$ kot
+	$$f_g(h) = g + h .$$
+	Ta preslikava je bijekcija saj je $f_{-g}$ njen inverz. Iz tega sklepamo, da je $ g + \Gamma = \Gamma$ za vsak $g$. Sedaj vidimo, da $ \sum_{h \in \Gamma} h = \sum_{h \in \Gamma} (g + h) = ng + \sum_{h \in \Gamma} h$. Iz tega sledi $ng = 0$.
+\end{proof}
+
+
+\begin{trditev}
+	Naj bo sedaj $\Gamma$ Abelova grupa lihe moči in $|\Gamma| = n$. Tedaj za vsak element $g \in \Gamma$ obstaja $h \in \Gamma$, tako da $g = 2h$.
+\end{trditev}
+
+\begin{proof}
+	Ker je $\Gamma$ Abelova grupa po prejšnji trditvi vemo, da $ 0 = ng$. Prištejemo $g$ na obeh straneh in dobimo $g = (n+1)g$. Sedaj označimo $h = \frac{n + 1}{2}g$ in očitno velja $g = 2h$.
+\end{proof}
+
+Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru ciklične grupe $\mathbb{Z}_4 = \{0,1,2,3\}$, kjer elementa $3$ ne moremo zapisat na tak način.
+
+
   \begin{trditev}
   	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-barljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
   \end{trditev}
 
-Posledica te trditve je, da za 3-barljive grafe 1-2-3 domneva drži. Dejansko pa pove še to, če za graf obstaja $k$ barvanje, potem obstaja tudi $k$-utežitev za to barvanje.
 \begin{proof}
-	content...
+	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \le 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \ in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$ in $0$ na vse ostale. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč ( = $2h$) dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$. Tak popravem utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$ kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
+	
+	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen.
 \end{proof}
+
+
+Posledica te trditve je, da za 3-barljive grafe 1-2-3 domneva drži. Dejansko pa pove še to, če za graf obstaja $k$ barvanje, potem obstaja tudi $k$-utežitev za to barvanje.
 
 \begin{posledica}
 	Če je $G$ $3$-barljiv graf, potem je $\mu(G) \le 3$.
