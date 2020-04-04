@@ -634,22 +634,20 @@ Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) =
 Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru ciklične grupe $\mathbb{Z}_4 = \{0,1,2,3\}$, kjer elementa $3$ ne moremo zapisat na tak način.
 
 
-  \begin{trditev}
+  \begin{izrek}
   	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-barljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
-  \end{trditev}
+  \end{izrek}
 
 \begin{proof}
 	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \le 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \ in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$ in $0$ na vse ostale. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč ( = $2h$) dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$. Tak popravem utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$ kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
 	
-	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen.
+	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$ (???). Zato v tem primeru postopamo malo drugače. ker je graf dvodelen, lahko zapišemo njegovo biparticijo kot $V(G) = A \cup B$. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$. Sedaj na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru pa na poljubni 2 povezavi iz $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
 \end{proof}
 
+Iz zgornjega izreka torej sledi, da domneva velja za $3$-obraljive grafe. Iz utežitve povezav smo na naraven način prišli do barvanja na grafu. Vprašanje je bilo potem ali je to barvanje pravilno. Zgornji izrek pove nekako obratno. Torej če imamo neko $k$-barvanje in je $k$ liho število potem lahko eksplicitno konstruiramo utežitev z $k$ elementi, ki porodi tako barvanje.
 
-Posledica te trditve je, da za 3-barljive grafe 1-2-3 domneva drži. Dejansko pa pove še to, če za graf obstaja $k$ barvanje, potem obstaja tudi $k$-utežitev za to barvanje.
+(V članku~\cite{base} je omenjeno, da se izrek da prilagoditi, tako da grafe lahko utežimo z $\Gamma$, če je graf $|\Gamma| - 3$-obarljiv. Zanmivo bi bilo dodati še ta dodatek ampak moram še premislit, kako spremeniti dokaz. V tem primeru bi lahko našli tudi za grafe, ki so "sodo" obarljivi neko utežitev s sicer malo več utežmi).
 
-\begin{posledica}
-	Če je $G$ $3$-barljiv graf, potem je $\mu(G) \le 3$.
-\end{posledica}
 
  \subsubsection{Dvodelni grafi in drevesa }
  
