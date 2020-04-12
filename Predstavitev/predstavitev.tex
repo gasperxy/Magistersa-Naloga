@@ -2,6 +2,7 @@
 \usetheme{CambridgeUS}
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
+\usepackage[slovene]{babel}
 \usetikzlibrary{quotes} % LATEX and plain TEX
 \usetikzlibrary{arrows,automata,positioning}
 
@@ -62,6 +63,7 @@ Graf $G$ je urejen par $(V, E)$, kjer je množica $V$ množice vozlišč in $E \
 	
 	\end{tikzpicture}
 	\caption{Primer $3$-utežitve, ki porodi pravilno $3$-barvanje.}
+	\label{primer}
 \end{figure}
 
 \end{frame}
@@ -79,7 +81,7 @@ Graf $G$ je urejen par $(V, E)$, kjer je množica $V$ množice vozlišč in $E \
 \subsection{Zgodovinski okvir}
 \begin{frame}
 \begin{itemize}
-	\item Leta 2004 v članku [] zastavljena domneva.
+	\item Leta 2004 zastavljena domneva.
 	\item Leta 2007 dokazano $\mu(G) \le 30$.
 	\item Leta 2008 dokazano $\mu(G) \le 16$.
 	\item Leta 2008 dokazano $\mu(G) \le 13$.
@@ -93,16 +95,18 @@ Graf $G$ je urejen par $(V, E)$, kjer je množica $V$ množice vozlišč in $E \
 \end{frame}
 
 \begin{frame}{Pristopi k 1-2-3 domnevi}
-V teoriji grafov domneve in podobne probleme obravnavamo na več različnih načinov. Nekaj metod in pristopov:
-\begin{itemize}
-	\item Direktno poizkušamo dokazati oziroma zavreči domnevo.
-	\item Pokažemo, da domneva velja za znane družine grafov ($P_n, C_n, K_n, \ldots$).
-	\item Pokažemo, da domneva velja za grafe z nekimi dodatnimi lastnostmi (dvodelni, 3-obarljivi, $\ldots$).
-	\item Pokažemo, da velja neka bolj \textit{omiljena} verzija domneve. Npr. $\mu(G) \le 5$.
+	Nekaj metod in pristopov k domnevi:\pause
+	\begin{itemize}
+		\item Iskanje čim nižje meje za $\mu$ za splošne grafe. \pause
+		\item Pokažemo, da domneva velja ob dodatnih pogojih oziroma za posebne družine grafov ($C_n$, $K_n$, dvodelni grafi, $3$-obarljivi, ...) \pause
+		\item Regularni in iregularni grafi ? \pause
+		\item Verjetnostne metode \pause
+		\item Razne izpeljanke
+		
+	\end{itemize}	
 	
-	\item Verjetnostne metode lahko dokažejo domnevo za dovolj \textit{velike} grafe.
 	
-\end{itemize}
+
 \end{frame}
 
 \subsection{Izračun $\mu$ za poti}
@@ -114,6 +118,7 @@ V primeru $n=2$ imamo graf $K_n$ zato obravnavamo primere ko $n \ge 3$.  Posebaj
 	\label{fig:pn}
 	\begin{tikzpicture}
 	[scale=.7,auto=left,main node/.style={shape=circle,draw,fill=white}]
+	\node[draw=none ] (4) at (5,3) {};
 	\node [main node] (1) at (1,1) [label=below:$v_1$] {1} ;
 	\node [main node](2) at (5,1) [label=below:$v_2$] {2} ;
 	\node [main node](3) at (9,1) [label=below:$v_3$] {1} ;
@@ -126,15 +131,16 @@ V primeru $n=2$ imamo graf $K_n$ zato obravnavamo primere ko $n \ge 3$.  Posebaj
 	;
 	
 	\end{tikzpicture}
-	\caption{Primer utežitve grafa $P_n$.}
+	
 \end{figure}
 \end{frame}
 
 \begin{frame}{$\mu(P_n)$ za $n > 3$}
-	Najprej oštevilčimo povezave kot $e_1, e_2, \ldots, e_{n-1}$, kjer $e_i = v_i v_{i+1}$ za $1 \le i < n$.
+	Najprej oštevilčimo povezave kot $e_1, e_2, \ldots, e_{n-1}$, kjer $e_i = v_i v_{i+1}$ za $1 \le i < n$. \pause
 	\begin{block}{Pogoj za pravilno barvanje}
 		Utežitev povezav $\omega$ inducira pravilno barvanje $P_n$ natanko tedaj ko $\omega(e_i) \neq \omega(e_j)$ za vsak $|j -i| = 2$.
 	\end{block}
+\pause
 \begin{figure}[!h]
 	\centering
 	\label{fig:pn}
@@ -177,8 +183,9 @@ V primeru $n=2$ imamo graf $K_n$ zato obravnavamo primere ko $n \ge 3$.  Posebaj
 		\end{cases}
 		$$
 	\end{block}
+\pause
 	\begin{itemize}
-		\item Našli smo $2$-utežitev, ki porodi pravilno barvanje $\implies$  $\mu(P_n) = 2$.
+		\item Našli smo $2$-utežitev, ki porodi pravilno barvanje $\implies$  $\mu(P_n) = 2$. \pause
 		\item Zaporedje uteži na povezavah je $11221\ldots 22112$, lahko pa bi definicijo utežitve popravili z naprimer levim zamikom zgornjega zaporedja. To so tudi vse možne pravilne $2$-utežitve poti.
 	\end{itemize}
 \end{frame}
@@ -207,7 +214,7 @@ V primeru $n=2$ imamo graf $K_n$ zato obravnavamo primere ko $n \ge 3$.  Posebaj
 	
 	
 	\end{tikzpicture}
-	\caption{Na primeru $C_3$ vidimo, $\mu(C_3) = 3$, saj morajo v luči potrebnega pogaja uteži na povezavah biti paroma različne.}
+	\caption{Na primeru $C_3$ vidimo, $\mu(C_3) = 3$, saj morajo zaradi pogoja uteži na povezavah biti paroma različne.}
 \end{figure}
 \end{frame}
 
@@ -308,7 +315,7 @@ Ponovno vzamemo utežitev za pot ter dodamo $\mu(e_n) = 3$.
 		\draw[] (4) to node [text=red, right] {2}  (5);
 		\draw[] (5) to node [above right] {$1 \to 3$}  (6);
 		
-		\draw[] (6) to node [text=red,above] {3}  (1);
+		\draw[] (6) to node [text=green,above] {3}  (1);
 		\end{tikzpicture}
 		\caption{Kot v prjšnjem primer moramo nastavit utež na povezavi $e_n$ na 3. Ker ima povezava $e_1$ enako utež kot $e_{n-1}$ popravimo še utež na tej povezavi na 3. }
 	\end{figure}
@@ -343,7 +350,7 @@ Ponovno vzamemo utežitev za pot ter dodamo $\mu(e_n) = 3$.
 		\draw[] (4) to node [text=red, right] {1}  (5);
 		\draw[] (5) to node [above right] {$1 \to 3$}  (6);
 		
-		\draw[] (6) to node [text=red,above] {3}  (1);
+		\draw[] (6) to node [text=green,above] {$\{2,3\}$}  (1);
 		\end{tikzpicture}
 		\caption{Na enak način kot v prejšnjem primeru dobimo pravilno barvanje. }
 	\end{figure}
@@ -351,6 +358,7 @@ Ponovno vzamemo utežitev za pot ter dodamo $\mu(e_n) = 3$.
 
 \begin{frame}{Ugotovitve za $C_n$}
 	Ugotovili smo, da $\mu(C_n) \le 3$ za vsak $n$. Pokazali bomo še, da je ta meja tudi stroga za $n \neq 4k$. Recimo nasprotno torej, da imamo $2$-utežitev cikla, ki porodi pravilno barvanje. Veljati mora torej $\omega(e_i) \neq \omega(e_{i + 2})$ iz česar sledi $\omega(e_i) = \omega(e_{i + 4})$. To pa je protislovje ko $n \neq 4k$.
+	\pause
 	\begin{block}{Rezultat}
 		
 		Za $C_n$ velja:
@@ -368,7 +376,7 @@ Ponovno vzamemo utežitev za pot ter dodamo $\mu(e_n) = 3$.
 \begin{frame}{Obravnavanje $k$-obarljivih grafov}
 	\begin{block}{Ideja}
 		Za $k$-obarljive grafe, lahko uteži gledamo modulo $k$ in še vedno dobimo veljavne rezultate. V ta namen bomo za množico uteži vzeli neko Abelovo grupo $\Gamma$, ter inducirano barvanje gledali v tej množici.
-	\end{block}
+	\end{block} \pause
 
 	\begin{block}{Trditev}
 		Naj bo $\Gamma$ Abelova grupa z $|\Gamma| = n$ in naj $0$ označuje enoto. Tedaj za vsak $g \in \Gamma$ velja $ng = 0$.
@@ -379,7 +387,7 @@ Ponovno vzamemo utežitev za pot ter dodamo $\mu(e_n) = 3$.
 	\begin{block}{Trditev}
 		Naj bo $\Gamma$ Abelova grupa lihe moči in $|\Gamma| = n$. Tedaj za vsak element $g \in \Gamma$ obstaja $h \in \Gamma$, tako da $g = 2h$.
 	\end{block}
-
+	\pause
 	\begin{block}{Dokaz}
 			Ker je $\Gamma$ Abelova grupa po prejšnji trditvi vemo, da $ 0 = ng$. Prištejemo $g$ na obeh straneh in dobimo $g = (n+1)g$. Sedaj označimo $h = \frac{n + 1}{2}g$ in očitno velja $g = 2h$.
 	\end{block}
@@ -389,10 +397,10 @@ Ponovno vzamemo utežitev za pot ter dodamo $\mu(e_n) = 3$.
 	\begin{block}{Izrek}
 	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-barljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
 	\end{block}
-
+	\pause
 	Nekaj opomb:
 	\begin{itemize}
-		\item Zgornji izrek dokaže domnevo v primeru dvodelnih in splošneje $3$-obarljivih grafov. Vsak tak graf, torej lahko utežimo z naprimer $\mathcal{Z}_3 = \{0,1,2\}$.
+		\item Zgornji izrek dokaže domnevo v primeru dvodelnih in splošneje $3$-obarljivih grafov. Vsak tak graf, torej lahko utežimo z naprimer $\mathcal{Z}_3 = \{0,1,2\}$. \pause
 		\item Definicija induciranega barvanje $c_{\omega}$ preko uteženih povezav je potekala na enostaven način. Kaj pa v drugo smer? Recimo, da imamo neko barvanje grafa z $k$ barvami. Zgornji izrek, oziroma njegov dokaz konstruirata utežitev z $k$ utežmi, ki inducira to barvanje (za lihe $k$).
 	\end{itemize}
 \end{frame}
@@ -482,28 +490,29 @@ Po trditvi obstaja $h \in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots + n_k g_k =
 \end{frame}
 
 \begin{frame}{$G$ dvodelen}
-Ker je graf dvodelen ima dva barvna razreda, vendar v tem primeru ne moremo vedno zagotoviti, da bodo uteži na vozliščih konstantne znotraj teh dveh razredov. Zato izberimo barvo $1$, tako da obstaja vozlišče  $x$ barve $1$ in je stopnje vsaj $2$. Izberemo še $2h = g_1 \neq 0 = g_2$.
-
-	\begin{figure}
+Ker je graf dvodelen ima dva barvna razreda, vendar v tem primeru ne moremo vedno zagotoviti, da bodo uteži na vozliščih konstantne znotraj teh dveh razredov. Zato izberimo barvo $1$, tako da obstaja vozlišče  $x$ barve $1$ in je stopnje vsaj $2$. Izberemo še $2h = g_1 \neq 0 = g_2$ in nastavimo začetne uteži na 0.
+			\begin{figure}
 	\begin{tikzpicture}
 	[scale=.7,auto=left,main node/.style={shape=circle,draw,fill=white}
 	]
 	
-
-	\node [main node][label=above:$1$] (1) at (0, 5) {};
-	\node [main node] (2) at (0,4) {};
-	\node [draw=none] (7) at (0, 3) {$\vdots$};
-	\node [main node] (3) at (0,1) {\tiny $x$};  
+	\node [draw=none] (4) at (0, 3) {$1$};
+		\node [draw=none] (5) at (4, 3) {$2$};
+		
+		\node [draw=none] (6) at (0, 2) {$\vdots$};
+		\node [draw=none] (7) at (4, 2) {$\vdots$};
+	\node [main node][label=below:$x$] (1) at (0, 1) {};
+	\node [main node] (2) at (4,1) {};
+	\node [main node] (3) at (4,0) {};
 	
-	\node [main node][label=above:$2$] (4) at (3, 5) {};
-	\node [main node] (5) at (3,4) {};
-	\node [draw=none] (8) at (3, 3) {$\vdots$};
-	\node [draw=none] (9) at (3, 2) {};
-	\node [main node] (6) at (3,1) {};
-	  
+	
+	
+	
 	\path[]
-	(3) edge[dashed] node {} (8)
-	(3) edge[dashed] node {} (6)	
+	(1) edge node[] {$0=g_2$} (2)
+	
+	(1) edge node [below]{$0=g_2$} (3)	
+	
 	;
 	
 	\end{tikzpicture}
@@ -511,7 +520,7 @@ Ker je graf dvodelen ima dva barvna razreda, vendar v tem primeru ne moremo vedn
 \end{frame}
 
 \begin{frame}{G dvodelen}
-	Sedaj nadaljujemo podobno kot prej in na vse povezave damo utež 0 ($=g_2$). Uteži popravljamo podobno kot prej. Za vsak $u \neq x$ iz barvnega razreda $1$, ki ima utež $0$ najdemo pot sode dolžine od $u$ do $x$ in popravljamo uteži z $g1, -g1, \ldots, -g_1$.
+ Uteži popravljamo podobno kot prej. Za vsak $u \neq x$ iz barvnega razreda $1$, ki ima utež $0$ najdemo pot sode dolžine od $u$ do $x$ in popravljamo uteži z $g1, -g1, \ldots, -g_1$.
 	
 		\begin{figure}
 		\begin{tikzpicture}
@@ -545,7 +554,9 @@ Ker je graf dvodelen ima dva barvna razreda, vendar v tem primeru ne moremo vedn
 	\end{figure}
 \end{frame}
 \begin{frame}{G dvodelen}
-	Po končanem postopku imajo vsa vozlišča v razredu $2$ utež $0$. Vozlišča v razredu $1$ imajo utež $g_1$ razen vozlišča $x$, ki ima utež $-(n_1 - 1)g_1$. V kolikor $-(n_1 - 1)g_1 \neq 0$ smo končali. V nasprotnem primeru na poljubni 2 povezavi, ki gresta iz $x$ dodamo utež $h$.
+	Po končanem postopku imajo vsa vozlišča v razredu $2$ utež $0$. Vozlišča v razredu $1$ imajo utež $g_1$ razen vozlišča $x$, ki ima utež $-(n_1 - 1)g_1$. V kolikor $-(n_1 - 1)g_1 \neq 0$ smo končali. \pause
+	
+	 V nasprotnem primeru na poljubni 2 povezavi, ki gresta iz $x$ dodamo utež $h$, ki je definirana kot $g_1 = 2h$.
 	
 			\begin{figure}
 		\begin{tikzpicture}
@@ -569,9 +580,14 @@ Ker je graf dvodelen ima dva barvna razreda, vendar v tem primeru ne moremo vedn
 		
 		\end{tikzpicture}
 	\end{figure}
-
+\pause
 Tako imamo v razredu $1$ vsa vozlišča z utežjo $g_1$ medtem ko imamo v razredu $2$ vozlišča z utežmi $g_2 = 0$ in $h \neq g_1$. S tem je izrek dokazan.
 	
+\end{frame}
+
+\begin{frame}{Literatura}
+	 \bibliographystyle{amsalpha} 
+	 \bibliography{literatura_pred.bib}
 \end{frame}
 
 
