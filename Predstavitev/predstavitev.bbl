@@ -5,6 +5,27 @@
   \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
 }
 \providecommand{\href}[2]{#2}
-\begin{thebibliography}{}
+\begin{thebibliography}{CLWY11}
+
+\bibitem[CLWY11]{examples}
+Gerard~J. Chang, Changhong Lu, Jiaojiao Wu, and Qinglin Yu,
+  \emph{Vertex-{C}oloring edge-weightings of graphs}, TAIWANESE JOURNAL OF
+  MATHEMATICSVol. 15, No. 4, pp. 1807-1813, August 2011 (2011).
+
+\bibitem[Die16]{maingraph}
+Reinhard Diestel, \emph{Graph {T}heory}, Springer; 5th ed, 2016.
+
+\bibitem[KKP10]{proof12345}
+Maciej Kalkowski, Michał Karoński, and Florian Pfender, \emph{Vertex-coloring
+  edge-weightings:{T}owards the 1-2-3-conjecture}, Journal of Combinatorial
+  Theory, Series B 100 (2010) 347–349 (2010).
+
+\bibitem[KuT04]{base}
+Michal Karonski, Tomasz Łuczak, and Andrew Thomasonb, \emph{Edge weights and
+  vertex colours}, Journal of Combinatorial Theory (2004).
+
+\bibitem[Prz20]{regular}
+Jakub Przybylo, \emph{The 1–2–3 {C}onjecture almost holds for regular
+  graphs}, Journal of Combinatorial Theory, Series B (2020).
 
 \end{thebibliography}
