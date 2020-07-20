@@ -237,7 +237,7 @@ def solve_recursive(graph, depth=0):
         except UnsolvableConflictException:
             return False
 
-        if len(graph.conflicts) > 1:
+        if len(graph.conflicts) > 0:
             unmarked = set(graph.graph.edges) - set(graph.history.keys())  # Goes over all un marked edges
             if len(unmarked) == 0:
                 return False
