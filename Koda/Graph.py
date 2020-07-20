@@ -3,6 +3,9 @@ import random as rnd
 import matplotlib.pyplot as plt
 
 
+class UnsolvableConflictException(Exception):
+    """When this exception is raised, current conflict cannot be solved within available edges."""
+    pass
 
 
 class Graph:
@@ -35,6 +38,10 @@ class Graph:
             return self.edge_weights[e]
         else:
             return self.edge_weights[(e[1], e[0])]
+
+    def add_conflict(self, c):
+        if (c[1], c[0]) not in self.conflicts:
+            self.conflicts.add(c)
 
     def randomize_weights(self):
         """
@@ -103,11 +110,11 @@ class Graph:
         # Add newly created conflicts
         for u in self.graph.neighbors(e[0]):
             if u in self.sums[self.node_sums[e[0]]]:
-                self.conflicts.add((e[0], u))
+                self.add_conflict((e[0], u))
 
         for u in self.graph.neighbors(e[1]):
             if u in self.sums[self.node_sums[e[1]]]:
-                self.conflicts.add((e[1], u))
+                self.add_conflict((e[1], u))
 
     def solve_conflict(self, c=None, in_depth=False):
         """
@@ -135,7 +142,7 @@ class Graph:
                 # (v1, u) is an edge where changing weight will resolve conflict c
                 w = self.get_edge_weight((v1, u))
                 nw = 2 if w == 3 else 1 if w == 2 else 2
-                if (v2, u) not in self.history and (u, v2) not in self.history:
+                if (v2, u) not in self.history and (u, v2) not in self.history: # Edge (v1, u) most not belong to history
                     self.modify_weight((v1, u), nw)
                     conflict_changes[(v1, u)] = len(self.conflicts)
                     # Undo modification
@@ -146,11 +153,14 @@ class Graph:
                 # (v1, u) is an edge where changing weight will resolve conflict c
                 w = self.get_edge_weight((v2, u))
                 nw = 2 if w == 3 else 1 if w == 2 else 2
-                if (v2, u) not in self.history and (u, v2) not in self.history:
+                if (v2, u) not in self.history and (u, v2) not in self.history:  # Edge (v2, u) most not belong to history
                     self.modify_weight((v2, u), nw)
                     conflict_changes[(v2, u)] = len(self.conflicts)
                     # Undo modification
                     self.modify_weight((v2, u), w)
+
+        if len(conflict_changes) == 0:   # There are no available edge modifications to solve conflict.
+            raise UnsolvableConflictException
 
         # Get the modification with minimum number of conflicts
         e = min(conflict_changes, key=conflict_changes.get)
@@ -160,7 +170,6 @@ class Graph:
             nw = 2 if w == 3 else 1 if w == 2 else 2
             self.modify_weight(e, nw)
         else:
-            #print("No modification can decrese number of conflicts.")
             if in_depth:
                 # Even thoug number of conflicts does not decrease still make weight modification
                 w = self.get_edge_weight(e)
@@ -173,12 +182,14 @@ class Graph:
 
     def solve(self, max_depth=0):
         """
-        Function tries to solve all conflicts in a graph. It solves conflict after conflict
+         Function tries to solve all conflicts in a graph. It solves conflict after conflict
         until there are no more conflicts or solve conflict function can not find a modification that decreaser number
         of conflicts.
-        :param max_depth:
-        :return:
+        :param rand_weights: randomize weights an start
+        :param max_depth: number of allowed non decreasing steps
+        :return: True if solution is found, False if not.
         """
+
         depth = 0
 
         while len(self.conflicts) != 0:
@@ -192,7 +203,7 @@ class Graph:
                     self.solve_conflict(c=c, in_depth=True)
                     depth += 1
                 else:
-                    self.conflicts.add(c)
+                    self.add_conflict(c)
                     #print("Cannot solve graph")
                     return False
         return True
@@ -221,64 +232,26 @@ def solve_recursive(graph, depth=0):
         """
 
         # First try to solve it using local search algorithm
-        graph.solve()
+        try:
+            graph.solve()
+        except UnsolvableConflictException:
+            return False
 
         if len(graph.conflicts) > 1:
-            # Pop a random conflict
-            un_visited_conflicts = graph.conflicts - set(graph.history.keys())
-            if len(un_visited_conflicts) == 0:
-                print("There are not any unmarked conflicts left")
+            unmarked = set(graph.graph.edges) - set(graph.history.keys())  # Goes over all un marked edges
+            if len(unmarked) == 0:
                 return False
-            c = un_visited_conflicts.pop()
-
-            # Create a copy, where w(c) = 1
-            g1 = graph.clone()
-            g1.modify_weight(c, 1)
-            g1.history[c] = (1, depth)
-
-            g1_result = solve_recursive(g1, depth+1)
-
-            if not g1_result:
-                return g1_result
-
-            # Create a copy, where w(c) = 1
-            g2 = graph.clone()
-            g2.modify_weight(c, 2)
-            g2.history[c] = (2, depth)
-
-            g2_result = solve_recursive(g2, depth + 1)
-
-            if not g2_result:
-                return g2_result
-
-            # Create a copy, where w(c) = 3
-            g3 = graph.clone()
-            g3.modify_weight(c, 3)
-            g3.history[c] = (3, depth)
-
-            g3_result = solve_recursive(g3, depth + 1)
-
-            if not g3_result:
-                return g3_result
-
-            # If execution comes to this line, then algorithm did not find a solution
-            print("End of execution")
+            e = unmarked.pop()
+            for w in [1, 2, 3]:
+                clone = graph.clone()
+                clone.modify_weight(e, w)
+                clone.history[e] = (w, depth)
+                result = solve_recursive(clone, depth + 1)
+                if result:
+                    return result
             return False
         else:
             return graph
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def read_graph6(file_path):
     """
@@ -290,21 +263,6 @@ def read_graph6(file_path):
     G = nx.read_graph6(file_path)
     return G
 
-#
-# G = read_graph6("graph_examples/graphs_5.txt")
-# g = Graph(G[5])
-# print(g.graph.edges)
-# g.randomize_weights()
-# print(g.conflicts)
-# print(g.edge_weights)
-# print(g.node_sums)
-# print(g.sums)
-#
-# g.solve_conflict(c=(4,3))
-# print("solving conflict")
-# print(g.conflicts)
-# print(g.edge_weights)
-# print(g.node_sums)
-# print(g.sums)
+
 
 
