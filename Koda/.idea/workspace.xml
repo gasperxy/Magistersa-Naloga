@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7cfd8d1e-fe4a-43f6-b2b8-bc7da83d52fa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graph.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_notebook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/test_notebook.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Predstavitev/predstavitev.nav" beforeDir="false" afterPath="$PROJECT_DIR$/../Predstavitev/predstavitev.nav" afterDir="false" />
@@ -24,18 +23,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="305" column="23" lean-forward="true" selection-start-line="305" selection-start-column="23" selection-end-line="305" selection-end-column="23" />
+            <state relative-caret-position="85">
+              <caret line="5" column="33" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="33" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#630#1010#0" />
                 <element signature="e#655#797#0" />
+                <element signature="e#1410#1481#0" />
                 <element signature="e#474#644#0" />
                 <element signature="e#1071#1249#0" />
                 <element signature="e#762#2332#0" />
                 <element signature="e#828#908#2" />
+                <element signature="e#3995#6747#0" />
                 <element signature="e#3135#3341#1" />
-                <element signature="e#6430#7031#0" />
                 <element signature="e#6363#6673#0" />
               </folding>
             </state>
@@ -156,12 +156,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1595005279936</updated>
-      <workItem from="1595005281288" duration="32410000" />
+      <workItem from="1595005281288" duration="34000000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32410000" />
+    <option name="totallyTimeSpent" value="34000000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1176" extended-state="6" />
@@ -214,18 +214,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="305" column="23" lean-forward="true" selection-start-line="305" selection-start-column="23" selection-end-line="305" selection-end-column="23" />
+        <state relative-caret-position="85">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="33" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#630#1010#0" />
             <element signature="e#655#797#0" />
+            <element signature="e#1410#1481#0" />
             <element signature="e#474#644#0" />
             <element signature="e#1071#1249#0" />
             <element signature="e#762#2332#0" />
             <element signature="e#828#908#2" />
+            <element signature="e#3995#6747#0" />
             <element signature="e#3135#3341#1" />
-            <element signature="e#6430#7031#0" />
             <element signature="e#6363#6673#0" />
           </folding>
         </state>

@@ -10,7 +10,7 @@ class UnsolvableConflictException(Exception):
 
 class Graph:
     def __init__(self, G):
-        self.graph = G  # networkx graph object
+        self.graph = G  # networkx graph object, used for graph6 format parsing and visualization
         self.edge_weights = {e: 0 for e in self.graph.edges}  # of type dict[tuple(int, int), int]
         self.sums = {0: [i for i in self.graph.nodes]}  # of type dict[int, list[int]]
         self.node_sums = {i: 0 for i in self.graph.nodes}  # dict with node sums
