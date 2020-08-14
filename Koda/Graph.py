@@ -1,11 +1,14 @@
 import networkx as nx
 import random as rnd
 import matplotlib.pyplot as plt
-
+import time
 
 class UnsolvableConflictException(Exception):
     """When this exception is raised, current conflict cannot be solved within available edges."""
+    """When this exception is raised, current conflict cannot be solved within available edges."""
     pass
+
+
 
 
 class Graph:
@@ -26,6 +29,14 @@ class Graph:
         g.history = {e: self.history[e] for e in self.history}
 
         return g
+
+    def get_edge_degree(self, e):
+        """
+        Gets the degree of an edge as a sum of node degrees minus 2.
+        :param e:
+        :return:
+        """
+        return self.graph.degree[e[0]] + self.graph.degree[e[1]] - 2
 
     def get_edge_weight(self, e):
         """
@@ -48,7 +59,7 @@ class Graph:
         Assings random weights to edges (1,3) and set up a sums dict
         :return:
         """
-        rnd.seed(30)
+        #rnd.seed(30)
         for e in self.graph.edges:
             self.modify_weight(e, rnd.randint(1, 3))
 
@@ -116,6 +127,25 @@ class Graph:
             if u in self.sums[self.node_sums[e[1]]]:
                 self.add_conflict((e[1], u))
 
+    def get_split_edge_heuristics(self, h=0):
+
+        unvisited = set(self.graph.edges) - set(self.history.keys())
+
+        if h == 0:
+            # random heuristics:
+            e = unvisited.pop()
+
+        elif h == 1:
+            # min edge degree heuristics:
+            e = min(unvisited, key=self.get_edge_degree)
+
+        elif h == 2:
+            # max edge degree heuristics:
+            e = max(unvisited, key=self.get_edge_degree)
+
+        return e
+
+
     def solve_conflict(self, c=None, in_depth=False):
         """
         Function takes a single conflict as an edge = (u, v) and try to solve it. Since a conflict can only be solved
@@ -141,23 +171,27 @@ class Graph:
             if u != v2:
                 # (v1, u) is an edge where changing weight will resolve conflict c
                 w = self.get_edge_weight((v1, u))
-                nw = 2 if w == 3 else 1 if w == 2 else 2
+                new_weights = [1, 2, 3]
+                new_weights.remove(w)
                 if (v2, u) not in self.history and (u, v2) not in self.history: # Edge (v1, u) most not belong to history
-                    self.modify_weight((v1, u), nw)
-                    conflict_changes[(v1, u)] = len(self.conflicts)
-                    # Undo modification
-                    self.modify_weight((v1, u), w)
+                    for nw in new_weights:
+                        self.modify_weight((v1, u), nw)
+                        conflict_changes[(v1, u)] = (len(self.conflicts), nw)
+                        # Undo modification
+                        self.modify_weight((v1, u), w)
 
         for u in self.graph.neighbors(v2):
             if u != v1:
                 # (v1, u) is an edge where changing weight will resolve conflict c
                 w = self.get_edge_weight((v2, u))
-                nw = 2 if w == 3 else 1 if w == 2 else 2
+                new_weights = [1, 2, 3]
+                new_weights.remove(w)
                 if (v2, u) not in self.history and (u, v2) not in self.history:  # Edge (v2, u) most not belong to history
-                    self.modify_weight((v2, u), nw)
-                    conflict_changes[(v2, u)] = len(self.conflicts)
-                    # Undo modification
-                    self.modify_weight((v2, u), w)
+                    for nw in new_weights:
+                        self.modify_weight((v2, u), nw)
+                        conflict_changes[(v2, u)] = (len(self.conflicts), nw)
+                        # Undo modification
+                        self.modify_weight((v2, u), w)
 
         if len(conflict_changes) == 0:   # There are no available edge modifications to solve conflict.
             raise UnsolvableConflictException
@@ -165,15 +199,15 @@ class Graph:
         # Get the modification with minimum number of conflicts
         e = min(conflict_changes, key=conflict_changes.get)
 
-        if conflict_changes[e] <= conflicts_size:
+        if conflict_changes[e][0] <= conflicts_size:
             w = self.get_edge_weight(e)
-            nw = 2 if w == 3 else 1 if w == 2 else 2
+            nw = conflict_changes[e][1]
             self.modify_weight(e, nw)
         else:
             if in_depth:
                 # Even thoug number of conflicts does not decrease still make weight modification
                 w = self.get_edge_weight(e)
-                nw = 2 if w == 3 else 1 if w == 2 else 2
+                nw = conflict_changes[e][1]
                 if e not in self.history:
                     self.modify_weight(e, nw)
             else:
@@ -223,7 +257,7 @@ class Graph:
         plt.show()
 
 
-def solve_recursive(graph, depth=0):
+def solve_recursive(graph, depth=0, h=0):
         """
         Recursively tries to solve graph weightening.
         :param graph:
@@ -241,8 +275,12 @@ def solve_recursive(graph, depth=0):
             unmarked = set(graph.graph.edges) - set(graph.history.keys())  # Goes over all un marked edges
             if len(unmarked) == 0:
                 return False
-            e = unmarked.pop()
-            for w in [1, 2, 3]:
+
+            e = graph.get_split_edge_heuristics(h)
+
+            weights = [1, 2, 3]
+            rnd.shuffle(weights)
+            for w in weights:
                 clone = graph.clone()
                 clone.modify_weight(e, w)
                 clone.history[e] = (w, depth)
@@ -262,6 +300,7 @@ def read_graph6(file_path):
     """
     G = nx.read_graph6(file_path)
     return G
+
 
 
 
