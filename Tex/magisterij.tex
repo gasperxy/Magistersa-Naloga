@@ -2,6 +2,7 @@
 % !TeX spellcheck = sl_SI
 % !TeX program = pdflatex+bibtex+makeindex
 % vim: set spell spelllang=sl:
+%& -job-name=newfilenameialwayswanted
 % za preverjanje črkovanja, če se uporablja Texstudio ali vim
 \documentclass[12pt,a4paper,twoside]{article}
 \usepackage[utf8]{inputenc}  % pravilno razpoznavanje unicode znakov
@@ -113,7 +114,7 @@
 \newcommand{\R}{\mathbb R}
 \newcommand{\N}{\mathbb N}
 \newcommand{\Z}{\mathbb Z}
-\renewcommand{\C}{\mathbb C}
+\newcommand{\C}{\mathbb C}
 \newcommand{\Q}{\mathbb Q}
 
 
@@ -368,7 +369,7 @@ Označimo najmanjši tak $k$, da za graf $G$ obstaja $k$-utežitev, ki je pravil
 	\label{123conjecture}
 	(1-2-3 Domneva; Karonski– Luczak–Thomason~\cite{base}) Naj bo $G$ povezan graf, ki ni $K_2$. Tedaj je $\mu(G) \le 3.$ 
 \end{domneva}
-Za sedaj še niti vemo, ali obstaja fiksna zgornja meja za vsak graf. V članku ~\cite{base}, kjer je bila zastavljena zgornja domneva so pokazali, da obstaja končna množica realnih števil, tako da utežitev z temi števili inducira pravilno barvanje vsakega grafa. Vendar je ta rezultat še vedno precej odmaknjen od željene domneve. Kasneje je bil v ~\cite{weigheting12345} predstavljen eleganten algoritem, ki doseže zahtevano utežitev z utežmi v $\{1,2,3,4,5\}$. To je do sedaj tudi najboljši razultat za splošne grafe. Tekom naloge bomo spoznali nekaj metod s katerimi se lahko lotimo zgornjega problema za neke specifične družine grafov ter se probamo čim bolj približati željenemu rezultatu. Za začetek pa si oglejmo nekaj preprostih družin, za katere pokaže, da zgornja meja velja.
+Za sedaj še niti vemo, ali obstaja fiksna zgornja meja za vsak graf. V članku ~\cite{base}, kjer je bila zastavljena zgornja domneva so pokazali, da obstaja končna množica realnih števil, tako da utežitev z temi števili inducira pravilno barvanje vsakega grafa. Vendar je ta rezultat še vedno precej odmaknjen od željene domneve. Kasneje je bil v ~\cite{proof12345} predstavljen eleganten algoritem, ki doseže zahtevano utežitev z utežmi v $\{1,2,3,4,5\}$. To je do sedaj tudi najboljši razultat za splošne grafe. Tekom naloge bomo spoznali nekaj metod s katerimi se lahko lotimo zgornjega problema za neke specifične družine grafov ter se probamo čim bolj približati željenemu rezultatu. Za začetek pa si oglejmo nekaj preprostih družin, za katere pokaže, da zgornja meja velja.
 \subsection{Izračun $\mu$ za nekatere družine grafov}
 Večina tega razdelka je povzeta po ~\cite{examples}. Primere sem predelal in jih mislim da precej jasno razložil. nekatere rezultate sem tudi razložil na malo drugačen način.
 
