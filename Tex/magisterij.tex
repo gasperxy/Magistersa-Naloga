@@ -617,17 +617,7 @@ n + 1 + i; \text{ } i < n \\
  $$
  To pa ja pravilno barvanje $K_n$ in zato $\mu(K_n) = 3$.
  
- \subsubsection{$\mu(K_{m,n})$}
- 
-Naj bo $K_{m,n}$ polni dvodelni graf z biparticijo $A,B$. V kolikor $m \neq n$ je vsako vozlišče v $A$ različne stopnje kot vsako vozlišče v $B$. To pomeni, da če vse povezave utežimo z $1$ dobimo pravilno inducirano barvanje in torej $\mu(K_{m,n}) = 1$. V kolikor $m=n$ oštevilčimo vozlišča v $A$ kot $v_1, v_2, \ldots, v_m$ in vozlišča v $B$ kot $u_1, u_2, \ldots, u_n$. Sedaj definiramo utežitev kot
-$$
-\omega(v_i u_j) = 
-\begin{cases}
-1 ; \text { } (i, j) \in [m-1] \times [n] \\
-2; \text{ } i=m; j \in [n]
-\end{cases}.
-$$
-Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) = m + 1$ vozlišča $v_i$ pa $c_{\omega}(v_i) = m$ z izjemo $c_{\omega}(v_m) = 2n$. To je torej pravilno barvanje in $\mu(K_{m,n}) = 2$.
+
 
  
  \subsection{$\mu$ za grafe z posebnimi pogoji}
@@ -676,12 +666,34 @@ Iz zgornjega izreka torej sledi, da domneva velja za $3$-obraljive grafe. Iz ute
  
 Izrek v prejšnjem razdelku pokaže $\ec(G) \le 3$ za vse 3 obarljive grafe. V ta razred grafov spada več dobro poznanih družin grafov. Očitno enako drži tudi za dvodelne grafe, saj jih lahko pobarvamo z tremi bavami. Sem spadajo tudi drevesa. Kljub temu, da zgornji izrek dokaže 1-2-3 domnevo za primer takih grafov si bomo ogledali, ali lahko na primeru dreves oziroma bolj natančno  dvodelnih grafov to zgornjo mejo izboljšamo. Ugotovili bomo, da to lahko do neke mere storimo.  Dvodelne grafe označimo kot $G=(A, B, E)$, kjer sta $A$ in $B$ biparticija vozlišč.
 
+Obravnavajmo najprej polne dvodelne grafe $K_{m,n}$ z biparticijo $(A, B)$. Enostavni primer je, ko velja $m \neq n$. V tem primeru lahko vse povezave utežimo z 1 in dobimo pravilno barvanje, kar pomeni $\ec(K_{m,n}) = 1$. V kolikor $m=n$ oštevilčimo vozlišča v $A$ kot $v_1, v_2, \ldots, v_m$ in vozlišča v $B$ kot $u_1, u_2, \ldots, u_n$. Sedaj definiramo utežitev kot
+$$
+\omega(v_i u_j) = 
+\begin{cases}
+1 ; \text { } (i, j) \in [m-1] \times [n] \\
+2; \text{ } i=m; j \in [n]
+\end{cases}.
+$$
+Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) = m + 1$ vozlišča $v_i$ pa $c_{\omega}(v_i) = m$ z izjemo $c_{\omega}(v_m) = 2n$. To je torej pravilno barvanje in $\mu(K_{m,n}) = 2$. Sedaj bomo obravnavali še nekaj bolj splošnih dvodelnih grafov.
+
+
 \begin{trditev}	
 Naj bo $G =(A,B,E)$ dvodelen graf. V kolikor je $|A|$ ali $|B|$ sodo, potem $\ec(G) \le 2$.
 \end{trditev}
 \begin{proof}
 Brez škode za splošnost bomo predpostavili $|A|$ sodo. Trditev bomo dokazali, tako da bomo skonstruirali $2$-utežitev $\omega$ za katero bo veljalo, da je $c_{\omega}(u)$ sodo za $u \in A$ in liho za $u \in B$. S tem bo trditev dokazana.
 \end{proof}
+
+\begin{posledica}
+Za dvodelen graf $G = (A, B, E)$ z $\delta(G)=1$ velja $\ec(G)  \le 2$.
+\end{posledica}
+\begin{proof}
+Po zgornji trditvi lahko predpostavimo, da sta tako $|A|$ in $|B|$ lihi.
+\end{proof}
+
+\begin{posledica}
+Za drevo $T$ z vsaj tremi vozlišči velja $\ec(T) \le 2$.
+\end{posledica}
 
  V tem razdelku bom sledil članku ~\cite{examples}.
  
