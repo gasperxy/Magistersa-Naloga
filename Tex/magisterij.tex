@@ -342,9 +342,14 @@ Graf bomo označili kot urejen par $G=(V, E)$. Pri tem množico $V$ imenujemo mn
 	
 	\end{tikzpicture}
 \end{primer}
-Za $v \in V(G)$ lahko definiramo t.i. odprto soseščino vozlišča $N(v)$. To je množica vseh sosedov vozlišča $u$, torej $N(v) = \{u \in V(G) \mid uv \in E(G), u \neq v \}$. Na enak način definiramo zaprto soseščino vozlišča $N\left[u\right] = N(v) \cup \{v\}$. Poleg množice sosedov je pomembna tudi njena moč, kar označimo z $d(v)$ in imenujemo stopnja vozlišča $v$. Stopnjo vozlišč lahko posplošimo ter  z $\delta(G)$ oziroma samo $\delta$ označimo najmanjšo stopnjo vozlišča v grafu. Na podoben način z $\Delta$ označimo maksimalno stopnjo vozlišča v grafu $G$. Grafi, ki imajo vsa vozlišča enake stopnje imenujemo\textbf{regularni graif}. Z oznako $d$-regularni graf mislimo graf, kjer imajo vsa vozlišča stopnjo $d$.
+Za $v \in V(G)$ lahko definiramo t.i. odprto soseščino vozlišča $N(v)$. To je množica vseh sosedov vozlišča $u$, torej $N(v) = \{u \in V(G) \mid uv \in E(G), u \neq v \}$. Na enak način definiramo zaprto soseščino vozlišča $N\left[u\right] = N(v) \cup \{v\}$. Poleg množice sosedov je pomembna tudi njena moč, kar označimo z $d(v)$ in imenujemo stopnja vozlišča $v$. Stopnjo vozlišč lahko posplošimo ter  z $\delta(G)$ oziroma samo $\delta$ označimo najmanjšo stopnjo vozlišča v grafu. Na podoben način z $\Delta$ označimo maksimalno stopnjo vozlišča v grafu $G$. 
 
 Največja in najmanjša stopnja vozlišč sta ene izmed osnovnih lastnosti grafa. Obstaja ogromno drugih lastnosti in različne veje teorije grafov se ukvarjajo z njihovim iskanjem. Ko opazujemo neko lastnost grafa si ponavadi želimo, da se ta lastnost ne spreminja pri različnih risbah grafa. Takim lastnostim rečemo \textbf{invariante grafa}.  Formalno invarianto grafa $G=(V,E)$ definiramo kot lastnost, ki se ohranja pod \textbf{izomorfizmi grafov}. Izomorfizem grafa je bijektivna preslikava $f: V(G) \rightarrow V(G)$, ki sosednja vozlišča slika v sosednja vozlišča. V nadaljevanju tega razdelka bomo spoznali nekaj različnih grafovskih invariant.
+
+\subsection{Osnovne družine grafov}
+Na podlagi določenih lastnosti ločimo različne družine grafov. Te lastnosti nam omogočaja, da probleme, ki so težki za splošne grafe, rešimo za neke specifične družine.
+
+Pot je najbolj preprost graf. \textbf{Pot} z $n$ vozlišči označimo z $P_n$ pri čemer vozlišča uredimo v vrsto $v_1, v_2, \ldots v_n$ ter medseboj povežemo zaporedna vozlišča. Vsa vozlišča razen $v_1$ in $v_n$ so stopnje 2. V kolikor dodamo še povezavo med $v_1$ in $v_n$ dobimo \textbf{cikel} z $n$ vozlišči in ga označimo kot $C_n$. Za cikle tako velja, da imajo vsa vozlišča stopnjo 2. To idejo lahko posplošimo in definiramo \textbf{regularni graf} kot graf, kjer imajo vsa vozlišča enako stopnjo. Z oznako $d$-regularni grafi mislimo grafe, kjer imajo vsa vozlišča stopnjo $d$. Parameter $d$ imenujemo tudi stopnja oziroma red regularnega grafa. S tem lahko cilke definiramo kot $2$-regularne grafe. Preprosto lahko ugotovimo, da regularni grafi poljubnih stopenj in velikosti ne morejo obstajat. Potreben in zadosten pogoj za obstoj $d$-regularnega grafa na $n$ vozliščih je $n \ge d + 1$ in $nd$ sodo. Navedimo še en poseben primer regularnega grafa. \textbf{Polni graf} z $n$ vozlišči označimo z $K_n$ kar predstavlja $n-1$-regularni graf. To je graf, kjer je vsako vozlišče povezano z vsemi drugimi vozlišči. Ime polni graf izhaja iz dejstva, da imajo polni grafi maksimalno število povezav in sicer ${n \choose 2}$. Naslednja pomembna družina grafov so drevesa. \textbf{Drevo} $T_n$ je povezan graf na $n$ vozliščih z $n-1$ povezavami. Obstaja več ekvivalentnih definicij oziroma karakterizacij dreves. Velikokrat se drevesa definira kot povezane grafe brez ciklov. V kolikor graf ni povezan in nima ciklov ga imenujemo gozd.
 
 \subsection{Barvanje grafa}
 Vozliščno barvanje grafa $G=(V, E)$ je preslikava $ c: V \rightarrow $, za katero velja $c(v) \neq c(u)$, če $vu \in E$. Množica $S$ je množica razpoložljivih barv. Poleg vozliščnega barvanja poznamo tudi povezavno barvanje, vendar nas to tekom magisterske naloge nebo zanimalo. Zato bomo od sedaj dalje z barvanjem grafa vedno mislili vozliščno barvanje. Pri barvanju nas ponavadi predvsem zanima velikost množice $S$. Drugače povedano, zanima nas najmanjši $k \in \mathbb{N}$, tako da G premore $k$-barvanje $c : V \rightarrow \{1,2,\ldots, k\}$. 
@@ -681,15 +686,22 @@ Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) =
 Naj bo $G =(A,B,E)$ dvodelen graf. V kolikor je $|A|$ ali $|B|$ sodo, potem $\ec(G) \le 2$.
 \end{trditev}
 \begin{proof}
-Brez škode za splošnost bomo predpostavili $|A|$ sodo. Trditev bomo dokazali, tako da bomo skonstruirali $2$-utežitev $\omega$ za katero bo veljalo, da je $c_{\omega}(u)$ sodo za $u \in A$ in liho za $u \in B$. S tem bo trditev dokazana.
+Brez škode za splošnost bomo predpostavili $|A|$ sodo. Trditev bomo dokazali, tako da bomo skonstruirali $2$-utežitev $\omega$ za katero bo veljalo, da je $c_{\omega}(u)$ sodo za $u \in A$ in liho za $u \in B$. S tem bo trditev dokazana. Označimo vozlišča v množici $A$ kot $a_1, a_2, \ldots, a_{2r}$ in naj bo $P_i$ pot od $a_i$ do $a_{i + r}$. Take poti obstajajo za vsak $i = 1, 2, \ldots, r$ saj je graf povezan. Utežitev $\omega$ konstruiramo, tako da začnemo z $\omega(e) = 0$ za vsako povezavo $e$. Vsakič ko neka pot $P_i$ vsebuje povezavo $e$ utež na tej povezavi povečamo za 1. Barvanje $c_{\omega}$, ki ga inducira utežitev $\omega$ ima naslednjo lastnost:
+\begin{itemize}
+\item $c_{\omega}(u) = 1 \pmod{2}$ za $u \in A$
+\item $c_{\omega}(u) = 0 \pmod{2}$ za $u \in B$.
+\end{itemize}
+To izhaja iz dejstava, da se vsaka pot $P_i$ začne in konča v množici $A$ in s tem za vsako vozlišče $u \in B$, ki se nahaja na poti, poveča vrednost $c_{\omega}(u)$ za $2$. Seveda enako velja za vmesna vozlišča $u \in A$ medtem ko začetnemu in končnemu vozlišču poveča vrednost barvanja le za 1. Ker smo poti $P_i$ definirali na tak način, da je vsako vozlišče v $A$ natanko enkrat začetek ali konec neke poti sledi zgornja lastnost. Sedaj uteži na povezavah zreduciramo $\pmod{2}$ kar še vedno ohranja zgornjo lastnost. Tako dobljena utežitev še vedno inducira pravilno barvanje in uporablja uteži z vrednostmi  v $\{0,1\}$. Preprosto spremenimo uteži z vrednostjo $0$ v $2$ in dobimo ustrezno $2$-utežitev grafa $G$.
 \end{proof}
 
 \begin{posledica}
 Za dvodelen graf $G = (A, B, E)$ z $\delta(G)=1$ velja $\ec(G)  \le 2$.
 \end{posledica}
 \begin{proof}
-Po zgornji trditvi lahko predpostavimo, da sta tako $|A|$ in $|B|$ lihi.
+Po zgornji trditvi lahko predpostavimo, da sta tako $|A|$ in $|B|$ lihi. Brez škode za splošnost predpostavimo, da $d(x) = 1$ za nek $x \in A$ in, ker je graf povezan obstaja povezava do nekega vozlišča $y \in B$. Dodatno velja, da $d(y) > 1$, saj je graf povezan. Potem za graf $G - x$ velja, da je povezan dvodelen graf  z $|A -  \{x\}|$ sodo. Po prejšnji trditvi za ta graf obstaja $2$-utežitev $\omega'$, ki inducira pravilno barvanje. Sedaj utežimo povezavo $xy$ z 2 in dobimo ustrezno utežitev $\omega$, saj velja, $c_{\omega}(x) = 2$ in $c_{\omega}(y) > 2$ ter še vedno sodo.
 \end{proof}
+
+Kot smo že omenili so vsa drevesa dvodelni grafi, kjer imajo vsi listi stopnjo ena. Na podlagi tega dejstva sledi naslednja posledica.
 
 \begin{posledica}
 Za drevo $T$ z vsaj tremi vozlišči velja $\ec(T) \le 2$.
