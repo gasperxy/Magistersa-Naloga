@@ -682,7 +682,8 @@ $$
 Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) = m + 1$ vozlišča $v_i$ pa $c_{\omega}(v_i) = m$ z izjemo $c_{\omega}(v_m) = 2n$. To je torej pravilno barvanje in $\mu(K_{m,n}) = 2$. Sedaj bomo obravnavali še nekaj bolj splošnih dvodelnih grafov.
 
 
-\begin{trditev}	
+\begin{trditev}
+\label{dvosodo}	
 Naj bo $G =(A,B,E)$ dvodelen graf. V kolikor je $|A|$ ali $|B|$ sodo, potem $\ec(G) \le 2$.
 \end{trditev}
 \begin{proof}
@@ -707,9 +708,65 @@ Kot smo že omenili so vsa drevesa dvodelni grafi, kjer imajo vsi listi stopnjo 
 Za drevo $T$ z vsaj tremi vozlišči velja $\ec(T) \le 2$.
 \end{posledica}
 
- V tem razdelku bom sledil članku ~\cite{examples}.
- 
- Tu si bomo ogledali zračun $\mu$ za dvodelne grafe. Ugotovili bomo, da za večino dvodelnih grafov $\mu(G) = 2$ vključno z drevesi vendar to ne velja za vse dvodelne grafe.
+Zgornja posledica izhaja iz dejstva, da ima vsako drevo vsaj 1 list ter posledično vozlišče s stopnjo 1. Sedaj si bomo ogledali še eno trditev, ki nam bo omogočala izračuna $\ec(G)$ za dvodelne in regularne grafe.
+
+\begin{izrek}
+\label{dvoreg}
+Naj bo $G = (A,B, E)$ dvodelen graf. V kolikor za vsako povezavo $uv \in E$ velja $\lfloor \frac{d(u)}{2} \rfloor + 1 \neq d(v) $ potem $\ec(G) \le 2$.
+\end{izrek}
+
+Preden se lotimo dokaza zgornjega izreka bomo neko pomožno trditev, ki velja za splošne dvodelne povezane grafe.
+\begin{trditev}
+\label{t1}
+V grafu $G = (A, B, E)$ obstaja vozlišče $x$, tako da so vozlišča $G - N[x]$ v množici $A$ vsa v isti povezani komponenti grafa $G -  N[x]$.
+\end{trditev}
+
+\begin{proof}[Dokaz trditve \ref{t1}]
+brez škode za splošnst predpostavimo $x \in B$. Izberimo vozlišče $x \in B$, tako da  maksimalna komponenta v $G - N[x]$ postane čim večja ter jo označimo kot $G_1 = (A_1, B_1, E_1)$. Sedaj za protislovje predpostavimo, da ima graf  $G - N[x]$ še eno povezano komponento $G_2 = (A_2, B_2, E_2)$, kjer je množica $A_2$ neprazna. Ker je začeten graf $G$ povezan obstaja povezava med $N(x)$ in $B_1$.  Izberimo si sedaj poljuben $x' \in A_2$ in opazujmo graf $G - N[x']$. Opazimo, da sta $G_1$ in $N[x]$ v isti povezani komponenti katere velikost je strogo večja od velikosti $G_1$, kar pa je v protislovju z izbiro vozlišča $x$.
+\end{proof}
+
+\begin{proof}[Dokaz izreka \ref{dvoreg}]
+Po trditvi \ref{dvosodo} predpostavimo, da sta tako $|A|$ kot $|B|$ lihi.
+Po trditvi \ref{t1} lahko sklepamo, da ima graf $G - N[x]$ komponento $G_1 = (A_1, B_1, E_1)$, kjer je $A_1 = A \setminus N(x)$, vse ostale komponente pa so izolirana vozlišča v $B$. Sedaj obravnavajmo dva primera.
+
+V kolikor je $d(x)$ liho je potem $|A_1|$ sodo. Po trditvi \ref{dvosodo} ima graf $G_1$ $2$-utežitev $\omega'$ z lastnostjo $f_{\omega'}(u)$ je liho za $u \in A_1$ in  $f_{\omega'}(u)$ je sodo za $v \in B_1$. Sedaj $\omega'$ razširimo do $\omega$, tako da utežimo povezave incidenčne $x$ z 1 ter z 2 vse ostale povezave. Za $\omega$ velja $c_{\omega}(u)$ je liho za $u \in A$  in $c_{\omega}(v)$ je sodo za $B \setminus \{x\}$. Prav tako velja $c_{\omega}(x) = d(x)$ in $c_{\omega}(u) = 2d(u) - 1$ za $u \in N(x)$. Po predpostavki izreka tako velja tudi $c_{\omega}(x) \neq c_{\omega}(u)$ za $u \in N(x)$. Tako je $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi.
+
+V koliko je $d(x)$ sodo je $|A_1|$ liho. Ker je graf $G$ povezan obstaja vozlišče $u^* \in N(x)$, ki je soseden $v^* \in B_1$. Označimo sedaj graf $G'$, kot graf, ki ga dobimo iz $G_1$, tako da dodamo povezavo $u^*v^*$. V tem primeru lahko za $G' = (A_1 \cup \{u^*\}, B_1, E_1 \cup \{u^*v^*\})$ uporabimo trditev \ref{dvosodo}, da dobimo $2$-utežitev $\omega'$ z že znano lastnostjo. Sedaj $\omega'$ razširimo v $\omega$, tako da utežimo povezave incidenčne $x$ razen $xu*$ z 1 ter vse ostale z 2. Sedaj velja $c_{\omega}(x) = d(x) + 1$ in $c_{\omega}(u) = 2d(u) - 1$ za vse $u qin N(x) \setminus \{u*\}$. Po predpostavki izreka tako zopet velja $c_{\omega}(x) \neq c_{\omega}(u)$ ter $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi. S tem je izrek dokazan.
+\end{proof}
+
+Oglejmo si sedaj takojšnjo posledico zgornjega izreka.
+\begin{posledica}
+Za vsak dvodelen $d$-regularen graf $G$ z $d \ge 3$ velja $\ec(G) = 2$. 
+\end{posledica}
+
+Za regularne grafe predpostavka izreka \ref{dvoreg} avtomatsko velja, izjema so le $2$-regularni grafi oziroma cikli. Preprost proti primer je $C_6$, ki je dvodelen ter $2$-regularen graf vendar velja $\ec(C_6) = 3$. Zato je pogoj $d \ge 3$ v posledici nujno potreben.
+
+
+V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin grafov ter za grafe z nekaj dodatnimi pogoji. V vseh primerih smo 1-2-3 domnevo potrdili v posebnih primerih smo lahko zgornjo mejo še celo malo izboljšali. Rezultate tega razdelka lahko predstavimo s spodnjo tabelo.
+\begin{table}[H]
+
+\caption{\label{tab:tab1} Izračun $\ec(G)$ za znane grafe. }
+\centering
+\begin{tabular}{|l|l|}
+\hline
+ Graf $G$ & $\ec(G)$  \\ \hline
+ $P_n$ & 2  \\ \hline
+ $C_n$ & $\begin{cases}
+	2 & n = 4k;\\ 
+	3 & sicer;
+	\end{cases}$  \\ \hline
+ $K_n$& 3  \\ \hline
+ $K_{m,n}$& $\begin{cases}
+	1 & m \neq n\\ 
+	2 & sicer;
+	\end{cases}$  \\ \hline
+ 3 obarljivi& 3  \\ \hline
+$T_n$ & 2  \\ \hline
+dvodelni in $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
+\end{tabular}
+\end{table}
+
+
  
  \section{1-2-3-4-5 Izrek}
  
