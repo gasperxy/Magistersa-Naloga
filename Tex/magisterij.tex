@@ -110,6 +110,7 @@
 
 \newcommand{\ec}{\chi_{\Sigma}^e}
 
+
 \numberwithin{equation}{section}  % števec za enačbe zgleda kot (2.7) in se resetira v vsakem poglavju
 
 % Matematični ukazi
@@ -769,15 +770,34 @@ dvodelni in $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
 
  
  \section{1-2-3-4-5 Izrek}
- 
- Ta razdelek sledi članku ~\cite{proof12345}. To je do sedaj tudi najboljša splošna meja $\mu$ za poljubne grafe. Dokaz je algoritmične narave in bi morda bilo zanimivo spisati algoritem ki deluje skladno z dokazom
+ Do sedaj smo 1-2-3 domnevo potrdili za grafe z posebnimi lastnostmi. Pri iskanju oziroma konstrukciji ustrezne utežitve grafa so ključno vlogo igrale prav te posebne lastnostni.  Kot smo že omenili je bilo od leta 2004 ko je bila zastavljena domneva veliko poizkusov iskanja zgornje meje za parameter $\ec(G)$, kjer je bilo do sedaj kar precej napredka. Različni avtorji so predstavili različne metode in pristope k temu problemu. Do danes je bila najboljša zgornja meja predstavljena v članku ~\cite{proof12345}. Presenetljivo je dokaz sorazmerno preprost in algoritmične narave. V tem razdelku bomo to zgornjo mejo dokazali in analizirali časovno zahtevnost algoritma, ki najde ustrezno utežitev. Dobljen rezultat lahko formuliramo kot naslednji izrek.
+
  
  \begin{izrek}
- 	Za vsak graf $G$, ki ni $K_2$ obstaja utežitev $\omega : E(G) \rightarrow {1,2,3,4,5}$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
+ 	Za vsak preprost graf $G$ velja $\ec(G) \le 5$.
  \end{izrek}
 
 \begin{proof}
-	
+	Ker je graf povezan in ima vsaj 3 vozlišča vsebuje vsaj eno vozlišče s stopnjo $\ge 2$. Sedaj uredimo vozlišča kot $V(G) = \{ v_1, v_2, \ldots, v_n\}$, tako da $d(v_n) \ge 2$ in ima za vsak $i \le n-1$ vozlišče $v_i$ soseda v množici $\{v_{i+1}, v_{i+2}, \ldots, v_n\}$. Tako ureditev vozlišč lahko najdemo na preprost način. V vozlišču $v_n$ začnemo BFS algoritem ter v seznam zaporedoma dodajano obiskana vozlišča. Tako dobimo vozlišča urejena kot $\{v_n, v_{n-1}, \ldots, v_1\}$. Za vsak $i \le n-1$ sedaj res velja, da ima soseda v množici   $\{v_{i+1}, v_{i+2}, \ldots, v_n\}$ saj se v tej množici nahaja njegov starš v BFS drevesu.
+
+V nadaljevanju dokaza bomo konstruirali $5$-utežitev $\omega$, ki bo pravilno obarvala graf $G$. Začnemo z začetno utežitvijo $\omega(e) = 3$ za vsako povezavo $e$. Vozlišča bomo procesirali v zgornjem vrstnem redu in pri tem vsako utež modificirali največ dvakrat. Za vsako vozlišče $v_i$ z $i < n$ bomo dodeli množico dveh barv $C(v_i) = \{c(v_i), c(v_i) + 2\}$, kjer je $c(v_i) \in \{0,1\}  \mod 4$, tako da za vsako povezavo \textit{nazaj} $v_jv_i$ z $j < i$ velja $C(v_j) \cap C(v_i) =\emptyset$. Poleg tega bomo utežitev $\omega$ konstruirali, tako da $c_{\omega}(v_i) \in C(v_i)$. V zadnjem koraku bomo popravili uteži na povezavah, ki so incidenčne $v_n$, tako da bo $c_{\omega}(v_n)$ različen od njegovih sosedov.
+
+Začnimo z dodeljevanjem množic barv za vozlišča $C(v_i)$. Začnemo z vozliščem $v_1$, kjer trenutno velja $c_{\omega}(v_1) = 3d(v_1)$ in izberemo $C(v_1)$, tako da $c_{\omega}(v_1) \in C(v_1)$. To lahko naredimo, ker trenutno še nimamo nobenih posebnih omejitev. Sedaj nadaljujemo induktivno. Naj bo $ 2 \le k \le n-1$ in predpostavimo, da smo izbrali $C(v_i)$ za vse $i < k$ ter velja:
+\begin{itemize}
+\item $c_{\omega}(v_i) \in C(v_i)$ za vse $ i < k$,
+\item $\omega(v_kv_j) = 3$ za vse povezave z $ j > k$,
+\item če $\omega(v_iv_k) \neq 3$ za neko povezavo z $i < k$ potem $\omega(v_iv_k) = 2$ in $c_{\omega}(v_i) = c(v_i)$ ali $\omega(v_iv_k)=4$ in $c_{\omega}(v_i) = c(v_i) + 2$.
+\end{itemize}
+Sedaj moramo določiti uteži, tako da bo enako veljalo tudi za volzišče $v_k$. Oglejmo si neko povezavo \textit{nazaj} $v_iv_k$ za nek $i < k$. Na podlagi zgornjih pogojev lahko uteži na tej povezavi bodisi prištejemo bodisi odštejemo 2 ter še vedno ohranjamo pogoj $c_{\omega}(v_i) \in C(v_i)$. Recimo, da ima $v_k$ $d$ takšnih sosedov, potem imamo $d+1$ možnosti za $c_{\omega}(v_k)$ vse iste parnosti (odvisno od parnosti $d$). Po eno možnost imamo za spremembo uteži na vsaki povezavi nazaj ter še eno dodatno možnost, če ničesar ne spreminjamo. Dodatno bomo dovoljevali spremembo za $1$ na prvi povezavi \textit{naprej}, t.j. $v_kv_j$, kjer je $j$ najmanjši tak indeks, da obstaja povezava $v_kv_j$. Na tak način bo izpolnjen zadnji pogoj, ko bomo procesirali naslednja vozlišča. S tem lahko $c_{\omega}(v_k)$ zavzame vse vrednosti na itervalu $[a, a + 2d + 2]$. Uteži sedaj modificiramo, tako da
+
+\begin{enumerate}
+\item $c_{\omega}(v_i) \in C(v_i)$ za vse $ i \le k$,
+\item $c(v_i) \neq c(v_k)$ za $v_iv_k \in E$, kjer $i < k$,
+\item bodisi $c_{\omega}(v_k) = c(v_k)$ in $\omega(v_kv_j) \in \{2,3\}$ ali $c_{\omega}(v_k) = c(v_k) + 2$ in $\omega(v_kv_j) \in \{3,4\}$.
+\end{enumerate}
+Pri tem je pogoj (1) vedno izpolnjen. V primeru, ko $c_{\omega}(v_i) = c(v_i)$ lahko uteži na povezavi $v_iv_k$ prištejemo 2, v nasprotnem primeru ko je $c_{\omega}(v_i) = c(v_i) + 2$ lahko uteži na zgornji povezavi odštejemo 2. Drugi pogoj nam lahko blokira največ $2d$ vrednosti v intervalu $[a, a + 2d + 2]$ in tretji pogoj kvačjemu blokira krajišči intervala. Tako ostane vsaj ena vrednost za $c_{\omega}(v_k)$. Na tak način lahko konstruiramo množice $W(v_k)$ z želenimi lastnostmi za vse $k < n$.
+
+V zadnjem koraku moramo najti primerno vrednost za $c_{\omega}(v_n)$. V tem primeru nimamo na voljo povezave naprej, ki nam je v prejšnjem primeru pomagala pri določitvi uteži, vendar nam v tem primeru ni potrebno skrbeti za kasnejša vozlišča. Na povezavah $v_iv_n$ za $i < n$ lahko ponovno utež bodisi povečamo bodisi zmanjšamo za 2 in ohranimo $c_{\omega}(v_i) \in C(v_i)$. To nam ponovno da $d(v_n) + 1 \ge 3$ možnosti za $c_{\omega}(v_n)$. V kolikor za najmanjšo izmed teh možnosti $a$ velja $a \in \{2,3\} \mod 4$ potem na vseh povezavah incidenčnih $v_n$ izberemo najnižjo možno utež. S tem bomo poskrbeli, da $c_{\omega}(v_i) = c(v_i) \in \{0,1\} \mod 4$ za $v_i \in N(v_n)$ in tako različna od $a$. V kolikor $a \in \{0,1\} \mod 4$ in obstaja $v_i \in N(v_n)$ z $c(v_i) \neq a$ potem izberemo višjo utež na povezavi $v_iv_n$ in nižjo utež na vseh ostalih povezavah s čimer dobimo $c_{\omega}(v_n) = a + 2$ kar je tudi pravilno barvanje. Nazadnje v kolikor $a \in \{0, 1\} \mod 4$ in $c(v_i) = a$ za vse $v_i \in N(v_n)$ izberemo višjo utež na vsaj dveh povezavah (kar lahko sotrimo, saj je $d(v_n) \ge 2$) in dobimo pravilno barvanje.
 \end{proof}
 
 V nadaljevanju tega razdelka bi podal kakšen primer $5$ utežitve nekega grafa.
