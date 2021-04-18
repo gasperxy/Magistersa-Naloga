@@ -88,6 +88,7 @@
 \usepackage{subcaption}
 \usepackage{mwe}
 \usepackage{float}
+\usepackage[]{algorithm2e}
 
 
 \setlength{\overfullrule}{50pt} % označi predlogo vrstico
@@ -353,9 +354,10 @@ Na podlagi določenih lastnosti ločimo različne družine grafov. Te lastnosti 
 Pot je najbolj preprost graf. \textbf{Pot} z $n$ vozlišči označimo z $P_n$ pri čemer vozlišča uredimo v vrsto $v_1, v_2, \ldots v_n$ ter medseboj povežemo zaporedna vozlišča. Vsa vozlišča razen $v_1$ in $v_n$ so stopnje 2. V kolikor dodamo še povezavo med $v_1$ in $v_n$ dobimo \textbf{cikel} z $n$ vozlišči in ga označimo kot $C_n$. Za cikle tako velja, da imajo vsa vozlišča stopnjo 2. To idejo lahko posplošimo in definiramo \textbf{regularni graf} kot graf, kjer imajo vsa vozlišča enako stopnjo. Z oznako $d$-regularni grafi mislimo grafe, kjer imajo vsa vozlišča stopnjo $d$. Parameter $d$ imenujemo tudi stopnja oziroma red regularnega grafa. S tem lahko cilke definiramo kot $2$-regularne grafe. Preprosto lahko ugotovimo, da regularni grafi poljubnih stopenj in velikosti ne morejo obstajat. Potreben in zadosten pogoj za obstoj $d$-regularnega grafa na $n$ vozliščih je $n \ge d + 1$ in $nd$ sodo. Navedimo še en poseben primer regularnega grafa. \textbf{Polni graf} z $n$ vozlišči označimo z $K_n$ kar predstavlja $n-1$-regularni graf. To je graf, kjer je vsako vozlišče povezano z vsemi drugimi vozlišči. Ime polni graf izhaja iz dejstva, da imajo polni grafi maksimalno število povezav in sicer ${n \choose 2}$. Naslednja pomembna družina grafov so drevesa. \textbf{Drevo} $T_n$ je povezan graf na $n$ vozliščih z $n-1$ povezavami. Obstaja več ekvivalentnih definicij oziroma karakterizacij dreves. Velikokrat se drevesa definira kot povezane grafe brez ciklov. V kolikor graf ni povezan in nima ciklov ga imenujemo gozd.
 
 \subsection{Barvanje grafa}
-Vozliščno barvanje grafa $G=(V, E)$ je preslikava $ c: V \rightarrow $, za katero velja $c(v) \neq c(u)$, če $vu \in E$. Množica $S$ je množica razpoložljivih barv. Poleg vozliščnega barvanja poznamo tudi povezavno barvanje, vendar nas to tekom magisterske naloge nebo zanimalo. Zato bomo od sedaj dalje z barvanjem grafa vedno mislili vozliščno barvanje. Pri barvanju nas ponavadi predvsem zanima velikost množice $S$. Drugače povedano, zanima nas najmanjši $k \in \mathbb{N}$, tako da G premore $k$-barvanje $c : V \rightarrow \{1,2,\ldots, k\}$. 
+Barvanje grafa je zagotovo eden izmed najbolj popularnih grafovskih problemov. Poleg tega, da je bil ta problem eden izmed prvih grafovskih problemov dokazano NP-poln je povezan še z mnogo drugimi podobnimi problemi. Tako se je oblikovalo več različnih in izpeljanih načinov barvanja grafov. Vsem oblikam barvanja je skupno to, da je za splošne oziroma poljubne grafe to težak problem.
+\textbf{Vozliščno barvanje} grafa $G=(V, E)$ je preslikava $ c: V \rightarrow S$, za katero velja $c(v) \neq c(u)$, če $vu \in E$. Množica $S$ je množica razpoložljivih barv. Poleg vozliščnega barvanja poznamo tudi povezavno barvanje, vendar nas to tekom magisterske naloge nebo zanimalo. Zato bomo od sedaj dalje z barvanjem grafa vedno mislili vozliščno barvanje. Pri barvanju nas ponavadi predvsem zanima velikost množice $S$. Drugače povedano, zanima nas najmanjši $k \in \mathbb{N}$, tako da G premore $k$-barvanje $c : V \rightarrow \{1,2,\ldots, k\}$. 
 
-Tak najmanjši $k$ označimo z $\chi(G)$ in ga imenujemo \textbf{kromatično število} grafa $G$. Z lahkoto preverimo, da je to invarianta grafa. V kolikor je $ \chi(G) \le k$ rečemo, da je graf $k$-obarljiv. Za podan graf $G$ nas ponavadi zanima zgornja meja za  $\chi(G)$. Konstantna zgornja meja za splošne grafe ne obstaja. Preprost primer, ki podpre to dejstvo so polni grafi $K_n$ saj za njih potrebujemo $n$ barv. Obstaja pa preprosta meja, ki vključuje maksimalno stopnjo $\Delta$ in sicer velja  $\chi(G) \le \Delta + 1$. To lahko preprosto vidimo, če analiziramo vozlišča grafa v poljubnem vrstnem redu ter jih požrešno barvamo. V najslabšem primeru, bodo vsi sosedi trenutnega vozlišča pobarvani z različnimi barvami, kar pomeni, da moramo vozlišče pobartvati z dodatno barvo. Na tak način nikoli ne porabimo več kot $\Delta + 1$ barv.
+Tak najmanjši $k$ označimo z $\chi(G)$ in ga imenujemo \textbf{kromatično število} grafa $G$. Z lahkoto preverimo, da je to invarianta grafa. V kolikor je $ \chi(G) \le k$ rečemo, da je graf $k$-obarljiv. Za podan graf $G$ nas ponavadi zanima zgornja meja za  $\chi(G)$. Konstantna zgornja meja za splošne grafe ne obstaja. Preprost primer, ki podpre to dejstvo so polni grafi $K_n$ saj za njih potrebujemo $n$ barv. Obstaja pa preprosta meja, ki vključuje maksimalno stopnjo $\Delta$ in sicer velja  $\chi(G) \le \Delta + 1$. To lahko preprosto vidimo, če analiziramo vozlišča grafa v poljubnem vrstnem redu ter jih požrešno barvamo. V najslabšem primeru, bodo vsi sosedi trenutnega vozlišča pobarvani z različnimi barvami, kar pomeni, da moramo trenutno vozlišče pobartvati z dodatno barvo. Na tak način nikoli ne porabimo več kot $\Delta + 1$ barv.
 Zgornjo mejo se lahko v večini primerov izboljša, kar pravi naslednji izrek:
 \begin{izrek}[Brooks (1941)]
 Naj bo $G$ povezan graf. V kolikor $G$ ni poln graf ali lih cikel potem
@@ -364,6 +366,13 @@ $$\chi(G) \le \Delta(G) $$
 \end{izrek}
 
 Dokaz zgornjega izreka bralec lahko najde v \cite{maingraph}. Posledica zgornjega izreka je, da lahko $d$-regularne grafe pobarvamo z $d$ barvami v kolikor je $d> 2$ (cikel) in $d < n$ (poln graf).
+
+\subsection{Seznamsko barvanje grafa}
+Sedaj bomo definirali generalizacijo barvanja grafa. Na zelo podoben način se generalizira tudi druge grafovske probleme, kar bomo videli v naslednjih razdelkih. Naj bo $G = (V, E)$ graf in naj bo $(S_v)_{v \in V}$ družina množic. Vozliščno barvanje $c$ grafa $G$ kjer dodatno velja $c(v) \in S_v$ za vse $v$ imenujemo \textbf{seznamsko barvanje} s seznami $S_v$. Graf $G$ je $k$-seznamsko obarljiv, če za vsako družino  $(S_v)_{v \in V}$ z $|S_v| = k$ za vse $v$ obstaja vozliščno barvanje s seznami $S_v$. Najmanjši tak $k$ imenujemo seznamsko kromatično število oziroma izbirno število (eng. choice number) in jo označimo kot $ch(G)$.
+Definicija je bolj zapletena kot definicija navadnega barvanja zato si oglejmo kakšna je povezava med njima. Da je seznamsko barvanje res generalizacija preprosto ugotovimo, tako da za družino  $(S_v)_{v \in V}$ vzamemo kar enake množice, naprimer $S_v = \{1,2, \ldots, k\}$.  S tem ugotovimo, da v kolikor je graf $k$-seznamsko obarljiv je tudi $k$-obarljiv. Bolj natančno, 
+$$ ch(G) \ge \chi(G)$$.
+
+Dodatno se izkaže, da veliko zgornjih mej za kromatično število velja tudi za seznamsko verzijo. Konkretno reformulacija Brooks-ovega izreka velja tudi za seznamsko barvanje. To pomeni, da v kolikor $G$ ni poln graf ali lih cikler velja $ch(G) \le \Delta(G)$. Vendar to še ne pomeni, da sta si $\chi(G)$ in $ch(G)$ blizu. Obstajajo preprosti grafi, kjer je razlika med parametroma lahko poljubna. Klasični primeri tega so polni dvodelni grafi $K_{m,n}$.
 
 \subsection{Barvanje grafa z utežmi}
 
@@ -384,6 +393,10 @@ Očitno ta utežitev porodi pravilno barvanje grafa $G$. Vendar je zgornja ocena
 	$$c_{\omega} (u) \neq c_{\omega}(v). $$
 \end{definicija}
 Označimo z $\ec(G)$ najmanjši tak $k$, da za graf $G$ obstaja $k$-utežitev, ki je pravilno barvanje z utežmi. Literatura glede oznake ni enotna vendar nam ta oznaka omogoča konsistentnost pri raziskovanju podobnih problemov. Tako kot kromatično število je tudi $\ec(G)$ invarianta grafa $G$. V nalogi se bomo osredotočili na analiziranje te grafovske invariante ter nekaj izpeljank. Naprimer namesto vsote uteži bi lahko primerjali produkte ter dovoljevali tudi vozliščem, da vsebujejo uteži. Po zgornjem primeru lahko grobo ocenimo $\ec(G) \le 2^{|E(G)|}$. Kot bomo videli v nadaljevanju ja ta ocena zelo slaba. Ugotovili bomo, da obstaja celo konstantna zgornja meja za vse grafe. Malo lažje ocenimo spodnjo mejo. Na primeru cikla $C_3$ opazimo, da $\ec(G) \ge 3$ saj potrebujemo vsaj 3 različne uteži na povezavah. Glede na to, da je cikel $C_3$ zelo preprost graf nam intuicija govori, da bo spodnja meja za bolj kompleksne grafe višja. Vendar temu ni tako. V naslednjem razdelku bomo predstavili 1-2-3 domnevo, kjer je domnevna zgornja meja za $\ec(G)$ kar enaka preprosti spodnji meji, ki smo jo ugotovili v primeru cikla $C_3$.
+
+\subsection{Iregularnostna moč grafa oziroma multigrafa}
+
+V tem razdelku bomo predstavili glavno motivacijo za 1-2-3 domnevo in je v nekem smislu generalizacija prejšnjega razdelka. Glavna ideja leži v tem, kako definirati t.i. \textbf{iregularni graf}. V nasprotju z regularnimi grafi bi naivno tak graf definirali kot graf, kjer imajo vsa vozlišča enako stopnjo. Vendar to seveda ni mogoče. Preprosto dejstvo je, da ima vsak graf z vsaj dvema vozliščema dva vozlišča z isto stopnjo. To lahko pokažemo z preprosto uporabo Dirichletovega principa. Možne stopnje vozlišč so $0, 1, 2, \ldots n-1$ vendar v grafu ne more istočasno obstajati vozlišče s stopnjo $0$ in s stopnjo $n-1$. Iz tega sledi, da imamo na razpolago $n-1$ različnih stopenj, ki jih moramo dodeliti $n$ vozliščem iz česar sledi, da imata vsaj 2 enako stopnjo. Torej naivna definicija iregularnega grafa ne deluje. Seveda to ne velja za multigrafe. Zato se lahko vprašamo, kako daleč je nek preprost graf do tega, da postane iregularen multi graf. Torej koliko vzporadnih povezav je potrebno dodati grafu, da bodo stopnje njegovih vozlišč različne. Namesto dodajanja vzporednih povezav lahko povezave utežimo z celoštevilskimi utežmi in opazujemo dobljene uteži vozlišč (v tem primeru želimo, da so vse uteži na vozliščih različne). Definirajmo sedaj zgornji razmislek bolj natančno. Naj bo $\omega : E(G) \rightarrow \{1,2, \ldots, k\}$ neka utežitev povezav grafa $G$. Utežitvi $\omega$ rečemo iregularna, če so uteži na vozliščih $ d_{\omega}(v) =  \sum_{u \in N(v)} \omega(vu)$ vse različne. Najmanjši tak $k$ za katerega obstaja iregularna utežitev grafa $G$ imenujemo iregularnostna moč ter jo označimo kot $s(G)$.
 
 Tukaj se dodaja osnovne definicije o grafih, ki jih bom potreboval. Trenutno še ne vem kaj vse bo potrebno.
 
@@ -800,11 +813,61 @@ Pri tem je pogoj (1) vedno izpolnjen. V primeru, ko $c_{\omega}(v_i) = c(v_i)$ l
 V zadnjem koraku moramo najti primerno vrednost za $c_{\omega}(v_n)$. V tem primeru nimamo na voljo povezave naprej, ki nam je v prejšnjem primeru pomagala pri določitvi uteži, vendar nam v tem primeru ni potrebno skrbeti za kasnejša vozlišča. Na povezavah $v_iv_n$ za $i < n$ lahko ponovno utež bodisi povečamo bodisi zmanjšamo za 2 in ohranimo $c_{\omega}(v_i) \in C(v_i)$. To nam ponovno da $d(v_n) + 1 \ge 3$ možnosti za $c_{\omega}(v_n)$. V kolikor za najmanjšo izmed teh možnosti $a$ velja $a \in \{2,3\} \mod 4$ potem na vseh povezavah incidenčnih $v_n$ izberemo najnižjo možno utež. S tem bomo poskrbeli, da $c_{\omega}(v_i) = c(v_i) \in \{0,1\} \mod 4$ za $v_i \in N(v_n)$ in tako različna od $a$. V kolikor $a \in \{0,1\} \mod 4$ in obstaja $v_i \in N(v_n)$ z $c(v_i) \neq a$ potem izberemo višjo utež na povezavi $v_iv_n$ in nižjo utež na vseh ostalih povezavah s čimer dobimo $c_{\omega}(v_n) = a + 2$ kar je tudi pravilno barvanje. Nazadnje v kolikor $a \in \{0, 1\} \mod 4$ in $c(v_i) = a$ za vse $v_i \in N(v_n)$ izberemo višjo utež na vsaj dveh povezavah (kar lahko sotrimo, saj je $d(v_n) \ge 2$) in dobimo pravilno barvanje.
 \end{proof}
 
+Na podlagi zgornjega dokaza lahko napišemo algoritem za iskanje takih utežitev za poljuben graf. V  algoritmu spodaj vidimo postopek. Poleg tega, da nam dokaz zagotavlja rešitev za vsak graf je algoritem, ki tako rešitev lahko poišče polinomske časovne zahtevnosti. To res drži, saj lahko notranji del for zanke omejimo z $O(n)$ z uporabo $d(v) \le n-1 $. Torej celoten algoritem potem deluje v $O(n^2)$.
+\begin{algorithm}[H]
+ \KwData{graf $G$}
+ \KwResult{utežitev $\omega$  }
+ V = BFS(G)\;
+C = dict() \;
+ $\omega$ = \{\} \;
+ \For{$v$ in $V$}{
+ used=\{\} \;
+	\For{$u$}{
+
+	$c_i$ = C[u] \;
+	used.Add($c_i$) \;
+	used.Add($c_i + 2$) \;
+
+	}
+m =  min(used) \;
+M = max(used) \;
+
+\eIf{$m-1 = 2,3 \mod(4)$}
+{
+	used.Add($m-1$)
+}
+{}
+
+
+\eIf{$M+1 = 0,1 \mod(4)$}
+{
+	used.Add($M+1$)
+}
+{}
+
+
+
+$c = 0$ \;
+
+\For{i = m - 1 to M + 1}{
+ \eIf{i not in used}{
+  $c = i$ \;
+   break \;  
+   }
+{}
+ }
+}
+ 
+ \caption{How to write algorithms}
+\end{algorithm}
+
 V nadaljevanju tega razdelka bi podal kakšen primer $5$ utežitve nekega grafa.
 
-\subsubsection{1-2-3-4 rezultat za d-regularne grafe}
+\subsection{1-2-3-4 rezultat za d-regularne grafe}
 
-Ta rzdelek najdemo v članku ~\cite{regular}. V tem članku sta 2 glavna rezultata in sicer 1-2-3-4 utežitev za d-regularne grafe, kar je narejeno na algoritmičen način. Drugi rezultat pa je,
+V prejšnjem razdelku smo analizirali rezultat za splošne grafe. Kot smo že omenili je to tudi najboljši rezultat do danes, ki ga poznamo za splošne grafe. Prav tako smo opazili, da za nekatere posebne grafe lahko rezultat izboljšamo. Ta razdelek bo namenjen $d$-regularnih grafom. Ugotovili smo že, da za regularne grafe $G$, ki so tudi dvodelni velja $\ec(G) \le 2$. Na podlagi motivacije za 1-2-3 domnevo smo po drugi strani ugotovili, da so morda regularni grafi težki za ta problem saj so zelo "oddaljeni"  od pojma iregularni graf. Kljub temu vseeno lahko izkoristimo nekatere lastnosti regularnih grafov in izboljšamo rezultat iz prejšnjega razdelka. Ta razdelek v veliki meri sledi članku ~\cite{regular}.
+
+Ta razdelek najdemo v članku ~\cite{regular}. V tem članku sta 2 glavna rezultata in sicer 1-2-3-4 utežitev za d-regularne grafe, kar je narejeno na algoritmičen način. Drugi rezultat pa je,
 dokaz da 1-2-3 domneva velja za grafe, ki imajo dovolj velik "d" in temelji na verjetnostnih metodah. V tem razdelku bi predstavil prvi rezultat z nekaj primeri.
 	
  
