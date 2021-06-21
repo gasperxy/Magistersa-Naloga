@@ -48,6 +48,7 @@
 \usepackage{amsmath,amssymb,amsfonts,amsthm} % matematični paketi
 \usepackage{graphicx}     % za slike
 \usepackage{mathtools}
+\usepackage[numbers]{natbib}
 %\usepackage[dvipsnames,usenames]{color} % barve
 \usepackage{emptypage}    % prazne strani so neoštevilčene, ampak so štete
 \usepackage{units}        % fizikalne enote kot \unit[12]{kg} z polovico nedeljivega presledka, glej primer v kodi
@@ -428,15 +429,18 @@ Z definicijo $\ec(G)$ lahko formuliramo 1-2-3 domnevo na naslednji način
 	(1-2-3 Domneva; Karonski– Luczak–Thomason~\cite{base}) Naj bo $G$ povezan graf, ki ni $K_2$. Tedaj je $\ec(G) \le 3.$ 
 \end{domneva}
 Zastavljena zgornja meja je presenetljiva iz več razlogov. Prvi razlog je to, da je meja konstantna, za razliko od kromatičnega števila kjer za splošne grafe ne obstajajo konstantne meje. Po drugi strani do sedaj še nismo predstavili nobene "dobre" zgornje meje za $\ec(G)$. V članku ~\cite{base}, kjer je bila zastavljena zgornja domneva so pokazali, da obstaja končna množica realnih števil, tako da utežitev z temi števili inducira pravilno barvanje vsakega grafa. Vendar je ta rezultat še vedno precej odmaknjen od željene domneve. Poleg tega so v članku dokazali domnevo za grafe $G$, kjer $\chi(G) \le 3$.
- Kasneje je bil v ~\cite{proof12345} predstavljen eleganten algoritem, ki doseže zahtevano utežitev z utežmi v $\{1,2,3,4,5\}$. To je do sedaj tudi najboljši razultat za splošne grafe. Tekom naloge bomo spoznali nekaj metod s katerimi se lahko lotimo zgornjega problema za neke specifične družine grafov ter se probamo čim bolj približati željenemu rezultatu. Za začetek pa si oglejmo nekaj preprostih družin, za katere pokaže, da zgornja meja velja.
+ Kasneje je bil v ~\cite{proof12345} predstavljen eleganten algoritem, ki doseže zahtevano utežitev z utežmi v $\{1,2,3,4,5\}$. To je do sedaj tudi najboljši razultat za splošne grafe. Tekom naloge bomo spoznali nekaj metod s katerimi se lahko lotimo zgornjega problema za neke specifične družine grafov ter se probamo čim bolj približati željenemu rezultatu. Za začetek pa si oglejmo nekaj preprostih družin, za katere se izkaže, da zgornja meja velja.
 
 \subsection{Izračun $\ec(G)$ za nekatere družine grafov}
 
-Za začetek si bomo ogledali nekaj osnovnih primerov grafov ter na njih izračunali parameter $\ec$. Zraven bomo izračunali tudi iregularnostno moč posameznih grafov ter rezultate med seboj primerjali. 
+Za začetek si bomo ogledali nekaj osnovnih primerov grafov ter na njih izračunali parameter $\ec$. Poleg tega bomo rezultate nahitro primerjali z iregularnostnjo močjo grafa. Ogledali so bomo predvsem tipe grafov, ki smo jih spoznali v uvodnem delu. Tekom magisterske naloge bomo za take grafe izračunali še parametre, ki izhajajo iz sorodnih verzij 1-2-3 domneve. Začnimo z enim izmed bolj preprostih družin grafov.
+
 Večina tega razdelka je povzeta po ~\cite{examples}.
+\begin{trditev}[1-2-3 domneva za $P_n$; ~\cite{examples}]
+Naj bo $P_n$ pot na vsaj treh vozliščih. Tedaj velja $\ec(P_n) = 2.$
+\end{trditev}
 
-\subsubsection{Pot $P_n$}
-
+\begin{proof}
 	Ker je graf $P_2 = K_2$ bomo obravnavali le primer, ko je $n \ge 3$. Najprej oštevilčimo povezave $P_n$ na naraven način kot $e_i = v_i v_{i+1}$ za $i=1,2,\ldots, n-1$. Po kratkem premisleku ugotovimo, da je potreben pogoj za željeno utežitev
 	$$\omega(e_i) \neq \omega(e_j) \text{ v kolikor } |j-i| = 2 .$$
 	Torej povezavi, ki sta na razdalji $2$ morata imeti različne uteži. To drži, saj imata v primeru ko $\omega(e_i) = \omega(e_{i+2})$ vozlišči $v_{i+1}$ in $v_{i+2}$ enako barvo neglede na vrednost $\omega(e_{i+1})$. Polega tega, da je zgornji pogoj potreben, je tudi zadosten. To preprosto vidimo saj smo ugotovili, da povezava $e_{i}$ ne vpliva na barvo vozlišč $v_i$ in $v_{i+1}$ saj obema "pripomore" enako vrednost. Na podlagi zgornjega razmisleka ugotovimo, da $\ec(P_3) = 1$, saj $P_3$ ne vsebuje povezav na razdalji 2. Po drugi strani za $P_n$ definiramo:
@@ -480,10 +484,13 @@ Večina tega razdelka je povzeta po ~\cite{examples}.
 	\end{figure}
 	Res, zgornja utežitev zadošča zgornjemu pogoju. Na sliki ~\ref{pn} vidimo primer neke take utežitvne na grafu $P_n$. Glede na to, da sta zadnji uteži na povezavah $1$ in $2$ lahko sklepamo, da gre na sliki za $P_n$ z $n \equiv 3 \pmod{4}$. Prav tako opazimo, da je pravzaprav pomembno zaporednje uteži $11221\ldots 112$. V tem zaporedju se torej nujno razlikujeta elementa na razdalji 2. Tako lahko zaključimo, da je $\ec(P_n) = 2$ za $n \ge 4$. 
 
-Premislimo sedaj še to kako bi izračunali iregularnostno moč $P_n$. Zgornja utežitev seveda ne deluje saj nam inducira le štiri različne barve kar pomeni, da ima veliko vozlišč enako barvo. Zato bomo tukaj postopali malenkost drugače. Utežitev bomo poizkušali konstruirati na tak način, da bodo barve vozlišč zavzele vse vrednosti od $1$ do $n$. Recimo, da je $n$ liho. Dodelimo vozlišču, ki se nahaja na sredini (torej z indeksom $\lfloor \frac{n}{2} \rfloor + 1$) barvo z vrednostjo $n$. 
-
-
-\subsubsection{Cikel $C_n$}
+Premislimo sedaj še to kako bi izračunali iregularnostno moč $P_n$. Zgornja utežitev seveda ne deluje saj nam inducira le štiri različne barve kar pomeni, da ima veliko vozlišč enako barvo. Zato bomo tukaj postopali malenkost drugače. Utežitev bomo poizkušali konstruirati na tak način, da bodo barve vozlišč zavzele vse vrednosti od $1$ do $n$. Recimo, da je $n$ liho. Dodelimo vozlišču, ki se nahaja na sredini (torej z indeksom $\lfloor \frac{n}{2} \rfloor + 1$) barvo z vrednostjo $n$. Sedaj povezavama, ki sta incidenčni sredinskemu vozlišču dodelimo uteži $\lfloor \frac{n}{2} \rfloor$ in $\lceil \frac{n}{2} \rceil$. Sedaj dodeljujemo nove uteži, tako da bodo imela vozlišča levo od sredinskega sodo vrednost in liho vrednost če se nahajajo desno od sredinskega vozlišča. Malo bolj pazljivi mormo sicer biti na posameznih koncih poti, da se naše uteževanje uspešno zaključi vendar to lahko storimo. Na podlagi tega torej sklepamo, $s(P_n) \ge \lceil \frac{n}{2} \rceil$ in je potem zgoraj zastavljena tudi precej stroga.
+\end{proof}
+Naravno nadaljujemo z grafom, ki ga iz poti dobimo, tako da združimo krajšiča poti z novo povezavo. Tedaj seveda ustvarimo cikel $C_n$. Kljub temu, da grafu dodamo le eno novo povezavo, pri tem strogo povečamo parameter $\ec.$
+\begin{trditev}[ ~\citet{examples}]
+Naj $C_n$ cikel. Tedaj velja $\ec(C_n) \le 3.$
+\end{trditev}
+\begin{proof}
 	
 	V prejšnjem primeru smo izračunali število $\mu$ za grafe, ki so poti. Hitro opazimo, da med potjo in ciklom ni veliko razlike. Dodana je le ena povezava med prvim in zadnjim vozliščem. Enako kot v prejšnjem primeru bomo oštevilčili povezave cikla $C_n$ kot $e_1, e_2, \ldots, e_n$, kjer vzamemo $e_n = v_n v_1$. Poizkusimo z enako utežitvijo kot smo jo imeli za poti, torej
 		\begin{equation*}
@@ -623,12 +630,18 @@ Premislimo sedaj še to kako bi izračunali iregularnostno moč $P_n$. Zgornja u
 \label{fig:cnall}
 \end{figure}
 Potreben in zadosten pogoj, ki smo ga uporabili že za primer poti velja tudi za cikle. Pri ciklu moramo opazovati dodatno povezavo med $v_1$ in $v_n$. Kot je razvidno iz slike~\ref{fig:cnall} moramo ločit primere glede na vrednost $n \pmod{4}$. Ugotovimo, da za pravilno utežitev cikla $C_n$ potrebujemo največ 3 uteži, torej $\ec(C_n) \le 3$. Pokažimo sedaj, da je ta meja tudi natančna za $n \neq 4k$. Recimo torej nasprotno, da je $\mu(C_n) = 2$ in naj bo $\omega$ utežitev, ki zadošča temu pogoju. Potem iz $c_{\omega}(v_i) \neq c_{\omega}(v_{i+1})$ sledi $\omega(v_i v_{i+1}) \neq \omega({v_{i+2} v_{i+3}})$. To je pogoj, da se uteži na razdalji $2$ razlikujejo. Ampak to pomeni, ker imamo na voljo samo uteži 1 in 2, da mora veljati $\omega(v_i v_{i+1}) = \omega({v_{i+4} v_{i+5}})$. To pa je protislovje v primeru ko $n \neq 4k$.
-	
-	
 
+Nahitro ocenimo še parameter $s(C_n)$. V tem primeru par tako vzamemo idejo, ki smo jo dobili pri uteževanju poti. Zopet začnemo nekje na sredini in v tem primeru poizkušamo dosečti, da se uteži na vozliščih nahajajo na intervalu $[2, n+1]$. Podobno koti pri poti je potrebno biti pazljiv pri robnih primerih vendar zagotovo velja enaka ocena in sicer $s(G) \ge \lceil \frac{n}{2} \rceil$.
 	
 	
-\subsubsection{Polni graf $K_n$}
+\end{proof}
+Do sedaj smo obravnavali grafe z precej nizkimi stopnjami vozlišč kar si lahko predstavljamo kot malo možnih konfliktov pri uteževanju povezav. Vendar poleg manjšega števila sosedov imajo vozlišča seveda tudi manjše število incidenčnih povezav v s tem manj svobode kakšne vrednosti lahko zasedejo. Sedaj si bomo ogledali iskanje primerne utežitve na polnih grafih $K_n$. Sedaj bodo torej stopnje vozlišč velike prav tako da bomo imeli več svobode pri popravljanju možnih konfliktov zato bomo utežitev konstruirali na malo drugačen način.
+
+\begin{trditev}[\citet{kncoloring} ]
+\end{trditev}
+Naj bo $K_n$ polni graf na vsaj treh vozliščih. Tedaj velja $\ec(K_n) = 3$.
+	\begin{proof}
+
 
 Poglejmo najprej zakaj $\ec(K_n) \ge 3$. Recimo, da to ne drži. Torej imamo neko $2$-utežitev $\omega$ za $K_n$ iz česar sledi $c_{\omega}(v_i) \neq c_{\omega}{v_j}$ za vsak $ i \neq j$. To pomeni, da mora vsak $c_{\omega}(v_i)$ za $i=1,2,\ldots,n$ pripadati eni izmed $n$ različnih vrednosti v $\{n-1, n, \ldots, 2(n-1)\}$. Tako lahko najdemo vozlišče $v'$ za katerega $c_{\omega}(v') = n-1$ in vozlišče $u'$ za katerega $c_{\omega}(u') = 2(n-1)$, to pa je protislovje saj $\omega(v'u') = 1$ zaradi vozlišča $v'$ in $\omega(v'u') = 2$ zaradi $u'$.
 
@@ -657,59 +670,18 @@ n + 1 + i; \text{ } i < n \\
 \lfloor \frac{5n-5}{2}\rfloor;\text{ } i=n
 \end{cases} .
  $$
- To ja pravilno barvanje $K_n$ in zato $\mu(K_n) = 3$.
+ To ja pravilno barvanje $K_n$ in zato $\ec(K_n) = 3$.
 
 Ker je graf poln mora seveda vsako vozlišče imeti svojo barvo. To pomeni, da v primeru polnih grafov velja $s(K_n) = \ec(K_n) = 3$.
  
 
-
+\end{proof}
  
- \subsection{$\ec(G)$ za grafe z posebnimi pogoji}
- V tem razdelku bomo obravnavali nekaj rezultatov za grafe, ki imajo neke dodatne pogoje.
- 
- \subsubsection{3-obarljivi grafi}
-  V ~\cite{base}  sta ... zastavila vprašanje, ki je nato pripeljalo do 1-2-3 domneve in ga v njem tudi dokazala za primer 3-obarljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem razdelku bo močnejši kot le dokaz, da $\ec(G) = 3$ v kolikor je $G$ 3-obarljiv. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
-  \begin{trditev}
-  	Naj bo $\Gamma$ Abelova grupa z $|\Gamma| = n$ in naj $0$ označuje enoto. Tedaj za vsak $g \in \Gamma$ velja $n g = 0$.
-  \end{trditev}
-
-\begin{proof}
-	Vzemimo poljuben $g \in \Gamma$ in definirajmo preslikavo $f_g : \Gamma \rightarrow \Gamma$ kot
-	$$f_g(h) = g + h .$$
-	Ta preslikava je bijekcija saj je $f_{-g}$ njen inverz. Iz tega sklepamo, da je $ g + \Gamma = \Gamma$ za vsak $g$. Sedaj vidimo, da $ \sum_{h \in \Gamma} h = \sum_{h \in \Gamma} (g + h) = ng + \sum_{h \in \Gamma} h$. Iz tega sledi $ng = 0$.
-\end{proof}
-
-
-\begin{trditev}
-	Naj bo sedaj $\Gamma$ Abelova grupa lihe moči in $|\Gamma| = n$. Tedaj za vsak element $g \in \Gamma$ obstaja $h \in \Gamma$, tako da $g = 2h$.
-\end{trditev}
-
-\begin{proof}
-	Ker je $\Gamma$ Abelova grupa po prejšnji trditvi vemo, da $ 0 = ng$. Prištejemo $g$ na obeh straneh in dobimo $g = (n+1)g$. Sedaj označimo $h = \frac{n + 1}{2}g$ in očitno velja $g = 2h$.
-\end{proof}
-
-Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru ciklične grupe $\mathbb{Z}_4 = \{0,1,2,3\}$, kjer elementa $3$ ne moremo zapisat na tak način.
-
-
-  \begin{izrek}
-  	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-barljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
-  \end{izrek}
-
-\begin{proof}
-	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \le 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \ in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$ in $0$ na vse ostale. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč ( = $2h$) dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$. Tak popravem utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$ kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
-	
-	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$ (???). Zato v tem primeru postopamo malo drugače. ker je graf dvodelen, lahko zapišemo njegovo biparticijo kot $V(G) = A \cup B$. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$. Sedaj na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru pa na poljubni 2 povezavi iz $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
-\end{proof}
-
-Iz zgornjega izreka torej sledi, da domneva velja za $3$-obraljive grafe. Iz utežitve povezav smo na naraven način prišli do barvanja na grafu. Vprašanje je bilo potem ali je to barvanje pravilno. Zgornji izrek pove nekako obratno. Torej če imamo neko $k$-barvanje in je $k$ liho število potem lahko eksplicitno konstruiramo utežitev z $k$ elementi, ki porodi tako barvanje.
-
-(V članku~\cite{base} je omenjeno, da se izrek da prilagoditi, tako da grafe lahko utežimo z $\Gamma$, če je graf $|\Gamma| - 3$-obarljiv. Zanmivo bi bilo dodati še ta dodatek ampak moram še premislit, kako spremeniti dokaz. V tem primeru bi lahko našli tudi za grafe, ki so "sodo" obarljivi neko utežitev s sicer malo več utežmi).
-
-
+ \subsection{Dvodelni in $3$-obarljivi grafi}
+V prejšnjem razdelku smo obravnavali grafe, ki imajo podobno strukturo. Sedaj se bomo osredotočili na grafe, z nizkim kromatičnim številom. Najnižje možno kromatično število je $2$ zato bomo najprej obravnavali dvodelne grafe. Medtem ko bomo domnevo dokazali za splošne dvodelne grafe bomo v nekaterih posebnih primerih to mejo še izboljšali.
  \subsubsection{Dvodelni grafi in drevesa }
  
-Izrek v prejšnjem razdelku pokaže $\ec(G) \le 3$ za vse 3 obarljive grafe. V ta razred grafov spada več dobro poznanih družin grafov. Očitno enako drži tudi za dvodelne grafe, saj jih lahko pobarvamo z tremi bavami. Sem spadajo tudi drevesa. Kljub temu, da zgornji izrek dokaže 1-2-3 domnevo za primer takih grafov si bomo ogledali, ali lahko na primeru dreves oziroma bolj natančno  dvodelnih grafov to zgornjo mejo izboljšamo. Ugotovili bomo, da to lahko do neke mere storimo.  Dvodelne grafe označimo kot $G=(A, B, E)$, kjer sta $A$ in $B$ biparticija vozlišč.
-
+ Dvodelne grafe označimo kot $G=(A, B, E)$, kjer sta $A$ in $B$ biparticija vozlišč.
 Obravnavajmo najprej polne dvodelne grafe $K_{m,n}$ z biparticijo $(A, B)$. Enostavni primer je, ko velja $m \neq n$. V tem primeru lahko vse povezave utežimo z 1 in dobimo pravilno barvanje, kar pomeni $\ec(K_{m,n}) = 1$. V kolikor $m=n$ oštevilčimo vozlišča v $A$ kot $v_1, v_2, \ldots, v_m$ in vozlišča v $B$ kot $u_1, u_2, \ldots, u_n$. Sedaj definiramo utežitev kot
 $$
 \omega(v_i u_j) = 
@@ -772,13 +744,56 @@ V kolikor je $d(x)$ liho je potem $|A_1|$ sodo. Po trditvi \ref{dvosodo} ima gra
 
 V koliko je $d(x)$ sodo je $|A_1|$ liho. Ker je graf $G$ povezan obstaja vozlišče $u^* \in N(x)$, ki je soseden $v^* \in B_1$. Označimo sedaj graf $G'$, kot graf, ki ga dobimo iz $G_1$, tako da dodamo povezavo $u^*v^*$. V tem primeru lahko za $G' = (A_1 \cup \{u^*\}, B_1, E_1 \cup \{u^*v^*\})$ uporabimo trditev \ref{dvosodo}, da dobimo $2$-utežitev $\omega'$ z že znano lastnostjo. Sedaj $\omega'$ razširimo v $\omega$, tako da utežimo povezave incidenčne $x$ razen $xu*$ z 1 ter vse ostale z 2. Sedaj velja $c_{\omega}(x) = d(x) + 1$ in $c_{\omega}(u) = 2d(u) - 1$ za vse $u qin N(x) \setminus \{u*\}$. Po predpostavki izreka tako zopet velja $c_{\omega}(x) \neq c_{\omega}(u)$ ter $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi. S tem je izrek dokazan.
 \end{proof}
-
-Oglejmo si sedaj takojšnjo posledico zgornjega izreka.
 \begin{posledica}
 Za vsak dvodelen $d$-regularen graf $G$ z $d \ge 3$ velja $\ec(G) = 2$. 
 \end{posledica}
 
 Za regularne grafe predpostavka izreka \ref{dvoreg} avtomatsko velja, izjema so le $2$-regularni grafi oziroma cikli. Preprost proti primer je $C_6$, ki je dvodelen ter $2$-regularen graf vendar velja $\ec(C_6) = 3$. Zato je pogoj $d \ge 3$ v posledici nujno potreben.
+ \subsubsection{3-obarljivi grafi}
+ Kot smo ugotovili v prejšnjem razdelku lahko nekatere dvodelne grafe utežimo le z utežema $1$ in $2$ vendar to ne velja v splošnem. Naravno naslednje sledijo $3$-obarljivi grafi. 
+  V ~\citet{base}  sta  avotrja zastavila vprašanje, ki je nato pripeljalo do 1-2-3 domneve in ga v njem tudi dokazala za primer $3$-obarljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem razdelku bo močnejši kot le dokaz, da $\ec(G) = 3$ v kolikor je $G$ 3-obarljiv. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
+  \begin{trditev}
+  	Naj bo $\Gamma$ Abelova grupa z $|\Gamma| = n$ in naj $0$ označuje enoto. Tedaj za vsak $g \in \Gamma$ velja $n g = 0$.
+  \end{trditev}
+
+\begin{proof}
+	Vzemimo poljuben $g \in \Gamma$ in definirajmo preslikavo $f_g : \Gamma \rightarrow \Gamma$ kot
+	$$f_g(h) = g + h .$$
+	Ta preslikava je bijekcija saj je $f_{-g}$ njen inverz. Iz tega sklepamo, da je $ g + \Gamma = \Gamma$ za vsak $g$. Sedaj vidimo, da $ \sum_{h \in \Gamma} h = \sum_{h \in \Gamma} (g + h) = ng + \sum_{h \in \Gamma} h$. Iz tega sledi $ng = 0$.
+\end{proof}
+
+
+\begin{trditev}
+	Naj bo sedaj $\Gamma$ Abelova grupa lihe moči in $|\Gamma| = n$. Tedaj za vsak element $g \in \Gamma$ obstaja $h \in \Gamma$, tako da $g = 2h$.
+\end{trditev}
+
+\begin{proof}
+	Ker je $\Gamma$ Abelova grupa po prejšnji trditvi vemo, da $ 0 = ng$. Prištejemo $g$ na obeh straneh in dobimo $g = (n+1)g$. Sedaj označimo $h = \frac{n + 1}{2}g$ in očitno velja $g = 2h$.
+\end{proof}
+
+Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru ciklične grupe $\mathbb{Z}_4 = \{0,1,2,3\}$, kjer elementa $3$ ne moremo zapisat na tak način.
+
+
+  \begin{izrek}
+  	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-barljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
+  \end{izrek}
+
+\begin{proof}
+	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \le 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$ in $0$ na vse ostale. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč ( = $2h$) dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$, tako kot na sliki \ref{im1} . Tak popravem utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$ kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
+ \begin{figure}[h!]
+\caption{Popravljanje utežitve z liho potjo.}
+\label{im1}
+\centering
+    \includegraphics[scale=0.5]{3col.png}
+    \end{figure}
+	
+	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$ (???). Zato v tem primeru postopamo malo drugače. ker je graf dvodelen, lahko zapišemo njegovo biparticijo kot $V(G) = A \cup B$. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$. Sedaj na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru pa na poljubni 2 povezavi iz $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
+\end{proof}
+
+Iz zgornjega izreka torej sledi, da domneva velja za $3$-obraljive grafe. Iz utežitve povezav smo na naraven način prišli do barvanja na grafu. Vprašanje je bilo potem ali je to barvanje pravilno. Zgornji izrek pove nekako obratno. Torej če imamo neko $k$-barvanje in je $k$ liho število potem lahko eksplicitno konstruiramo utežitev z $k$ elementi, ki porodi tako barvanje.
+
+
+ 
 
 
 V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin grafov ter za grafe z nekaj dodatnimi pogoji. V vseh primerih smo 1-2-3 domnevo potrdili v posebnih primerih smo lahko zgornjo mejo še celo malo izboljšali. Rezultate tega razdelka lahko predstavimo s spodnjo tabelo.
@@ -991,7 +1006,7 @@ $$ d(G) \ge (p - \epsilon)n $$.
 
 Glavni namen tega razdelka je podati neko asimptotsko oceno za parameter $\ec(G)$ oziroma bolj natančno podali bomo trditev, ki bo pokazala, da skoraj za vse grafe velja $\ec(G) = 2$ kar je zelo preseneltjiv rezultat saj je še boljši kot sama domneva. Da nam bo uspelo pokazati zgornje si moramo ogledati še nek rezultat, ki nima nič opravit z verjetnostnimi metodami ampak z iskanjem posebnih faktorjev v grafu. Nato bomo uporabili vse rezultate iz tega razdelka in formulirali ter dokazali končno trditev.
 
-\subsection{$[a, b]$ faktorji v grafu}
+\subsection{Podgrafi z omejenimi stolpnjami}
 
 Naj bo $G =(V, E)$ graf in naj bo $H$ njegov vpet podgraf. V kolikor je graf $H$ $k$-regularen rečemo tudi, da je $H$ \textbf{$k$-faktor} grafa $G$.  Iskanje določenih faktorjev v grafu je ekvivalentno nekaterim drugim problemov na grafih. Naprimer $1$-faktor v grafu predstavlja popolno ujemanje. Nas bo v tem razdelku zanimala bolj splošna definicja faktorja.  Recimo, da sta $f$ in $g$ celoštevilski funkciji na množici vozlišč in velja $0 \le g(v) \le f(v) \le d(v)$ za vsako vozlišče $v \in V(G)$. Tako definiramo \textbf{$(g,f)$-faktor} grafa $G$ kot vpet podgraf $H$ z lastnostjo $g(v) \le d_H(v) \le f(v)$ za vsako vozlišče $v$. Želimo si torej, da ima naš vpet podgraf stopnjo vozlišč med vnaprej podanima funkcijama. Naslednja trditev nam podaja potreben in zadosten pogoj, ki nam pove kdaj nek graf vsebuje določen $(g, f)$- faktor.
 
@@ -1013,7 +1028,13 @@ Dokaza se bomo lotili z protislovjem zato predpostavimo, da tak podgraf $H$ ne o
 $$D = \sum_v max(0, a_v - d_H(v)) .$$ 
 Izberemo $a_v \in \{a_v^-, a_v^+\}$ in $b_v = a_v +1$, kjer sta $a_v^-$ in $a_v^+$ kot v formulaciji trditve. Sedaj izberemo še vpet podgraf $H \subset G$, tako da za vsak $v \in V$ velja $d_H(v) \le b_v$. Izmed vse takih možnosti izberemo tisto, ki minimizira primankljaj $D$.  Sedaj trdimo, da obstaja vsaj eno vozlišče $v \in V$ za katerega $d_H(v) < a_v$ ter posledično $D > 0$. To je res, saj v nasprotnem primeru  velja $d_H(v) = a_v$ ali $d_H(v) = b_v = a_v + 1$, kar pa pomeni, da je $H$ iskan podgraf.
 
-Dokaz bomo sedaj nadaljevali, tako da bomo na podlagi podgrafa $H$ definirali množici $A$ in $B$, ki bosta v protislovju z prejšnjo trditvijo in iz česar bomo lahko sklepali, da je bila naša predpostvka napačna ter mora obstajati iskan podgraf $H$. Definirajmo množico $A_0 = \{v : d_H(v) < a_v\}$ in \textit{H-alternirajoč sprehod} kot sprehod $P = v_0v_1\ldots v_k$, ki se začne v vozlišču $v_0 \in A_0$ in dodatno velja $v_iv_{i+1} \in G-H$ za sod $i$ ter $v_iv_{i+1} \in H$ za lih $i$. Tak sprehod se torej začne v nekem vozlišču iz $A_0$ nato nadaljuje do nekega vozlišča preko povezave, ki je ni v $H$, nato po povezavi v $H$ in tako dalje. Sedaj označimo množici
+Dokaz bomo sedaj nadaljevali, tako da bomo na podlagi podgrafa $H$ definirali množici $A$ in $B$, ki bosta v protislovju z  \begin{figure}[h!]
+\caption{Primer $H$-alternirajočega spredoda, ki se konča bodisi v $A$, bodisi v $B$.}
+\label{im1}
+\centering
+    \includegraphics[scale=0.5]{alt1.png}
+    \end{figure}prejšnjo trditvijo in iz česar bomo lahko sklepali, da je bila naša predpostvka napačna ter mora obstajati iskan podgraf $H$. 
+Definirajmo množico $A_0 = \{v : d_H(v) < a_v\}$ in \textit{H-alternirajoč sprehod} kot sprehod $P = v_0v_1\ldots v_k$, ki se začne v vozlišču $v_0 \in A_0$ in dodatno velja $v_iv_{i+1} \in G-H$ za sod $i$ ter $v_iv_{i+1} \in H$ za lih $i$. Tak sprehod se torej začne v nekem vozlišču iz $A_0$ nato nadaljuje do nekega vozlišča preko povezave, ki je ni v $H$, nato po povezavi v $H$ in tako dalje. Sedaj označimo množici
 \begin{itemize}
 \item $A = \{v \text{ : obstaja $H$-alternirajoč sprehod sode dolžine, ki se konča z $v$}\}$ in
 \item $B =\{v \text{ : obstaja $H$-alternirajoč sprehod lihe dolžine, ki se konča z $v$}\}.$
@@ -1403,7 +1424,7 @@ Sedaj razvijemo po zadnji vrstici in dobimo $perA_T(K') = perA_{T-e-f}(K) \neq 0
 \cleardoublepage                           % na desni strani
 \phantomsection                            % da prav delujejo hiperlinki
 \addcontentsline{toc}{section}{\bibname}   % dodajmo v kazalo
-\bibliographystyle{fmf-sl}                 % uporabljen stil je v datoteki fmf-sl.bst, na voljo tudi angleška verzija
+\bibliographystyle{plainnat}                 % uporabljen stil je v datoteki fmf-sl.bst, na voljo tudi angleška verzija
 \bibliography{\literatura}                 % literatura je v datoteki, definirani na začetku
 
 % Za stvarno kazalo
