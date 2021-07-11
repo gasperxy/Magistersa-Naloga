@@ -1094,8 +1094,7 @@ Za konec tega razdelka bomo komentirali dobljene rezultate. Definirali smo verje
 
 Zgornji rezultat ni edini rezultat v okviru 1-2-3 domneve, ki uporablja verjetnostne metode. Vendar se v magisterski nalogi nebo neposredno okvarjali z tem pristopom ampak vseeno bomo uporabili močno orodje, ki izhaja iz verjetnostnih metod.
 
-
-\section{Polna verzija in druge izpeljanke} 
+\section{Polna verzija}
 
 Do sedaj smo povezavam grafa dodelili uteži ter nato opazovali dobljene uteži na vozliščih kot vsoto uteži na incidenčnih povezavah. Na enak način bomo definirali polno utežitev grafa, kjer bomo poleg povezavam uteži dodelili tudi vsakemu vozlišču. Dobljena polna utež na vozlišč bo tako vsota uteži na incidinčnih povezavah  ter uteži na samem vozlišču.
 
@@ -1158,7 +1157,42 @@ Naj bo $G$ povezan graf. Tedaj velja $\ect(G) \le 3$.
 Dokaz izreka je modifikacija izreka \ref{theorem12345}.
 \end{proof}
 
- \subsection{Seznamska verzija}
+Za zaključek tega razdelka dopolnimo tabelo, ki smo jo izpolnili že po koncu začetnega dela. V tabelo bomo dodali parameter $\ect$ ter ga direktno primerjali z parametrom $\ec$.
+\begin{table}[H]
+
+\caption{\label{tab:tab2} Izračun $\ec(G)$ in $\ect(G)$ za znane grafe. }
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+ Graf $G$ & $\ec(G)$ & $\ect(G) $ \\ \hline
+ $P_n$ & 2 & 2 \\ \hline
+ $C_n$ & $\begin{cases}
+	2 & n = 4k;\\ 
+	3 & sicer;
+	\end{cases}$ & 2 \\ \hline
+ $K_n$& 3 & 2 \\ \hline
+ $K_{m,n}$& $\begin{cases}
+	1 & m \neq n\\ 
+	2 & sicer;
+	\end{cases}$ &$\begin{cases}
+	1 & m \neq n\\ 
+	2 & sicer;
+	\end{cases}$ \\ \hline
+ 3 obarljivi& 3 & $\le 3$ \\ \hline
+$T_n$ & 2 & 2\\ \hline
+dvodelni in $d$ -regularni z $d \ge 3 $ & 2  & 2\\ \hline
+dvodelni   & $\le 3$  & 2\\ \hline
+splošni   & $\le 5$  &$ \le 3$\\ \hline
+\end{tabular}
+\end{table}
+Kot je razvidno iz zgornje tabele smo za velik del graf v polni verziji uspeli izboljšati rezultate. V nekaterih primerih smo že v originalni verziji dosegli najnižjo možno mejo t.j. 2 in se je seveda neda izboljšati v polni verziji.
+
+
+\section{Seznamska verzija} 
+
+
+
+
 S seznamsko verzijo problema smo se že srečali na začetku naloge, kjer smo predstavili seznamsko verzijo barvanja grafa. Ugotovili smo, da so rezultati seznamskih verziji močnejši v smislu, da so veljavni tudi za ne seznamski problem. V tem razdelku si bomo ogledali seznamsko verzijo 1-2-3 domneve ter nekaj orodij s katerimi se lahko lotimo takega problema. Naj bo $G = (V, E)$ povezan graf in dodelimo vsakemu vozlišču $v \in V$ in vsaki povezavi $e \in E$ seznam $k$ realnih uteži $L_v$ in $L_e$ in naj bo $L$ množica vse teh seznamov. Rečemo, da je $G$ \textbf{polno seznamsko utežljiv} iz $L$, če obstaja polna utežitev $\omega : V \cup E \rightarrow \cup_{L_a} L_a$, tako da $\omega(e) \in L_e$ in $\omega(v) \in L_v$ za vsako vozlišče $v$ in vsako povezavo $e$. Graf $G$ je  \textbf{$k$-polno seznamsko utežljiv}, če je polno seznamsko utežljiv iz vsake družine seznamov velikosti $k$. Na enak način seveda definiramo \textbf{seznamsko utežljivost} grafa. Pri tem opazujemo utežitve, ki slikajo le iz množice povezav. Najmanjši tak $k$ za katerega je graf $G$ $k$-seznamsko utežljiv oziroma $k$-polno seznamsko utežljiv označimo z $\ecl$ in $\eclt$ zaporedoma.
 
 Povezavo do ne seznamske verzije dobimo, v primeru ko imamo vse sezname enake. Za analiziranje seznamske verzije 1-2-3 domneve bomo uporabili algebraična orodja, čeprav podobne rezultate lahko dobimo tudi brez uporabe teh orodij. Vendar smo do sedaj videli že nekaj različnih pristopov k 1-2-3 domnevi zato si bomo bolj podrobneje ogledali tudi algebraične metode. Najbolj pomembno orodje bo kombinatorični izrek o ničlah. Pri tem bomo grafu priredili nek polinom ter v njem poizkušali poiskati  monome posebne oblike. Oglejmo si najprej kombinatorični izrek o ničlah.
@@ -1200,7 +1234,11 @@ Za vsak povezan graf $G$, ki ni $K_2$ velja $\ecl(G) \le 3$.
  \begin{domneva}
 Za vsak  graf $G$ velja $\eclt(G) \le 2$.
 \end{domneva}
-Zgornji domnevi sta presenetljivi v kolikor jih primerjamo s seznamsko verzijio kromatičnega števila. Tam smo ugotovili, da sicer veljajo podobne zgornje meje vendar se parametra lahko poljubno razlikujeta. V našem primeru je zastavljena zgornja meja enaka v seznamski in ne seznamski obliki. Pri tem velja izpostavit, da je seznamska verzija problema precej težja in že pri preprostih in majhnih grafih imamo lahko veliko težav pri računanju točnih vrednosti parametrov $\ecl(G)$ in $\eclt(G)$. Vendar s pomočjo orodja, ki smo ga razvili zgoraj to postane precej lažje. Iz vidika zgornjih domnev bi morali pokazati, da velja $mind(G) \le 2 $ in $tmind(G) \le 1$ za vsak graf $G$. Vendar to je v splošnem zelo težko pokazati saj je zelo težko ugotoviti kateri monomi preostanejo v razširitvi polinoma. Preden si ogledamo nekaj primerov moramo razviti še orodje s katerim bomo lažje ocenili kateri monomi ostanejo v polinomih, ki pripadajo grafom. V ta namen bomo vsakemu grafu priredili posebno matriko $A_G = (a_{ij})$. Fiksirajmo poljubno orientacijo grafa in definiramo elemente matrike kot 
+Zgornji domnevi sta presenetljivi v kolikor jih primerjamo s seznamsko verzijio kromatičnega števila. Tam smo ugotovili, da sicer veljajo podobne zgornje meje vendar se parametra lahko poljubno razlikujeta. V našem primeru je zastavljena zgornja meja enaka v seznamski in ne seznamski obliki. Pri tem velja izpostavit, da je seznamska verzija problema precej težja in že pri preprostih in majhnih grafih imamo lahko veliko težav pri računanju točnih vrednosti parametrov $\ecl(G)$ in $\eclt(G)$. Vendar s pomočjo orodja, ki smo ga razvili zgoraj to postane precej lažje. Iz vidika zgornjih domnev bi morali pokazati, da velja $mind(G) \le 2 $ in $tmind(G) \le 1$ za vsak graf $G$. Vendar to je v splošnem zelo težko pokazati saj je zelo težko ugotoviti kateri monomi preostanejo v razširitvi polinoma. Preden si ogledamo nekaj primerov moramo razviti še orodje s katerim bomo lažje ocenili kateri monomi ostanejo v polinomih, ki pripadajo grafom. Najprej se bomo osredotočili na povezavno verzijo problema, kjer uteži dodeljujemo samo povezavam. Nato bomo zelo podobno naredili tudi za polno verzijo pri čemer bodo vsi rezultati povezavne verziji bili veljavni tudi za polno verzijo.
+
+\subsubsection{Povezavna verzija}
+Za računanje kateri monomi preživijo ko razširimo polinom pripadajoč grafu $G$ bomo razvili posebno metodo, ki originalen problem pretvori na problem linearne algebre. Pri tem bo problem navidezno postal bolj preprost saj si morda lažje predstavljamo matrike in računanje z njimi vendar se bo izkazalo, da problem še vedno stane težak.
+ V ta namen bomo vsakemu grafu priredili posebno matriko $A_G = (a_{ij})$. Fiksirajmo poljubno orientacijo grafa in definiramo elemente matrike kot 
 
 \begin{equation*}
 a_{ij} = 
@@ -1224,6 +1262,7 @@ kjer je $S_m$ simetrična grupa velikosti $m$.
 Definicija močno spominja na definicijo determinante vendar tukaj za razliko od determinante člene vedno seštevamo. Kljub temu, da definicija izgleda močno podobna deterninanti je računanje permanenta precej težji problem, saj za računanje determinante poznamo polinomski algoritem (naprimer s pomočjo Gaussovih eliminacij) medtem ko za računanje permanenta polinomski algoritem še ne obstaja. Kljub temu bo za nas še vedno dovolj dobro orodje. Na podoben način definiramo \textbf{permanentni rank} ne nujno kvadratne matrike $A$ kot velikost največje kvadratne podmatrike z neničelnim permanentom. Označimo  z $A^{(k)} = [A,A, \ldots, A]$ matriko dobljeno z $k$ zaporednimi kopijami matrike $A$. Sedaj definiramo še \textbf{permanentni indeks} matrike $A$ kot najmanjši $k$ za katerega je permanentni rank matrike $A^{(k)}$ enak $m$, kjer je $m$ velikost matrike $A$ ter ga označimo z $pind(A)$. V kolikor tak $k$ ne obstaja določimo $pind(A) = \infty$. Oglejmo si še ekvivalentno definicija permanentnega indeksa. Naj bo $K = (k_1, \ldots, k_m)$ poljubno zaporednje nenegativnih celih števil in označimo stolpce matrike $A$ kot $A_1, \ldots, A_m$. Matriko $A(K)$ dobimo, tako da vsak stolpec $A_i$ ponovimo $k_i$ krat. Permanentni indeks $pind(A)$ je sedaj najmanjši $k$, za katerega velja $k_1 + k_2 + \ldots + k_m = m$ in $k_i \le k$ za vsak $i = 1, \ldots, m$ ter je $per A(K) \neq 0$. Definiciji sta res ekvivalentni saj lahko izbrano podmatriko $A^{(k)}$ dobimo z primerno izbranim zaporedjem $K$. Navidez komplicirane in neuporabne definicije iz linearne algebre imajo vrednost ko opazujemo naslednjo trditev.
 
 \begin{trditev}
+\label{mpind}
 Naj bo $A = (a_{ij})$ kvadratna matrika velikosti $m$ in končnim permanentnim indeksom. Naj bo $P(x_1, \ldots, x_m) = \prod_{i=1}^m (a_{i1}x_1 + \ldots a_{im}x_m)$. Takrat velja $mind(P) = pind(A)$.
 \end{trditev}
 
@@ -1238,7 +1277,7 @@ Oglejmo si graf na sliki \ref{ex_1}. Za orientacijo kot je na sliki je polinom p
 \caption{Primer orientacije grafa.}
 \label{ex_1}
 \centering
-    \includegraphics[scale=0.4]{ex1.png}
+    \includegraphics[scale=0.4]{alg_ex_1.png}
     \end{figure}
 Zapišimo sedaj še matriko pripadajočo temu polinomu. Ko imamo enkrat zapisan celoten polinom dobimo matriko na zelo preprost način. Za $i$-to vrstico pogledamo $i$-ti faktor v polinomu in v to vrstico zapišemo koeficiente pred spremenljivkami, ki se v njem pojavljajo. Tako dobimo nasledno matriko 
 $$ A_G = \left( \begin{matrix} 0 & 1 & 0 & 1 \\ -1 & 0 & 1 & -1 \\ 0 & -1 & 0 & 1 \\ -1 & 1 & -1 & 0 \end{matrix} \right) .$$
@@ -1258,12 +1297,12 @@ Pri tem smo permament računali tako kot računamo determinanto in sicer z razvo
 V zgornjem primeru smo videli uporabo metode, ki smo jo razvili do sedaj. Direkten izračun, brez uporabne kombinatoričnega izreka o ničlah bi bil lahko že za zelo preproste grafe zahteven problem. Navidezno se nam sicer zdi, da smo problem že dobro rešili vendar izkaže se, da je računanje permamentov poljubnih grafov lahko zahtevno. Prak tako ni enostavno računati permanenta matrik za kakšne posebne družine grafov kot so naprimer cikli ali polni grafi. V ta namen si bomo ogledali preprosto trditev s pomočjo katere bomo malo lažje računali permanente kakšnih posebnih matrik.
 \begin{trditev}
 \label{pind}
-Naj bosta $A$ in $L$ kvadratni matriki velikosti $m$, tako da so stolpci matrike $L$ linearna kombinacija stolpcev matrike $A$. Naj bo $m_j$ število tistih stolpcev v $L$ v katerih $j$-ti stolpec $A_j$ nastopa z neničelnim koeficientom. Če je $n_j \le r$ in $perL \neq 0$ potem $pind(A) \le r$.
+Naj bo $A$ matrika velikost $m \times l$ in $L$ kvadratna matrika velikosti $m$, tako da so stolpci matrike $L$ linearna kombinacija stolpcev matrike $A$. Naj bo $n_j$ število tistih stolpcev v $L$ v katerih $j$-ti stolpec $A_j$ nastopa z neničelnim koeficientom. Če je $n_j \le r$ in $perL \neq 0$ potem $pind(A) \le r$.
 \end{trditev}
 \begin{proof}
-Naj bo $L_k$ $k$-ti stolpec matrike $L$ in ga zapišimo kot $L_k = \sum_{j=1}^m a_{kj}A_j$. Sedaj bomo uporabili dejstvo iz linearne algebre, ki ga nebomo dokazovali. Tako kot determinanta je tudi permanent multilinearna funkcija stolpcev. To pravzaprav ni težko preverit vendar dokaz tega ni zanimiv. Oglejmo si raje kaj to pomeni. Zapišimo matriko $A$ kot $A = [A_1, \ldots, A_m]$. Multilinearnost permanenta pomeni naslednje
+Naj bo $L_k$ $k$-ti stolpec matrike $L$ in ga zapišimo kot $L_k = \sum_{j=1}^l a_{kj}A_j$. Sedaj bomo uporabili dejstvo iz linearne algebre, ki ga nebomo dokazovali. Tako kot determinanta je tudi permanent multilinearna funkcija stolpcev. To pravzaprav ni težko preverit vendar dokaz tega ni zanimiv. Oglejmo si raje kaj to pomeni. Zapišimo matriko $A$ kot $A = [A_1, \ldots, A_l]$. Multilinearnost permanenta pomeni naslednje
 $$ per([a_1A_1 + a_2A_2, A_2]) = a_1 a_2 \left( per([A_1, A_2]) + per([A_2, A_2]) \right).$$
-Seveda enak razvoj velja za katerikoli stolpec. V zgornjem primeru smo zaradi lažje razumljivosti vzeli le 2 stolpca. Glavna ideja leži v tem, da lahko $perL$ zapišemo kot vsoto členov oblike $c \cdot per([A_{j_1}, \dots, A_{j_m}])$. Pri tem se seveda lahko zgodi, da se sta kakšna indeksa stolpcev enaka vendar zaradi predpostavke $m_j \le r$ imamo lahko v vsakem členu največ $r$ enakih stolpcev matrike $A$. Ker po predpostaki $perL \neq 0$ je vsaj eden izmed zgornjih členov neničelen. Ampak ker se v tem členu katerikoli stolpec matrike $A$ ponovi največ $r$-krat trditev sledi na podlagi alternativne definicije permanentnega indeksa.
+Seveda enak razvoj velja za katerikoli stolpec. V zgornjem primeru smo zaradi lažje razumljivosti vzeli le 2 stolpca. Glavna ideja leži v tem, da lahko $perL$ zapišemo kot vsoto členov oblike $c \cdot per([A_{j_1}, \dots, A_{j_m}])$. Pri tem se seveda lahko zgodi, da se sta kakšna indeksa stolpcev enaka vendar zaradi predpostavke $n_j \le r$ imamo lahko v vsakem členu največ $r$ enakih stolpcev matrike $A$. Ker po predpostaki $perL \neq 0$ je vsaj eden izmed zgornjih členov neničelen. Ampak ker se v tem členu katerikoli stolpec matrike $A$ ponovi največ $r$-krat trditev sledi na podlagi alternativne definicije permanentnega indeksa.
 \end{proof}
 
 Kot smo že omenili je računanje permanentov zahtevno predvsem zato ker ne moremo uporabiti Gausovih eliminacij kot pri determinantah. Seveda je zaradi tega računaje permanentenga indeksa matrike še toliko težji problem saj niti ne vemo ali je permanentni indeks končen. S pomočjo zgornje trditve lahko permanentni indeks računamo na podoben način kot računamo determinanto s pomočjo eliminacij. Oglejmo preprosto uporabno zgornje matrike.
@@ -1406,6 +1445,168 @@ $$ A_T(K') = \left[ \begin{matrix}
 \end{matrix} \right] .$$
 Sedaj razvijemo po zadnji vrstici in dobimo $perA_T(K') = perA_{T-e-f}(K) \neq 0$.
  \end{proof}
+
+Za zaključek tega razdelka povzemimo, da smo seznamsko verzijo domneve dokazali za kar nekaj družin grafov za kateremo smo v prejšnjih razdelkih dokazali originalno domnevo. Kljub dobro razvitemu orodju za obravnavanje seznamske verzije za splošne grafe težko potegnemo kakšne uporabne zaključke. To sledi iz dejstva, da smo v večini primerov uporabili posebno strukturo grafov kar nam je porodilo matriko posebne oblike in smo z primernimi transformacijami lahko izračunali njen permanentni indeks. Prav tako si z izrekom \ref{algcons} v primeru splošnih grafov ne moremo pomagati kaj dosti saj z konstrukcijo kot je opisana v izreku seveda ne moremo generirati vseh grafov. Zato konstantna zgornja meja za seznamsko verzijo ostaja odprt problem.
+
+\subsubsection{Polna verzija}
+Oglejmo si še kako postopamo v primeru polne verzije. Vse ideje prejšnjega razdelka so seveda veljavne tudi tukaj zaradi enakega razloga kot v ne seznamski verziji. Tudi za polno verzijo bomo grafu priredili matriko $A_G^t = (a_{ij})$ velikosti $m \times m+n$. Zopet fiksiramo poljubno orientacijo grafo in definiramo matriko $A_G^t$ kot
+
+\begin{equation*}
+a_{ij} = 
+\begin{cases}
+
+1, & \text{če je $e_j$ incidenčna z koncem $e_i$ ali je $v_{j-m}$ na koncu povezave $e_i$}\\ 
+	-1, & \text{če je $ e_j$ incidenčna z začetkom  $e_i$ ali je $v_{j-m}$ na začetku povezave $e_i$} \\
+
+0, & \text{če $e_i$ in $e_j$ nista incidenčni in $v_{j-m}$ ni niti na koncu niti začetku $e_i$}
+\end{cases},
+\end{equation*}
+kjer $i=1,\ldots, m$ in $j=1, \ldots, n+m$. Označimo $l=n+m$ in enako kot prej  polinom $T_G$ zapišemo kot 
+$$T_G = \prod_{i=1}^m (a_{i1}x_1 + \ldots a_{il}x_l).$$
+Spomnimo se, da definicija permanentnega indeksa velja tudi za ne kvadratne matrike.
+\begin{trditev}
+Naj bo $A = (a_{ij})$  matrika velikosti $m \times l$ in končnim permanentnim indeksom. Naj bo $P(x_1, \ldots, x_l) = \prod_{i=1}^m (a_{i1}x_1 + \ldots a_{il}x_l)$. Takrat velja $mind(P) = pind(A)$.
+\end{trditev}
+\begin{proof}
+Dokaz je popolnoma enak kot dokaz trditve \ref{mpind}.
+\end{proof}
+Matrika $A_G^t$ seveda ni kvadratna in je večja kot matrika $A_G$ vendar se obe matriki ujemata na prvih $m$ stolpcih. Torej matrika $A_G$ je ravno prvih $m$ stolpcev matrike $A_G^t$. Zadnjih $n$ stolpcev matrike $A_G^t$ pripada vozliščem grafa. Če si bolj podrobno ogledamo definicijo matrike ugotovimo, da vsaka vrstica v zadnjih $n$ stolpcih vsebuje natanko eno vrednost $1$ in eno vrednost $-1$. Res saj ima vsaka povezava natanko eno vozlišče na koncu in eno vozlišče na začetku. Ravno zadnjih $n$ stolpcev nam bo omogočalo izboljšati nekatere rezultate iz prejšnjega razdelka. Oglejmo si na primeru kako to deluje.
+\begin{primer}
+Oglaejmo si enak primer grafa kot prej le da sedaj oštevilčimo še vozlišča. Za orientacijo kot je na sliki \ref{ex_2} je polinom
+ \begin{figure}[h!]
+\caption{Primer orientacije grafa z označenimi vozlišči.}
+\label{ex_2}
+\centering
+    \includegraphics[scale=0.8]{alg_ex_2.png}
+    \end{figure}
+pripadajoč grafu oblike $T_G(x_1, \ldots, x_8) = (x_2 + x_4 + x_6 - x_5)(x_3 + x_7 - x_1 - x_4 - x_6)(x_4 + x_8 - x_2 - x_7)(x_1 + x_2 + x_6 - x_3 - x_8)$ ter matrika 
+
+$$A_G^t = \left( \begin{matrix} 0 & 1 & 0 & 1 & -1 & 1 & 0 & 0 \\ -1 & 0 & 1 & -1 & 0 & -1 & 1 & 0 \\ 0 & -1 & 0 & 1 & 0 & 0 & -1 & 1 \\ 1 & 1 & -1 & 0 & 0 & 1 & 0 & -1 \end{matrix} \right).$$
+Sedaj moramo izračunami $pind(A_G^t)$. Označimo $A =A_G^t$ in izračunajmo:
+
+\begin{equation*}
+\begin{split}
+ per([A_1, A_3, A_5, A_7]) &= per\left( \begin{matrix} 0 & 0 & -1 & 0 \\ -1 & 1 & 0 & 1 \\ 0 & 0 & 0 & -1 \\ 1 & -1 & 0 & 1 \end{matrix} \right) \\
+&= -per\left( \begin{matrix} 0 & 0 & -1 \\ -1 & 1 & 0 \\ 1 & -1 & 0 \end{matrix} \right) = per\left( \begin{matrix} -1 & 1 \\ 1 & -1 \end{matrix} \right) \\
+&=2 \neq 0.
+\end{split}
+\end{equation*}
+Iz tega torej sledi $pind(A_G^t) = 1 = tmind(G)$, kar pomeni $\eclt(G) = 2$ in smo s tem izboljšali rezultat iz prejšnjega razdelka.
+\end{primer}
+
+Oglejmo si še kako lahko rezultat izboljšamo v primeru ciklov.
+\begin{trditev}
+Za vsak $n$ velja $tmind(C_n) = 1$.
+\end{trditev}
+
+\begin{proof}
+Za dokaz si moramo natančno ogledati matriko $A_G^t$. Kot smo že omenili je prvih $m$ stolpcev enakih matriki $A_G$, ki smo jo že obravnavali v prejšnjem razdelku. Označimo $A =  A_G^t$ in najprej predpostavimo, da je $n$ sod. Za dokaz $tmind(C_n) = 1$ moramo pokazati $pind(A) = 1$ za kar potrebujemo kvadratno $n \times n$ podmatriko $A'$ za katero velja $perA' \neq 0$. Vzemimo podmatriko, ki je sestavljena iz zadnjih $n$ stolpcev matrike $A$.
+$$ 
+A' =[A_{m+1}, \ldots, A_{m+n}] = 
+\left( 
+\begin{matrix} -1 & 1 & 0 &  & 0 & 0 \\ 0 & -1 & 1 & \ldots & 0 & 0 \\
+0 & 0 & -1 &  & 0 & 0 \\ 
+ & \vdots &  & \ddots & \vdots &  \\ 
+0 & 0 & 0 & \ldots & -1 & 1 \\
+ 1 & 0 & 0 &  & 0 & -1 
+\end{matrix} \right)
+$$
+Sedaj izračunamo $perA'$, tako da matriko razvijemo glede na prvi stolpec in dobimo
+\begin{equation*}
+\begin{split}
+ perA' &=-per\left( 
+\begin{matrix} 
+ -1 & 1 & \ldots & 0 & 0 \\ 
+ 0 & -1 &  & 0 & 0 \\ 
+ \vdots &  & \ddots & \vdots &  \\ 
+ 0 & 0 & \ldots & -1 & 1 \\
+ 0 & 0 &  & 0 & -1 
+\end{matrix} \right) 
++per\left( 
+\begin{matrix} 
+- 1 & 0 &  & 0 & 0 \\
+ -1 & 1 & \ldots & 0 & 0 \\  0 & -1 &  & 0 & 0 \\ 
+  \vdots &  & \ddots & \vdots &  \\ 
+ 0 & 0 & \ldots & -1 & 1 
+\end{matrix} \right) \\
+&=-(-1)^{n-1} + 1^{n-1} =  1 + 1 = 2 \neq 0\\
+\end{split}
+\end{equation*}
+Obravnavajmo sedaj še primer ko je $n$ lih. V tem primeru za kvadratno podmatriko $A'$ vzamemo $n$-ti stolpec matrike $A$ ter zadnjih $n-1$ stolpcev. Za računanje $perA'$ zopet razvijemo po prvem stolpcu in dobimo
+\begin{equation*}
+\begin{split}
+ perA' &=-per\left( 
+\begin{matrix} 
+ -1 & 1 & \ldots & 0 & 0 \\ 
+ 0 & -1 &  & 0 & 0 \\ 
+ \vdots &  & \ddots & \vdots &  \\ 
+ 0 & 0 & \ldots & -1 & 1 \\
+ 0 & 0 &  & 0 & -1 
+\end{matrix} \right) 
++per\left( 
+\begin{matrix} 
+ 1 & 0 &  & 0 & 0 \\
+ -1 & 1 & \ldots & 0 & 0 \\  0 & -1 &  & 0 & 0 \\ 
+  \vdots &  & \ddots & \vdots &  \\ 
+ 0 & 0 & \ldots & 0 & -1
+\end{matrix} \right) \\
+&=-(-1)^{n-1} -1 =  -1 - 1 = -2 \neq 0\\
+\end{split}
+\end{equation*}
+V obeh primerih smo torej dobili, da je permanent največje kvadratne podmatrike neničelen s čimer je trditev dokazana.
+\end{proof}
+V primeru polne verzije smo uspeli izboljšati rezultat za cikle in kot je razvidno iz dokaza je velik del tega pripadal dodatnim stolpcev v matriki, ki pripadajo utežem na vozliščih. Res, pri računanju permanenta smo vse stolpce razen enega vzeli iz drugega dela matrike. Podobno smo naredili tudi v ne seznamski verziji problema. Uteži na vozliščih so zmanjšale potrebo po treh različnih utežeh na povezavah, kar je nekako splošna ideja pri polni verziji 1-2-3 domneve.
+
+V ne seznamski verziji problema je očitno veljalo $\ect \le \ec$, saj smo iz veljavne povezavne utežitve preprosto konstruirali polno utežitev, tako da smo vozliščem dodelili poljubno konstantno utež. V seznamski verziji ne moremo uporabiti istega premisleka, saj ni nujno, da imajo vsa vozlišča isti seznam za izbiro uteži. Vendar kljub temu tudi v seznamski verziji velja enaka ocena.
+\begin{trditev}
+Za vsak graf $G \neq K_2$ velja $tmind(G) \le mind(G).$
+\end{trditev}
+\begin{proof}
+Označimo z $m$ število povezav v grafu $G$. Polinom $T_G$ lahko zapišemo kot $T_G = P_G + R$, kjer je $P_G \in \mathbb{F}[x_1, \ldots, x_m]$ in torej vsebuje le spremenljivke dodeljene povezavam. Po drugi strani ima vsak monom $M$ v polinomu $R$ spremenljivko $x_i$ z $i > m$. Očitno sedaj velja $mind(T_G) = \min \{mind(P_G), mind(R)\} \le mind(P_G)$.
+\end{proof}
+Na podlagi zgornje trditve in konstrukcijskega izreka \ref{algcons} iz prejšnjega razdelka velja naslednja trditev.
+\begin{trditev}
+Če je $G$ polni graf, polni dvodelni graf ali drevo velja $tmind(G) \le 2$.
+\end{trditev}
+Dodatno nas zanima, ali lahko v polni verziji rezultate za zgornje grafe še izboljšamo. Kot bomo videli v nadaljevanju je to mogoče v primeru dreves in polnih grafov. V primeru dreves si bomo ogledali konstrukcijski izrek, kjer gradimo grafe z dodajanjem ene nove povezave med obstoječim in novim  vozliščem. Za polne grafe si bomo ogledali postopek, ki ne uporablja kombinatoričnega izreka o ničlah temveč direktno konstruira ustrezne utežitve iz poljubnih seznamov. Seveda bi tudi za polne grafe lahko postopali s pomočjo polinomov in matrik vendar se izkaže, da je dokaz na tak način precej dolg in zahteven in predvsem zahteva veliko dela z matrikami.
+\begin{trditev}
+Naj bo $G=(V,E)$ graf za katerega velja $tmind(G) = 1$. Naj bo $v \notin V$ novo vozlišče ter $u \in V$. Definiramo graf $G' = G + uv$. Tedaj velja $tmind(G') =1$.
+\end{trditev}
+ \begin{proof}
+Naj bo $G$ orientiran graf z $m$ povezavami in $n$ vozlišči ter naj bo $A = A_G$ matrika pripadajoča grafu. Po predpostavki trditve torej velja $per[A_{j_1}, \ldots, A_{j_m}]  \neq 0$ za nekih $m$ stolpcev. Orientiramo novo povezavo $e = uv$ in označimo $A' = A_{G'}$ matriko pripadajočo novemu grafu, ki je naslednje oblike
+$$
+A' = \left( \begin{matrix}
+  &  &  &  & 0 \\
+  & A &  & C_e & \vdots \\
+  &  &  &  & 0 \\ 
+ & R_e &  & 0 & 1 
+\end{matrix} \right).
+$$
+Pri tem sta $R_e$ in $C_e$ stolpec in matrika pripadajoča novi povezavi medtem ko zadnji stolpec, ki ga označimo z $A'_{l'}$ pripada novemu vozlišču. Sedaj preprosto vzamemo vse stolpce $A'_{j_1}, \ldots, A'_{j_m}$ ter zadnji stolpec ter izračunamo 
+$per[A'_{j_1}, \ldots, A'_{j_m}, A'_{l'} ] = per[A_{j_1}, \ldots, A_{j_m}]  \neq 0$.
+\end{proof}
+Posledica trditve je torej $tmind(T_n) = 1$ za vsa drevesa $T_n$, saj vsako drevo lahko zgradimo na zgoraj opisan način.
+
+Oglejmo si sedaj še primer polnih grafov. Kot smo že omenili pri tem nebomo uporabili algebraičnih orodij. Označimo $V = \{v_1, \ldots, v_n\}$ in $E = \{e_1, \ldots, e_m\}$ množico vozlišč in povezav grafa $G=(V,E)$ in nabor seznamov
+ $$L = \{L_{v_1}, \ldots, L_{v_n}, L_{e_1}, \ldots, L_{e_m}\}$$ velikosti $k$ dodeljeni vozliščem in povezavam. Za potrebe izreka moramo definirati še nekaj pojmov. Za vsak seznam $L_a \in L$ definirajmo $m_L(a) = \min L_a$ in $M_L(a) = \max L_a$. S pomočjo tega definiramo najmanjšo potencialno polno utež in največjo potencialno polno utež kot
+\begin{equation*}
+\begin{split}
+m(L) &= \min \Big \{ \sum_{e \ni v} m_L(e) + m_L(v) \text{ : } v \in V\Big \}, \\
+M(L) &= \max \Big\{ \sum_{e \ni v} M_L(e) + M_L(v) \text{ : } v \in V\Big \} 
+\end{split}
+\end{equation*}
+Zgornja izraza predstavljata najmanjšo in največjo možno utež, ki jo lahko dobimo vozlišče v grafu v kolikor ga utežujemo iz seznamov. V primeru polnih grafov bomo dokazali malenkost  močnejši izrek, ki nam bo podal dve različni utežitvi polnega grafa.
+\begin{izrek}
+Naj bo $G = K_n$ polni graf in naj bo $L$ nabor seznamov velikosti $2$ dodeljen vozliščem in povezavam polnega grafa. Potem obstajata vsaj dve različni veljavni polni utežitvi grafa $G$ z utežmi iz seznamov v $L$. Pri tem je ena izmed polnih utežitev brez $m(L)$ in druga brez $M(L)$ končne uteži na vozliščih.
+\end{izrek}
+\begin{proof}
+Izrek bomo dokazali z indukcijo glede na število vozlišč $n$. V primeru $n \le 2$ je izrek trivialen. Za indukcijski korak bomo grafu odstranili primerno izbrano vozlišče ter nato uporabili indukcijsko predpostavko na dobljenem manjšem grafu. Nato bomo odstranjeno vozlišče dodali nazaj ter ga ustrezno utežili, da zopet dobimo veljavno utežitev. Naj bo torej $G = K_n = (V, E)$ z vsaj tremi vozlišči. Naj bo $L$ nabor seznamov kot v formulaciji izreka. Sedaj si izberemo poljubno vozlišče $v \in V$, ki lahko zavzame minimalno potencialno polno utež $m(L)$. Tako vozlišče res obstaja saj imamo opravka z končnimi grafi. Sedaj označimo $G' = G - v$ in definirajmo nov nabor seznamov $L'$ velikosti $2$ za graf $G' = (V', E')$ na naslednji način. Ker smo z odstranitvijo vozlišča $v$ odstranili tudi $n-1$ povezav ima zato $L'$ toliko manj seznamov pripadajočim povezavam. Sezname pripadajoče preostalim povezavah pustimo take kot so. Po drugi strani za vsako vozlišče $u \in V'$ definiramo 
+$$L'_u = \{m_L(u) + m_L(uv), M_L(U) + m_L(uv) \}. $$
+Opazimo, da velja $m(L') \ge m(L)$ saj uteži iz odstranjenih povezav dodelili seznamom, ki pripadajo vozliščem. Po indukcijski predpostavki lahko sedaj najdemo veljavno utežitev $\omega'$ grafa $G'$ iz seznamov $L'$, tako da je polna utež $c_{\omega'}^t(u)$ strogo večja od $m(L')$ za vsako vozlišče $u \in V'$. Konstruirajmo sedaj polno utežitev $\omega$ grafa $G$ na naslednji način. Ker seznamov na povezavah nismo spreminjali ohranimo tudi uteži na teh povezavah. Torej za vsako povezavo $e \in E'$ nastavimo $\omega(e) = \omega'(e)$. Za vozlišče $u \in V'$ nastavimo $\omega(u) = \omega'(u) - m_L(uv)$ s čimer dosežemo, da imajo obstoječa vozlišča bodisi utež $m_L(u)$ ali $M_L(u)$. S tem smo sicer morda pokvarili pravilno utežitev vozlišč v $V'$ vendar to preprosto popravimo. Za vsako novo povezavo $uv \in E \setminus E'$ nastavimo $\omega(uv) = m_L(uv) in \omega(v)= m_L(v)$. Zaradi pravilno določenih uteži na novih povezavah velja $c_{\omega}^t(u) =c_{\omega'}^t(u) > m(L)$. Zaradi tega je torej nova utežitev $\omega$ pravilna gledano na vozliščih iz $V'$, saj so njihove uteži ostale nespremenjene. Poleg tega je nova utežitev tudi mogoča saj vrednosti za uteži vzema iz originalnega nabora seznamov $L$. Po drugi strani za novo vozlišče velja $c_{\omega}^t(v) = m(L)$ saj smo na samem vozlišču ter na vseh njegovih incidenčnih povezavah izbrali najmanjšo možno utež. Ker imajo vsa preostala vozlišča višjo končno utež smo konstruirali ustrezn polno utežitev iz danih seznamov. Dodatno velja tudi, da v tej utežitvi nobeno vozlišče ne zasede vrednosti $M(L)$ saj je vsako vozlišče incidenčno z vsaj eno povezavo kjer smo izbrali najmanjšo možno utež.
+Če bi želeli konstruirati utežitev, ki ne zasede najmanjše potencialne polne uteži $m(L)$ bi postopali popolnoma enako le da bi zamenjali vloge najmanjših in največjih uteži iz posameznih seznamov.
+\end{proof}
+
+
 
 
 
