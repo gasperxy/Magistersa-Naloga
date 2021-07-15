@@ -331,28 +331,9 @@ V nalogi bomo obravnavali zgornji problem, kjer se bomo najprej osredotočili na
 V tem razdelku bomo spoznali nekaj osnovnih definicij in pojmov, ki jih bomo uporabljali tekom naloge. Dokazali bomo tudi kakšen lažji izrek v kolikor bomo rezultate uporabljali kasneje. Večina definicij in izrekov bo povzetih po \cite{maingraph}.
 
 Graf bomo označili kot urejen par $G=(V, E)$. Pri tem množico $V$ imenujemo množica vozlišč grafa in njene elemente ponavadi označimo z $u, v, w$. Množica $E \subset V \times V$ je množica povezav grafa $G$. Njene elemente ponavadi označujemo z $e, f, g$ kadar nas ne zanima kateri dve vozlišči povezava vsebuje. V nasprotnem primeru povezavo označimo z $uv \in E$ in s tem eksplicitno povemo, da je to potem povezava med vozliščem $v$ in $u$. Množico vozlišč in povezav grafa, lahko zaporedoma označimo tudi kot $V(G)$ in $E(G)$. V izogib težavam z notacijo bomo vedno predpostavili, da $V \cap E = \emptyset$. 
-\begin{primer}
-	Vzemimo graf $$G = (\{1,2,3,4,5,6\}, \{\{1,2\}, \{1,5\}, \{2,5\}, \{5,4\}, \{2,3\}, \{4,3\}, \{4,5\}, \{4,6\}\}).$$ 
-	
-	Potem ena izmed možnih risb grafa izgleda takole:
-	
-	\begin{tikzpicture}
-	[scale=.8,auto=left,every node/.style={circle,draw=black,fill=white!20}]
-	\node (n6) at (1,10) {6};
-	\node (n4) at (4,8)  {4};
-	\node (n5) at (8,9)  {5};
-	\node (n1) at (11,8) {1};
-	\node (n2) at (9,6)  {2};
-	\node (n3) at (5,5)  {3};
-	
-	\foreach \from/\to in {n6/n4,n4/n5,n5/n1,n1/n2,n2/n5,n2/n3,n3/n4}
-	\draw (\from) -- (\to);
-	
-	\end{tikzpicture}
-\end{primer}
 Za $v \in V(G)$ lahko definiramo t.i. odprto soseščino vozlišča $N(v)$. To je množica vseh sosedov vozlišča $u$, torej $N(v) = \{u \in V(G) \mid uv \in E(G), u \neq v \}$. Na enak način definiramo zaprto soseščino vozlišča $N\left[u\right] = N(v) \cup \{v\}$. Poleg množice sosedov je pomembna tudi njena moč, kar označimo z $d(v)$ in imenujemo stopnja vozlišča $v$. Stopnjo vozlišč lahko posplošimo ter  z $\delta(G)$ oziroma samo $\delta$ označimo najmanjšo stopnjo vozlišča v grafu. Na podoben način z $\Delta$ označimo maksimalno stopnjo vozlišča v grafu $G$. 
 
-Največja in najmanjša stopnja vozlišč sta ene izmed osnovnih lastnosti grafa. Obstaja ogromno drugih lastnosti in različne veje teorije grafov se ukvarjajo z njihovim iskanjem. Ko opazujemo neko lastnost grafa si ponavadi želimo, da se ta lastnost ne spreminja pri različnih risbah grafa. Takim lastnostim rečemo \textbf{invariante grafa}.  Formalno invarianto grafa $G=(V,E)$ definiramo kot lastnost, ki se ohranja pod \textbf{izomorfizmi grafov}. Izomorfizem grafa je bijektivna preslikava $f: V(G) \rightarrow V(G)$, ki sosednja vozlišča slika v sosednja vozlišča. Grafi, ki so izomorfni imajo tako enake lastnostni in jih obravnavamo kot enake. Definirajmo sedaj še pojem podgrafa. Graf $G' = (V', E')$ je \textbf{podgraf} grafa $G = (V, E)$, če velja $ V' \subseteq V$ in $E' \subseteq E$. Pogosto obravnavamo dva posebna primera podgrafov. Naprimer izberemo lahko neko podmnožico vozlišč $V' \subset V$ ter vse povezave med izbranimi vozlišči. Tak podgraf imenujemo \textbf{induciran} podgraf in z oznako $G[S]$ mislimo induciran podgraf kjer za množico vozlišč vzamemo $S$. Na podoben način definiramo $G - U$ kot$ G[V(G) \setminus U]$. Po drugi strani pa lahko za podgraf izberemo vsa vozlišča originalnega grafa med tem ko odstranimo kakšno povezavo. Takemo podgrafu rečemo \textbf{vpet} podgraf. Velikokrat se izkaže, da nam posebni primeri induciranih oziroma vpetih podgrafov omogočajo izpeljavo nekaterih lastnostih za celoten graf. V nadaljevanju tega razdelka bomo spoznali nekaj različnih grafovskih invariant.
+Največja in najmanjša stopnja vozlišč sta ene izmed osnovnih lastnosti grafa. Obstaja ogromno drugih lastnosti in različne veje teorije grafov se ukvarjajo z njihovim iskanjem. Ko opazujemo neko lastnost grafa si ponavadi želimo, da se ta lastnost ne spreminja pri različnih risbah grafa. Takim lastnostim rečemo \textbf{invariante grafa}.  Formalno invarianto grafa $G=(V,E)$ definiramo kot lastnost, ki se ohranja pod \textbf{izomorfizmi grafov}. Izomorfizem grafa je bijektivna preslikava $f: V(G) \rightarrow V(G)$, ki sosednja vozlišča slika v sosednja vozlišča. Grafi, ki so izomorfni imajo tako enake lastnostni in jih obravnavamo kot enake. Definirajmo sedaj še pojem podgrafa. Graf $G' = (V', E')$ je \textbf{podgraf} grafa $G = (V, E)$, če velja $ V' \subseteq V$ in $E' \subseteq E$. Pogosto obravnavamo dva posebna primera podgrafov. Naprimer izberemo lahko neko podmnožico vozlišč $V' \subset V$ ter vse povezave med izbranimi vozlišči. Tak podgraf imenujemo \textbf{induciran} podgraf in z oznako $G[S]$ mislimo induciran podgraf kjer za množico vozlišč vzamemo $S$. Na podoben način definiramo $G - U$ kot $G[V(G) \setminus U]$. Po drugi strani pa lahko za podgraf izberemo vsa vozlišča originalnega grafa med tem ko odstranimo kakšno povezavo. Takemo podgrafu rečemo \textbf{vpet} podgraf. Velikokrat se izkaže, da nam posebni primeri induciranih oziroma vpetih podgrafov omogočajo izpeljavo nekaterih lastnostih za celoten graf. V nadaljevanju tega razdelka bomo spoznali nekaj različnih grafovskih invariant.
 
 \subsection{Osnovne družine grafov}
 Na podlagi določenih lastnosti ločimo različne družine grafov. Te lastnosti nam omogočaja, da probleme, ki so težki za splošne grafe, rešimo za neke specifične družine.
@@ -380,6 +361,17 @@ $$\chi(G) \le \Delta(G) $$
 
 Dokaz zgornjega izreka bralec lahko najde v \cite{maingraph}. Posledica zgornjega izreka je, da lahko $d$-regularne grafe pobarvamo z $d$ barvami v kolikor je $d> 2$ (cikel) in $d < n$ (poln graf).
 
+\begin{primer}
+Oglejmo si primer grafa ter opazujmo njegove osnovne lastnosti.
+ \begin{figure}[h!]
+\caption{Primer grafa G.}
+\label{basic_ex}
+\centering
+    \includegraphics[scale=1]{b_ex_1.png}
+    \end{figure}
+Graf na sliki \ref{basic_ex} ima $9$ vozlišč in $10$ povezav. Njegova najmanjša stopnja $\delta(G) = 1$ ter največja stopnja $\Delta(G) = 5$. Graf ne pripada nobeni izmed zgoraj opisanih osnovnih vendar je povezan. Zaradi tega zadošča predpostavkam Brooksovega izreka zaradi katerega velja $\chi(G) \le 5$. Ali je to dobra ocena za podan graf? Hitro tudi opazimo, da graf ni dvodelen saj vsebuje lih cikel zaradi katerega velja $\chi(G) \ge 3$. Preprosto lahko preverimo, da graf lahko požrešno pobarvamo z tremi barvami torej velja $\chi(G) = 3$.
+\end{primer}
+
 \subsection{Seznamsko barvanje grafa}
 Sedaj bomo definirali generalizacijo barvanja grafa. Na zelo podoben način se generalizira tudi druge grafovske probleme, kar bomo videli v naslednjih razdelkih. Naj bo $G = (V, E)$ graf in naj bo $(S_v)_{v \in V}$ družina množic. Vozliščno barvanje $c$ grafa $G$ kjer dodatno velja $c(v) \in S_v$ za vse $v$ imenujemo \textbf{seznamsko barvanje} s seznami $S_v$. Graf $G$ je $k$-seznamsko obarljiv, če za vsako družino  $(S_v)_{v \in V}$ z $|S_v| = k$ za vse $v$ obstaja vozliščno barvanje s seznami $S_v$. Najmanjši tak $k$ imenujemo seznamsko kromatično število oziroma izbirno število (eng. choice number) in jo označimo kot $ch(G)$.
 Definicija je bolj zapletena kot definicija navadnega barvanja zato si oglejmo kakšna je povezava med njima. Da je seznamsko barvanje res generalizacija preprosto ugotovimo, tako da za družino  $(S_v)_{v \in V}$ vzamemo kar enake množice, naprimer $S_v = \{1,2, \ldots, k\}$.  S tem ugotovimo, da v kolikor je graf $k$-seznamsko obarljiv je tudi $k$-obarljiv. Bolj natančno, 
@@ -387,7 +379,7 @@ $$ ch(G) \ge \chi(G)$$.
 
 Dodatno se izkaže, da veliko zgornjih mej za kromatično število velja tudi za seznamsko verzijo. Konkretno reformulacija Brooks-ovega izreka velja tudi za seznamsko barvanje. To pomeni, da v kolikor $G$ ni poln graf ali lih cikler velja $ch(G) \le \Delta(G)$.  Prav tako velja ista zgornja meja s pomočjo barvnega števila $col(G)$. Vendar to še ne pomeni, da sta si $\chi(G)$ in $ch(G)$ blizu. Obstajajo preprosti grafi, kjer je razlika med parametroma lahko poljubna. Klasični primeri tega so polni dvodelni grafi $K_{m,n}$.
 
-V tem razdelku bi morda dejansko prikazal modifikacijo ali Brooksovega izreka ali optimizirane požrešne metode s čimer bi nekako pokazal, da sta si problema na nek način podobna. zagotovo pa bi dodal tudi primer kjer se moćno razlikujeta. Seznamsko barvanje obravnavam smao iz tega razloga, ker bi v nalogi omenil tudi seznamsko verzijo 123 domneve oziroma ene izmed njenih izpeljank. V teh primerih se dejansko izkaže podobna situacija kot tukaj, kjer so si meje zelo podobne.
+V tem razdelku bi morda dejansko prikazal modifikacijo ali Brooksovega izreka ali optimizirane požrešne metode s čimer bi nekako pokazal, da sta si problema na nek način podobna. zagotovo pa bi dodal tudi primer kjer se močno razlikujeta. Seznamsko barvanje obravnavam smao iz tega razloga, ker bi v nalogi omenil tudi seznamsko verzijo 1-2-3 domneve oziroma ene izmed njenih izpeljank. V teh primerih se dejansko izkaže podobna situacija kot tukaj, kjer so si meje zelo podobne.
 
 \subsection{Barvanje grafa z utežmi}
 
@@ -409,6 +401,17 @@ Očitno ta utežitev porodi pravilno barvanje grafa $G$. Vendar je zgornja ocena
 \end{definicija}
 Označimo z $\ec(G)$ najmanjši tak $k$, da za graf $G$ obstaja $k$-utežitev, ki je pravilno barvanje z utežmi. Literatura glede oznake ni enotna vendar nam ta oznaka omogoča konsistentnost pri raziskovanju podobnih problemov. Tako kot kromatično število je tudi $\ec(G)$ invarianta grafa $G$. V nalogi se bomo osredotočili na analiziranje te grafovske invariante ter nekaj izpeljank. Naprimer namesto vsote uteži bi lahko primerjali produkte ter dovoljevali tudi vozliščem, da vsebujejo uteži. Po zgornjem primeru lahko grobo ocenimo $\ec(G) \le 2^{|E(G)|}$. Kot bomo videli v nadaljevanju ja ta ocena zelo slaba. Ugotovili bomo, da obstaja celo konstantna zgornja meja za vse grafe. Malo lažje ocenimo spodnjo mejo. Na primeru cikla $C_3$ opazimo, da $\ec(G) \ge 3$ saj potrebujemo vsaj 3 različne uteži na povezavah. Glede na to, da je cikel $C_3$ zelo preprost graf nam intuicija govori, da bo spodnja meja za bolj kompleksne grafe višja. Vendar temu ni tako. V naslednjem razdelku bomo predstavili 1-2-3 domnevo, kjer je domnevna zgornja meja za $\ec(G)$ kar enaka preprosti spodnji meji, ki smo jo ugotovili v primeru cikla $C_3$.
 
+\begin{primer}
+Na primeru si sedaj oglejmo kako deluje barvanje grafa z utežmi.
+ \begin{figure}[h!]
+\caption{Primer grafa G z utežmi na povezavah ter induciranim barvanjem.}
+\label{basic_ex1}
+\centering
+    \includegraphics[scale=1]{b_ex_2.png}
+    \end{figure}
+V prejšnjem primeru smo ugotovili, da velja $\chi(G) = 3$. Kot je razvidno iz slike smo graf uspeli utežiti le z dvema utežema iz česar sledi $\ec(G) \le 2$. Vendar graf vsebuje sosednja vozlišča, ki imata isto stopnjo zato lahko sklepamo $\ec(G) = 2$. Pri konkretni utežitvi sicer vidimo, da inducirano barvanje porabi $6$ različnih barv. Koliko različnih barv dobimo nas v okviru 1-2-3 domneve sicer ne zanima ampak vseeno omenimo kot zanimivost. Z primerno izbiro utežitve lahko induciramo barvanje, ki je optimalno torej zavzame le $3$ različne vrednosti. Vendar v tem primeru ne zadostujeta le uteži $\{1,2\}$ vendar potrebujemo še tretjo utež.
+\end{primer}
+
 \subsection{Iregularnostna moč grafa oziroma multigrafa}
 
 V tem razdelku bomo predstavili glavno motivacijo za 1-2-3 domnevo in je v nekem smislu generalizacija prejšnjega razdelka. Glavna ideja leži v tem, kako definirati t.i. \textbf{iregularni graf}. V nasprotju z regularnimi grafi bi naivno tak graf definirali kot graf, kjer imajo vsa vozlišča enako stopnjo. Vendar to seveda ni mogoče. Preprosto dejstvo je, da ima vsak graf z vsaj dvema vozliščema dva vozlišča z isto stopnjo. To lahko pokažemo z preprosto uporabo Dirichletovega principa. Možne stopnje vozlišč so $0, 1, 2, \ldots n-1$ vendar v grafu ne more istočasno obstajati vozlišče s stopnjo $0$ in s stopnjo $n-1$. Iz tega sledi, da imamo na razpolago $n-1$ različnih stopenj, ki jih moramo dodeliti $n$ vozliščem iz česar sledi, da imata vsaj 2 enako stopnjo. Torej naivna definicija iregularnega grafa ne deluje. Seveda to ne velja za multigrafe. Zato se lahko vprašamo, kako daleč je nek preprost graf do tega, da postane iregularen multi graf. Torej koliko vzporadnih povezav je potrebno dodati grafu, da bodo stopnje njegovih vozlišč različne. Namesto dodajanja vzporednih povezav lahko povezave utežimo z celoštevilskimi utežmi in opazujemo dobljene uteži vozlišč (v tem primeru želimo, da so vse uteži na vozliščih različne). Definirajmo sedaj zgornji razmislek bolj natančno. Naj bo $\omega : E(G) \rightarrow \{1,2, \ldots, k\}$ neka utežitev povezav grafa $G$. Utežitvi $\omega$ rečemo iregularna, če so uteži na vozliščih $ d_{\omega}(v) =  \sum_{u \in N(v)} \omega(vu)$ vse različne. Najmanjši tak $k$ za katerega obstaja iregularna utežitev grafa $G$ imenujemo iregularnostna moč ter jo označimo kot $s(G)$. Podobno kot za kromatično število tudi za iregularnostno moč grafa obstajajo različne zgornje in spodnje meje. Za razliko od barvanja grafa je to relativno nov problem in ne obstajajo zgornje meje, ki so preproste. Kljub temu navedimo enega izmed zadnjih rezlutatov, ki pravi 
@@ -426,17 +429,17 @@ Z definicijo $\ec(G)$ lahko formuliramo 1-2-3 domnevo na naslednji način
 
 \begin{domneva} 
 	\label{123conjecture}
-	(1-2-3 Domneva; Karonski– Luczak–Thomason~\cite{base}) Naj bo $G$ povezan graf, ki ni $K_2$. Tedaj je $\ec(G) \le 3.$ 
+	(1-2-3 Domneva; ~\citet{base}) Naj bo $G$ povezan graf, ki ni $K_2$. Tedaj je $\ec(G) \le 3.$ 
 \end{domneva}
-Zastavljena zgornja meja je presenetljiva iz več razlogov. Prvi razlog je to, da je meja konstantna, za razliko od kromatičnega števila kjer za splošne grafe ne obstajajo konstantne meje. Po drugi strani do sedaj še nismo predstavili nobene "dobre" zgornje meje za $\ec(G)$. V članku ~\cite{base}, kjer je bila zastavljena zgornja domneva so pokazali, da obstaja končna množica realnih števil, tako da utežitev z temi števili inducira pravilno barvanje vsakega grafa. Vendar je ta rezultat še vedno precej odmaknjen od željene domneve. Poleg tega so v članku dokazali domnevo za grafe $G$, kjer $\chi(G) \le 3$.
+Zastavljena zgornja meja je presenetljiva iz več razlogov. Prvi razlog je to, da je meja konstantna, za razliko od kromatičnega in iregularnostnega števila kjer za splošne grafe ne obstajajo konstantne meje. Po drugi strani do sedaj še nismo predstavili nobene 'dobre' zgornje meje za $\ec(G)$. V članku ~\cite{base}, kjer je bila zastavljena zgornja domneva so pokazali, da obstaja končna množica realnih števil, tako da utežitev z temi števili inducira pravilno barvanje vsakega grafa. Vendar je ta rezultat še vedno precej odmaknjen od željene domneve. Poleg tega so v članku dokazali domnevo za grafe $G$, kjer $\chi(G) \le 3$.
  Kasneje je bil v ~\cite{proof12345} predstavljen eleganten algoritem, ki doseže zahtevano utežitev z utežmi v $\{1,2,3,4,5\}$. To je do sedaj tudi najboljši razultat za splošne grafe. Tekom naloge bomo spoznali nekaj metod s katerimi se lahko lotimo zgornjega problema za neke specifične družine grafov ter se probamo čim bolj približati željenemu rezultatu. Za začetek pa si oglejmo nekaj preprostih družin, za katere se izkaže, da zgornja meja velja.
 
 \subsection{Izračun $\ec(G)$ za nekatere družine grafov}
 
 Za začetek si bomo ogledali nekaj osnovnih primerov grafov ter na njih izračunali parameter $\ec$. Poleg tega bomo rezultate nahitro primerjali z iregularnostnjo močjo grafa. Ogledali so bomo predvsem tipe grafov, ki smo jih spoznali v uvodnem delu. Tekom magisterske naloge bomo za take grafe izračunali še parametre, ki izhajajo iz sorodnih verzij 1-2-3 domneve. Začnimo z enim izmed bolj preprostih družin grafov.
 
-Večina tega razdelka je povzeta po ~\cite{examples}.
-\begin{trditev}[1-2-3 domneva za $P_n$; ~\cite{examples}]
+Večina tega razdelka je povzeta po~\cite{examples}.
+\begin{trditev}[1-2-3 domneva za $P_n$; ~\citet{examples}]
 Naj bo $P_n$ pot na vsaj treh vozliščih. Tedaj velja $\ec(P_n) = 2.$
 \end{trditev}
 
@@ -487,7 +490,7 @@ Naj bo $P_n$ pot na vsaj treh vozliščih. Tedaj velja $\ec(P_n) = 2.$
 Premislimo sedaj še to kako bi izračunali iregularnostno moč $P_n$. Zgornja utežitev seveda ne deluje saj nam inducira le štiri različne barve kar pomeni, da ima veliko vozlišč enako barvo. Zato bomo tukaj postopali malenkost drugače. Utežitev bomo poizkušali konstruirati na tak način, da bodo barve vozlišč zavzele vse vrednosti od $1$ do $n$. Recimo, da je $n$ liho. Dodelimo vozlišču, ki se nahaja na sredini (torej z indeksom $\lfloor \frac{n}{2} \rfloor + 1$) barvo z vrednostjo $n$. Sedaj povezavama, ki sta incidenčni sredinskemu vozlišču dodelimo uteži $\lfloor \frac{n}{2} \rfloor$ in $\lceil \frac{n}{2} \rceil$. Sedaj dodeljujemo nove uteži, tako da bodo imela vozlišča levo od sredinskega sodo vrednost in liho vrednost če se nahajajo desno od sredinskega vozlišča. Malo bolj pazljivi mormo sicer biti na posameznih koncih poti, da se naše uteževanje uspešno zaključi vendar to lahko storimo. Na podlagi tega torej sklepamo, $s(P_n) \ge \lceil \frac{n}{2} \rceil$ in je potem zgoraj zastavljena tudi precej stroga.
 \end{proof}
 Naravno nadaljujemo z grafom, ki ga iz poti dobimo, tako da združimo krajšiča poti z novo povezavo. Tedaj seveda ustvarimo cikel $C_n$. Kljub temu, da grafu dodamo le eno novo povezavo, pri tem strogo povečamo parameter $\ec.$
-\begin{trditev}[ ~\citet{examples}]
+\begin{trditev}[1-2-3 Domneva za cikle; ~\citet{examples}]
 Naj $C_n$ cikel. Tedaj velja $\ec(C_n) \le 3.$
 \end{trditev}
 \begin{proof}
@@ -637,7 +640,7 @@ Nahitro ocenimo še parameter $s(C_n)$. V tem primeru par tako vzamemo idejo, ki
 \end{proof}
 Do sedaj smo obravnavali grafe z precej nizkimi stopnjami vozlišč kar si lahko predstavljamo kot malo možnih konfliktov pri uteževanju povezav. Vendar poleg manjšega števila sosedov imajo vozlišča seveda tudi manjše število incidenčnih povezav v s tem manj svobode kakšne vrednosti lahko zasedejo. Sedaj si bomo ogledali iskanje primerne utežitve na polnih grafih $K_n$. Sedaj bodo torej stopnje vozlišč velike prav tako da bomo imeli več svobode pri popravljanju možnih konfliktov zato bomo utežitev konstruirali na malo drugačen način.
 
-\begin{trditev}[\citet{kncoloring} ]
+\begin{trditev}[1-2-3 Domneva za $K_n$~\citet{kncoloring} ]
 \end{trditev}
 Naj bo $K_n$ polni graf na vsaj treh vozliščih. Tedaj velja $\ec(K_n) = 3$.
 	\begin{proof}
@@ -679,7 +682,7 @@ Ker je graf poln mora seveda vsako vozlišče imeti svojo barvo. To pomeni, da v
  
  \subsection{Dvodelni in $3$-obarljivi grafi}
 V prejšnjem razdelku smo obravnavali grafe, ki imajo podobno strukturo. Sedaj se bomo osredotočili na grafe, z nizkim kromatičnim številom. Najnižje možno kromatično število je $2$ zato bomo najprej obravnavali dvodelne grafe. Medtem ko bomo domnevo dokazali za splošne dvodelne grafe bomo v nekaterih posebnih primerih to mejo še izboljšali.
- \subsubsection{Dvodelni grafi in drevesa }
+
  
  Dvodelne grafe označimo kot $G=(A, B, E)$, kjer sta $A$ in $B$ biparticija vozlišč.
 Obravnavajmo najprej polne dvodelne grafe $K_{m,n}$ z biparticijo $(A, B)$. Enostavni primer je, ko velja $m \neq n$. V tem primeru lahko vse povezave utežimo z 1 in dobimo pravilno barvanje, kar pomeni $\ec(K_{m,n}) = 1$. V kolikor $m=n$ oštevilčimo vozlišča v $A$ kot $v_1, v_2, \ldots, v_m$ in vozlišča v $B$ kot $u_1, u_2, \ldots, u_n$. Sedaj definiramo utežitev kot
@@ -745,13 +748,14 @@ V kolikor je $d(x)$ liho je potem $|A_1|$ sodo. Po trditvi \ref{dvosodo} ima gra
 V koliko je $d(x)$ sodo je $|A_1|$ liho. Ker je graf $G$ povezan obstaja vozlišče $u^* \in N(x)$, ki je soseden $v^* \in B_1$. Označimo sedaj graf $G'$, kot graf, ki ga dobimo iz $G_1$, tako da dodamo povezavo $u^*v^*$. V tem primeru lahko za $G' = (A_1 \cup \{u^*\}, B_1, E_1 \cup \{u^*v^*\})$ uporabimo trditev \ref{dvosodo}, da dobimo $2$-utežitev $\omega'$ z že znano lastnostjo. Sedaj $\omega'$ razširimo v $\omega$, tako da utežimo povezave incidenčne $x$ razen $xu*$ z 1 ter vse ostale z 2. Sedaj velja $c_{\omega}(x) = d(x) + 1$ in $c_{\omega}(u) = 2d(u) - 1$ za vse $u qin N(x) \setminus \{u*\}$. Po predpostavki izreka tako zopet velja $c_{\omega}(x) \neq c_{\omega}(u)$ ter $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi. S tem je izrek dokazan.
 \end{proof}
 \begin{posledica}
+
 Za vsak dvodelen $d$-regularen graf $G$ z $d \ge 3$ velja $\ec(G) = 2$. 
 \end{posledica}
 
 Za regularne grafe predpostavka izreka \ref{dvoreg} avtomatsko velja, izjema so le $2$-regularni grafi oziroma cikli. Preprost proti primer je $C_6$, ki je dvodelen ter $2$-regularen graf vendar velja $\ec(C_6) = 3$. Zato je pogoj $d \ge 3$ v posledici nujno potreben.
- \subsubsection{3-obarljivi grafi}
- Kot smo ugotovili v prejšnjem razdelku lahko nekatere dvodelne grafe utežimo le z utežema $1$ in $2$ vendar to ne velja v splošnem. Naravno naslednje sledijo $3$-obarljivi grafi. 
-  V ~\citet{base}  sta  avotrja zastavila vprašanje, ki je nato pripeljalo do 1-2-3 domneve in ga v njem tudi dokazala za primer $3$-obarljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem razdelku bo močnejši kot le dokaz, da $\ec(G) = 3$ v kolikor je $G$ 3-obarljiv. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
+
+ Kot smo ugotovili lahko nekatere dvodelne grafe utežimo le z utežema $1$ in $2$ vendar to ne velja v splošnem. Naravno naslednje sledijo $3$-obarljivi grafi. 
+  V članku ~\citet{base}  sta  avotrja zastavila vprašanje, ki je nato pripeljalo do 1-2-3 domneve in ga v njem tudi dokazala za primer $3$-obarljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem delu bo bolj splošen ena izmed njegovih bo dokaz 1-2-3 domneve v primeru 3-obarljivih grafov. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
   \begin{trditev}
   	Naj bo $\Gamma$ Abelova grupa z $|\Gamma| = n$ in naj $0$ označuje enoto. Tedaj za vsak $g \in \Gamma$ velja $n g = 0$.
   \end{trditev}
@@ -787,7 +791,7 @@ Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru cik
     \includegraphics[scale=0.5]{3col.png}
     \end{figure}
 	
-	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$ (???). Zato v tem primeru postopamo malo drugače. ker je graf dvodelen, lahko zapišemo njegovo biparticijo kot $V(G) = A \cup B$. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$. Sedaj na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru pa na poljubni 2 povezavi iz $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
+	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$ (???). Zato v tem primeru postopamo malo drugače. ker je graf dvodelen, lahko zapišemo njegovo biparticijo kot $V(G) = A \cup B$. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$ ter na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru pa na poljubni 2 povezavi iz $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
 \end{proof}
 
 Iz zgornjega izreka torej sledi, da domneva velja za $3$-obraljive grafe. Iz utežitve povezav smo na naraven način prišli do barvanja na grafu. Vprašanje je bilo potem ali je to barvanje pravilno. Zgornji izrek pove nekako obratno. Torej če imamo neko $k$-barvanje in je $k$ liho število potem lahko eksplicitno konstruiramo utežitev z $k$ elementi, ki porodi tako barvanje.
@@ -819,6 +823,40 @@ $T_n$ & 2  \\ \hline
 dvodelni in $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
 \end{tabular}
 \end{table}
+
+\subsection{Konstrukcija grafov G z nizkim parametrom $\ec(G)$}
+
+Tekom magisterske naloge smo spoznali že kar nekaj grafov z nizko vrednostjo parametra $\ec$. Z nizko vrednostjo imamo v mislih seveda čim nižjo zgornjo mejo. Sedaj si bomo ogledali kako lahko neko dobro utežitev razširimo na večji graf. V ta namen najprej ponovimo definicijo kartezičnega produkta dveh grafov. Naj bosta $G =(V, E)$ in $G' = (V', E')$ grafa.  \textbf{Kartezični produkt} grafov $G$ in $G'$ je graf, ki ga označimo z $G \Box G'$. Množica vozlišč grafa  $G \Box G'$ je enaka kartezičnemu produktu $V(G) \times V(G')$ iz česar tudi sledi ime za ta produkt. Dve vozlišči $(u, u')$ in $(v, v')$ sta sosednji v $G \Box G'$ natanko tedaj ko $u=v$ in $u'v' \in E(G')$ ali $u' = v'$ in $uv \in E(G)$. Vozlišče $(u, u')$ v kartezičnem produktu ima po zgornji definiciji toliko incidenčnih povezav kot jih ima $u$ v grafu $G$ plus toliko kot $u'$ v grafu $G'$. Velja torej formula $d_{G \Box G'}((u, u')) = d_G(u) + d_{G'}(u')$.
+\begin{trditev}
+Za vsaka grafa $G$ in $H$ velja $\ec(G \Box H) \le \max \{\ec(g), \ec(H)\}$.
+\end{trditev}
+\begin{proof}
+Trditev bomo dokazali, tako da bomo konstruirali utežitev kartezičnega produkta  $G \Box H$. Naj bo $k =\max \{\ec(g), \ec(H)\} $. Tedaj obstajata utežitvi $\omega_1 : E(G) \rightarrow \{1, \ldots, k\}$ in $\omega_2 : E(H)\rightarrow \{1, \ldots, k\}$, ki porodita pravilno barvanje za grafa $G$ in $H$. Sedaj sestavimo utežitev $\omega : E(G \Box H) \rightarrow \{1, \ldots, k\}$, tako da definiramo 
+\begin{equation*}
+\omega((u, u'), (v, v')) = \begin{cases}
+	\omega_1(uv) & u' = v'\\ 
+	\omega_2(u'v') & u = v;
+	\end{cases}.
+\end{equation*}
+Poglejmo sedaj kakšno barvanje porodi zgornja utežitev. Podobno kot pri stopnjah vozlišč v kartezičnem produktu grafov velja $c_{\omega}((u, u')) = c_{\omega_1}(u) + c_{\omega_2}(u')$. Pokazati moramo, da imata vozlišči na vsaki povezavi kartezičnega produkta različne barve. Ampak povezava v kartezičnem produktu obstaja le ko se vozliči ujemata vsaj na eni koordinati. V kolikor se ujemata na prvi koordinati trditev sledi ker $\omega_2$ inducira pravilno barvanje v kolikor pa se ujemata na drugi koordinati trditev sledi ker $\omega_1$ inducira pravilno barvanje.
+\end{proof}
+Na podlagi zgornje trditve lahko, iz grafov za katere smo 1-2-3 domnevo že dokazali, konstruiramo nove grafe za katere domneva tudi velja. Oglejmo si nekaj primerov.
+\begin{primer}
+\textbf{Hiperkocka} je graf $Q_n$ z $2^n$ vozlišči dobljen kot kartezični produkt $n$ kopij grafov $K_2$. Na sliki \ref{hip} vidimo nekaj začetnih hiperkock.
+ \begin{figure}[h!]
+\caption{Hiperkocke $Q_n$ za $n=1,2,3$.}
+\label{hip}
+\centering
+    \includegraphics[scale=0.4]{car_ex_1.png}
+    \end{figure}
+Primer $Q_1 = K_2$ izpustimo saj v tem primeru rešitev ne obstaja. Za ostale primere iz slike \ref{hip}  ročno preverimo $\ec(Q_2) = \ec(Q_3) \le 2.$ Nato za vsak $n > 3$ zapišemo hiperkocko kot
+ $$Q_n = Q_{\lfloor n/2 \rfloor} \Box Q_{\lceil n/2 \rceil}.$$
+ To lahko naredimo saj je operacija kartezičnega produkta asociativna. Ker $n > 3$ je tako dimenzija obeh hiperkock na desni strani zgornje enakosti vsaj $2$. Z uporabo indukcije nato dokažemo $\ec(Q_n) = 2$ za $ n \ge 2$. Izračuna $\ec(Q_n)$ bi se lahko lotili tudi na drug način in sicer z orodjem, ki smo ga do sedaj že uporabili. Namreč za hiperkocko velja, da je dvodelen graf kar lahko dokažemo na več načinov.  Najlažji izmed njih je morda ravno indukcija kjer zapišemo $Q_n = Q_{n-1} \Box K_2$ ter induktivno uporabimo $2$-barvanje $Q_{n-1}$. V kartezičnem produktu za posamezni kopiji $Q_{n-1}$ uporabimo ravno obratno barvanje. Poleg tega je hiperkocka $Q_n$ tudi $n-1$ regularen graf kar zopet lahko vidimo z indukcijo. V tem trenutno lahko uporabimo posledico izreka ~\ref{dvoreg} in direktno dobimo $\ec(Q_n) = 2$.
+
+Na podoben način lahko generiramo tudi t.i. torus grafe. \textbf{Torus} graf označimo z $T_{m,n} = C_m \Box C_n$. Direktna posledica zgornje trditve je torej $\ec(T_{m,n}) \le 3$ v kolikor $n,m \ge 3$.
+\end{primer}
+
+
 
 
  
@@ -948,13 +986,9 @@ in s tem zadoščamo zgornjemu pogoju. Sedaj bomo modificirali uteži na povezav
 
 Z zgornjim postopkom smo zagotovili, da ni konfliktov med vozlišči znotraj $R_2$. Sedaj moramo pokazati, da je postopek spreminjanja uteži v skladen z 1. - 3. Opazujmo neko vozlišče $v \in I$. Povezave incidenčne vozlišču $v$ imajo začetno utežitev v množici $\{3,4\}$. Po zgornjem postopku lahko utež na povezavi incidenčni $v$ spremenimo samo v primeru ko je oprona povezava. Ampak vse oporne povezave smo na začetku utežili z $4$ in jih v postopku kvečjemu zmanjšamo za $1$. To pomeni, da so uteži na povezavah incidenčnih $v$ še vedno v množici $\{3,4\}$. Iz tega sledi zahteva 2). V kolikor ima $v$ nekega soseda v $R_1$ je bila začetka utežitev na tej povezavi enaka $3$ in ni bila spremenjena v zgornjem postopku zatorej velja tudi 3). Pokažimo, da velja tudi 1). Opazimo najprej, da utež na vsaki povezavi $e$ grafa $G[R_2]$ spremenimo največ enkrat in sicer takrat ko združi trenutno analizirano vozlišče z njegovim sosedom nazaj. Za vsako vozlišče $v \in R_2$, ki ni zadnjo vozlišče neke komponente velja, da ima njegova prva povezava naprej utež $1$ ter skladno z algoritmom in začetno utežitvijo imajo vse ostale povezave incidenčne $v$ utež največ $3$ razen oporne povezave $e_v$, ki ima utež 4. Iz tega sledi, da $c_{\omega}(v) \le 3d - 1$ ter se ne spreminja ko analiziramo kasnejša vozlišča. Sedaj pokažimo, da enako velja tudi v primeru ko je $v$ zadnje vozlišče neke komponente v $G[R_2]$. To preprosto sledi iz dejstva, da zadnja vozlišča nimajo opornih povezav, kar pomeni da imajo vse povezave incidenčne $v$ utež manjšo ali enako $3$. Poleg tega je povezava $uv$, kjer je $u$ predzadnje vozlišče v zgornji ureditvi prva povezava naprej vozlišča $u$ in je po že uporabljenem premisleku utežena z največ $2$. Iz tega sledi tudi 1).
 Sedaj smo odpravili konflikte v $R_2$ in poskrbeli, da so uteži še vedno konsistentne z začetnimi zahtevami. To nam zagotavlja, da $c_{\omega}(v) \neq c_{\omega}(u)$ za vsako povezavo $uv \in E(I \cap R_2)$. Poskrbimo sedaj še za možne konflikte med $I$ in $R_1$, tako da bo veljal pogoj 4). Ker je vozlišče $v \in R_1$ indidenčno le z vozlišči v $I$ so vse povezave incidenčne $v$ utežene z $3$. Sedaj za vsako vozlišče $v \in R_1$ postopamo na naslednji način. V koliko je $c_{\omega}(u') \ge 3d + 1$ za nekega soseda $u'$ vozlišča $v$, potem spremenimo utež na natanko eni povezavi, recimo $u'v$ iz $3$ na $2$. V nasprotnem primeru, ko je $c_{\omega}(u) = 3d$ za vsako vozlišče $u \in N(v)$ spremenimo utež na vsaki povezavi $uv$ iz $3$ na $4$ za vsak $u \in N(v)$.  Na tak način ohranimo vse pogoje 1) - 3) ter ko obdelamo vsa vozlišča v $R_1$ velja tudi 4). S tem smo našli ustrezno $4$-utežitev.
-
-
-
-
-
-
 \end{proof}
+
+Za konec tega razdelka komentirajmo dobljene rezultate. Kot smo že omenili sta oba izreka algoritmične narave in tudi uporabljata podobne ideje. Glavna ideja v obeh primerih je neka začetna utežitev ter nato procesiranje vozlišč v primernem vrstnem redu. Pri tem smo morali biti pazljivi, da ohranjamo določene lastnosti pri že procesiranih vozliščih kar nam omogoča neka dodatna povezava iz vozlišča, ki ga trenutno procesiramo. Pri zadnjem vozlišču je bilo nato potrebna malo drugačna ideja vendar je to bilo mogoče v obeh primerih. Oba izreka podajata zelo dobro mejo, ki se precej približa zastavljeni domnevi. Vendar nažalost z podobno idejo težko dosežemo še boljše rezultate saj naprimer pri izreku \ref{theorem12345} nujno potrebujemo $5$ različnih uteži.
 	
  
  \section{Verjetnostne metode}
@@ -1605,6 +1639,37 @@ $$L'_u = \{m_L(u) + m_L(uv), M_L(U) + m_L(uv) \}. $$
 Opazimo, da velja $m(L') \ge m(L)$ saj uteži iz odstranjenih povezav dodelili seznamom, ki pripadajo vozliščem. Po indukcijski predpostavki lahko sedaj najdemo veljavno utežitev $\omega'$ grafa $G'$ iz seznamov $L'$, tako da je polna utež $c_{\omega'}^t(u)$ strogo večja od $m(L')$ za vsako vozlišče $u \in V'$. Konstruirajmo sedaj polno utežitev $\omega$ grafa $G$ na naslednji način. Ker seznamov na povezavah nismo spreminjali ohranimo tudi uteži na teh povezavah. Torej za vsako povezavo $e \in E'$ nastavimo $\omega(e) = \omega'(e)$. Za vozlišče $u \in V'$ nastavimo $\omega(u) = \omega'(u) - m_L(uv)$ s čimer dosežemo, da imajo obstoječa vozlišča bodisi utež $m_L(u)$ ali $M_L(u)$. S tem smo sicer morda pokvarili pravilno utežitev vozlišč v $V'$ vendar to preprosto popravimo. Za vsako novo povezavo $uv \in E \setminus E'$ nastavimo $\omega(uv) = m_L(uv) in \omega(v)= m_L(v)$. Zaradi pravilno določenih uteži na novih povezavah velja $c_{\omega}^t(u) =c_{\omega'}^t(u) > m(L)$. Zaradi tega je torej nova utežitev $\omega$ pravilna gledano na vozliščih iz $V'$, saj so njihove uteži ostale nespremenjene. Poleg tega je nova utežitev tudi mogoča saj vrednosti za uteži vzema iz originalnega nabora seznamov $L$. Po drugi strani za novo vozlišče velja $c_{\omega}^t(v) = m(L)$ saj smo na samem vozlišču ter na vseh njegovih incidenčnih povezavah izbrali najmanjšo možno utež. Ker imajo vsa preostala vozlišča višjo končno utež smo konstruirali ustrezn polno utežitev iz danih seznamov. Dodatno velja tudi, da v tej utežitvi nobeno vozlišče ne zasede vrednosti $M(L)$ saj je vsako vozlišče incidenčno z vsaj eno povezavo kjer smo izbrali najmanjšo možno utež.
 Če bi želeli konstruirati utežitev, ki ne zasede najmanjše potencialne polne uteži $m(L)$ bi postopali popolnoma enako le da bi zamenjali vloge najmanjših in največjih uteži iz posameznih seznamov.
 \end{proof}
+
+V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo seznamske verzije problema. Poleg tega je vsaka rešitev seznamske verzije tudi rešitev originalne verzije in celo zastavljena domneva za seznamsko verzijo je enaka kot domneva originalne verzije. Če torej uspešno rešimo seznamsko verzijo rešimo tudi originalno vendar v kolikor odkrijemo proti primer za seznamsko verzijo domneve s tem ne ovržemo tudi originalne domneve. Dopolnimo sedaj tabelo z do sedaj dobljenimi rezultati.
+\begin{table}[H]
+
+\caption{\label{tab:tab3} Izračun $\ec(G)$,  $\ect(G)$, $ch_{\Sigma}^e$, $ch_{\Sigma}^t$ za znane grafe. }
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ Graf $G$ & $\ec(G)$ & $\ect(G) $ & $ch_{\Sigma}^e$ & $ch_{\Sigma}^t$\\ \hline
+ $P_n$ & 2 & 2 & $\le 3$ & 2\\ \hline
+ $C_n$ & $\begin{cases}
+	2 & n = 4k;\\ 
+	3 & sicer;
+	\end{cases}$ & 2 & 3 & 2\\ \hline
+ $K_n$& 3 & 2 & 3 &2\\ \hline
+ $K_{m,n}$& $\begin{cases}
+	1 & m \neq n\\ 
+	2 & sicer;
+	\end{cases}$ &$\begin{cases}
+	1 & m \neq n\\ 
+	2 & sicer;
+	\end{cases}$ &3 & $\le 3$\\ \hline
+ 3 obarljivi& 3 & $\le 3$& & \\ \hline
+$T_n$ & 2 & 2& 3 & 2\\ \hline
+dvodelni in $d$ -regularni z $d \ge 3 $ & 2  & 2& &\\ \hline
+dvodelni   & $\le 3$  & 2 & &\\ \hline
+splošni   & $\le 5$  &$ \le 3$ & &\\ \hline
+\end{tabular}
+\end{table}
+Kot je razvidno iz tabele smo se tudi s seznamsko verzijo problema zelo približali oziroma dobilo celo enake rezultate kot v originalni verziji. Seveda pri tem manjkajo rezultati za bolj splošne grafe kar smo že omenili, da je v tem trenutku še odprt problem.
+
 
 
 
