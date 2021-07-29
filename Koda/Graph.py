@@ -1,6 +1,7 @@
 import networkx as nx
 import random as rnd
 import matplotlib.pyplot as plt
+
 import time
 
 class UnsolvableConflictException(Exception):
