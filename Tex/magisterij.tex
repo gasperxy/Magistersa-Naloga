@@ -969,11 +969,13 @@ V dokazu bomo uporabili podobno metodo kot pri dokazu izreka ~\ref{theorem12345}
 \end{itemize}
 Konstruirali bomo utežitev $\omega$ za katero bo na koncu veljalo:
 \begin{enumerate}
-\item $c_{\omega}(v) < 3d $ za vsak $v \in R_2$
+\item \label{itm:1} $c_{\omega}(v) < 3d $ za vsak $v \in R_2$
 \item $c_{\omega}(v) \ge 3d $ za vsak $v \in I$
 \item $c_{\omega}(v) < 4d $ za vsak $v \in I$, ki ima soseda v $R_1$
 \item $c_{\omega}(v) \in \{3d - 1, 4d\} $ za vsak $v \in R_1$
 \end{enumerate}
+
+Kot vidimo v \ref{itm:1} trtr.
 Glede na to, da je $I$ neodvisna množica, $R_1$ neodvisna množica v $G[R]$ in ni povezav med $R_1$ in $R_2$ v $G$ na podlagi zgornjih omejitev možni konflikti obstajajo med sosednjimi vozlišči v $R_2$. Zato bomo na to posebno pazili pri konstrukciji utežitve. Za utežitev bomo dodatno zahtevali še:
 \begin{itemize}
 \item $\omega(e) \in \{1,2,3\}$ za $e \in E(R_2)$
@@ -1068,7 +1070,7 @@ Naj bo $G = (V, E)$ graf in za vse $v \in V$ cela števila $a_v^-$, $a_v^+$, tak
 
 \begin{proof}
 Dokaza se bomo lotili z protislovjem zato predpostavimo, da tak podgraf $H$ ne obstaja. Naj bo dana množica celih števil $\{ a_v  || v \in V\}$ in nek podgraf $H$ grafa $G$ ter definiramo \textit{pomankanje} kot vrednost
-$$D = \sum_v max(0, a_v - d_H(v)) .$$ 
+$$D = \sum_v \max(0, a_v - d_H(v)) .$$ 
 Izberemo $a_v \in \{a_v^-, a_v^+\}$ in $b_v = a_v +1$, kjer sta $a_v^-$ in $a_v^+$ kot v formulaciji trditve. Sedaj izberemo še vpet podgraf $H \subset G$, tako da za vsak $v \in V$ velja $d_H(v) \le b_v$. Izmed vse takih možnosti izberemo tisto, ki minimizira primankljaj $D$.  Sedaj trdimo, da obstaja vsaj eno vozlišče $v \in V$ za katerega $d_H(v) < a_v$ ter posledično $D > 0$. To je res, saj v nasprotnem primeru  velja $d_H(v) = a_v$ ali $d_H(v) = b_v = a_v + 1$, kar pa pomeni, da je $H$ iskan podgraf.
 
 Dokaz bomo sedaj nadaljevali, tako da bomo na podlagi podgrafa $H$ definirali množici $A$ in $B$, ki bosta v protislovju z  \begin{figure}[h!]
@@ -1193,12 +1195,37 @@ Za $n=2$ preprosto najdemo ustrezno utežitev. Predpostavimo, da je $n \ge 3$ in
 
 Kot smo opazli se za osnovne družine grafov brez večjih težav pokaže veljavnost 1-2 domneve na tem mestu bi se lahko vprašali smiselno vprašanje, kako je s splošnimi grafi? Izkaže se, da tudi za splošne grafa obstaja precej dober rezultat, ki je v neki meri bližje domnevi kot v primeru 1-2-3 domneve, ko smo dokazali tako imenovan 1-2-3-4-5 izrek.
 \begin{izrek}
+\label{theorem123}
 Naj bo $G$ povezan graf. Tedaj velja $\ect(G) \le 3$.
  \end{izrek}
 
 \begin{proof}
-Dokaz izreka je modifikacija izreka \ref{theorem12345}.
+Dokaz zgornjega izreka je zelo podoben dokazu izreka \ref{theorem12345}. Glavna ideja je bila pri tem to, da smo vozlišča procesirali v nekem vrstnem redu ter smo lahko zagotovili, da ima trenutno procesirano vozlišče drugačno skupno utež kot njegovi sosedi med že procesiranimi vozlišči. To smo lahko storili zato ker smo lahko popravljali uteži na določenih povezavah in sicer tako, da pri tem nismo povzročali konfliktov.
+
+Konstruirali bomo utežitev $\omega$, ki uporablja uteži $\{1,2,3\}$ na povezavah ter uteži $\{1,2\}$ na vozliščih. S tem bomo dokazali malenkost močnejšo obliko izreka. V ta namen označimo z $c_{\omega}^t(v)$ končno barvo oziroma skupno utež vozlišča $v \in V(G)$, ki jo določimo ko procesiramo vozlišče $v$ in jo kasneje ne spremenimo. Med samo konstrukcijo bomo to utež večkrat spremenili, zato označimo še $c(v)$ kot začasno utež vozlišča $v$. Začnemo z poljubno ureditvijo vozlišč $v_1, v_2, \ldots, v_n$ in nastavimo začetno utež $2$ na vse povezave ter utež $1$ na vsa vozlišča. Med procesiranjem vozlišč bomo vsako povezavo spremenili največ enkrat. Tako velja $c_{\omega}^t(v_1) = c(v_1) = 2d(v_1) + 1$. Za vsako trenutno procesirano vozlišče $v_i$, $2\le i \le n$ predpostavljamo,
+\begin{enumerate}
+\item $c(v_j) = c_{\omega}^t(v_j) $ ali $c(v_j) = c_{\omega}^t(v_j)  - 1$, za $j < i$,
+\item $c_{\omega}^t(v_j) \neq c_{\omega}^t(v_l)$, če $(v_j,v_l) \in E(G)$ in $j,l < i$,
+\item $\omega(e) = 2$ za vsako povezavo $e = (v_i, v_l)$.
+\end{enumerate}
+Predpostavimo še, da ima vozlišče $v_i$ $d$ sosedov v množici že procesiranih vozlišč $\{v_1, v_2, \ldots, v_{i-1}\}$. Na tem koraku moramo določiti končno barvo $c_{\omega}^t(v_i)$ vozlišča $v_i$, tako da bo razližna od njegovih sosedov v množici procesiranih vozlišč. To lahko storimo z modifikacijo uteži na povezavah do že procesiranih vozlišč. In sicer lahko za vsako povezavo $e = (v_j, v_i)$ z $j < i$,
+\begin{itemize}
+\item ohranimo trenutno utež,
+\item dodamo $1$ v kolikor $c(v_j) = c_{\omega}^t(v_j)   - 1$ ali
+\item odštejemo $1$ v koliko $c(v_j) = c_{\omega}^t(v_j) $.
+\end{itemize}
+Podobno kot v dokazu izreka \ref{theorem12345} lahko na tak način ustvarimo $d+1$ različnih zaporednih možnih vrednosti za $c(v_i)$. Res, ena možnost je, če nič ne spreminjamo. Nato dobimo po eno možnost za spremembo na vsaki povezavi nazaj. Lahko si predstavljamo tudi drugače. Na vseh povezavah nazaj poizkušajmo zmanjšati utež, tam kjer je to seveda mogoče. Na tak način dobimo minimalno potencialno utež za $v_i$, označimo jo z  $c_m$. Na enak način povečamo vse uteži in dobimo maksimalno utež za $v_i$, ki jo označimo z $c_M$. Tako se vse potencialne vrednosti za $c(v_i)$ nahajajo v intervalu $[c_m, c_M]$, ki ima $d+1$ elementov. Ker ima vozlišče $v_i$ $d$ sosedov v procesiranih vozliščih lahko tako najdemo vsaj eno prosto utež za vozlišče $v_i$, ki jo nastavimo kot njegovo končno utež. Na tak način torej izberemo $c_{\omega}^t(v_i)$, popravimo uteži na ustreznih povezavah in nastavimo $c_{\omega}^t(v_i) = c(v)$. Postopek ponavljamo, dokler ne sprocesiramo vseh vozlišč. Na koncu procesiranja imamo naslednje lastnosti:
+\begin{itemize}
+\item vsako vozlišče $v \in V(G)$ ima začasno barvo $c(v) = c_{\omega}^t(v)$ ali $c(v) = c_{\omega}^t(v) - 1$,
+\item nobena sosednja vozlišča nimata dodeljene enake končne barve $c_{\omega}^t(v)$,
+\item vsaka povezava ima utež iz množice $\{1,2,3\}$,
+\item vsako vozlišče ima utež $1$.
+\end{itemize}
+Za konec povečamo za $1$ utež na vseh vozliščih za katere velja $c(v) = c_{\omega}^t(v) - 1$. To lahko storimo saj imajo vsa vozlišče utež $1$ in s tem zagotovimo, da imajo vsa vozlišča njihovo končno barvo.
+
 \end{proof}
+Kot je razvidno iz zgornjega dokaza obstaja ogromno podobnosti med dokazom izreka \ref{theorem12345}. Pri polni verziji smo sicer imeli več svobode saj smo lahko vozlišča uredili in procesirali v poljubnem vrstnem redu. To izhaja iz tega, da v tem primeru ne potrebujemo povezave naprej, da dosežemo želene pogoje. Pri tem so seveda zahtevani pogoji manj strogi saj ne zahtevamo, da imajo vsa procesirana vozlišča že končno barvo, ker jih lahko popravimo na koncu z utežitvijo posameznih vozlišč. V samem dokazu izreka \ref{theorem123} smo dejansko dokazali močnejši izrek, saj uteži z vrednostjo $3$ nismo uporabili na vozliščih. Poleg tega smo ugotovili še nekaj. Do zadnjega koraka v dokazu je bila utež na vseh vozliščih enaka $1$. Kaj se zgodi, če to utež popolnoma odstranimo in opazujemo samo dobljeno povezavno utežitev? Dobljena povezavna utežitev sicer ne porodi nujno pravilnega barvanja ampak od tega ni daleč oddaljena saj se dobljeno barvanje razlikuje največ za $1$ od pravilnega barvanja. Uporabili smo tudi samo uteži $\{1,2,3\}$ kar je skladno z 1-2-3 domnevo. Vendar je ravno to težak del problema. Kako torej iz neke povezavne utežitve, ki skoraj porodi pravilno barvanje, dobiti ustrezno utežitev. Do tega trenutka je to mogoče samo z metodami, ki smo si jih ogledali. V povezavni verziji nujno potrebujemo še uteži $4$ in $5$ na povezavah medtem ko moramo v polni verziji dodati utež $2$ na nekatera vozlišča.
+
 
 Za zaključek tega razdelka dopolnimo tabelo, ki smo jo izpolnili že po koncu začetnega dela. V tabelo bomo dodali parameter $\ect$ ter ga direktno primerjali z parametrom $\ec$.
 \begin{table}[H]
@@ -1683,7 +1710,7 @@ V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo se
 	\end{cases}$ &3 & $\le 3$\\ \hline
  3 obarljivi& 3 & $\le 3$& & \\ \hline
 $T_n$ & 2 & 2& 3 & 2\\ \hline
-dvodelni in $d$ -regularni z $d \ge 3 $ & 2  & 2& &\\ \hline
+dvodelni, $d$-regularni, $d \ge 3 $ & 2  & 2& &\\ \hline
 dvodelni   & $\le 3$  & 2 & &\\ \hline
 splošni   & $\le 5$  &$ \le 3$ & $ 2\Delta(G) + 1$ * & $\Delta(G)$ \\ \hline
 \end{tabular}
@@ -1691,8 +1718,39 @@ splošni   & $\le 5$  &$ \le 3$ & $ 2\Delta(G) + 1$ * & $\Delta(G)$ \\ \hline
 Kot je razvidno iz tabele smo se tudi s seznamsko verzijo problema zelo približali oziroma dobilo celo enake rezultate kot v originalni verziji. Največja razlika v primerjavi s seznamsko verzijo problema so seveda splošni grafi. V tem primeru za seznamsko verzijo problema še ne obstaja nobena konstantna zgornja meja in ostaja odprt problem. Vendar glede na to, da je podobno veljalo za originačno verzijo ob postavitvi domneve smo lahko optimistični, da se bo meja za seznamsko verzijo v prihodnosti še izboljšala.
 
 \section{Algoritem za računanje $3$-utežitve grafa}
-V tem razdelku predstavimo algoritem za računanje $3$-utežitve poljubnega grafa $G$. Iz vidika 1-2-3 domneve bi se tak algoritem moral vedno končati oziroma bi moral vedno najti ustrezno utežitev. Ker domneva še ni rešena lahko seveda v najslabšem primeru za podan graf probamo kar vse možne utežitve katerih je $3^|E(G)|$. Analizirali bomo njegovo teoretično časovno zahtevnost ter jo primerjali z časom, ki ga algoritem dejansko porabi za računanje. 
+Tekom magisterske naloge smo predstavili kar nekaj izrekov in dokazov, ki uporabljajo algoritmične pristope. V glavnem smo s tem uspeli pokazati najboljše zgornje meje za parametra $\ec$ in $\ect$. V tem primeru je zadoščal polinomski algoritem, ki je poiskal ustrezno utežitev za poljuben graf. V tem razdelku bomo predstavili algoritem, ki bo poizkušal najti $3$-utežitev za poljuben graf. Iz vidika 1-2-3 domneve bi se moral tak algoritem vedno uspešno končati, torej bi moral vedno najti ustrezno $3$-utežitev. Ampak ker domneva še ni dokazana dejansko ne vemo, ali bomo res uspeli najti rešitev za vsak graf. Kaj to pomeni? V najslabšem primeru bomo morali poizkusiti vse možne utežitve grafa $G$. Takih utežitev je seveda ogromno in sicer $3^{|E(G)|}$. Poleg tega vemo, da je število povezav nekako kvadratno odvisno od števila vozlišč in s tem težavnost problema raste zelo hitro. Na podlagi zgornjih premislekov se nam zdi, da bomo lahko tak problem reševali le za majhne grafe. Za hiter premislek si oglejmo graf z $15$ vozlišči iz $75$ povezavami. Tak graf ima torej $3^{75} \approx 6 \times 10^{35}$ različnih utežitev kar je ogromno število za relativno majhen graf. Poleg računanja $3$-utežitve za poljuben graf je iz vidika domneve zanimivo tudi, analiziranje vseh grafov do neke velikosti. Tako morda odkrijemo kakšen graf, za katerega ne obstaja $3$-utežitev, ki porodi pravilnega barvanja. Tukaj pridemo do naslednjega problema. Poleg tega, da za posamezen graf predvidevamo eksponentno časovno zahtevnost, število vseh grafov tudi raste eksponentno. Izberimo si fiksno število vozlišč $n$. Koliko povezanih grafov na $n$ vozliščih obstaja? Pravzaprav je to precej težko vprašanje. Oglejmo si najprej koliko je vseh grafov na $n$ vozliščih, tudi takih, ki niso nujno povezani. Vseh možnih povezav je $ {n \choose 2}$ in ker vsako povezavo lahko bodisi vključimo bodisi ne lahko tako generiramo $2^{n \choose 2}$ grafov. Vendar pri tem lahko dobimo grafe, ki niso povezani ter so med seboj lahko tudi izomorfni. Računanje $3$-utežitve na nepovezanih grafih ni smiselno saj moramo rešiti problem na vsaki izmed povezanih komponent. Prav tako se nam seveda ne izplača računati $3$-utežitve na grafih, ki so izomorfni saj smo že premislili, da je parameter $\ec$ invarianta grafa in se tako ne spreminja pod izomorfizmi. Vendar je odgovor na vprašanje koliko ne izomorfnih povezanih grafov na $n$ vozliščih obstaja precej zahtevno in je mogoče tema za drugo magistersko nalogo. Vendar je odgovor podoben, število grafov raste izredno hitro.
 
+Iz vidika zgornjih komentarjev in opomb se bomo problema lotili na naslednji način:
+\begin{itemize}
+\item Analizirali bomo vse grafe do stopnje $10$.
+\item Za večje stopnje grafov bomo za različne velikosti (20, 30, 40, 50, 60, 70, 80, 90, 100) vzeli $1000$ naključnjih grafov.
+\end{itemize}
+
+Na vseh grafih bomo spremljali naslednje parametre:
+\begin{itemize}
+\item Ali je naključna utežitev  ustrezna?
+\item Ali najdemo utežitev z lokalnim iskanjem v polinomskem času?
+\item Ali je problem na grafu rešljiv (rekurzivno)?
+\item Kakšna je rekurzivna globina, kjer je algoritem našel rešitev?
+\end{itemize}
+
+Prav tako bomo na vsakem grafu algoritem izvedli večkrat. To nam bo pomagalo dobiti boljšo statistično oceno za zgornje parametre saj se v algoritmu skriva nekaj naključnih odločitev.
+
+\subsection{Opis algoritma}
+
+Kot smo omenili bo moral algoritem v najslabšem primeru predelati vse možne utežitve za dan graf. To najlažje dosežemo, tako da si izberemo neko povezavo in problem nato razdelimo na $3$ različne podprobleme, ki jih nato rekurzivno rešujemo. V vsakem podproblemu nastavimo različno utež na izbrani povezavi in je več ne spreminjamo.
+ \begin{figure}[h!]
+\caption{Primer razvejitve problema preko povezave $e$.}
+\label{alg_rec}
+\centering
+    \includegraphics[scale=0.8]{alg_rec.png}
+    \end{figure}
+Shema take delitve oziroma razvejitve je prikazana na sliki ~\ref{alg_rec}. Na tak način lahko torej preverimo vse možne utežitve za dan graf. V kolikor nobena izmed njih ne inducira pravilnega barvanja smo odkrili protiprimer za 1-2-3 domnevo. Torej za razvejitev problema si moramo izbrati neko povezavo. Katera izbira je najboljše? Odgovor je na to vprašanje je preprost. Ne vemo. Zato na tej točki potrebujemo neko hevristiko, ki nam bo na podlagi trenutnega stanja podala neko povezavo na kateri izvedemo delitev. Nekaj možnih hevristik:
+\begin{enumerate}
+\item Izberemo naključno, še ne označeno povezavo.
+\item Izberemo neoznačeno povezavo, ki ima najvišjo stopnjo.
+\item Izberemo neoznačeno povezavo, ki ima najnižjo stopnjo.
+\end{enumerate}
 
 
 
