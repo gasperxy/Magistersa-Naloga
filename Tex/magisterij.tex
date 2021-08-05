@@ -1737,6 +1737,7 @@ Na vseh grafih bomo spremljali naslednje parametre:
 Prav tako bomo na vsakem grafu algoritem izvedli večkrat. To nam bo pomagalo dobiti boljšo statistično oceno za zgornje parametre saj se v algoritmu skriva nekaj naključnih odločitev.
 
 \subsection{Opis algoritma}
+\subsubsection{Razveji glede na povezavo}
 
 Kot smo omenili bo moral algoritem v najslabšem primeru predelati vse možne utežitve za dan graf. To najlažje dosežemo, tako da si izberemo neko povezavo in problem nato razdelimo na $3$ različne podprobleme, ki jih nato rekurzivno rešujemo. V vsakem podproblemu nastavimo različno utež na izbrani povezavi in je več ne spreminjamo.
  \begin{figure}[h!]
@@ -1751,6 +1752,59 @@ Shema take delitve oziroma razvejitve je prikazana na sliki ~\ref{alg_rec}. Na t
 \item Izberemo neoznačeno povezavo, ki ima najvišjo stopnjo.
 \item Izberemo neoznačeno povezavo, ki ima najnižjo stopnjo.
 \end{enumerate}
+Katera hevristika je boljša je težko ocenit. Eksperimentalno si bomo ogledali vpliv zgornjih hevristik. Algoritem, ki uporablja samo preprosto delitev glede na utež povezave bo vedno deloval v eksponentnem času. Ali lahko v kakšnih primerih to izboljšamo? Ideja je, da pred delitvijo opravimo nek bolj preprost postopek, ki morda najde ustrezno utežitev. Pri tem je pomembno, da tak postopek deluje v polinomskem času poleg tega si želimo, da nam s tem nebo potrebno pregledat celotnega rekurzivnega drevesa temveč bomo rešitev našli že prej.
+
+\subsubsection{Minimizacija konfliktov}
+
+Recimo, da ima graf $G = (V, E)$ neko utežitev $\omega$, ki ne inducira pravilnega barvanja. V tem primeru definiramo konflikt kot povezavo $e =(u, v) \in E(G)$ za katero velja $c_{\omega}(u) = c_{\omega}(v)$. To torej pomeni, da imata sosedji vozlišči enako inducirano barvo. Seveda imamo lahko takih konfliktov več zato označimo z $C$ seznam vseh takih konfliktov. V tem razdelku bomo opisali postopek, kako v polinomskem času v odvisnosti od števila vozlišč poizkušamo minimizirati število konflikov za dan graf in utežitev. V kolikor seznam konfliktov spravimo na velikost $0$ smo našli ustrezno utežitev. Začnemo, tako da vse konflikte postavimo v vrsto in sicer v poljubnem vrstnem redu. Sedaj vzamemo nek konflikt $e = (u, v) \in E(G)$ iz vrste ter ga poizkušamo odpravit. To bomo storili, tako da bomo spremenili uteži na povezavah, ki so incidenčne $u$ in $v$. To je tudi edini način, da odpravimo konflikt $e$ saj inducirano barvo posameznega vozlišča določanjo natanko njegove incidenčne povezave.
+ \begin{figure}[h!]
+\caption{Primer odprave konflikta $e$ z modifikacijo uteži na sosednji povezavi.}
+\label{alg_loc}
+\centering
+    \includegraphics[scale=0.8]{alg_loc.png}
+    \end{figure}
+Na sliki ~\ref{alg_loc} lahko vidimo primer odprave takega konflikta. Vendar z tem ko smo spremenili utež $\sigma$ v $\sigma'$ smo lahko ustvarili kakšen nov konflikt in sicer v soseščini vozlišča $w$ in $u$. V našem algoritmu zato poizkušamo konflikt odpravit, tako da spremenimo uteži na vseh povezavah, ki so incidenčne $u$ in $v$, razen seveda povezave $e$, ki na konflikt nima vpliva. Pri tem za vsako spremembo uteži zabeležimo skupno število konflikov. Na koncu se odločimo za tisto spremembo uteži, ki ustvari najmanjše skupno število konfliktov. Po odpravi konflikta nadaljujemo in iz vrste vzamemo naslednji konflikt. Algoritem končamo, če odpravimo vse konflikte ali nobena sprememba uteži ne zniža števila konfliktov. V tem primeru zaključimo, da je minimizacija konfliktov neuspešna ter nadaljujemo z rekurzivnim algoritmom. Zaradi tega, ker algoritem poizkuša minimizirati število konfliktov in ker zato uporablja le sosednje povezave bomo ta postopek imenovali lokalno iskanje (rešiteve) oziroma lokalna minimizacija konfliktov.
+
+Na grobo ocenimo časovno zahtevnost takega algoritma. Za seznam konfliktov velja ocena $|C| \le m$. Za vsak konflikt $e \in C$ moramo pregledati vse sosednje povezave ter na vsaki izmed teh povezav poizkušati utež spremeniti na dva različna načina. Tako vse skupaj opravimo manj kot $4(n-1)$ spremembn uteži. Pod predpostavko, da modifikacija uteži ter popravek seznama konfliktov deluje v konstantnem času tako za celotno minimizacijo konfliktov deluje v $\mathcal{O}(mn)$ časovni zahtevnosti.
+
+Algoritem z minimizacijo konfliktov lahko najde rešitev vendar zato nimamo nobenega zagotovila. Pričakujemo, da bo algoritem bolje deloval na grafih, ki so bolj redki oziroma imajo manjše število povezav. To pričakujemo predvsem zaradi dejstva, da imajo redki grafi manj povezav in s tem tudi manjšo možnost ustvarjanja novih konfliktov. Vendar v tem primeru tudi nimam veliko različnih možnosti za odpravo konflikta ker ima posamezna povezava malo sosednjih povezav. V praksi se bo izkazalo, da vseeno minimizacija konfliktov boljše deluje v grafih z manjšim številom povezav.
+
+\subsubsection{Razveji z minimizacijo konfliktov}
+
+Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskanja rešitve z minimizacijo konfliktov ter razvejiteve glede na uteži na povezavah. Celoten algoritem začne z poljubno oziroma naključno utežitvijo povezav. V kolikor je seznam konfliktov $C$ prazen smo zaključili in je naključna utežitev inducirala pravilno barvanje. V nasprotnem primeru izvedemo minimizacijo konfliktov in ponovno zaključimo, če je seznam konfliktov prazen. Drugače z pomočjo hevristike izberemo povezavo $e$, ki je še nismo uporabili ter problem razvejimo na $3$ podprobleme, kjer ima v vsakem podproblemu povezava $e$ različno utež ter nadaljujemo rekurzivno. Pri tem v vsaki veji beležimo zgodovino, to je seznam povezav z utežmi, ki smo jih izbrali pri delitvah v algoritmu. Dolžina tega seznama nam poda rekurzivno globino pri kateri je algoritem našel rešitev.
+
+\begin{algorithm}[H]
+ \KwData{graf $G$}
+ \KwResult{Graf $G$ z utežitvijo $\omega$  }
+
+\SetKwFunction{FMain}{Solve123}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{$G$}}{
+       
+
+       \text{$G$.local_solve()}
+
+\eIf{$|G.conflicts| > 0$}
+{
+	
+	\text{split_edge = get_split_edge()}
+
+	
+}
+{}
+
+\textbf{return} $ S^{*}; $ 
+}
+\textbf{End Function}
+
+
+
+ 
+ \caption{Algoritem za izračun 5-utežitve (še ni končan)}
+\end{algorithm}
+
+\subsection{Rezultati izvajanja}
+ Za namen testiranja izvajanja algoritma potrebujemo še nabor grafov na katerih bomo algoritem izvajali. Grafe bomo generirali s pomočjo knjižnjice \textbf{nauty} in ukazov \textit{geng} in \textit{genrang}. Več informacij o knjižnjici in predvsem o tem kako deluje lahko bralec najde v ~\citet{nauty}. Zgornja ukaza generirata vse grafe z določenimi omejitvami kot so število vozlišč, povezav, regularnost ter podobno. Prav tako lahko generiramo naključne grafe poljubnih velikosti.
 
 
 
