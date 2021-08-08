@@ -1,6 +1,7 @@
 import networkx as nx
 import random as rnd
 import matplotlib.pyplot as plt
+from collections import  deque
 
 import time
 
@@ -146,6 +147,20 @@ class Graph:
 
         return e
 
+    def get_edge_weight_diff(self, e):
+        """
+        Function gets current weight of and edge and returns list of
+        possible new weights. It returns difference from current weight to possilbe weights
+        :param e:
+        :return:
+        """
+        current_weight = self.get_edge_weight(e)
+        if current_weight == 1:
+            return [1,2]
+        elif current_weight == 2:
+            return [-1, 1]
+        else:
+            return [-1, -2]
 
     def solve_conflict(self, c=None, in_depth=False):
         """

@@ -6,6 +6,7 @@ import pyodbc
 from os import listdir
 import os
 import time
+import sys
 
 
 class GraphRunner:
@@ -14,7 +15,7 @@ class GraphRunner:
     It can process all graphs in a
     """
 
-    def __init__(self, input_path, folder = False):
+    def __init__(self, input_path, folder = False, rep=10):
         # Input files with multiple graphs in graph6 format
         self.input_file = input_path
 
@@ -36,6 +37,8 @@ class GraphRunner:
         # DataFrame that wil hold aggregated results of experiments in unpivoted format!
         self.unpivoted = pd.DataFrame()
 
+        self.rep = rep
+
     def read_file(self, path):
         if self.folder:
             nx_graph = []
@@ -56,11 +59,15 @@ class GraphRunner:
 
 
     def create_df(self):
-        df= pd.DataFrame(columns=["Graph", "n", "m", "minDeg", "maxDeg", "Time", "RandomSolvable", "LocalSolvable","RecursiveSolvable", "RecursiveDepth"])
-        df = df.astype({"n": int,"m": int,"minDeg": int,"maxDeg": int, "Time":float, "RandomSolvable": float,"LocalSolvable": float,"RecursiveSolvable": float, "RecursiveDepth": float})
+        df= pd.DataFrame(columns=["Graph", "n", "m", "minDeg", "maxDeg", "Time", "RandomSolvable", "LocalSolvable","Heuristics", "RecursiveSolvable", "RecursiveDepth"])
+        df = df.astype(
+            {"n": int,"m": int,"minDeg": int,"maxDeg": int,
+             "Time":float, "RandomSolvable": float,
+             "LocalSolvable": float, "Heuristics":int,
+             "RecursiveSolvable": float,"RecursiveDepth": float})
         return df
 
-    def analyze(self, rep=10):
+    def analyze(self, heuristics=[0]):
         for i, graph in enumerate(self.graphs):
             g = Graph(graph)
             gid = self.graphs_g6[i]
@@ -71,36 +78,38 @@ class GraphRunner:
             d = min(degrees)
             D = max(degrees)
 
-            for _ in range(rep):
-                start_time = time.time()
-                g.randomize_weights()
-                if len(g.conflicts) == 0:
-                    # Graph in solvable using random weights
-                    end_time = time.time() - start_time
-                    r = pd.Series([gid, n, m, d, D,end_time, 1, 0, 0, np.nan], index=self.df.columns)
-                    self.df = self.df.append(r, ignore_index=True)
-                    continue
+            for h in heuristics:
+                # for each heuristics perform algorithm multiple times( number of rep)
+                for _ in range(self.rep):
+                    start_time = time.time()
+                    g.randomize_weights()
+                    if len(g.conflicts) == 0:
+                        # Graph in solvable using random weights
+                        end_time = time.time() - start_time
+                        r = pd.Series([gid, n, m, d, D,end_time, 1, 0, 0, 0, np.nan], index=self.df.columns)
+                        self.df = self.df.append(r, ignore_index=True)
+                        continue
 
-                start_time = time.time()
-                succ = g.solve()
-                if succ:
-                    # Graph is solvable using local search!
-                    end_time = time.time() - start_time
-                    r = pd.Series([gid, n, m,d, D,end_time, 0, 1, 0, np.nan], index=self.df.columns)
-                    self.df = self.df.append(r, ignore_index=True)
-                    continue
+                    start_time = time.time()
+                    succ = g.solve()
+                    if succ:
+                        # Graph is solvable using local search!
+                        end_time = time.time() - start_time
+                        r = pd.Series([gid, n, m,d, D,end_time, 0, 1,0, 0, np.nan], index=self.df.columns)
+                        self.df = self.df.append(r, ignore_index=True)
+                        continue
 
-                start_time = time.time()
-                solved_graph = solve_recursive(g, h=1)
-                end_time = time.time() - start_time
-                d = len(solved_graph.history)
-                r = pd.Series([gid, n, m,d, D,end_time, 0, 0, 1, d], index=self.df.columns)
-                self.df = self.df.append(r, ignore_index=True)
+                    start_time = time.time()
+                    solved_graph = solve_recursive(g, h=h)
+                    end_time = time.time() - start_time
+                    d = len(solved_graph.history)
+                    r = pd.Series([gid, n, m,d, D,end_time, 0, 0, h+1, 1, d], index=self.df.columns)
+                    self.df = self.df.append(r, ignore_index=True)
             if i % 100 == 0:
                 print('Processed ' + str(i) + ' graphs.')
 
     def summerize(self):
-        agg = self.df.groupby('Graph').agg(
+        agg = self.df.groupby(['Graph', 'Heuristics']).agg(
             {
                 "n": np.mean,
                 "m": np.mean,
@@ -116,7 +125,7 @@ class GraphRunner:
         self.summary = self.summary.append(agg, ignore_index=True)
 
     def unpivot(self):
-        unpivoted = self.summary.melt(id_vars=['Graph', 'n', 'm', 'minDeg', 'maxDeg', 'Time'], value_vars=['RandomSolvable', 'LocalSolvable','RecursiveSolvable', 'RecursiveDepth'])
+        unpivoted = self.summary.melt(id_vars=['Graph', 'n', 'm', 'minDeg', 'maxDeg', 'Time', 'Heuristics'], value_vars=['RandomSolvable', 'LocalSolvable','RecursiveSolvable', 'RecursiveDepth'])
         self.unpivoted = self.unpivoted.append(unpivoted)
 
     def export_summary_sql(self, tbl_name):
@@ -157,16 +166,71 @@ class GraphRunner:
 
 
 
-analysis = GraphRunner("graph_examples_100", folder=True)
-analysis.analyze()
-analysis.summerize()
-analysis.unpivot()
-analysis.export_unpivoted_xlsx('graph_results/results.xlsx')
-analysis.export_unpivoted_csv('graph_results/results.csv')
-analysis.export_unpivoted_sql("graph_results_agg_2")
+
+#analysis.export_unpivoted_sql("graph_results_agg_2")
 
 
 #analysis.summerize_xlsx(r"C:\Users\gaspe\Documents\Magisterska\Magistersa-Naloga\Koda\g_test.xlsx", False)
+
+if __name__ == "__main__":
+    in_file = ""
+    in_folder = ""
+    folder = False
+    rep = 1
+    output = "csv"
+    unpivot = True
+    heuristic = [0]
+    hev = ""
+    for i, arg in enumerate(sys.argv):
+        if arg == "-file":
+            in_file = sys.argv[i+1]
+        elif arg == "-folder":
+            in_folder = sys.argv[i+1]
+            folder = True
+        elif arg == "-rep":
+            rep = int(sys.argv[i+1])
+        elif arg == "-output":
+            output = sys.argv[i+1]
+        elif arg == "-pivot":
+            unpivot = False
+        elif arg == "-h":
+            hev = sys.argv[i+1]
+            if hev == "all":
+                heuristic = [0,1,2]
+            else:
+                heuristic = [int(hev)]
+
+
+    # Create output file name:
+    if folder:
+        out_file = os.path.join("graph_results", os.path.basename(in_folder) + "_results")
+    else:
+        out_file = os.path.join("graph_results", os.path.splitext(os.path.basename(in_file))[0] + "_results")
+
+    out_file += "." + output
+    print(in_file, in_folder, rep, output, heuristic, out_file)
+    runner = GraphRunner(in_folder if folder else in_file, folder=folder, rep=rep)
+
+    runner.analyze(heuristic)
+    runner.summerize()
+    if unpivot:
+        runner.unpivot()
+        if output == "csv":
+            runner.export_unpivoted_csv(out_file)
+        elif output == "xlsx":
+            runner.export_unpivoted_xlsx(out_file)
+        else:
+            runner.export_unpivoted_sql("graph_results")
+    else:
+        if output == "csv":
+            runner.export_results_csv(out_file)
+        elif output == "xlsx":
+            runner.export_results_xlsx(out_file)
+        else:
+            runner.export_summary_sql("graph_results")
+
+
+
 
 
 
