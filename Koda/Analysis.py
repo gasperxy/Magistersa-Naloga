@@ -91,7 +91,11 @@ class GraphRunner:
                         continue
 
                     start_time = time.time()
-                    succ = g.solve()
+                    try:
+                        succ = g.solve()
+                    except UnsolvableConflictException:
+                        succ= False
+
                     if succ:
                         # Graph is solvable using local search!
                         end_time = time.time() - start_time
