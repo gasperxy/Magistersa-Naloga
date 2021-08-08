@@ -95,6 +95,7 @@
 \usepackage[]{algorithm2e}
 
 
+
 \setlength{\overfullrule}{50pt} % označi predlogo vrstico
 \pagestyle{plain}               % samo številka strani na dnu, nobene glave / noge
 
@@ -126,6 +127,7 @@
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\C}{\mathbb C}
 \newcommand{\Q}{\mathbb Q}
+\newcommand{\var}{\texttt}
 
 \graphicspath{{slike/}}
 
@@ -1004,12 +1006,12 @@ Za konec tega razdelka komentirajmo dobljene rezultate. Kot smo že omenili sta 
  
  \section{Verjetnostne metode}
 
-Rezultati, ki smo jih obravnavali do sedaj so nam eksplicitno podali neko utežitev, ki je zadoščla zahtevanim pogojem. Najboljši rezultat za splošne grafe je izrek \ref{theorem12345}, ki konstruira $5$-utežitev. Ugotovili smo tudi, da lahko v primeru regularnih grafov rezultat v splošnem še malo izboljšamo. V tem razdelku bomo na problem pogledali malenkost drugače. Prav tako bomo poizkušali konstruirati primerno utežitev vendar tokrat ta utežitev morda nebo delovala za vse grafe, vendar bo za nas dovolj, da je utežitev primerna za večino grafov. To zahtevo si lahko intuitivno predstavljamo na naslednji način. Izberimo si nek $n$ in opazujmo grafe na množici vozlišč $V = \{1,2, \ldots, n\}$. Sedaj nas zanima, ali lahko za poljuben graf na $n$ vozliščih najdemo "dobro" utežitev? Na to vprašanje v splošnem še ne moremo odgovoriti, saj se po tem sprašuje tudi 1-2-3 domneva. Lahko pa se vprašamo kakšna je verjetnost, da za naključen graf na $n$ vozliščih najdemo ustrezno utežitev. Kot bomo videli tekom razdelka bo odgovor na to vprašanje pozitiven, kar bomo tudi dokazali. Preden se lotimo formulacije samega izreka ter dokazovanja moramo definirati pojem "naključen" graf. Pri tem bomo v veliki meri sledili knjigi \cite{maingraph}.
+Rezultati, ki smo jih obravnavali do sedaj so nam eksplicitno podali neko utežitev, ki je zadoščla zahtevanim pogojem. Najboljši rezultat za splošne grafe je izrek \ref{theorem12345}, ki konstruira $5$-utežitev. Ugotovili smo tudi, da lahko v primeru regularnih grafov rezultat v splošnem še malo izboljšamo. V tem razdelku bomo na problem pogledali malenkost drugače. Prav tako bomo poizkušali konstruirati primerno utežitev vendar tokrat ta utežitev morda nebo delovala za vse grafe. V tem primeru bo dovolj, da je rešitev dobra za večino grafov. Trenutno še ni jasno kaj pomeni izraz dobra rešitev za večino grafov. To zahtevo si lahko intuitivno predstavljamo na naslednji način. Izberimo si nek $n$ in opazujmo grafe na množici vozlišč $V = \{1,2, \ldots, n\}$. Sedaj nas zanima, ali lahko za poljuben graf na $n$ vozliščih najdemo ``dobro'' utežitev? Na to vprašanje v splošnem še ne moremo odgovoriti, saj se po tem sprašuje tudi 1-2-3 domneva. Lahko pa se vprašamo kakšna je verjetnost, da za naključen graf na $n$ vozliščih najdemo ustrezno utežitev. Tekom razdelka bomo definirali pojem ``naključnega grafa'' ter si ogledali nekaj preprostih trditev, ki veljajo za take grafe. Z uporabo preprostih trditev bomo formulirali in dokazali izrek, ki bo za veliko večino grafov podal ustrezno $1-2$ utežitev. Pri tem bomo v veliki meri sledili knjigi \citet{maingraph}.
 
 \subsection{Naključni grafi}
-Vzemimo ponovno fiksno število $n$ in naj bo $V = {1,2, \ldots, n}$ množica $n$ vozlišč. Z oznako $\mathcal{G}$ označimo množico vseh grafov na množici vozlišč $V$.  Ideja je, da množico $\mathcal{G}$ spremenimo v verjetnostni prostor ter se nato sprašujemo vprašanja oblike kakšna je verjetnost, da ima nek $G \in \mathcal{G}$ določeno lastnost. Oziroma kolikšna je pričakovana vrednost neke invariante, recimo kromatično število na grafu $G$.
+Vzemimo ponovno fiksno število $n$ in naj bo $V = \{1,2, \ldots, n\}$ množica $n$ vozlišč. Z oznako $\mathcal{G}$ označimo množico vseh grafov na množici vozlišč $V$.  Ideja je, da množico $\mathcal{G}$ spremenimo v verjetnostni prostor ter se nato sprašujemo vprašanja oblike kakšna je verjetnost, da ima nek $G \in \mathcal{G}$ določeno lastnost. Oziroma kolikšna je pričakovana vrednost neke invariante, recimo kromatično število na grafu $G$.
 
-Intiutivno bomo naključen graf $G$ generirali na naslednji način. Izberemo si $p \in [0, 1]$ in za vsako povezavo $e \in V^2$ izvedemo naključen poizkus, ali povezavo vključimo v graf $G$ ali ne. Poizkuse izvajamo neodvisno ter verjetnost uspeha vsakega poizkusa je enaka $p$. Recimo sedaj, da imamo nek fiksen graf $G_0$ na $n$ vozliščih z $m$ povezavami. Kakšna je verjetnost, da naključno generiramo prav ta graf na zgornji način? To je seveda preprost izračun, saj mora poizkus uspeti za vsako izmed $m$ povezav ter spodleteti za mankajoče povezave. Torej verjetnost, da je naključen $G \in \mathcal{G}$ enak grafu $G_0$ je  $p^m (1-p)^{{n \choose 2} - m}$. To je torej verjetnost nekega elementarnega dogodka vendar iz terorije mere oziroma verjetnosti vemo, da v kolikor so določene verjetnosti elementarnih dogodkov lahko konstruiramo verjetnostno mero na celotnem prostoru. Pokazati bi bilo še potrebno, da taka verjetnostna mera sploh obstaja, vendar dokaz za naše namene ni zanimiv, bralec ga lahko najde v poglavju 11 v \cite{maingraph}. Označimo še naš verjetnosti prostor kot $\mathcal{G} = \mathcal{G}(n, p)$. Sedaj si bomo ogledali nekaj preprostih izračunov povezanih z naključno generiranimi grafi.
+Intiutivno bomo naključen graf $G$ generirali na naslednji način. Izberemo si $p \in [0, 1]$ in za vsako povezavo $e \in V^2$ izvedemo naključen poizkus, ali povezavo vključimo v graf $G$ ali ne. Poizkuse izvajamo neodvisno ter verjetnost uspeha vsakega poizkusa je enaka $p$. Recimo sedaj, da imamo nek fiksen graf $G_0$ na $n$ vozliščih z $m$ povezavami. Kakšna je verjetnost, da naključno generiramo prav ta graf na zgornji način? To je seveda preprost izračun, saj mora poizkus uspeti za vsako izmed $m$ povezav ter spodleteti za mankajoče povezave. Torej verjetnost, da je naključen $G \in \mathcal{G}$ enak grafu $G_0$ je  $p^m (1-p)^{{n \choose 2} - m}$. To je torej verjetnost nekega elementarnega dogodka v verjetnostnem prostoru. Na enak način preprosto izračunamo verjetnosti za vse elementarne dogodke oziroma za vse grafe. Na tem koraku si uporabimo nekaj dejstev iz verjetnosti ter teorije mere. Znano je, da v kolikor poznamo verjetnosti za vse elementarne dogodke potem znamo izračunati verjetnost vsakega dogodka. To seveda drži v kolikor je naš verjetnosti prostor končen, kar pa seveda drži ker je grafov na $n$ vozlišč končno. Pokazati bi bilo še potrebno, da taka verjetnostna mera sploh obstaja, vendar dokaz za naše namene ni zanimiv, bralec ga lahko najde v poglavju 11 v \cite{maingraph}. Označimo še naš verjetnosti prostor kot $\mathcal{G} = \mathcal{G}(n, p)$. Sedaj si bomo ogledali nekaj preprostih izračunov povezanih z naključno generiranimi grafi.
 
 \begin{trditev}
 \label{indeprand}
@@ -1021,7 +1023,7 @@ $$ P[\alpha(G) \ge k] \le {n \choose k} q ^{k \choose 2} $$.
 Verjetnost, da je neka $k$ množica $U \subseteq V$ neodvisna v $G$ je $q^{k \choose 2}$. Ampak takih množic $U$ je natanko ${n \choose k}$ in trditev sledi.
 \end{proof}
 
-Na podoben način lahko dokažemo ogromno zanimivih lastnosti grafov, vendar jih za naš primer nebomo potrebovali. Kot zanimivost mogoče navedimo dejstvo, da so naključni grafi $G \in \mathcal{G}(n, p)$ močno povezani tudi za majhne vrednosti $p$.
+Na podoben način lahko dokažemo ogromno zanimivih lastnosti grafov, vendar jih za naš primer nebomo potrebovali. Kot zanimivost mogoče navedimo dejstvo, da so naključni grafi $G \in \mathcal{G}(n, p)$ močno povezani tudi za majhne vrednosti $p$. To pomeni, da so naključni grafi v splošnem povezani. Pri tem velja omenit še to, da je generacija naključnih grafov zelo preprosta, ampak generiranje povezanih grafov je telo zahtevno. Na podlagi zgornje ugotovitve lahko simuliramo generiranje povezanih grafov. Enostavno generiramo poljuben naključen graf in preverimo, če je povezan. V kolikor ni povezan postopek ponovimo. Ker je verjetnost, da je naključen graf na $n$ vozliščih nepovezan zelo majhna nam za generiranje povezanih grafov nebo potrebno velikokrat ponavljati generiranja.
 
 Sedaj lahko definiramo to, kar smo se spraševali na začetku razdelka. Naj $\mathcal{P}$ označuje neko invariano oziroma lastnost grafa. Na podlagi tega se lahko vprašamo kako se obnaša verjetnost $P[G \text{ ima lastnost } \mathcal{P}]$ za $G \in \mathcal{G}(n, p)$ ko $n \rightarrow \infty$. V kolikor gre ta verjetnost proti $1$ rečemo, da ima graf $G$ lastnost $\mathcal{P}$ skoraj zagotovo. Oziroma skoraj vsi grafi imajo lastnost $\mathcal{P}$. Naslednja trditev nam bo podajala spodnjo (ter tudi zgornjo) mejo za kromatično število za skoraj vse grafe.
 \begin{trditev}
@@ -1040,22 +1042,24 @@ P[\alpha(G) \ge k]  &\le {n \choose k} q ^{k \choose 2} \\
 \end{split}
 \end{equation}
 
-Kjer vzamemo $k = (2 + \epsilon) \frac{\log n}{\log (1/q)}$. Za tako izbiro gre eksponent proti neskončnosti ko povečujemo $n$, ter celoten izraz gre torej proti $0$. Iz tega sklepamo, da je skoraj vsak $G \in \mathcal{G}(n, p)$ tak, da v kateremkoli barvanjo $G$ nima nobenih $k$ vozlišč iste barve, saj bi to pomenilo neodvisno množico velikosti $k$. Iz tega sledi, da vsako barvanje vsebuje več kot 
+Kjer vzamemo $k = (2 + \epsilon) \frac{\log n}{\log (1/q)}$. Za tako izbiro gre eksponent proti neskončnosti ko povečujemo $n$, ter celoten izraz gre proti $0$ saj je $q < 1$. Iz tega sklepamo, da je skoraj vsak $G \in \mathcal{G}(n, p)$ tak, da v kateremkoli barvanjo $G$ nima nobenih $k$ vozlišč iste barve, saj bi to pomenilo neodvisno množico velikosti $k$. Iz tega sledi, da vsako barvanje vsebuje več kot 
 $$ \frac{n}{k} = \frac{\log (1/q)}{2 + \epsilon} \cdot \frac{n}{\log n} $$
 barv.
 \end{proof}
 
-Zgornjo trditev bomo kasneje uporabili ko bomo analizirali utežitve na naključnih grafih. V zgornji trditvi bomo $\epsilon$ zamenjali z $-\epsilon$ in bomo tako dobili zgornjo mejo za kromatično število. Poleg bomo potrebovali še neko asimptotsko oceno in sicer za minimalno stopnjo vozlišč. Naj bo $p \in (0, 1)$ in vzemimo graf $G \in  \mathcal{G}(n, p)$ ter opazujmo poljubno vozlišče $v \in V(G)$. Kaj lahko povemo o $d(v)$? Mislimo si lahko, da izvedemo eksperiment za vsakega izmed preostalih $n - 1$ vozlišč ter povečamo stopno vozlišča $v$ v kolikor je bil eksperiment uspešen. Na podlagi tega lahko ocenimo pričakovano stopnjo vozlišča kot $(n-1)p$. Na tem mestu lahko uporabimo Chernoffovo mejo ter ugotovimo, da velja $P[d(v) \le (p - \epsilon)n] \rightarrow 0$ ko pošljemo $n$ v neskončnost. Tako lahko sklepamo, da ima skoraj vsak graf $G \in  \mathcal{G}(n, p)$ naslednjo lastnost
+Zgornjo trditev bomo kasneje uporabili ko bomo analizirali utežitve na naključnih grafih. V primeru ko $\epsilon$ zamenjamo z $-\epsilon$ gre eksponent v zgornjem dokazu proti $0$ ko povečujemo $n$. Pri gre celoten izraz proti $1$. Na podoben način kot v dokazu zgornje trditve iz tega sledi, da skoraj vsako barvanje vsebuje manj kot $n/k$ barv kar nam podaja zgornjo mejo za kromatično število. Ta zgornja meja je torej $\chi(G) < \frac{\log(1/q)}{2 - \epsilon} \cdot \frac{n}{\log n}$ in jo bomo uporabili pri dokazu glavnega izreka v tem razdelku. Poleg tega bomo potrebovali še eno asimptotsko oceno in sicer za minimalno stopnjo vozlišč. Naj bo $p \in (0, 1)$ in vzemimo graf $G \in  \mathcal{G}(n, p)$ ter opazujmo poljubno vozlišče $v \in V(G)$. Kaj lahko povemo o $d(v)$? Mislimo si lahko, da izvedemo eksperiment za vsakega izmed preostalih $n - 1$ vozlišč ter povečamo stopno vozlišča $v$ v kolikor je bil eksperiment uspešen. Na podlagi tega lahko ocenimo pričakovano stopnjo vozlišča kot $(n-1)p$. Na tem mestu lahko uporabimo Chernoffovo mejo ter ugotovimo, da velja $P[d(v) \le (p - \epsilon)n] \rightarrow 0$ ko pošljemo $n$ v neskončnost. Tako lahko sklepamo, da ima skoraj vsak graf $G \in  \mathcal{G}(n, p)$ naslednjo lastnost
 
-$$ d(G) \ge (p - \epsilon)n $$.
+$$ d(G) \ge (p - \epsilon)n .$$
 
 Glavni namen tega razdelka je podati neko asimptotsko oceno za parameter $\ec(G)$ oziroma bolj natančno podali bomo trditev, ki bo pokazala, da skoraj za vse grafe velja $\ec(G) = 2$ kar je zelo preseneltjiv rezultat saj je še boljši kot sama domneva. Da nam bo uspelo pokazati zgornje si moramo ogledati še nek rezultat, ki nima nič opravit z verjetnostnimi metodami ampak z iskanjem posebnih faktorjev v grafu. Nato bomo uporabili vse rezultate iz tega razdelka in formulirali ter dokazali končno trditev.
 
 \subsection{Podgrafi z omejenimi stolpnjami}
+Za dokaz glavnega izreka v tem razdelku potrebujemo nek bolj tehničen izrek, ki nam podaja obstoj posebnih vpetih podgrafov. Glavna ideja je v tem, da si za vsako vozlišče izberemo kakšno stopnjo želimo, da ima v vpetem podgrafu. Ugotovili bomo, da za pravilno izbiro stopenj lahko vedno najdemo tak vpet podgraf.
 
-Naj bo $G =(V, E)$ graf in naj bo $H$ njegov vpet podgraf. V kolikor je graf $H$ $k$-regularen rečemo tudi, da je $H$ \textbf{$k$-faktor} grafa $G$.  Iskanje določenih faktorjev v grafu je ekvivalentno nekaterim drugim problemov na grafih. Naprimer $1$-faktor v grafu predstavlja popolno ujemanje. Nas bo v tem razdelku zanimala bolj splošna definicja faktorja.  Recimo, da sta $f$ in $g$ celoštevilski funkciji na množici vozlišč in velja $0 \le g(v) \le f(v) \le d(v)$ za vsako vozlišče $v \in V(G)$. Tako definiramo \textbf{$(g,f)$-faktor} grafa $G$ kot vpet podgraf $H$ z lastnostjo $g(v) \le d_H(v) \le f(v)$ za vsako vozlišče $v$. Želimo si torej, da ima naš vpet podgraf stopnjo vozlišč med vnaprej podanima funkcijama. Naslednja trditev nam podaja potreben in zadosten pogoj, ki nam pove kdaj nek graf vsebuje določen $(g, f)$- faktor.
 
- \begin{trditev}
+Naj bo $G =(V, E)$ graf in naj bo $H$ njegov vpet podgraf. V kolikor je graf $H$ $k$-regularen rečemo tudi, da je $H$ \textbf{$k$-faktor} grafa $G$.  Iskanje določenih faktorjev v grafu je ekvivalentno nekaterim drugim problemov na grafih. Naprimer $1$-faktor v grafu predstavlja popolno ujemanje. Nas bo v tem razdelku zanimala bolj splošna definicja faktorja.  Recimo, da sta $f$ in $g$ celoštevilski funkciji na množici vozlišč in velja $0 \le g(v) \le f(v) \le d(v)$ za vsako vozlišče $v \in V(G)$. Tako definiramo \textbf{$(g,f)$-faktor} grafa $G$ kot vpet podgraf $H$ z lastnostjo $g(v) \le d_H(v) \le f(v)$ za vsako vozlišče $v$. Želimo si torej, da ima naš vpet podgraf stopnje vozlišč med vnaprej podanima funkcijama. Naslednja trditev nam podaja potreben in zadosten pogoj, ki nam pove kdaj nek graf vsebuje določen $(g, f)$- faktor.
+
+ \begin{trditev}[~\citet{factor}]
 Naj bo $G=(V, E)$ graf ter $f$ in $g$ celoštevilski funkciji na množici vozlišč $V$, tako da velja  $0 \le g(v) \le f(v) \le d(v)$ za vsako vozlišče $v \in V(G)$. Če je $G$ dvodelen ali $g(v) \neq f(v)$ za vse $v$, potem obstaja vpet podgraf $H$ grafa $G$, ki je $(g, f)$-fakotr natanko tedaj ko za vsako množico $S \subseteq V(G)$ velja:
 
 $$\sum_{v \not \in S}(g(v) - d_{G-S}(v)) \le f(S) $$
@@ -1069,7 +1073,7 @@ Naj bo $G = (V, E)$ graf in za vse $v \in V$ cela števila $a_v^-$, $a_v^+$, tak
 \end{izrek}
 
 \begin{proof}
-Dokaza se bomo lotili z protislovjem zato predpostavimo, da tak podgraf $H$ ne obstaja. Naj bo dana množica celih števil $\{ a_v  || v \in V\}$ in nek podgraf $H$ grafa $G$ ter definiramo \textit{pomankanje} kot vrednost
+Dokaza se bomo lotili z protislovjem zato predpostavimo, da tak podgraf $H$ ne obstaja. Naj bo dana množica celih števil $\{ a_v  || v \in V\}$ in nek podgraf $H$ grafa $G$ ter definiramo \textit{primankljaj} glede na števila $a_v$ kot vrednost
 $$D = \sum_v \max(0, a_v - d_H(v)) .$$ 
 Izberemo $a_v \in \{a_v^-, a_v^+\}$ in $b_v = a_v +1$, kjer sta $a_v^-$ in $a_v^+$ kot v formulaciji trditve. Sedaj izberemo še vpet podgraf $H \subset G$, tako da za vsak $v \in V$ velja $d_H(v) \le b_v$. Izmed vse takih možnosti izberemo tisto, ki minimizira primankljaj $D$.  Sedaj trdimo, da obstaja vsaj eno vozlišče $v \in V$ za katerega $d_H(v) < a_v$ ter posledično $D > 0$. To je res, saj v nasprotnem primeru  velja $d_H(v) = a_v$ ali $d_H(v) = b_v = a_v + 1$, kar pa pomeni, da je $H$ iskan podgraf.
 
@@ -1084,29 +1088,28 @@ Definirajmo množico $A_0 = \{v : d_H(v) < a_v\}$ in \textit{H-alternirajoč spr
 \item $A = \{v \text{ : obstaja $H$-alternirajoč sprehod sode dolžine, ki se konča z $v$}\}$ in
 \item $B =\{v \text{ : obstaja $H$-alternirajoč sprehod lihe dolžine, ki se konča z $v$}\}.$
 \end{itemize}
-Ker število $0$ štejemo kot sodo število velja $A_0 \subseteq A$. Poleg tega za vsak $v \in A$ velja tudi $d_H(v) \le a_v$, saj v nasprotnem primeru obrnemo katere povezave so v $H$ ter $G-H$ tekom sodega alternirajočega sprehoda, ki se konča z $v$ saj s tem povečamo stopnjo $d_H(v_0)$ za ena in s tem zmanjšamo primankljal kar pa je v protislovju saj smo graf $H$ izbrali, tako da je primankljal minimalen. Na podoben način ugotovimo, da za vsak $v \in B$ velja $d_H(v) = b_v$. V nasprotnem primeru zopet zamenjamo povezave tekom lihega alternirajočega sprehoda, ki se konča z $v$. Ker velja $a_v < b_v$ pomeni, da sta množici $A$ in $B$ disjunktni. Naj bo sedaj $v \in A$ in recimo, da obstaja neka povezava $vw \in E$. V kolikor $w \notin B$ potem mora veljati $vw \in H$ saj bi v nasprotnem primeru lahko sprehod, ki se konča z $v$ podaljšali do $w$ in tkao dobili lih alternirajoč sprehod kar bi postavilo vozlišče $w$ v množico $B$. Velja tudi obratno, torej če je $v \in B$ ter povezava $vw \in  E$ ter $w \notin A$ potem $vw \notin H$. S pomočjo teh ugotovitev bomo vsoto $\sum_{v \in A} d_H(v)$ prešteli na drugačen način in sicer, tako da bomo posamezno stopnjo vozlišča $d_H(v)$ z $v \in  A$ razdelili na 2 dela. Prvi del bo sestavljen iz sosedov od $v$, ki niso v $B$. Do vseh teh sosedov lahko po ugotovitvi pridemo le po povezavi, ki se nahaja v $H$. Zato velja $d_H(v) > d_{G-B}(v)$ za vsak $v \in A$. Mankajo torej še vsi sosedje $v$, ki se nahajajo v $B$. V ta namen si podrobno oglejmo neko vozlišče $u \in B$. Po ugotovitvi od prej vemo, da so vsi sosedje od $u$, do katerih pridemo po neki povezavi iz $H$ v množici $A$ in to so natanko tiste povezave, ki jih v prvem primeru nismo prešteli. Vse skupaj lahko torej zapišemo kot
+Ker število $0$ štejemo kot sodo število velja $A_0 \subseteq A$. Poleg tega za vsak $v \in A$ velja tudi $d_H(v) \le a_v$, saj v nasprotnem primeru obrnemo katere povezave so v $H$ ter $G-H$ tekom sodega alternirajočega sprehoda, ki se konča z $v$ saj s tem povečamo stopnjo $d_H(v_0)$ za ena in s tem zmanjšamo primankljal kar pa je v protislovju saj smo graf $H$ izbrali, tako da je primankljal minimalen. Na podoben način ugotovimo, da za vsak $v \in B$ velja $d_H(v) = b_v$. V nasprotnem primeru zopet zamenjamo povezave tekom lihega alternirajočega sprehoda, ki se konča z $v$. Ker velja $a_v < b_v$ pomeni, da sta množici $A$ in $B$ disjunktni. Naj bo sedaj $v \in A$ in recimo, da obstaja neka povezava $vw \in E$. V kolikor $w \notin B$ potem mora veljati $vw \in H$ saj bi v nasprotnem primeru lahko sprehod, ki se konča z $v$ podaljšali do $w$ in tako dobili lih alternirajoč sprehod kar bi postavilo vozlišče $w$ v množico $B$. Velja tudi obratno, torej če je $v \in B$ ter povezava $vw \in  E$ ter $w \notin A$ potem $vw \notin H$. S pomočjo teh ugotovitev bomo vsoto $\sum_{v \in A} d_H(v)$ prešteli na drugačen način in sicer, tako da bomo posamezno stopnjo vozlišča $d_H(v)$ z $v \in  A$ razdelili na 2 dela. Prvi del bo sestavljen iz sosedov od $v$, ki niso v $B$. Do vseh teh sosedov lahko po ugotovitvi pridemo le po povezavi, ki se nahaja v $H$. Zato velja $d_H(v) > d_{G-B}(v)$ za vsak $v \in A$. Mankajo torej še vsi sosedje $v$, ki se nahajajo v $B$. V ta namen si podrobno oglejmo neko vozlišče $u \in B$. Po ugotovitvi od prej vemo, da so vsi sosedje od $u$, do katerih pridemo po neki povezavi iz $H$ v množici $A$ in to so natanko tiste povezave, ki jih v prvem primeru nismo prešteli. Vse skupaj lahko torej zapišemo kot
 $$\sum_{v \in A} d_H(v) = \sum_{v \in A} d_{G-B}(v) + \sum_{v \in B} d_H(v). $$
 Levo in desno stran še malo dodelamo in dobimo
 $$ \sum_{v\in A}a_v > \sum_{v \in A} d_H(v) = \sum_{v \in A} d_{G-B}(v) + \sum_{v \in B} d_H(v) =\sum_{v \in A} d_{G-B}(v) + \sum_{v \in B} b_v . $$
-
 Ko sedaj levo in desno stran spravimo skupaj dobimo
-
- $$ S_A = \sum_{v\in A}a_v - d_{G-B}(v) > \sum_{v \in B} b_v = S_B.$$
-
-Dokaz s protislovjem bomo zaključili, tako da pokažemo še obratno in sicer $S_A \le S_B$. V ta namen bomo uporabili še neuporabljene predpostavke trditve in pokazali, da velja naslednje:
+$$ S_A = \sum_{v\in A}a_v - d_{G-B}(v) > \sum_{v \in B} b_v = S_B.$$
+Dokaz s protislovjem bomo zaključili, tako da pokažemo še obratno in sicer $S_A \le S_B$. V ta namen bomo uporabili še neuporabljene predpostavke izreka in pokazali serijo preprostih trditev:
 
 \begin{enumerate}
-\item $\sum_ {v\in A}d_B(v) = \sum_{v \in B}d_A(v)$,
-\item $\forall v \in A$,  $a_v - d_{G_B}(v) \le d_B(v)/2$ in
-\item  $\forall v \in B$,  $b_v \ge d_A(v)/2.$
+\item \label{fac:1} $\sum_ {v\in A}d_B(v) = \sum_{v \in B}d_A(v)$,
+\item \label{fac:2} $\forall v \in A$,  $a_v - d_{G-B}(v) \le d_B(v)/2$ in
+\item  \label{fac:3} $\forall v \in B$,  $b_v \ge d_A(v)/2.$
 
 \end{enumerate}
-Prvo stvar je enostavno videti z dvojnim štetjem. Za vsako vozlišče $v \in A$ preštejemo njegove sosede, ki so v $B$. Pri tem lahko nekatera vozlišča sicer štejemo večkrat vendar to ni težava, saj v tem štetju vsako povezavo med $A$ in $B$ štejemo natanko enkrat. Prav tako vse povezave med $A$ in $B$ dobimo, če za vsako vozlišče $v \in B$ preštejemo vse njegove sosede v $A$. Za dokaz druge trditve vzemimo poljuben $v \in A$ in predpostavimo $d_H(v) < a_v$. To lahko storimo za vsako posamezno vozlišče v $A$, saj v nasprotnem primeru, ko velja $d_H(v) = a_v$ zamenjamo povezave, ki so v $H$ tekom alternirajočega sprehoda in s tem ne spremenimo primankljaja $H$ (povečamo za 1 v vozlišču $v$ in zmanjšamo za 1 v začetnem vozlišču sprehoda) prav tako se ne spremenita množici $A$ in $B$. To preprosto vidimo, ker za vozlišče $v$ sedaj velja $v \in A_0$ in je začetno vozlišče sprehodov, tako lihih kot sodih. Sedaj moramo obravnavati dva primera in sicer prvič ko je $a_v = a_v^-$ in drugič ko je $a_v = a_v^+$. V prvem primeru je zadeva preprosta saj $a_v^- \le d(v)/2$ po drugi strani pa velja $d_{G-H}(v) /2 + d_B(v) \ge d(v)/2$ in trditev velja. Oglejmo si še primer ko $a_v = a_v^+ > d(v)/2$. Predpostavljamo lahko dodatno še $d_ {G-B}(v) > a_v^- + 1$ saj v nasprotnem primeru ko nastavimo $a_v = a_v^-$ in odstranimo nekaj povezav med $v$ in $B$ zmanjšamo primankljaj. Sedaj na podlagi predpostavke o $a_v^+$ velja
+Trditev ~\ref{fac:1} enostavno dokažemo z dvojnim štetjem. Za vsako vozlišče $v \in A$ preštejemo njegove sosede, ki so v $B$. Pri tem lahko nekatera vozlišča sicer štejemo večkrat vendar to ni težava, saj v tem štetju vsako povezavo med $A$ in $B$ štejemo natanko enkrat. Prav tako vse povezave med $A$ in $B$ dobimo, če za vsako vozlišče $v \in B$ preštejemo vse njegove sosede v $A$. Za dokaz trditve ~\ref{fac:2} vzemimo poljuben $v \in A$ in predpostavimo $d_H(v) < a_v$. To lahko storimo za vsako posamezno vozlišče v $A$, saj v nasprotnem primeru, ko velja $d_H(v) = a_v$ zamenjamo povezave, ki so v $H$ tekom alternirajočega sprehoda in s tem ne spremenimo primankljaja $H$ (povečamo za 1 v vozlišču $v$ in zmanjšamo za 1 v začetnem vozlišču sprehoda) prav tako se ne spremenita množici $A$ in $B$. To preprosto vidimo, ker za vozlišče $v$ sedaj velja $v \in A_0$ in je začetno vozlišče sprehodov, tako lihih kot sodih. Sedaj moramo obravnavati dva primera in sicer prvič ko je $a_v = a_v^-$ in drugič ko je $a_v = a_v^+$. V prvem primeru je zadeva preprosta saj $a_v^- \le d(v)/2$ po drugi strani velja $d_{G-H}(v) /2 + d_B(v) \ge d(v)/2$ in trditev velja. Oglejmo si še primer ko $a_v = a_v^+ > d(v)/2$. Predpostavljamo lahko dodatno še $d_ {G-B}(v) > a_v^- + 1$ saj v nasprotnem primeru ko nastavimo $a_v = a_v^-$ in odstranimo nekaj povezav med $v$ in $B$ zmanjšamo primankljaj. Sedaj na podlagi predpostavke o $a_v^+$ velja
 $$a_v \le \frac{d(v)}{2} + \frac{a_v^-}{2} + 1 < \frac{d(v)}{2} + \frac{d_{G-B}(v)}{2} + \frac{1}{2} = d_{G-B}(v) + \frac{d_B(v)}{2} + \frac{1}{2}, $$
-ter ker je $a_v$ celo število in je bil $v \in A$ poljuben druga trditev drži. Pokazati torej moramo še tretjo trditev. Vzemimo poljuben $v \in B$ in predpostavimo, da $a_v = a_v^- < \lfloor d(v)/2 \rfloor$ saj v drugem primeru avtomatsko velja $b_v \ge d(v)/2 \ge d_A(v)/2$. Predpostavimo sedaj, da trditev ne drži torej $2b_v < d_A(v)$ oziroma $d_A(v) \ge 2a_v + 2 + 1$ in s tem tudi $d_A(v) \ge a_v^+$ zaradi predpostavke izreka. Ker velja $b_v = d_H(v)$ in, ker smo ugotovili če gre neka povezava, ki je v $H$ iz vozlišča $v \in B$ potem mora drugo vozlišče nujno biti v množici $A$, je natanko $d_A(v) - b_v$ povezav med $v$ in množico $A$, ki niso v $H$. Bolj natančno obstaja neko vozlišče $w \in N(v) \cap A$, tako da $uw \notin H$. Kot smo pokazali zgoraj, lahko zagotovimo, da $d_H(w) < a_w$ ter s tem ne spremenimo dejstva, da je $vw \in H$. Ko nastavimo $a_v = a_v^+$ in dodamo $a_v^+ - d_H(v)$ povezav od $v$ do $A$ v $H$ ter s tem tudi povezavo $vw$ znižamo primankljaj in s tem dokažemo trditev ter izrek.
+ter ker je $a_v$ celo število in je bil $v \in A$ poljuben trditev ~\ref{fac:2} drži. Pokazati torej moramo še trditev ~\ref{fac:3}. Vzemimo poljuben $v \in B$ in predpostavimo, da $a_v = a_v^- < \lfloor d(v)/2 \rfloor$ saj v drugem primeru avtomatsko velja $b_v \ge d(v)/2 \ge d_A(v)/2$. Predpostavimo sedaj, da trditev ne drži torej $2b_v < d_A(v)$ oziroma $d_A(v) \ge 2a_v + 2 + 1$ in s tem tudi $d_A(v) \ge a_v^+$ zaradi predpostavke izreka. Ker velja $b_v = d_H(v)$ in, ker smo ugotovili, če gre neka povezava, ki je v $H$ iz vozlišča $v \in B$ potem mora drugo vozlišče nujno biti v množici $A$, je natanko $d_A(v) - b_v$ povezav med $v$ in množico $A$, ki niso v $H$. Bolj natančno obstaja neko vozlišče $w \in N(v) \cap A$, tako da $uw \notin H$. Kot smo pokazali zgoraj, lahko zagotovimo, da $d_H(w) < a_w$ ter s tem ne spremenimo dejstva, da je $vw \in H$. Ko nastavimo $a_v = a_v^+$ in dodamo $a_v^+ - d_H(v)$ povezav od $v$ do $A$ v $H$ ter s tem tudi povezavo $vw$ znižamo primankljaj in s tem dokažemo trditev ~\ref{fac:3} ter izrek. To preprosto vidimo saj s pomočjo zgornjih trditev velja
+$$ S_A =  \sum_{v\in A}a_v - d_{G-B}(v) \le \sum_{v \in A} d_B(v)/2 = \sum_{v \in B} d_A(v) /2 \le \sum_{v \in B} b_v = S_B,$$
+kar je seveda protislovje saj smo malo prej pokazali $S_A > S_B$.
  \end{proof}
 
-Zgornji izrek oziroma dokaz je bil kar težak ter ne ravno najbolj povezan z temo magisterske naloge ampak nam bo omogočal dokazati zanimivo asimptotsko lastnost 1-2-3 domneve, ki smo jo omeneli že malo prej. Poleg tega so avtorji članka () uporabili zgornji izrek, da so dokzali $\ec(G) \le 16$ za poljuben graf. Takrat je to bil tudi najboljši rezultat za splošne grafe. Poleg uporabe zgornjega izreka so konstruirali želeno utežitev na precej zahteven način, medtem ko opazimo, da je izrek () zares preprost v primerjavi z prejšnjimi poizkusu kljub temu, da podaja precej boljši rezultat.
+Zgornji izrek oziroma dokaz je bil kar težak ter ne ravno najbolj povezan z temo magisterske naloge ampak nam bo omogočal dokazati zanimivo asimptotsko lastnost 1-2-3 domneve, ki smo jo omeneli že malo prej. Poleg tega so ~\citet{random12} uporabili zgornji izrek, da so dokzali $\ec(G) \le 16$ za poljuben graf. Takrat je to bil tudi najboljši rezultat za splošne grafe. Poleg uporabe zgornjega izreka so konstruirali želeno utežitev na precej zahteven način, medtem ko opazimo, da je izrek ~\ref{theorem12345} zares preprost v primerjavi z prejšnjimi poizkusu kljub temu, da podaja precej boljši rezultat.
 
 Podajmo še hiter premislek zakaj nas bi zanimalo iskanje posebnih vpetih podgrafov oziroma kako nam lahko pomagajo pri reševanju 1-2-3 domneve. Predstavljajmo si, da lahko najdemo vpet podgraf $H \subset G$ za katerega velja $d_H(v) \neq d_H(w)$ za vsako povezavo $vw \in E(G)$. Potem lahko utežimo povezave v $H$ z $1$ vse ostale z $0$ in dobimo vozliščno barvanje z uteženimi povezavami z utežmi v $\{0,1\}$. Vendar tak podgraf $H$ v splošnem ne obstaja in seveda smo tak primer že videli saj preprost graf $C_3 = K_3$ ne premore takega podgrafa. Vendar vseeno lahko s pomočjo te ideje dokažemo naslednji izrek.
 
@@ -1121,7 +1124,7 @@ Naj bo $G \in \mathcal{G}(n,p)$. Fiksiramo $\epsilon > 0$. Tekom razdelka smo po
 
 \item $\chi(G) < \frac{\log(1/(1-p))}{2 - \epsilon} \cdot \frac{ n}{\log n}.$
 \end{itemize}
-Ker sta števili $p$ in $\epsilon$ fiksirani lahko preprosto izpeljemo, da velja asimptotično skoraj zagotovo velja $w \chi(G) < \min_vd(v) / 6$ za dovolj velik $n$. Predpostavili bomo, da ta neenakost velja in konstruirali $2$-utežitev, ki bo tudi pravilno barvanje grafa $G$.
+Ker sta števili $p$ in $\epsilon$ fiksirani lahko preprosto izpeljemo, da velja asimptotično skoraj zagotovo velja $ \chi(G) < \min_vd(v) / 6$ za dovolj velik $n$. Predpostavili bomo, da ta neenakost velja in konstruirali $2$-utežitev, ki bo tudi pravilno barvanje grafa $G$.
 
 Naj bo $\{ V_1, V_2, \ldots, V_{\chi(G)}\}$ particija množice vozlišč v neodvisne množice. Sedaj za vsak $v \in V_i$ izberemo $a_v^- \in [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $a_v^+ \in [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$, tako da $a_v^- + d(v) \equiv a_v^+  d(v) \equiv 2i \mod 2\chi(G)$. Take izbire obstajajo saj intervala $ [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $ [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$ vsebujeta vsaj $2\chi(G)$ zaporednih celih števil. Pri tem je seveda pomembno tudi, da $i \le \chi(G)$. Poleg tega taka izbira za $a_v^-$ in $a_v^+$ zadoščata predpostavkam izreka \ref{factor}, tako da obstaja vpet podgraf $H \subseteq G$ kjer za vsak $v$ velja $d_H(v) \in \{a_v^-,a_v^+,a_v^- + 1 ,a_v^+ + 1\}$.Sedaj konstuiramo utežitev $\omega$ kot 
 
@@ -1137,7 +1140,7 @@ S tem smo pokazali, da imajo sosednja vozlišča v različnih barvnih razredih $
 
 Za konec tega razdelka bomo komentirali dobljene rezultate. Definirali smo verjetnostni prostor naključnih grafov, kjer smo naključne grafe generirali, tako da smo za vsako povezavo izvedli \textit{enak poizkus} neodvisno od prejšnjih in z enako verjetnostjo uspeha. S pomočjo tega smo za nekaj grafovskih invariant ocenili kako se obnašajo pri naključnih grafih ter si ogledali njihovo asimptotsko obnašanje. Poleg verjetnostnih metod smo dokazali izrek, ki nam pod določenimi pogoji garantira obstoj posebnega vpetega podgrafa, ki ima omejene stopnje vozlišč. Ta izrek sicer nima nič skupnega z verjetnostnimi metodami, ampak nam je omogočal določiti asimptotsko oceno za parameter $\ec(G)$. Presenetljivo smo pokazali, da velja $\ec(G) = 2$ za skoraj vse grafe kar je še boljše kot pravi 1-2-3 domneva. Presenetljivo je tudi zato, ker smo v začetnem delu dokazali, da za nekatere grafe velja $\ec(G) = 3$. Taki so naprimer že nekateri cikli, polni grafi ter nekateri izmed dvodelnih grafov. Iz vidika našega zadnjega rezultata si to lahko predstavljamo tako, da so zgoraj našteti grafi za katere velja $\ec(G) = 3$ redki v verjetnostnem prostoru naključnih grafov. To torej pomeni, da če naključno izberemo nek graf potem skoraj zagotovo to nebo polni graf, cikel ali dvodelni graf z $\ec(G) = 3$. Kljub temu, da je asimptotski rezultat pozitiven iz vidika 1-2-3 domneve nam pri dokazovanju domneve ne koristi prav preveč. Problem je v tem, da še vedno obstaja neskončno število grafov za katere lahko velja $\ec(G) > 2$ in z naivnim pristopom ne moremo poiskati vseh takih grafov.
 
-Zgornji rezultat ni edini rezultat v okviru 1-2-3 domneve, ki uporablja verjetnostne metode. Vendar se v magisterski nalogi nebo neposredno okvarjali z tem pristopom ampak vseeno bomo uporabili močno orodje, ki izhaja iz verjetnostnih metod.
+Zgornji rezultat ni edini rezultat v okviru 1-2-3 domneve, ki uporablja verjetnostne metode. Vendar se v magisterski nalogi nebomo neposredno okvarjali z tem pristopom ampak vseeno bomo uporabili močno orodje, ki izhaja iz verjetnostnih metod.
 
 \section{Polna verzija}
 
@@ -1774,7 +1777,7 @@ Algoritem z minimizacijo konfliktov lahko najde rešitev vendar zato nimamo nobe
 Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskanja rešitve z minimizacijo konfliktov ter razvejiteve glede na uteži na povezavah. Celoten algoritem začne z poljubno oziroma naključno utežitvijo povezav. V kolikor je seznam konfliktov $C$ prazen smo zaključili in je naključna utežitev inducirala pravilno barvanje. V nasprotnem primeru izvedemo minimizacijo konfliktov in ponovno zaključimo, če je seznam konfliktov prazen. Drugače z pomočjo hevristike izberemo povezavo $e$, ki je še nismo uporabili ter problem razvejimo na $3$ podprobleme, kjer ima v vsakem podproblemu povezava $e$ različno utež ter nadaljujemo rekurzivno. Pri tem v vsaki veji beležimo zgodovino, to je seznam povezav z utežmi, ki smo jih izbrali pri delitvah v algoritmu. Dolžina tega seznama nam poda rekurzivno globino pri kateri je algoritem našel rešitev.
 
 \begin{algorithm}[H]
- \KwData{graf $G$}
+ \KwData{$G$}
  \KwResult{Graf $G$ z utežitvijo $\omega$  }
 
 \SetKwFunction{FMain}{Solve123}
@@ -1782,16 +1785,11 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
     \Fn{\FMain{$G$}}{
        
 
-       \text{$G$.local_solve()}
+       \text{$G$.local\_solve()} \;
 
-\eIf{$|G.conflicts| > 0$}
-{
-	
-	\text{split_edge = get_split_edge()}
+\eIf{}{}{}
 
-	
-}
-{}
+
 
 \textbf{return} $ S^{*}; $ 
 }
