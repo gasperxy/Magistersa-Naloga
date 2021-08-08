@@ -106,9 +106,15 @@ class GraphRunner:
                     start_time = time.time()
                     solved_graph = solve_recursive(g, h=h)
                     end_time = time.time() - start_time
-                    d = len(solved_graph.history)
-                    r = pd.Series([gid, n, m,d, D,end_time, 0, 0, h+1, 1, d], index=self.df.columns)
-                    self.df = self.df.append(r, ignore_index=True)
+                    if solved_graph:
+
+                        d = len(solved_graph.history)
+                        r = pd.Series([gid, n, m,d, D,end_time, 0, 0, h+1, 1, d], index=self.df.columns)
+                        self.df = self.df.append(r, ignore_index=True)
+                    else:
+                        # graph is not solvable!
+                        r = pd.Series([gid, n, m, d, D, end_time, 0, 0, h + 1, 0, 0], index=self.df.columns)
+                        self.df = self.df.append(r, ignore_index=True)
             if i % 100 == 0:
                 print('Processed ' + str(i) + ' graphs.')
 
