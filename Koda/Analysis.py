@@ -118,6 +118,10 @@ class GraphRunner:
             if i % 100 == 0:
                 print('Processed ' + str(i) + ' graphs.')
 
+    @staticmethod
+    def numpy_nan_mean(a):
+        return np.NaN if np.all(a != a) else np.nanmean(a)
+
     def summerize(self):
         agg = self.df.groupby(['Graph', 'Heuristics']).agg(
             {
@@ -129,7 +133,7 @@ class GraphRunner:
                 "RandomSolvable": np.mean,
                 "LocalSolvable": np.mean,
                 "RecursiveSolvable": np.mean,
-                "RecursiveDepth":np.nanmean
+                "RecursiveDepth": self.numpy_nan_mean
             }
         ).reset_index()
         self.summary = self.summary.append(agg, ignore_index=True)
