@@ -1,3 +1,4 @@
+from __future__ import print_function
 from Graph import *
 import numpy as np
 import pandas as pd
@@ -7,7 +8,7 @@ from os import listdir
 import os
 import time
 import sys
-from __future__ import print_function
+
 
 
 class GraphRunner:
