@@ -7,6 +7,7 @@ from os import listdir
 import os
 import time
 import sys
+from __future__ import print_function
 
 
 class GraphRunner:
@@ -179,7 +180,8 @@ class GraphRunner:
 
 
 
-
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 #analysis.export_unpivoted_sql("graph_results_agg_2")
 
@@ -225,23 +227,27 @@ if __name__ == "__main__":
     print(in_file, in_folder, rep, output, heuristic, out_file)
     runner = GraphRunner(in_folder if folder else in_file, folder=folder, rep=rep)
 
-    runner.analyze(heuristic)
-    runner.summerize()
-    if unpivot:
-        runner.unpivot()
-        if output == "csv":
-            runner.export_unpivoted_csv(out_file)
-        elif output == "xlsx":
-            runner.export_unpivoted_xlsx(out_file)
+    try:
+
+        runner.analyze(heuristic)
+        runner.summerize()
+        if unpivot:
+            runner.unpivot()
+            if output == "csv":
+                runner.export_unpivoted_csv(out_file)
+            elif output == "xlsx":
+                runner.export_unpivoted_xlsx(out_file)
+            else:
+                runner.export_unpivoted_sql("graph_results")
         else:
-            runner.export_unpivoted_sql("graph_results")
-    else:
-        if output == "csv":
-            runner.export_results_csv(out_file)
-        elif output == "xlsx":
-            runner.export_results_xlsx(out_file)
-        else:
-            runner.export_summary_sql("graph_results")
+            if output == "csv":
+                runner.export_results_csv(out_file)
+            elif output == "xlsx":
+                runner.export_results_xlsx(out_file)
+            else:
+                runner.export_summary_sql("graph_results")
+    except Exception as ex:
+        eprint(ex)
 
 
 
