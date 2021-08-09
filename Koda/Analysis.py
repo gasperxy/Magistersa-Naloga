@@ -226,10 +226,10 @@ if __name__ == "__main__":
 
     out_file += "." + output
     print(in_file, in_folder, rep, output, heuristic, out_file)
-    runner = GraphRunner(in_folder if folder else in_file, folder=folder, rep=rep)
+
 
     try:
-
+        runner = GraphRunner(in_folder if folder else in_file, folder=folder, rep=rep)
         runner.analyze(heuristic)
         runner.summerize()
         if unpivot:
@@ -248,6 +248,7 @@ if __name__ == "__main__":
             else:
                 runner.export_summary_sql("graph_results")
     except Exception as ex:
+        print(ex)
         eprint(ex)
 
 
