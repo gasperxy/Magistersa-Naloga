@@ -69,7 +69,8 @@ class GraphRunner:
              "RecursiveSolvable": float,"RecursiveDepth": float})
         return df
 
-    def analyze(self, heuristics=[0]):
+    def analyze(self, heuristics=[0], step=0, file_name="", unpivot=True):
+        exported = False
         for i, graph in enumerate(self.graphs):
             g = Graph(graph)
             gid = self.graphs_g6[i]
@@ -110,15 +111,40 @@ class GraphRunner:
                     end_time = time.time() - start_time
                     if solved_graph:
 
-                        d = len(solved_graph.history)
-                        r = pd.Series([gid, n, m,d, D,end_time, 0, 0, h+1, 1, d], index=self.df.columns)
+                        depth = len(solved_graph.history)
+                        r = pd.Series([gid, n, m,d, D,end_time, 0, 0, h+1, 1, depth], index=self.df.columns)
                         self.df = self.df.append(r, ignore_index=True)
                     else:
                         # graph is not solvable!
                         r = pd.Series([gid, n, m, d, D, end_time, 0, 0, h + 1, 0, 0], index=self.df.columns)
                         self.df = self.df.append(r, ignore_index=True)
+
+                if step != 0 and len(self.df.index) > step:
+                    self.summerize()
+                    self.unpivot()
+                    if exported:
+                        self.export_unpivoted_csv(file_name, mode="a", headers=False)
+                    else:
+                        self.export_unpivoted_csv(file_name)
+                        exported = True
+
+
+                    ## reset df
+                    self.df = self.create_df()
+                    self.summary = pd.DataFrame()
+                    self.unpivoted = pd.DataFrame()
+
             if i % 100 == 0:
                 print('Processed ' + str(i) + ' graphs.')
+        if step > 0 and len(self.df.index) > 0:
+            # export last remaining rows!
+            self.summerize()
+            self.unpivot()
+            if exported:
+                self.export_unpivoted_csv(file_name, mode="a", headers=False)
+            else:
+                self.export_unpivoted_csv(file_name)
+                exported = True
 
     @staticmethod
     def numpy_nan_mean(a):
@@ -159,8 +185,8 @@ class GraphRunner:
     def export_results_csv(self, file_name):
         self.summary.to_csv(file_name,index=False)
 
-    def export_unpivoted_csv(self, file_name):
-        self.unpivoted.to_csv(file_name, index=False)
+    def export_unpivoted_csv(self, file_name, mode="w", headers=True):
+        self.unpivoted.to_csv(file_name, mode=mode, header=headers, index=False)
 
     def bulk_upload_sql(self, df, table_name, pivot=True):
         server = 'netflow.database.windows.net'
@@ -198,6 +224,8 @@ if __name__ == "__main__":
     unpivot = True
     heuristic = [0]
     hev = ""
+    stepped = False
+    step = 0
     for i, arg in enumerate(sys.argv):
         if arg == "-file":
             in_file = sys.argv[i+1]
@@ -217,6 +245,10 @@ if __name__ == "__main__":
             else:
                 heuristic = [int(hev)]
 
+        elif arg == "-s":
+            stepped = True
+            step = int(sys.argv[i+1])
+
 
     # Create output file name:
     if folder:
@@ -230,23 +262,26 @@ if __name__ == "__main__":
 
     try:
         runner = GraphRunner(in_folder if folder else in_file, folder=folder, rep=rep)
-        runner.analyze(heuristic)
-        runner.summerize()
-        if unpivot:
-            runner.unpivot()
-            if output == "csv":
-                runner.export_unpivoted_csv(out_file)
-            elif output == "xlsx":
-                runner.export_unpivoted_xlsx(out_file)
-            else:
-                runner.export_unpivoted_sql("graph_results")
+        if stepped:
+            runner.analyze(heuristic, step=step, file_name=out_file)
         else:
-            if output == "csv":
-                runner.export_results_csv(out_file)
-            elif output == "xlsx":
-                runner.export_results_xlsx(out_file)
+            runner.analyze(heuristic)
+            runner.summerize()
+            if unpivot:
+                runner.unpivot()
+                if output == "csv":
+                    runner.export_unpivoted_csv(out_file)
+                elif output == "xlsx":
+                    runner.export_unpivoted_xlsx(out_file)
+                else:
+                    runner.export_unpivoted_sql("graph_results")
             else:
-                runner.export_summary_sql("graph_results")
+                if output == "csv":
+                    runner.export_results_csv(out_file)
+                elif output == "xlsx":
+                    runner.export_results_xlsx(out_file)
+                else:
+                    runner.export_summary_sql("graph_results")
     except Exception as ex:
         print(ex)
         eprint(ex)
