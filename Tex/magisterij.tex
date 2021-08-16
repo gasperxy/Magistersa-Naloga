@@ -1736,23 +1736,32 @@ splošni   & $\le 5$  &$ \le 3$ & $ 2\Delta(G) + 1$ * & $\Delta(G)$ \\ \hline
 Kot je razvidno iz tabele smo se tudi s seznamsko verzijo problema zelo približali oziroma dobilo celo enake rezultate kot v originalni verziji. Največja razlika v primerjavi s seznamsko verzijo problema so seveda splošni grafi. V tem primeru za seznamsko verzijo problema še ne obstaja nobena konstantna zgornja meja in ostaja odprt problem. Vendar glede na to, da je podobno veljalo za originačno verzijo ob postavitvi domneve smo lahko optimistični, da se bo meja za seznamsko verzijo v prihodnosti še izboljšala.
 
 \section{Algoritem za računanje $3$-utežitve grafa}
-Tekom magisterske naloge smo predstavili kar nekaj izrekov in dokazov, ki uporabljajo algoritmične pristope. V glavnem smo s tem uspeli pokazati najboljše zgornje meje za parametra $\ec$ in $\ect$. V tem primeru je zadoščal polinomski algoritem, ki je poiskal ustrezno utežitev za poljuben graf. V tem razdelku bomo predstavili algoritem, ki bo poizkušal najti $3$-utežitev za poljuben graf. Iz vidika 1-2-3 domneve bi se moral tak algoritem vedno uspešno končati, torej bi moral vedno najti ustrezno $3$-utežitev. Ampak ker domneva še ni dokazana dejansko ne vemo, ali bomo res uspeli najti rešitev za vsak graf. Kaj to pomeni? V najslabšem primeru bomo morali poizkusiti vse možne utežitve grafa $G$. Takih utežitev je seveda ogromno in sicer $3^{|E(G)|}$. Poleg tega vemo, da je število povezav nekako kvadratno odvisno od števila vozlišč in s tem težavnost problema raste zelo hitro. Na podlagi zgornjih premislekov se nam zdi, da bomo lahko tak problem reševali le za majhne grafe. Za hiter premislek si oglejmo graf z $15$ vozlišči iz $75$ povezavami. Tak graf ima torej $3^{75} \approx 6 \times 10^{35}$ različnih utežitev kar je ogromno število za relativno majhen graf. Poleg računanja $3$-utežitve za poljuben graf je iz vidika domneve zanimivo tudi, analiziranje vseh grafov do neke velikosti. Tako morda odkrijemo kakšen graf, za katerega ne obstaja $3$-utežitev, ki porodi pravilnega barvanja. Tukaj pridemo do naslednjega problema. Poleg tega, da za posamezen graf predvidevamo eksponentno časovno zahtevnost, število vseh grafov tudi raste eksponentno. Izberimo si fiksno število vozlišč $n$. Koliko povezanih grafov na $n$ vozliščih obstaja? Pravzaprav je to precej težko vprašanje. Oglejmo si najprej koliko je vseh grafov na $n$ vozliščih, tudi takih, ki niso nujno povezani. Vseh možnih povezav je $ {n \choose 2}$ in ker vsako povezavo lahko bodisi vključimo bodisi ne lahko tako generiramo $2^{n \choose 2}$ grafov. Vendar pri tem lahko dobimo grafe, ki niso povezani ter so med seboj lahko tudi izomorfni. Računanje $3$-utežitve na nepovezanih grafih ni smiselno saj moramo rešiti problem na vsaki izmed povezanih komponent. Prav tako se nam seveda ne izplača računati $3$-utežitve na grafih, ki so izomorfni saj smo že premislili, da je parameter $\ec$ invarianta grafa in se tako ne spreminja pod izomorfizmi. Vendar je odgovor na vprašanje koliko ne izomorfnih povezanih grafov na $n$ vozliščih obstaja precej zahtevno in je mogoče tema za drugo magistersko nalogo. Vendar je odgovor podoben, število grafov raste izredno hitro.
+Tekom magisterske naloge smo predstavili kar nekaj izrekov in dokazov, ki uporabljajo algoritmične pristope. V glavnem smo s tem uspeli pokazati najboljše zgornje meje za parametra $\ec$ in $\ect$. V tem primeru je zadoščal polinomski algoritem, ki je poiskal ustrezno utežitev za poljuben graf. V tem razdelku bomo predstavili algoritem, ki bo poizkušal najti pravilno $3$-utežitev za poljuben graf. Pod predpostavko 1-2-3 domneve bi se moral tak algoritem vedno uspešno končati, torej bi moral vedno najti ustrezno $3$-utežitev. Ampak ker domneva še ni dokazana dejansko ne vemo, ali bomo res uspeli najti rešitev za vsak graf. Kaj to pomeni? V najslabšem primeru bomo morali poizkusiti vse možne utežitve grafa $G$. Takih utežitev je seveda ogromno in sicer $3^{|E(G)|}$. Poleg tega vemo, da je število povezav nekako kvadratno odvisno od števila vozlišč in s tem težavnost problema raste zelo hitro. Na podlagi zgornjih premislekov se nam zdi, da bomo lahko tak problem reševali le za majhne grafe. Za hiter premislek si oglejmo graf z $15$ vozlišči in $75$ povezavami. Tak graf ima torej $3^{75} \approx 6 \times 10^{35}$ različnih utežitev kar je ogromno število za relativno majhen graf. Poleg računanja $3$-utežitve za poljuben graf je iz vidika domneve zanimivo tudi, analiziranje vseh grafov do neke velikosti. Tako morda odkrijemo kakšen graf, za katerega ne obstaja pravilna $3$-utežitev. S tem bi našli protiprimer za 1-2-3 domnevo vendar tukaj pridemo do naslednjega problema. Poleg tega, da za posamezen graf predvidevamo eksponentno časovno zahtevnost, število vseh grafov tudi raste eksponentno v odvisnosti od števila vozlišč. Izberimo si fiksno število vozlišč $n$. Koliko povezanih grafov na $n$ vozliščih obstaja? Pravzaprav je to precej težko vprašanje. Oglejmo si najprej koliko je vseh grafov na $n$ vozliščih, tudi takih, ki niso nujno povezani. Vseh možnih povezav je $ {n \choose 2}$ in ker vsako povezavo lahko bodisi vključimo bodisi ne lahko tako generiramo $2^{n \choose 2}$ grafov. Vendar pri tem lahko dobimo grafe, ki niso povezani ter so med seboj lahko tudi izomorfni. V tabeli ~\ref{tbl:gnumb} vidimo kako hitro raste število povezanih grafov.
+\begin{table}[h!]
 
-Iz vidika zgornjih komentarjev in opomb se bomo problema lotili na naslednji način:
+
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+
+\hline
+\multicolumn{1}{|l|}{$n$} & $5$  & $6$   & $7$ & $8$ & $9$ & $10$ & $11$ \\ \hline
+\# grafov                 & $21$ & $112$ & $853$  & $11117$  & $261080$  & $11716571$   & $1006700565$  \\ \hline
+\end{tabular}
+\caption{Število povezanih grafov na $n$ vozliščih.}
+\label{tbl:gnumb}
+\end{table}
+ Računanje $3$-utežitve na nepovezanih grafih ni smiselno saj moramo rešiti problem na vsaki izmed povezanih komponent. Prav tako se nam seveda ne izplača računati $3$-utežitve na grafih, ki so izomorfni saj smo že premislili, da je parameter $\ec$ invarianta grafa in se tako ne spreminja pod izomorfizmi. Vendar je odgovor na vprašanje koliko ne izomorfnih povezanih grafov na $n$ vozliščih obstaja precej zahtevno in je lahko tema za celotno magistersko nalogo. Vendar je odgovor podoben, število grafov raste izredno hitro. Zaradi zgornjih ugotovitev se bomo problema lotili, tako da bomo
 \begin{itemize}
-\item Analizirali bomo vse grafe do stopnje $10$.
-\item Za večje stopnje grafov bomo za različne velikosti (20, 30, 40, 50, 60, 70, 80, 90, 100) vzeli $1000$ naključnjih grafov.
+\item analizirali bomo vse grafe do stopnje $10$ in
+\item naključne grafe večjih stopenj.
 \end{itemize}
-
-Na vseh grafih bomo spremljali naslednje parametre:
+Iz zgornje tabele ~\ref{tbl:gnumb} je razvidno, da je vseh grafov na $11$ vozliščih že res ogromno in je praktično nemogoče analizirati vse take grafe v nekem zglednem času. Analiziranje lahko poenostavimo do te mere, da vse grafe za določeno stopnjo razdelimo glede na število povezav in vsako skupino grafov analiziramo vzporedno. Točno to bomo naredili tudi v našem primeru za $n=10$. Poleg tega nas bo zanimalo obnašanje algoritma tudi na večjih grafih. V ta namen bomo generirali naključne grafe večjih stopenj in opazovali obnašanje algoritma. V vseh grafih, ki jih bomo analizirali bomo opazovali naslednje lastnosti.
 \begin{itemize}
 \item Ali je naključna utežitev  ustrezna?
 \item Ali najdemo utežitev z lokalnim iskanjem v polinomskem času?
 \item Ali je problem na grafu rešljiv (rekurzivno)?
 \item Kakšna je rekurzivna globina, kjer je algoritem našel rešitev?
 \end{itemize}
-
-Prav tako bomo na vsakem grafu algoritem izvedli večkrat. To nam bo pomagalo dobiti boljšo statistično oceno za zgornje parametre saj se v algoritmu skriva nekaj naključnih odločitev.
+Na grafih, ki jih bomo generirali bomo algoritem izvedli večkrat. To bomo storili z namenom, da za rezultate dobimo boljše statistične ocene in predvsem izločimo kakšne ponesrečene primere.
 
 \subsection{Opis algoritma}
 \subsubsection{Razveji glede na povezavo}
@@ -1764,7 +1773,7 @@ Kot smo omenili bo moral algoritem v najslabšem primeru predelati vse možne ut
 \centering
     \includegraphics[scale=0.8]{alg_rec.png}
     \end{figure}
-Shema take delitve oziroma razvejitve je prikazana na sliki ~\ref{alg_rec}. Na tak način lahko torej preverimo vse možne utežitve za dan graf. V kolikor nobena izmed njih ne inducira pravilnega barvanja smo odkrili protiprimer za 1-2-3 domnevo. Torej za razvejitev problema si moramo izbrati neko povezavo. Katera izbira je najboljše? Odgovor je na to vprašanje je preprost. Ne vemo. Zato na tej točki potrebujemo neko hevristiko, ki nam bo na podlagi trenutnega stanja podala neko povezavo na kateri izvedemo delitev. Nekaj možnih hevristik:
+Shema take delitve oziroma razvejitve je prikazana na sliki ~\ref{alg_rec}. Na tak način lahko torej preverimo vse možne utežitve za dan graf. V kolikor nobena izmed njih ne inducira pravilnega barvanja smo odkrili protiprimer za 1-2-3 domnevo. Torej za razvejitev problema si moramo izbrati neko povezavo. Katera izbira je najboljše? Odgovor na to vprašanje je preprost. Ne vemo. Zato na tej točki potrebujemo neko hevristiko, ki nam bo na podlagi trenutnega stanja podala neko povezavo na kateri izvedemo delitev. V našem primeru bomo uporabljali naslednje hevristike za izbiro povezave:
 \begin{enumerate}
 \item Izberemo naključno, še ne označeno povezavo.
 \item Izberemo neoznačeno povezavo, ki ima najvišjo stopnjo.
@@ -1817,10 +1826,93 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
 \end{algorithm}
 
 \subsection{Rezultati izvajanja}
- Za namen testiranja izvajanja algoritma potrebujemo še nabor grafov na katerih bomo algoritem izvajali. Grafe bomo generirali s pomočjo knjižnjice \textbf{nauty} in ukazov \textit{geng} in \textit{genrang}. Več informacij o knjižnjici in predvsem o tem kako deluje lahko bralec najde v ~\citet{nauty}. Zgornja ukaza generirata vse grafe z določenimi omejitvami kot so število vozlišč, povezav, regularnost ter podobno. Prav tako lahko generiramo naključne grafe poljubnih velikosti.
+ Za namen testiranja izvajanja algoritma potrebujemo še nabor grafov na katerih bomo algoritem izvajali. Grafe bomo generirali s pomočjo knjižnjice \textbf{nauty} in ukazov \textit{geng} in \textit{genrang}. Več informacij o knjižnjici in predvsem o tem kako deluje lahko bralec najde v ~\citet{nauty}. Zgornja ukaza generirata vse grafe z določenimi omejitvami kot so število vozlišč, povezav, regularnost ter podobno. Prav tako lahko generiramo naključne grafe poljubnih velikosti. Uporabljali bomo t.i. \textbf{graph6} format za shranjevanje grafov saj nauty grafe lahko generira v takšnem formatu in tudi veliko knjižnjic podpira tak format. Ideja leži v tem, da posamezen graf predstavimo z neko unikatno besedo. Pri tem je pomembno, da lahko na podlagi besede vedno dobimo enoličen graf kot množico vozlišč in povezav. Začnemo z matriko sosednosti ter opazujemo zgornji desni trikotnik saj je matrika simetrična. Sedaj vnose matrike beremo po vrsticah iz leve proti desni ter jih zapišemo v eno vrstico oziroma vektor. Sedaj s pomočjo preprostega kodiranja zapišemo celoten vektor kot besedo. Pri tem je treba biti pazljiv kako opravimo kodiranje, da bomo lahko prebrali nazaj matriko sosednosti. Ker je to del posameznih knjižnjic in se s samim kodiranjem grafov nismo ukvarjali si raje oglejmo kako izgledajo rezultati izvajanja algoritma. Algoritem torej zaženemo na neki množici grafov in pri tem opazujemo kako je algoritem rešil problem za posamezen graf. Zabeležimo informacijo o samem grafu in njegovih lastnostih ter podatke o izvajanju algoritma. V to sodi na kakšen način je algoritem našel rešitev (naključno, z lokalnim iskanjem ter rekurzivno globino) ter koliko časa je pri tem porabil. V primeru, da algoritem poganjamo na naključno generiranih grafih vse rezultate še agregiramo na posamezen graf ter hevristiko, tako da za vsak graf in vsako uporabljeno hevristiko na njem dobimo en rezultat.
 
+\begin{table}[]
+\begin{tabular}{lllllllll}
+\hline
+\multicolumn{1}{|l|}{\textbf{$G$}} & \multicolumn{1}{l|}{\textbf{$n$}} & \multicolumn{1}{l|}{\textbf{$m$}} & \multicolumn{1}{l|}{\textbf{$t[s]$}} & \multicolumn{1}{l|}{\textbf{H}} & \multicolumn{1}{l|}{\textbf{Naključno}} & \multicolumn{1}{l|}{\textbf{Lokalno}} & \multicolumn{1}{l|}{\textbf{Razveji}} & \multicolumn{1}{l|}{\textbf{$d_r$}} \\ \hline
+\multicolumn{1}{|l|}{FTnvo}        & \multicolumn{1}{l|}{$7$}          & \multicolumn{1}{l|}{$15$}         & \multicolumn{1}{l|}{$0.00026$}       & \multicolumn{1}{l|}{0}          & \multicolumn{1}{l|}{$0$}                & \multicolumn{1}{l|}{$1$}              & \multicolumn{1}{l|}{$0$}              & \multicolumn{1}{l|}{Null}           \\ \hline
+\multicolumn{1}{|l|}{FTnvw}        & \multicolumn{1}{l|}{$7$}          & \multicolumn{1}{l|}{$16$}         & \multicolumn{1}{l|}{$0.00024$}       & \multicolumn{1}{l|}{0}          & \multicolumn{1}{l|}{$0$}                & \multicolumn{1}{l|}{$1$}              & \multicolumn{1}{l|}{$0$}              & \multicolumn{1}{l|}{Null}           \\ \hline
+                                   & $\vdots$                          &                                   &                                      &                                 &                                         &                                       & $\vdots$                              &                                     \\ \hline
+\multicolumn{1}{|l|}{HCdebRX}      & \multicolumn{1}{l|}{$9$}          & \multicolumn{1}{l|}{$16$}         & \multicolumn{1}{l|}{$0.00032$}       & \multicolumn{1}{l|}{$1$}        & \multicolumn{1}{l|}{$0$}                & \multicolumn{1}{l|}{$0$}              & \multicolumn{1}{l|}{$1$}              & \multicolumn{1}{l|}{2}              \\ \hline
+\multicolumn{1}{|l|}{HCdebQk}      & \multicolumn{1}{l|}{$9$}          & \multicolumn{1}{l|}{$15$}         & \multicolumn{1}{l|}{$0.0011$}        & \multicolumn{1}{l|}{1}          & \multicolumn{1}{l|}{$0$}                & \multicolumn{1}{l|}{$0$}              & \multicolumn{1}{l|}{$1$}              & \multicolumn{1}{l|}{5}              \\ \hline
+                                   & $\vdots$                          &                                   &                                      &                                 &                                         &                                       & $\vdots$                              &                                    
+\end{tabular}
+\label{tbl:res}
+\caption{Primer rezultatov izvajanja algoritma. Stolpec $H$ predstavlja uporabljeno hevristiko pri razvejitvi. V kolikor algoritem najde rešitev že pred razvejitvijo zabeležimo uporabljeno hevristiko kot Null ter prav tako tudi rekurzivno globino $d_r$.}
+\end{table}
+Primer tabele z rezultati lahko vidimo v ~\ref{tab:res}. V enakem formatu smo shranili tudi vse ostale rezultate.
 
+Algoritem ni imel večjih težav pri iskanju ustreznih rešitev za vse možne povezane grafe do stopnje $10$. Zaradi velikega števila grafov velikosti $10$ smo algoritem izvajali vzporedno in sicer smo grafe razdelili glede na število povezav.
+ \begin{figure}[h!]
+\caption{Primerjava med različnimi rešitvami za grafe do stopnje $10$ v odvisnosti od števila vozlišč}
+\label{chart_10_1}
+\centering
+    \includegraphics[scale=0.8]{chart_10_1.png}
+    \end{figure}
 
+Pri analiziranju rešitev se bomo osredotočili na to, kako je algoritem našel rešitev. Pričakujemo lahko, da bo naključna utežitev in lokalno iskanje boljše delovalo na grafih z manjšim številom povezav in vozlišč. To je razumljivo, saj je pri manjšem število povezav tudi manj vseh možnih utežitev. Zato naključna utežitev lahko prinese uspešne rezultate. Prav tako lokalno iskanje deluje dobro pri manjših grafih saj je manj možnosti za konflikte. Na sliki ~\ref{chart_10_1} vidimo rezultate izvajanja algoritma na vseh grafih do stopnje $10$. Kot je razvidno se delež grafov, ki so bili rešeni naključno, zamnjšuje ko povečujemo stopnje vozlišč. Po drugi strani opazimo, da se delež lokalno rešljivih grafov povečuje. Vendar je to posledica tega, da se s številom vozlišč zelo hitro povečuje število grafov. Pri je še vedno velika večina grafov rešljivih z lokalnim iskanjem.
+ \begin{figure}[h!]
+\caption{Primerjava med različnimi rešitvami za grafe do stopnje $10$ v odvisnosti od števila povezav.}
+\label{chart_10_2}
+\centering
+    \includegraphics[scale=0.8]{chart_10_2.png}
+    \end{figure}
+Po drugi strani se s številom vozlišč povečuje tudi možno število povezav. Na sliki ~\ref{chart_10_2} prikazujemo delež rešitev v odvisnosti od števila povezav. Opazimo, da se delež lokalno rešljivih grafov nekaj časa povečuje ter nato začne padati. Razlog za naraščanje leži v tem, da se število naključno rešljivih grafov zmanjšuje. Nato število povezav in število možnih utežitev postane veliko ter grafov skoraj ne moremo več rešiti naključno. Opazi se tudi, da lokalno iskanje ne najde vedno rešitve in je potrebna razvejitev problema.
+
+Poleg analiziranja vseh možnih grafov do stopnje $10$ smo algoritem pognali tudi na večjih grafih. Vendar smo v tem primeru izbrali naključne grafe različnih velikosti. Pri tem smo za vsak analiziran graf algoritem ponovili $10$ krat ter nato vse rezultate agregirali na posamezen graf.
+ \begin{figure}[h!]
+\caption{Primerjava med različnimi rešitvami za grafe višjih stopenj.}
+\label{chart_big_1}
+\centering
+    \includegraphics[scale=0.8]{chart_big_1.png}
+    \end{figure}
+To smo storili, da dobimo boljšo oceno za naključno generiran graf. Vsak graf smo na začetku utežili z naključnimi utežmi ter uporabili hevristiko, ki izbere naključno povezavo za razvejitev. Pričakovano je, da bo algoritem za večje grafe potreboval več časa, da najde rešitev. Prav tako bomo opazovali na kakšen način algoritem najde rešitev. 
+
+Na sliki ~\ref{chart_big_1} lahko opazimo, da se število naključno rešljivih grafov zelo hitro zmanšuje in za grafe z več kot $20$ vozlišči praktično nismo več našli naključne rešitve. Delež lokalno rešljivih grafov se prav tako zmanjšuje. Zaradi tega se seveda povečuje število grafov, ki so potrebovali razvejitev.  Kot že omenjeno je to pričakovan rezultat. Ali lahko kaj več povemo o izvajanju razvejitve? Poleg tega, da smo spremljali kako je algoritem našel rešitev smo pri rekurzivnih rešitvah opazovali tudi rekurzivno globino oziroma število razvejitev, ki jih je algoritem opravil preden je našel rešitev. 
+ \begin{figure}[h!]
+\caption{Škatlasti diagrami rekurzivne globine glede na število vozlišč.}
+\label{chart_big_2}
+\centering
+    \includegraphics[scale=0.67]{chart_big_2.png}
+    \end{figure}
+Na sliki ~\ref{chart_big_2} vidimo, kako se spreminja rekurzivna globina s številom vozlišč. Rekurzivno globino smo ponazorili z t.i. škatlastim diagramom, ki prikazuje povprečje, mediano, prvi in tretji kvartil ter minimalne in maksimalne vrednosti. S pomočjo škatlastih diagramov lažje opazujemo porazdelitev neke slučajne spremenljivke. Opazimo, da rekurzivna globina narašča. Hitrost naraščanja težko ocenimo. Kot smo že omenili je razumljivo, da se rekurzivna globina povečuje saj se s številom vozlišč povečuje tudi število povezav. Ravno število povezav je tisto, kar najbolj vpliva na delovanje algoritma. Poleg tega, da rekurzivna globina narašča se povečuje tudi razpon rekurzivnih globin po posameznih velikostih grafov. To si morda lahko predstavljamo na naslednji način. Več kot ima graf vozlišč več različnih grafov obstaja in pri tem obstajajo grafi, ki so za algoritem težji ter tudi lažji. Ravno zaradi tega je razpon vrednosti večji pri večjih grafih. V sosednjem diagramu smo poizkušali uravnotežit naraščanje števila povezav, tako da smo rekurzivno globino delili s številom povezav. To smo storili preden smo izrisali škatlaste diagrame, saj smo za vsak graf utežili njegovo rekurzivno globino. Rezultati so zelo zanimivi, saj med drugim opazimo, da utežena rekurzivna globina na začetku celo pada nato pa narašča zelo počasi. Poleg tega se stabilizirajo tudi razponi vrednosti pri večjih grafih. Zelo zanimivo je tudi dejstvo, da za grafe z več kot $30$ vozlišči nikoli nismo razvejili algoritma na več kot $10\%$ vseh povezav grafa. V povprečju smo celo razvejili na manj kot $5\%$ vseh povezav. Ena izmed možnih razlag je v tem, da algoritem pravzaprav odreže velik del celotnega iskalnega drevesa. Algoritem konča z neko vejo, takoj ko ugotovi, da nekega konflikta ne more odpravit saj bi nujno moral spremeniti utež na eni izmed povezav na kateri je že bila izvedena delitev. To seveda ni mogoče zato v tisti veji ne išče več rešitev.  Ker smo grafe generirali naključno je seveda možno tudi to, da smo imeli srečo in generirali grafe, ki so za algoritem ``ugodni''. Prav tako bi morali analizirati še grafe večjih stopenj, da bi lahko potrdili kako se spreminja število delitev oziroma delež povezav na katerih se opravi delitev.
+
+Oglejmo si nahitro še kako se spreminja čas, ki ga algoritem porabi za analiziranje posameznega grafa.
+ \begin{figure}[h!]
+\caption{Škatlasti diagrami časa izvajanja algoritma.}
+\label{chart_big_3}
+\centering
+    \includegraphics[scale=0.73]{chart_big_3.png}
+    \end{figure}
+Seveda je razumljivo, da se bo čas izvajanja povečeval saj se hitro povečuje tudi število povezav v grafu. Ko smo analizirali lokalno iskanje rešitve smo ocenili tudi njegovo časovno zahtevnost, ki je bila polinomska v odvisnosti od števila vozlišč. To potrdimo tudi z diagramom na sliki ~\ref{chart_big_3}. Na isti sliki imamo tudi diagram časa izvajanje rekurzivnega algoritma. Seveda bo za rekurzivno rešitev algoritem potreboval več časa kot za lokalno rešitev saj mora pred vsako delitvijo opravit lokalno iskanje. Iz vidika prejšnjih ugotovitev lahko sklepamo, da rekurzivni algoritem vseeno ne porabi toliko več časa kot lokalno iskanje. Če bi lahko omejili število delitev rekurzivnega algoritma z $\mathcal{O}(m)$ bi njegova celotna časovna zahtevnost postala polinomska. Vendar kaj takega ne moremo sklepati le na podlagi dobljenih rezultatov saj ne vemo, kako bi se algoritem obnašal na precej večjih grafih.
+
+Pri vseh grafih, ki smo ji analizirali smo uporabili naključno povezavo za razvejitev problema. To je tudi eden izmed razlogov, zakaj smo algoritem na posameznem grafu pognali večkrat saj izbira povezave vpliva na iskanje pravilne utežitve. Morda kakšna druga hevristika deluje bolje? Kot smo omenili smo implementirali še dve drugi hevristiki in sicer ena vzame povezavo z najnižjo stopnjo ter druga povezava z najvišjo stopnjo. 
+ \begin{figure}[h!]
+\caption{Škatlasti diagrami rekurzivne globine glede na hevristike.}
+\label{chart_h_1}
+\centering
+    \includegraphics[scale=0.8]{chart_h_1.png}
+    \end{figure}
+V diagramu ~\ref{chart_h_1} so prikazani škatlasti diagrami rekurzivne globine glede na različne tipe hevristike. Pri tem smo generirali $10000$ naključnih grafov na $60$ vozliščih in algoritem pognali na vsakem grafu z uporabo vseh treh hevristik. Med hevristikami ni opaziti večjih razli. Vendar vseeno se morda delovanje hevristik razlikuje, če rezultate pogledamo bolj natančno. V diagramu  ~\ref{chart_h_2} vidimo kako je rekurzivna globina odvisna od minimalne stopnje vozlišča v grafu.
+ \begin{figure}[h!]
+\caption{Rekurzivna globina glede na hevristiko v osvisnosti od minimalne stopnje grafa.}
+\label{chart_h_2}
+\centering
+    \includegraphics[scale=0.7]{chart_h_2.png}
+    \end{figure}
+Pri tem opazimo, da max hevristika deluje malo boljše za grafe z večjo minimalno stopnjo medtem ko min hevristika deluje bolje za grafe z manjšo  minimalno stopnjo. Naključna hevristika generalno deluje podobno kot ostali dve. Kljub temu, da je na diagramu videti male razlike med samimi hevristikami so te razlike majhne in verjetno nimajo velikega vpliva na izvajanje algoritma.
+
+Z algoritmom smo uspeli analizirati vse grafe z vključno $10$ vozlišči in pri vseh smo uspešno našli rešitev. Pri tem smo skupno analizirali kar $11989754$ različnih neizomorfnih grafov. Algoritem je v tem primeru rešitve našel precej hitro. Kljub temu je bil skupni čas izvajanja kar dolg saj je število grafov veliko. Poleg tega smo opazovali obnašanje tudi na večjih grafih, kjer smo naključno generirali nekaj grafov za posamezne stopnje vozlišč. Opazovali smo kako se z višanjem števila vozlišč povečuje rekurzivna globina in čas izvajanja algoritma. Ogledali smo si tudi vpliv različnih hevristik in ugotovili, da med njimi ni prav veliko razlik. 
+
+\section{Zaključek in nadaljno delo}
+
+V začetnem delu magisterske naloge smo predstavili najboljše rezultate do sedaj za 1-2-3 domnevo. Presenetljivo je dejstvo, da so trenutno najboljši rezultati zelo blizu domneve ter so poleg tega še sorazmerno preprosti. Rezultate take kot so je težko oziroma nemogoče posplošit, tako da bi uporabljali manj uteži. Za doseganje boljših rezultatov je potrebno ugotoviti boljši postopek ter odkriti še neznane lastnosti grafov. To morda celo ni mogoče v splošnem saj še vedno ne vemo, ali obstaja kakšen protiprimer. Zagotovo lahko sicer trdimo, da možen protiprimer vsebuje vsaj $11$ vozlišč. Z podobnimi metodami smo se lotili tudi najbolj osnovne variacije 1-2-3 domneve, ki se glasi 1-2 domneva. Tukaj smo uteži dodelili tako vozliščem in povezavam ter opazovali skupno oziroma polno utež. Prav tako smo na sorazmerno preprost način prišli do zelo dobrega rezultata. Uspelo nam je tudi izboljšati vse rezultate iz povezavne verzije. To ni bila edina variacija 1-2-3 domneve, ki smo jo obravnavali. Velik del smo posvetili t.i. seznamski verziji 1-2-3 ter 1-2 domneve. V tem primeru se je izkazalo, da lahko uporabimo elegantno vendar vseeno sorazmerno preprosto in predstavljivo orodje iz abstraktne algebre. S pomočjo polinomov in matrik smo uspeli izračunati seznamsko obliko parametrov iz prvega dela magisterske naloge za posebne družine grafov. Prav tako smo si s pomočjo konstrukcije posebne matrike ogledali kako lahko generiramo nove grafe za katere se ohranja nizka vrednost iskanih parametrov. Za razliko od kromatičnega števila in njegove seznamske variante je zastavljena domneva v tem primeru kar enaka ne seznamski verziji. To je seveda presenetljivo saj so seznamski problemi v glavnem precej težji. Ravno to je verjetno razlog, da do danes še nimamo konstantne zgornje meje za seznamsko verzijo 1-2-3 domneve in je s tem konstantna zgornja meja še vedno odprt problem. Po mojem mnenju je ravno na tem področju največ možnosti za napredek. Prav tako tukaj nimamo nobenih omejitev, da z obstoječimi metodami nebi dosegli boljših rezultatov. Napredek v linearni algebri predvsem pri računaju permanente lahko močno pomaga pri analiziranju seznamske verzije 1-2-3 domneve.
+
+Poleg točnih rezultatov smo si ogledali tudi kako poiskati ustrezno rešitev na velikih in naključnih grafih. Pri smo odkrili, da zadoščata že uteži $1$ in $2$ skoraj vedno. S tem je mišljeno, da ima skoraj vsak graf izbran naključno pravilno $2$-utežitev. To je posledica asimptotskih rezultatov za kromatično število ter minimalno stopnjo potrebujemo pa tudi poseben izrek o podgrafih z omejenimi stopnjami. Rezultat je presenetljiv in nam poenostavi računanje parametra za večje grafe, če zadoščajo določenim lastnostim. Pri smo pokazali, da skoraj vsak graf tem lastnostim res zadošča. Izrek, ki smo ga pokazali za take grafe eksplicitno konstruira ustrezno utežitev.
+
+1-2-3 domneva je bila zastavljena leta 2004. V tem času je bilo narejeno ogromno napredka ter poveaz z različnimi vejami matematike. Vendar kot smo že omenili poznamo podobne grafovske domneve in probleme za katere se je generalno mislilo, da držijo in je manjkal le dokaz. Zelo podoben primer je recimo kromatično število za ravninske grafe. Domneva je bila zastavljena že v 19. stoletju vendar je dokaz prišel šele proti koncu 20. stoletja. Pri tem je bilo mnogo neuspelih poizkusov. Trenutno uporabe 1-2-3 domneve oziroma njenih rezultatov v praksi nisem zasledil in je zato zanimiva zgolj teoretično saj nam podaja neko lastnost grafov, ki je bila do sedaj še neznana. Kljub temu je 1-2-3 domneva močno povezana z barvanjem grafov, kar je verjetno eden izmed najbolj uporabljenih problemov na grafih. Zato bo nekoč morda 1-2-3 domneva dobila uporabno vrednost tudi v praksi ne glede na to, ali bo ovržena ali dokazana. Rezultati, nabrani do sedaj podajajo velik vpogled kako lahko s pomočjo celoštevilskih uteži na povezavah konstruiramo pravilna barvanja grafov. To lahko storimo že sedaj z obstoječimi rezultati in pri tem potrebuje le uteži $\{1,2,3,4,5\}$.
 
 
  
