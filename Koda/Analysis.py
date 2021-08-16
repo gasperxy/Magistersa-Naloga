@@ -261,6 +261,7 @@ if __name__ == "__main__":
 
 
     try:
+        sys.setrecursionlimit(40000)
         runner = GraphRunner(in_folder if folder else in_file, folder=folder, rep=rep)
         if stepped:
             runner.analyze(heuristic, step=step, file_name=out_file)
