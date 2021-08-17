@@ -980,14 +980,13 @@ Verjetnost, da je neka množica $U \subseteq V$ velikost $k$ neodvisna v $G$ je 
 
 Na podoben način lahko dokažemo ogromno zanimivih lastnosti grafov, vendar jih za naš primer nebomo potrebovali. Kot zanimivost mogoče navedimo dejstvo, da so naključni grafi $G \in \mathcal{G}(n, p)$ močno povezani tudi za majhne vrednosti $p$. To pomeni, da so naključni grafi v splošnem povezani. Pri tem velja omenit še to, da je generacija naključnih grafov zelo preprosta medtem ko je generiranje strogo povezanih grafov težek problem. Na podlagi zgornje ugotovitve lahko simuliramo generiranje povezanih grafov. Enostavno generiramo poljuben naključen graf in preverimo, če je povezan. V kolikor ni povezan postopek ponovimo. Ker je verjetnost, da je naključen graf na $n$ vozliščih nepovezan zelo majhna nam za generiranje povezanih grafov nebo potrebno velikokrat ponavljati generiranja.
 
-Sedaj lahko definiramo to, kar smo se spraševali na začetku razdelka. Naj $\mathcal{P}$ označuje neko invariano oziroma lastnost grafa. Na podlagi tega se lahko vprašamo kako se obnaša verjetnost $P[G \text{ ima lastnost } \mathcal{P}]$ za $G \in \mathcal{G}(n, p)$ ko $n \rightarrow \infty$. V kolikor gre ta verjetnost proti $1$ rečemo, da ima graf $G$ lastnost $\mathcal{P}$ skoraj zagotovo. Oziroma skoraj vsi grafi imajo lastnost $\mathcal{P}$. Naslednja trditev nam bo podajala spodnjo (ter tudi zgornjo) mejo za kromatično število za skoraj vse grafe.
+Sedaj lahko definiramo to, kar smo govorili na začetku razdelka. Naj $\mathcal{P}$ označuje neko invariano oziroma lastnost grafa. Na podlagi tega se lahko vprašamo kako se obnaša verjetnost $P[G \text{ ima lastnost } \mathcal{P}]$ za $G \in \mathcal{G}(n, p)$ ko $n \rightarrow \infty$. V kolikor gre ta verjetnost proti $1$ rečemo, da ima graf $G$ lastnost $\mathcal{P}$ skoraj zagotovo. Oziroma skoraj vsi grafi imajo lastnost $\mathcal{P}$. Naslednja trditev nam bo podajala spodnjo (ter tudi zgornjo) mejo za kromatično število za skoraj vse grafe.
 \begin{trditev}
-Za vsako konstanto $p \in (0,1)$ in vsak $\epsilon > 0$ ima skoraj vsak graf $G \in \mathcal{G}(n, p)$ kromatično število
-$$ \chi(G) > \frac{\log(1/q)}{2 + \epsilon} \cdot \frac{n}{\log n} $$
+Za vsako konstanto $p \in (0,1)$ in vsak $\epsilon > 0$ ima skoraj vsak graf $G \in \mathcal{G}(n, p)$ kromatično število enako
+$$ \chi(G) > \frac{\log(1/q)}{2 + \epsilon} \cdot \frac{n}{\log n}. $$
 \end{trditev}
 \begin{proof}
 Po trditvi \ref{indeprand} za vsak fiksen $n \ge k \ge 2$ sledi:
-
 \begin{equation}
 \begin{split}
 P[\alpha(G) \ge k]  &\le {n \choose k} q ^{k \choose 2} \\
@@ -996,20 +995,17 @@ P[\alpha(G) \ge k]  &\le {n \choose k} q ^{k \choose 2} \\
 &= q^{\frac{k}{2}\left(- \frac{2 \log n}{\log(1/q)} + k - 1\right)}.
 \end{split}
 \end{equation}
-
-Kjer vzamemo $k = (2 + \epsilon) \frac{\log n}{\log (1/q)}$. Za tako izbiro gre eksponent proti neskončnosti ko povečujemo $n$, ter celoten izraz gre proti $0$ saj je $q < 1$. Iz tega sklepamo, da je skoraj vsak $G \in \mathcal{G}(n, p)$ tak, da v kateremkoli barvanjo $G$ nima nobenih $k$ vozlišč iste barve, saj bi to pomenilo neodvisno množico velikosti $k$. Iz tega sledi, da vsako barvanje vsebuje več kot 
+Kjer vzamemo $k = (2 + \epsilon) \frac{\log n}{\log (1/q)}$. Za tako izbiro gre eksponent proti neskončnosti ko povečujemo $n$. Posledično gre celoten izraz proti $0$ saj je $q < 1$. Iz tega sklepamo, da je skoraj vsak $G \in \mathcal{G}(n, p)$ tak, da v kateremkoli barvanju grafa $G$ nima nobenih $k$ vozlišč iste barve. To bi namreč pomenilo, da ima graf neodvisno množico velikosti $k$, kar pa je malo verjetno. Iz tega sledi, da vsako barvanje vsebuje več kot 
 $$ \frac{n}{k} = \frac{\log (1/q)}{2 + \epsilon} \cdot \frac{n}{\log n} $$
 barv.
 \end{proof}
 
-Zgornjo trditev bomo kasneje uporabili ko bomo analizirali utežitve na naključnih grafih. V primeru ko $\epsilon$ zamenjamo z $-\epsilon$ gre eksponent v zgornjem dokazu proti $0$ ko povečujemo $n$. Pri gre celoten izraz proti $1$. Na podoben način kot v dokazu zgornje trditve iz tega sledi, da skoraj vsako barvanje vsebuje manj kot $n/k$ barv kar nam podaja zgornjo mejo za kromatično število. Ta zgornja meja je torej $\chi(G) < \frac{\log(1/q)}{2 - \epsilon} \cdot \frac{n}{\log n}$ in jo bomo uporabili pri dokazu glavnega izreka v tem razdelku. Poleg tega bomo potrebovali še eno asimptotsko oceno in sicer za minimalno stopnjo vozlišč. Naj bo $p \in (0, 1)$ in vzemimo graf $G \in  \mathcal{G}(n, p)$ ter opazujmo poljubno vozlišče $v \in V(G)$. Kaj lahko povemo o $d(v)$? Mislimo si lahko, da izvedemo eksperiment za vsakega izmed preostalih $n - 1$ vozlišč ter povečamo stopno vozlišča $v$ v kolikor je bil eksperiment uspešen. Na podlagi tega lahko ocenimo pričakovano stopnjo vozlišča kot $(n-1)p$. Na tem mestu lahko uporabimo Chernoffovo mejo ter ugotovimo, da velja $P[d(v) \le (p - \epsilon)n] \rightarrow 0$ ko pošljemo $n$ v neskončnost. Tako lahko sklepamo, da ima skoraj vsak graf $G \in  \mathcal{G}(n, p)$ naslednjo lastnost
-
+Zgornjo trditev bomo kasneje uporabili ko bomo analizirali utežitve na naključnih grafih. V primeru ko $\epsilon$ zamenjamo z $-\epsilon$ gre eksponent v zgornjem dokazu proti $0$ ko povečujemo $n$. Posledično gre celoten izraz proti $1$. Na podoben način kot v dokazu zgornje trditve iz tega sledi, da skoraj vsako barvanje vsebuje manj kot $n/k$ barv kar nam podaja zgornjo mejo za kromatično število. Ta zgornja meja je torej $\chi(G) < \frac{\log(1/q)}{2 - \epsilon} \cdot \frac{n}{\log n}$ in jo bomo uporabili pri dokazu glavnega izreka v tem razdelku. Poleg tega bomo potrebovali še eno asimptotsko oceno in sicer za minimalno stopnjo vozlišč. Naj bo $p \in (0, 1)$ in vzemimo graf $G \in  \mathcal{G}(n, p)$ ter opazujmo poljubno vozlišče $v \in V(G)$. Kaj lahko povemo o $d(v)$? Mislimo si lahko, da izvedemo eksperiment za vsakega izmed preostalih $n - 1$ vozlišč ter povečamo stopnjo vozlišča $v$, če je bil eksperiment uspešen. Na podlagi tega lahko ocenimo pričakovano stopnjo vozlišča kot $(n-1)p$. Na tem mestu lahko uporabimo Chernoffovo mejo ter ugotovimo, da velja $P[d(v) \le (p - \epsilon)n] \rightarrow 0$ ko pošljemo $n$ v neskončnost. Tako lahko sklepamo, da ima skoraj vsak graf $G \in  \mathcal{G}(n, p)$ naslednjo lastnost
 $$ d(G) \ge (p - \epsilon)n .$$
-
 Glavni namen tega razdelka je podati neko asimptotsko oceno za parameter $\ec(G)$ oziroma bolj natančno podali bomo trditev, ki bo pokazala, da skoraj za vse grafe velja $\ec(G) = 2$ kar je zelo preseneltjiv rezultat saj je še boljši kot sama domneva. Da nam bo uspelo pokazati zgornje si moramo ogledati še nek rezultat, ki nima nič opravit z verjetnostnimi metodami ampak z iskanjem posebnih faktorjev v grafu. Nato bomo uporabili vse rezultate iz tega razdelka in formulirali ter dokazali končno trditev.
 
 \subsection{Podgrafi z omejenimi stolpnjami}
-Za dokaz glavnega izreka v tem razdelku potrebujemo nek bolj tehničen izrek, ki nam podaja obstoj posebnih vpetih podgrafov. Glavna ideja je v tem, da si za vsako vozlišče izberemo kakšno stopnjo želimo, da ima v vpetem podgrafu. Ugotovili bomo, da za pravilno izbiro stopenj lahko vedno najdemo tak vpet podgraf.
+Za dokaz glavnega izreka v tem razdelku potrebujemo nek bolj tehničen izrek, ki nam podaja obstoj posebnih vpetih podgrafov. Glavna ideja je v tem, da si za vsako vozlišče izberemo s kakšno stopnjo želimo, da se nahaja v vpetem podgrafu. Ugotovili bomo, da za pravilno izbiro stopenj lahko vedno najdemo tak vpet podgraf.
 
 
 Naj bo $G =(V, E)$ graf in naj bo $H$ njegov vpet podgraf. V kolikor je graf $H$ $k$-regularen rečemo tudi, da je $H$ \textbf{$k$-faktor} grafa $G$.  Iskanje določenih faktorjev v grafu je ekvivalentno nekaterim drugim problemov na grafih. Naprimer $1$-faktor v grafu predstavlja popolno ujemanje. Nas bo v tem razdelku zanimala bolj splošna definicja faktorja.  Recimo, da sta $f$ in $g$ celoštevilski funkciji na množici vozlišč in velja $0 \le g(v) \le f(v) \le d(v)$ za vsako vozlišče $v \in V(G)$. Tako definiramo \textbf{$(g,f)$-faktor} grafa $G$ kot vpet podgraf $H$ z lastnostjo $g(v) \le d_H(v) \le f(v)$ za vsako vozlišče $v$. Želimo si torej, da ima naš vpet podgraf stopnje vozlišč med vnaprej podanima funkcijama. Naslednja trditev nam podaja potreben in zadosten pogoj, ki nam pove kdaj nek graf vsebuje določen $(g, f)$- faktor.
@@ -1024,20 +1020,20 @@ Dokaz zgornje trditve je posledica bolj splošnega izreka, lahko pa se jo dokaž
 
 \begin{izrek}[~\citet{random12}]
 \label{factor}
-Naj bo $G = (V, E)$ graf in za vse $v \in V$ cela števila $a_v^-$, $a_v^+$, tako da $a_v^- \le \lfloor d(v)/2 \rfloor \le a_v^+ < d(v)$ in $a_v^+ \le min \left( \frac{d(v) + a_v^-}{2} + 1, 2a_v^- + 3 \right)$, potem obstaja vpet podgraf $H$ grafa $G$, tako da $d_H(v) \in \{ a_v^-, a_v^- + 1, a_v^+, a_v^+ + 1\}$ za vse $v \in V$.
+Naj bo $G = (V, E)$ graf in za vse $v \in V$ cela števila $a_v^-$, $a_v^+$, tako da $a_v^- \le \lfloor d(v)/2 \rfloor \le a_v^+ < d(v)$ in $a_v^+ \le min \left( \frac{d(v) + a_v^-}{2} + 1, 2a_v^- + 3 \right)$ Potem obstaja vpet podgraf $H$ grafa $G$, tako da $d_H(v) \in \{ a_v^-, a_v^- + 1, a_v^+, a_v^+ + 1\}$ za vse $v \in V$.
 \end{izrek}
 
 \begin{proof}
-Dokaza se bomo lotili z protislovjem zato predpostavimo, da tak podgraf $H$ ne obstaja. Naj bo dana množica celih števil $\{ a_v  || v \in V\}$ in nek podgraf $H$ grafa $G$ ter definiramo \textit{primankljaj} glede na števila $a_v$ kot vrednost
+Dokaza se bomo lotili s protislovjem zato predpostavimo, da tak podgraf $H$ ne obstaja. Naj bo dana množica celih števil $\{ a_v  || v \in V\}$ in nek podgraf $H$ grafa $G$ ter definiramo \textit{primankljaj} glede na števila $a_v$ kot vrednost
 $$D = \sum_v \max(0, a_v - d_H(v)) .$$ 
-Izberemo $a_v \in \{a_v^-, a_v^+\}$ in $b_v = a_v +1$, kjer sta $a_v^-$ in $a_v^+$ kot v formulaciji trditve. Sedaj izberemo še vpet podgraf $H \subset G$, tako da za vsak $v \in V$ velja $d_H(v) \le b_v$. Izmed vse takih možnosti izberemo tisto, ki minimizira primankljaj $D$.  Sedaj trdimo, da obstaja vsaj eno vozlišče $v \in V$ za katerega $d_H(v) < a_v$ ter posledično $D > 0$. To je res, saj v nasprotnem primeru  velja $d_H(v) = a_v$ ali $d_H(v) = b_v = a_v + 1$, kar pa pomeni, da je $H$ iskan podgraf.
+Izberemo $a_v \in \{a_v^-, a_v^+\}$ in $b_v = a_v +1$, kjer sta $a_v^-$ in $a_v^+$ kot v formulaciji izreka. Sedaj izberemo še vpet podgraf $H \subseteq G$, tako da za vsak $v \in V$ velja $d_H(v) \le b_v$. Izmed vseh takih možnosti izberemo tisto, ki minimizira primankljaj $D$.  Sedaj trdimo, da obstaja vsaj eno vozlišče $v \in V$ za katerega $d_H(v) < a_v$ ter posledično $D > 0$. To je res, saj v nasprotnem primeru  velja $d_H(v) = a_v$ ali $d_H(v) = b_v = a_v + 1$, kar pa pomeni, da je $H$ iskan podgraf. To je namreč nemogoče saj smo predpostavili nasprotno.
 
 Dokaz bomo sedaj nadaljevali, tako da bomo na podlagi podgrafa $H$ definirali množici $A$ in $B$, ki bosta v protislovju z  \begin{figure}[h!]
 \caption{Primer $H$-alternirajočega spredoda, ki se konča bodisi v $A$, bodisi v $B$.}
 \label{im1}
 \centering
     \includegraphics[scale=0.5]{alt1.png}
-    \end{figure}prejšnjo trditvijo in iz česar bomo lahko sklepali, da je bila naša predpostvka napačna ter mora obstajati iskan podgraf $H$. 
+    \end{figure}prejšnjo trditvijo. Iz tega bomo lahko sklepali, da je bila naša predpostvka napačna ter mora obstajati iskan podgraf $H$. 
 Definirajmo množico $A_0 = \{v : d_H(v) < a_v\}$ in \textit{H-alternirajoč sprehod} kot sprehod $P = v_0v_1\ldots v_k$, ki se začne v vozlišču $v_0 \in A_0$ in dodatno velja $v_iv_{i+1} \in G-H$ za sod $i$ ter $v_iv_{i+1} \in H$ za lih $i$. Tak sprehod se torej začne v nekem vozlišču iz $A_0$ nato nadaljuje do nekega vozlišča preko povezave, ki je ni v $H$, nato po povezavi v $H$ in tako dalje. Sedaj označimo množici
 \begin{itemize}
 \item $A = \{v \text{ : obstaja $H$-alternirajoč sprehod sode dolžine, ki se konča z $v$}\}$ in
@@ -1066,10 +1062,10 @@ kar je seveda protislovje saj smo malo prej pokazali $S_A > S_B$.
 
 Zgornji izrek oziroma dokaz je bil kar težak ter ne ravno najbolj povezan z temo magisterske naloge ampak nam bo omogočal dokazati zanimivo asimptotsko lastnost 1-2-3 domneve, ki smo jo omeneli že malo prej. Poleg tega so ~\citet{random12} uporabili zgornji izrek, da so dokzali $\ec(G) \le 16$ za poljuben graf. Takrat je to bil tudi najboljši rezultat za splošne grafe. Poleg uporabe zgornjega izreka so konstruirali želeno utežitev na precej zahteven način, medtem ko opazimo, da je izrek ~\ref{theorem12345} zares preprost v primerjavi z prejšnjimi poizkusu kljub temu, da podaja precej boljši rezultat.
 
-Podajmo še hiter premislek zakaj nas bi zanimalo iskanje posebnih vpetih podgrafov oziroma kako nam lahko pomagajo pri reševanju 1-2-3 domneve. Predstavljajmo si, da lahko najdemo vpet podgraf $H \subset G$ za katerega velja $d_H(v) \neq d_H(w)$ za vsako povezavo $vw \in E(G)$. Potem lahko utežimo povezave v $H$ z $1$ vse ostale z $0$ in dobimo vozliščno barvanje z uteženimi povezavami z utežmi v $\{0,1\}$. Vendar tak podgraf $H$ v splošnem ne obstaja in seveda smo tak primer že videli saj preprost graf $C_3 = K_3$ ne premore takega podgrafa. Vendar vseeno lahko s pomočjo te ideje dokažemo naslednji izrek.
+Podajmo še hiter premislek zakaj nas bi zanimalo iskanje posebnih vpetih podgrafov oziroma kako nam lahko pomagajo pri reševanju 1-2-3 domneve. Predstavljajmo si, da lahko najdemo vpet podgraf $H \subseteq G$ za katerega velja $d_H(v) \neq d_H(w)$ za vsako povezavo $vw \in E(G)$. Potem lahko utežimo povezave v $H$ z $1$ vse ostale povezave z $0$ in dobimo vozliščno barvanje z uteženimi povezavami z utežmi v $\{0,1\}$. Vendar tak podgraf $H$ v splošnem ne obstaja in seveda smo tak primer že videli saj preprost graf $C_3 = K_3$ ne premore takega podgrafa. Vendar vseeno lahko s pomočjo te ideje dokažemo naslednji izrek.
 
 \begin{izrek}[Asimptotsko obnašanje $\ec(G)$; ~\citet{random12}]
-Naj bo $G$ naključen graf izbran iz $\mathcal{G}(n,p)$ za konstanten $p \in (0,1)$. Potem asimptotično skoraj zagotovo velja $\ec(G) = 2$. Natančneje obstaja $2$-povezavna utežitev, tako da so uteži/barve sosednjih vozlišč različne $\mod 2 \chi(G)$.
+Naj bo $G$ naključen graf izbran iz $\mathcal{G}(n,p)$ za konstanten $p \in (0,1)$. Potem asimptotično skoraj zagotovo velja $\ec(G) = 2$. Natančneje obstaja $2$-povezavna utežitev, tako da so barve sosednjih vozlišč različne$\mod 2 \chi(G)$.
 \end{izrek}
 
 \begin{proof}
@@ -1084,10 +1080,10 @@ Ker sta števili $p$ in $\epsilon$ fiksirani lahko preprosto izpeljemo, da velja
 Naj bo $\{ V_1, V_2, \ldots, V_{\chi(G)}\}$ particija množice vozlišč v neodvisne množice. Sedaj za vsak $v \in V_i$ izberemo $a_v^- \in [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $a_v^+ \in [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$, tako da $a_v^- + d(v) \equiv a_v^+  d(v) \equiv 2i \mod 2\chi(G)$. Take izbire obstajajo saj intervala $ [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $ [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$ vsebujeta vsaj $2\chi(G)$ zaporednih celih števil. Pri tem je seveda pomembno tudi, da $i \le \chi(G)$. Poleg tega taka izbira za $a_v^-$ in $a_v^+$ zadoščata predpostavkam izreka \ref{factor}, tako da obstaja vpet podgraf $H \subseteq G$ kjer za vsak $v$ velja $d_H(v) \in \{a_v^-,a_v^+,a_v^- + 1 ,a_v^+ + 1\}$.Sedaj konstuiramo utežitev $\omega$ kot 
 
 $$ \omega(e) = \begin{cases}
-	1 & e \in E(G) - E(H)\\ 
-	2 & e \in E(H) 
+	1, & \textbf{če } e \in E(G) - E(H;)\\ 
+	2, &\textbf{če } e \in E(H) .
 	\end{cases} .$$
-Izračunajmo sedaj utež na nekek vozlišču $v \in V_i$
+Izračunajmo sedaj utež na nekek vozlišču $v \in V_i$ kot
 
 $$ \sum_{e \ni v} \omega(e) = 2 d_H(v) + d_{G-H}(v) = d_{G}(v) + d_H(v) \in \{2i, 2i + 1\} \pmod{2\chi(G)}.$$
 S tem smo pokazali, da imajo sosednja vozlišča v različnih barvnih razredih $V_i$ različne parnosti in tako konstruirana utežitev porodi pravilno barvanje.
