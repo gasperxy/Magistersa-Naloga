@@ -343,7 +343,7 @@ V nalogi bomo obravnavali zgornji problem, kjer se bomo najprej osredotočili na
 
 V tem razdelku bomo spoznali nekaj osnovnih definicij in pojmov, ki jih bomo uporabljali tekom naloge. Dokazali bomo tudi kakšen izrek v kolikor bomo rezultate uporabljali kasneje. Večina definicij in izrekov bo povzetih po \cite{maingraph}.
 
-Graf bomo označili kot urejen par $G=(V, E)$. Pri tem množico $V$ imenujemo množica vozlišč grafa in njene elemente ponavadi označimo z $u, v, w$. Množica $E \subset V \times V$ je množica povezav grafa $G$. Njene elemente ponavadi označujemo z $e, f, g$ kadar nas ne zanima kateri dve vozlišči povezava vsebuje. V nasprotnem primeru povezavo označimo z $uv \in E$ in s tem eksplicitno povemo, da je to potem povezava med vozliščem $v$ in $u$. Množico vozlišč in povezav grafa, lahko zaporedoma označimo tudi kot $V(G)$ in $E(G)$. V izogib težavam z notacijo bomo vedno predpostavili, da $V \cap E = \emptyset$. 
+Graf bomo označili kot urejen par $G=(V, E)$. Pri tem množico $V$ imenujemo množica vozlišč grafa in njene elemente ponavadi označimo z $u, v, w$. Množica $E \subseteq {V \choose 2} $ je množica povezav grafa $G$. Njeni elementi so torej dvoelementne podmnožice vozlišč. Povezave ponavadi označujemo z $e, f, g$ kadar nas ne zanima kateri dve vozlišči povezava vsebuje. V nasprotnem primeru povezavo označimo z $uv \in E$ in s tem eksplicitno povemo, da je to potem povezava med vozliščem $v$ in $u$. Množico vozlišč in povezav grafa, lahko zaporedoma označimo tudi kot $V(G)$ in $E(G)$. V izogib težavam z notacijo bomo vedno predpostavili, da $V \cap E = \emptyset$. 
 Za $v \in V(G)$ lahko definiramo t.i. odprto soseščino vozlišča $N(v)$. To je množica vseh sosedov vozlišča $u$, torej $N(v) = \{u \in V(G) \mid uv \in E(G), u \neq v \}$. Zaprto soseščno definiramo kot $N\left[u\right] = N(v) \cup \{v\}$. Poleg množice sosedov je pomembna tudi njena moč, kar označimo z $d(v)$ in imenujemo stopnja vozlišča $v$. Z $\delta(G)$ oziroma samo $\delta$ označimo najmanjšo stopnjo vozlišča v grafu. Največjo stopnjo vozlišča v grafu označimo z $\Delta(G)$ oziroma samo $\Delta$. 
 
 Največja in najmanjša stopnja vozlišč sta dve izmed osnovnih lastnosti grafa. Grafi imajo ogromno različnih lastnosti. Različne veje teorije grafov se ukvarjajo z njihovim raziskovanjem. Ko opazujemo neko lastnost grafa si ponavadi želimo, da se ta lastnost ne spreminja, če vozlišča grafa preimenujemo. Taki lastnosti rečemo \textbf{invarianta grafa}. Invarianto grafa $G = (V, E)$ definiramo formalno kot lastnost, ki se ohranja z \textbf{izomorfizmi grafov}. Izomorfizem grafa je bijektivna preslikava $f: V(G) \rightarrow V(H)$ za katero mora veljati, da sta vozlišči $u$ in $v$ v grafu $G$ sosednji natanko tedaj, ko sta sosedni vozlišči $f(u)$ in $f(v)$ v grafu $H$. V kolikor med dvema grafoma obstaja izomorfizem rečemo, da sta izomorfna. Grafi, ki so izomorfni imajo tako enake lastnostni in jih obravnavamo kot enake. Definirajmo sedaj še pojem podgrafa. Graf $G' = (V', E')$ je \textbf{podgraf} grafa $G = (V, E)$, če velja $ V' \subseteq V$ in $E' \subseteq E$. Pogosto obravnavamo dva posebna primera podgrafov. V prvem primeru izberemo neko podmnožico vozlišč $V' \subset V$ ter vse povezave med izbranimi vozlišči. Tak podgraf imenujemo \textbf{induciran} podgraf. Z $G[S]$ označimo induciran podgraf kjer za množico vozlišč vzamemo $S$. Na podoben način definiramo $G - U$ kot $G[V(G) \setminus U]$. V drugem primeru za podgraf izberemo vsa vozlišča originalnega grafa in ne izberemo nujno vseh povezav. Takemu podgrafu rečemo \textbf{vpet} podgraf. Velikokrat se izkaže, da nam posebni primeri induciranih oziroma vpetih podgrafov omogočajo izpeljavo nekaterih lastnostih za celoten graf. V nadaljevanju tega razdelka bomo spoznali nekaj različnih grafovskih invariant.
@@ -368,7 +368,7 @@ Barvanje grafa je zagotovo eden izmed najbolj popularnih grafovskih problemov. P
 
 Tak najmanjši $k$ označimo z $\chi(G)$ in ga imenujemo \textbf{kromatično število} grafa $G$. Z lahkoto preverimo, da je to invarianta grafa. V kolikor je $ \chi(G) \le k$ rečemo, da je graf $k$-obarljiv. Za podan graf $G$ nas ponavadi zanima zgornja meja za  $\chi(G)$. Konstantna zgornja meja za splošne grafe ne obstaja. Preprost primer, ki podpre to dejstvo so polni grafi $K_n$ saj za njih potrebujemo $n$ barv. Obstaja pa preprosta meja, ki vključuje maksimalno stopnjo $\Delta$ in sicer velja  $\chi(G) \le \Delta + 1$. To lahko preprosto vidimo, če analiziramo vozlišča grafa v poljubnem vrstnem redu, recimo $v_1, v_2, \dots, v_n$ ter jih požrešno barvamo. V najslabšem primeru, bodo vsi sosedi trenutnega vozlišča pobarvani z različnimi barvami, kar pomeni, da moramo trenutno vozlišče pobartvati z dodatno barvo. Na tak način nikoli ne porabimo več kot $\Delta + 1$ barv. Izkaže se, da je ta zgornja meja v večini primerov slaba ter se jo da izboljšati. Ideja leži v tem, da ko analiziramo vozlišče $v_i$ zadošča opazovati le število sosedov $v_j$ z $j < i$. S pomočjo te opazke lahko konstruiramo posebno razvrstitev vozlišč za katero bo veljalo, da ima $v_i$ minimalno stopnjo v grafu induciranem z $v_1, v_2, \ldots, v_i$. Tako razvrstitev lahko dosežemo, tako da najprej vzamemo $v_n$ za katerega velja $d(v_n) = \delta(G)$. Postopek nadaljujemo, tako da izberemo $v_{n-1}$ kot vozlišče z najmanjšo stopnjo v $G - v_n$ ter tako naprej.
 
-Najmanjši tak $k$ za katerega ima graf $G$ tako ureditev vozlišč za katerega velja, da ima vsako volišče manj kot $k$ sosedov v množici prejšnjih vozlič  imenujemo \textbf{barvno število} ter jo označimo kot $\col(G)$. Očitno velja $\chi(G) \le \col(G)$. S pomočjo zgornje ureditve vozlišč lahko dodatno omejimo $\col(G) \le  \max_{H \subseteq G} \delta(H) + 1$. Ampak očitno velja tudi obratno ter velja $col(G) \ge \col(H)$. Dokazali smo torej 
+Najmanjši tak $k$ za katerega ima graf $G$ tako ureditev vozlišč za katerega velja, da ima vsako volišče manj kot $k$ sosedov v množici prejšnjih vozlič  imenujemo \textbf{barvno število} ter jo označimo kot $\col(G)$. Očitno velja $\chi(G) \le \col(G)$. S pomočjo zgornje ureditve vozlišč lahko dodatno omejimo $\col(G) \le  \max_{H \subseteq G} \delta(H) + 1$. Ampak očitno velja tudi obratno ter velja $\col(G) \ge \col(H)$. Dokazali smo torej 
 
 $$ \chi(G) \le \col(G) = \max\{\delta(H) | H \subseteq G\} + 1.$$
 Zgornja meja lahko v veliko primerih močno izboljša naivno požrešno metodo vendar moramo za natančen izračun $\col(G)$ pregledati vse možne inducirane podgrafe kar ni preprosto.
@@ -404,7 +404,7 @@ Dodatno se izkaže, da veliko zgornjih mej za kromatično število velja tudi za
 \caption{Primer grafa $K_{2, 4}$ s seznami velikosti $2$.}
 \label{list_ex_1}
 \centering
-    \includegraphics[scale=0.8]{list_ex_1.png}
+    \includegraphics[scale=0.75]{list_ex_1.png}
     \end{figure}
 Na sliki ~\ref{list_ex_1} vidimo primer takega grafa. Ker je graf dvodelen ga lahko pobarvamo z dvema barvama. Vendar grafa ne moremo seznamsko pobarvat s seznami velikosti $2$. Protiprimer je prikazan na sliki ~\ref{list_ex_1}. Ne glede na to, kakšne barve izberemo za vozlišči v levi množici, nebomo mogli pravilno pobarvat vseh vozlišč v desni množici. Zato velja $\ch(K_{2, 4}) > 2$. Podobno lahko konstruiramo večje protiprimere. Velja namreč $\ch(K_{n, n^n}) > n$, kar pokaže, da je lahko razlika med kromatičnim številom in njegovo seznamsko verzijo poljubno velika.
 
@@ -800,7 +800,7 @@ Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru cik
   \end{izrek}
 
 \begin{proof}
-	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \le 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$ in $0$ na vse ostale. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč ( = $2h$) dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$, tako kot na sliki \ref{im1} . Tak popravem utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$ kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
+	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \le 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$. Na vse preostale povezave damo utež $0$. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč konstantno ( = $2h$), dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g$ in velja $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$, tako kot na sliki \ref{im1} . Tak popravem utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$ kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
  \begin{figure}[h!]
 \caption{Popravljanje utežitve z liho potjo.}
 \label{im1}
@@ -827,12 +827,12 @@ V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin graf
  Graf $G$ & $\ec(G)$  \\ \hline
  $P_n$ & 2  \\ \hline
  $C_n$ & $\begin{cases}
-	2 & n = 4k;\\ 
+	2 ,& \text{če } n = 4k;\\ 
 	3 & sicer;
 	\end{cases}$  \\ \hline
  $K_n$& 3  \\ \hline
  $K_{m,n}$& $\begin{cases}
-	1 & m \neq n\\ 
+	1 ,& \text{če } nm \neq n\\ 
 	2 & sicer;
 	\end{cases}$  \\ \hline
  3 obarljivi& 3  \\ \hline
@@ -843,7 +843,7 @@ dvodelni in $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
 
 \subsection{Konstrukcija grafov G z nizkim parametrom $\ec(G)$}
 
-Tekom magisterske naloge smo spoznali že kar nekaj grafov z nizko vrednostjo parametra $\ec$. Z nizko vrednostjo imamo v mislih seveda čim nižjo zgornjo mejo. Sedaj si bomo ogledali kako lahko neko dobro utežitev razširimo na večji graf. V ta namen najprej ponovimo definicijo kartezičnega produkta dveh grafov. Naj bosta $G =(V, E)$ in $G' = (V', E')$ grafa.  \textbf{Kartezični produkt} grafov $G$ in $G'$ je graf, ki ga označimo z $G \Box G'$. Množica vozlišč grafa  $G \Box G'$ je enaka kartezičnemu produktu $V(G) \times V(G')$ iz česar tudi sledi ime za ta produkt. Dve vozlišči $(u, u')$ in $(v, v')$ sta sosednji v $G \Box G'$ natanko tedaj ko $u=v$ in $u'v' \in E(G')$ ali $u' = v'$ in $uv \in E(G)$. Vozlišče $(u, u')$ v kartezičnem produktu ima po zgornji definiciji toliko incidenčnih povezav kot jih ima $u$ v grafu $G$ plus toliko kot $u'$ v grafu $G'$. Velja torej formula $d_{G \Box G'}((u, u')) = d_G(u) + d_{G'}(u')$.
+Spoznali smo že kar nekaj grafov z nizko vrednostjo parametra $\ec$. Z nizko vrednostjo imamo v mislih seveda čim nižjo zgornjo mejo. Sedaj si bomo ogledali kako lahko neko ``dobro'' utežitev razširimo na večji graf. V ta namen najprej ponovimo definicijo kartezičnega produkta dveh grafov. Naj bosta $G =(V, E)$ in $G' = (V', E')$ grafa.  \textbf{Kartezični produkt} grafov $G$ in $G'$ je graf, ki ga označimo z $G \Box G'$. Množica vozlišč grafa  $G \Box G'$ je enaka kartezičnemu produktu $V(G) \times V(G')$ iz česar tudi sledi ime za ta produkt. Dve vozlišči $(u, u')$ in $(v, v')$ sta sosednji v $G \Box G'$ natanko tedaj ko $u=v$ in $u'v' \in E(G')$, ali $u' = v'$ in $uv \in E(G)$. Vozlišče $(u, u')$ v kartezičnem produktu ima po zgornji definiciji toliko incidenčnih povezav kot jih ima $u$ v grafu $G$ plus toliko kot $u'$ v grafu $G'$. Velja torej formula $d_{G \Box G'}((u, u')) = d_G(u) + d_{G'}(u')$.
 \begin{trditev}
 Za vsaka grafa $G$ in $H$ velja $\ec(G \Box H) \le \max \{\ec(g), \ec(H)\}$.
 \end{trditev}
@@ -851,13 +851,13 @@ Za vsaka grafa $G$ in $H$ velja $\ec(G \Box H) \le \max \{\ec(g), \ec(H)\}$.
 Trditev bomo dokazali, tako da bomo konstruirali utežitev kartezičnega produkta  $G \Box H$. Naj bo $k =\max \{\ec(g), \ec(H)\} $. Tedaj obstajata utežitvi $\omega_1 : E(G) \rightarrow \{1, \ldots, k\}$ in $\omega_2 : E(H)\rightarrow \{1, \ldots, k\}$, ki porodita pravilno barvanje za grafa $G$ in $H$. Sedaj sestavimo utežitev $\omega : E(G \Box H) \rightarrow \{1, \ldots, k\}$, tako da definiramo 
 \begin{equation*}
 \omega((u, u'), (v, v')) = \begin{cases}
-	\omega_1(uv) ,& \text{če } u' = v'\\ 
-	\omega_2(u'v'), &\text{če } u = v;
-	\end{cases}.
+	\omega_1(uv) ,& \text{če } u' = v';\\ 
+	\omega_2(u'v'), &\text{če } u = v.
+	\end{cases}
 \end{equation*}
 Poglejmo sedaj kakšno barvanje porodi zgornja utežitev. Podobno kot pri stopnjah vozlišč v kartezičnem produktu grafov velja $c_{\omega}((u, u')) = c_{\omega_1}(u) + c_{\omega_2}(u')$. Pokazati moramo, da imata vozlišči na vsaki povezavi kartezičnega produkta različne barve. Ampak povezava v kartezičnem produktu obstaja le ko se vozliči ujemata vsaj na eni koordinati. V kolikor se ujemata na prvi koordinati trditev sledi ker $\omega_2$ inducira pravilno barvanje v kolikor pa se ujemata na drugi koordinati trditev sledi ker $\omega_1$ inducira pravilno barvanje.
 \end{proof}
-Na podlagi zgornje trditve lahko, iz grafov za katere smo 1-2-3 domnevo že dokazali, konstruiramo nove grafe za katere domneva tudi velja. Oglejmo si nekaj primerov.
+Na podlagi zgornje trditve lahko, iz grafov za katere smo domnevo 1-2-3 že dokazali, konstruiramo nove grafe za katere domneva tudi velja. Oglejmo si nekaj primerov.
 \begin{primer}
 \textbf{Hiperkocka} je graf $Q_n$ z $2^n$ vozlišči dobljen kot kartezični produkt $n$ kopij grafov $K_2$. Na sliki \ref{hip} vidimo nekaj začetnih hiperkock.
  \begin{figure}[h!]
@@ -868,28 +868,28 @@ Na podlagi zgornje trditve lahko, iz grafov za katere smo 1-2-3 domnevo že doka
     \end{figure}
 Primer $Q_1 = K_2$ izpustimo saj v tem primeru rešitev ne obstaja. Za ostale primere iz slike \ref{hip}  ročno preverimo $\ec(Q_2) = \ec(Q_3) \le 2.$ Nato za vsak $n > 3$ zapišemo hiperkocko kot
  $$Q_n = Q_{\lfloor n/2 \rfloor} \Box Q_{\lceil n/2 \rceil}.$$
- To lahko naredimo saj je operacija kartezičnega produkta asociativna. Ker $n > 3$ je tako dimenzija obeh hiperkock na desni strani zgornje enakosti vsaj $2$. Z uporabo indukcije nato dokažemo $\ec(Q_n) = 2$ za $ n \ge 2$. Izračuna $\ec(Q_n)$ bi se lahko lotili tudi na drug način in sicer z orodjem, ki smo ga do sedaj že uporabili. Namreč za hiperkocko velja, da je dvodelen graf kar lahko dokažemo na več načinov.  Najlažji izmed njih je morda ravno indukcija kjer zapišemo $Q_n = Q_{n-1} \Box K_2$ ter induktivno uporabimo $2$-barvanje $Q_{n-1}$. V kartezičnem produktu za posamezni kopiji $Q_{n-1}$ uporabimo ravno obratno barvanje. Poleg tega je hiperkocka $Q_n$ tudi $n-1$ regularen graf kar zopet lahko vidimo z indukcijo. V tem trenutno lahko uporabimo posledico izreka ~\ref{dvoreg} in direktno dobimo $\ec(Q_n) = 2$.
+ To lahko naredimo saj je operacija kartezičnega produkta asociativna. Ker $n > 3$ je tako dimenzija obeh hiperkock na desni strani zgornje enakosti vsaj $2$. Z uporabo indukcije nato dokažemo $\ec(Q_n) = 2$ za $ n \ge 2$. Izračuna $\ec(Q_n)$ bi se lahko lotili tudi na drug način in sicer z orodjem, ki smo ga do sedaj že uporabili. Namreč za hiperkocko velja, da je dvodelen graf.To lahko pokažemo na več načinov.  Eden izmed njih je indukcija na $n$, kjer zapišemo $Q_n = Q_{n-1} \Box K_2$ ter induktivno uporabimo $2$-barvanje $Q_{n-1}$. V kartezičnem produktu za posamezni kopiji $Q_{n-1}$ uporabimo ravno obratno barvanje. Poleg tega je hiperkocka $Q_n$ tudi $(n)$-regularen graf, kar zopet lahko preverimo z indukcijo. Sedaj lahko uporabimo posledico izreka ~\ref{dvoreg} in direktno dobimo $\ec(Q_n) = 2$.
 
-Na podoben način lahko generiramo tudi t.i. torus grafe. \textbf{Torus} graf označimo z $T_{m,n} = C_m \Box C_n$. Direktna posledica zgornje trditve je torej $\ec(T_{m,n}) \le 3$ v kolikor $n,m \ge 3$. Torus graf $T_{m,n}$ si lahko predstavljamo kot $m \times n$ mrežo kjer povežemo sosednje točke, prav tako povežemo levi in desni rob ter zgornji in spodnji rob. Tako dobimo $4$-regularen graf z $mn$ vozlišči. Vendar na tak način ne moremo dobiti vseh $4$-regularnih grafov na $mn$ vozliščih saj tak graf ni enolično določen do izomorfizma natančno.
+Na podoben način lahko generiramo tudi t.i.\ torus grafe. \textbf{Torus graf} označimo z $T_{m,n} = C_m \Box C_n$. Direktna posledica zgornje trditve je torej $\ec(T_{m,n}) \le 3$ v kolikor $n,m \ge 3$. Torus graf $T_{m,n}$ si lahko predstavljamo kot $m \times n$ mrežo kjer povežemo sosednje točke ter prav tako povežemo levi in desni rob ter zgornji in spodnji rob. Tako dobimo $4$-regularen graf z $mn$ vozlišči. Vendar na tak način ne moremo dobiti vseh $4$-regularnih grafov na $mn$ vozliščih, saj tak graf ni enolično določen.
 \end{primer}
 
 
 
 
  
- \section{1-2-3-4-5 Izrek}
- Do sedaj smo 1-2-3 domnevo potrdili za grafe z posebnimi lastnostmi. Pri iskanju oziroma konstrukciji ustrezne utežitve grafa so ključno vlogo igrale prav te posebne lastnostni.  Kot smo že omenili je bilo od leta 2004 ko je bila zastavljena domneva veliko poizkusov iskanja zgornje meje za parameter $\ec(G)$, kjer je bilo do sedaj kar precej napredka. Različni avtorji so predstavili različne metode in pristope k temu problemu. Do danes je bila najboljša zgornja meja predstavljena v članku ~\cite{proof12345}. Presenetljivo je dokaz sorazmerno preprost in algoritmične narave. V tem razdelku bomo to zgornjo mejo dokazali in analizirali časovno zahtevnost algoritma, ki najde ustrezno utežitev. Dobljen rezultat lahko formuliramo kot naslednji izrek.
+ \section{Izrek 1-2-3-4-5}
+Do sedaj smo domnevo 1-2-3 potrdili za grafe s posebnimi lastnostmi. Pri iskanju oziroma konstrukciji ustrezne utežitve grafa so ključno vlogo igrale prav te posebne lastnostni.  Kot smo že omenili je bilo od leta 2004 ko je bila zastavljena domneva veliko poizkusov iskanja zgornje meje za parameter $\ec(G)$. V tem kratkem času je bilo narejeno veliko napredka. Različni avtorji so predstavili različne metode in pristope k problemu. Do danes so najboljšo zgornjo mejo predstavili~\citet{proof12345}. Presenetljivo je dokaz sorazmerno preprost in algoritmične narave. V tem razdelku bomo to zgornjo mejo dokazali in analizirali časovno zahtevnost algoritma, ki najde ustrezno utežitev. Dobljen rezultat lahko formuliramo kot naslednji izrek.
 
  
- \begin{izrek}[12345 izrek za splošne grafe; ~\citet{proof12345}]
+ \begin{izrek}[Izrek 1-2-3-4-5; ~\citet{proof12345}]
 \label{theorem12345}
- 	Za vsak preprost graf $G$ velja $\ec(G) \le 5$.
+ 	Za vsak enostaven graf $G$, ki ni $K_2$ velja $\ec(G) \le 5$.
  \end{izrek}
 
 \begin{proof}
-	Ker je graf povezan in ima vsaj 3 vozlišča vsebuje vsaj eno vozlišče s stopnjo $\ge 2$. Sedaj uredimo vozlišča kot $V(G) = \{ v_1, v_2, \ldots, v_n\}$, tako da $d(v_n) \ge 2$ in ima za vsak $i \le n-1$ vozlišče $v_i$ soseda v množici $\{v_{i+1}, v_{i+2}, \ldots, v_n\}$. Tako ureditev vozlišč lahko najdemo na preprost način. V vozlišču $v_n$ začnemo BFS algoritem ter v seznam zaporedoma dodajano obiskana vozlišča. Tako dobimo vozlišča urejena kot $\{v_n, v_{n-1}, \ldots, v_1\}$. Za vsak $i \le n-1$ sedaj res velja, da ima soseda v množici   $\{v_{i+1}, v_{i+2}, \ldots, v_n\}$ saj se v tej množici nahaja njegov starš v BFS drevesu.
+	Ker je graf povezan in ima vsaj 3 vozlišča vsebuje vsaj eno vozlišče s stopnjo $\ge 2$. Sedaj uredimo vozlišča kot $V(G) = \{ v_1, v_2, \ldots, v_n\}$, tako da je $d(v_n) \ge 2$ in ima vozlišče $v_i$ soseda v množici $\{v_{i+1}, v_{i+2}, \ldots, v_n\}$ za vsak $i \le n-1$. Tako ureditev vozlišč lahko najdemo na preprost način. V vozlišču $v_n$ začnemo BFS algoritem ter v seznam zaporedoma dodajano obiskana vozlišča. Tako dobimo vozlišča urejena kot $\{v_n, v_{n-1}, \ldots, v_1\}$. Za vsak $i \le n-1$ sedaj res velja, da ima soseda v množici   $\{v_{i+1}, v_{i+2}, \ldots, v_n\}$, saj se v tej množici nahaja njegov starš v BFS drevesu.
 
-V nadaljevanju dokaza bomo konstruirali $5$-utežitev $\omega$, ki bo pravilno obarvala graf $G$. Začnemo z začetno utežitvijo $\omega(e) = 3$ za vsako povezavo $e$. Vozlišča bomo procesirali v zgornjem vrstnem redu in pri tem vsako utež modificirali največ dvakrat. Za vsako vozlišče $v_i$ z $i < n$ bomo dodeli množico dveh barv $C(v_i) = \{c(v_i), c(v_i) + 2\}$, kjer je $c(v_i) \in \{0,1\}  \mod 4$, tako da za vsako povezavo \textit{nazaj} $v_jv_i$ z $j < i$ velja $C(v_j) \cap C(v_i) =\emptyset$. Poleg tega bomo utežitev $\omega$ konstruirali, tako da $c_{\omega}(v_i) \in C(v_i)$. V zadnjem koraku bomo popravili uteži na povezavah, ki so incidenčne $v_n$, tako da bo $c_{\omega}(v_n)$ različen od njegovih sosedov.
+V nadaljevanju dokaza bomo konstruirali $5$-utežitev $\omega$, ki bo pravilno obarvala graf $G$. Začnemo z začetno utežitvijo $\omega(e) = 3$ za vsako povezavo $e$. Vozlišča bomo procesirali v zgornjem vrstnem redu in pri tem vsako utež modificirali največ dvakrat. Za vsak $i < n$ $v_i$ bomo vozlišču $v_i$ dodeli množico dveh barv $C(v_i) = \{c(v_i), c(v_i) + 2\}$. Dodatno zahtevamo, da velja $c(v_i) \in \{0,1\}  \mod 4$. Ti dve barvi bosta dve izmed možnih končnih barv za vozlišče $v_i$. Ker želimo, da se končna barva razlikuje od končnih barv sosedov zahtevamo, da je presek množic sosednjih vozlišč prazen. To lahko zapišemo bolj natančno, tako da za vsako \textit{povezavo nazaj} $v_jv_i \in E(G)$ z $j < i$ velja $C(v_j) \cap C(v_i) =\emptyset$. Poleg tega bomo utežitev $\omega$ konstruirali, tako da bo veljalo $c_{\omega}(v_i) \in C(v_i)$. Skupaj to torej pomeni, da med prvimi $n-1$ vozlišči ni nobenega konflikta. V zadnjem koraku bomo popravili uteži na povezavah, ki so incidenčne $v_n$, tako da bo $c_{\omega}(v_n)$ različen od njegovih sosedov. S tem bo izrek dokazan.
 
 Začnimo z dodeljevanjem množic barv za vozlišča $C(v_i)$. Začnemo z vozliščem $v_1$, kjer trenutno velja $c_{\omega}(v_1) = 3d(v_1)$ in izberemo $C(v_1)$, tako da $c_{\omega}(v_1) \in C(v_1)$. To lahko naredimo, ker trenutno še nimamo nobenih posebnih omejitev. Sedaj nadaljujemo induktivno. Naj bo $ 2 \le k \le n-1$ in predpostavimo, da smo izbrali $C(v_i)$ za vse $i < k$ ter velja:
 \begin{itemize}
@@ -897,78 +897,30 @@ Začnimo z dodeljevanjem množic barv za vozlišča $C(v_i)$. Začnemo z vozliš
 \item $\omega(v_kv_j) = 3$ za vse povezave z $ j > k$,
 \item če $\omega(v_iv_k) \neq 3$ za neko povezavo z $i < k$ potem $\omega(v_iv_k) = 2$ in $c_{\omega}(v_i) = c(v_i)$ ali $\omega(v_iv_k)=4$ in $c_{\omega}(v_i) = c(v_i) + 2$.
 \end{itemize}
-Sedaj moramo določiti uteži, tako da bo enako veljalo tudi za volzišče $v_k$. Oglejmo si neko povezavo \textit{nazaj} $v_iv_k$ za nek $i < k$. Na podlagi zgornjih pogojev lahko uteži na tej povezavi bodisi prištejemo bodisi odštejemo 2 ter še vedno ohranjamo pogoj $c_{\omega}(v_i) \in C(v_i)$. Recimo, da ima $v_k$ $d$ takšnih sosedov, potem imamo $d+1$ možnosti za $c_{\omega}(v_k)$ vse iste parnosti (odvisno od parnosti $d$). Po eno možnost imamo za spremembo uteži na vsaki povezavi nazaj ter še eno dodatno možnost, če ničesar ne spreminjamo. Dodatno bomo dovoljevali spremembo za $1$ na prvi povezavi \textit{naprej}, t.j. $v_kv_j$, kjer je $j$ najmanjši tak indeks, da obstaja povezava $v_kv_j$. Na tak način bo izpolnjen zadnji pogoj, ko bomo procesirali naslednja vozlišča. S tem lahko $c_{\omega}(v_k)$ zavzame vse vrednosti na itervalu $[a, a + 2d + 2]$. Uteži sedaj modificiramo, tako da
+Sedaj moramo določiti uteži, tako da bo enako veljalo tudi za volzišče $v_k$. Oglejmo si poljubno povezavo \textit{nazaj} $v_iv_k \in E$ za nek $i < k$. Na podlagi zgornjih pogojev lahko uteži na tej povezavi bodisi prištejemo bodisi odštejemo 2 ter še vedno ohranjamo pogoj $c_{\omega}(v_i) \in C(v_i)$. Recimo, da ima $v_k$ $d$ takšnih sosedov. Potem imamo $d+1$ možnosti za $c_{\omega}(v_k)$, ki so vse iste parnosti (odvisno od parnosti $d$). Vse različne možnosti dobimo, tako da najprej na vseh povezavah \textit{nazaj} nastavimo najnižjo možno utež. S tem dobimo najnižjo možno vrednost $a$ za $c_{\omega}(v_k)$. Sedaj na vsaki povezavi \textit{nazaj} postopoma povečamo utež za $2$. Tako dobimo možnosti $a, a+2, \ldots, a +2d$. Dodatno bomo dovoljevali spremembo za $1$ na prvi povezavi \textit{naprej}. To je povezava \ $v_kv_j \in E$, kjer je $j$ najmanjši tak indeks, da obstaja povezava $v_kv_j$. S tem lahko $c_{\omega}(v_k)$ zavzame vse vrednosti na intervalu $[a-1, a + 2d + 1]$. Različnih vrednosti je torej $2d + 3$. Uteži sedaj modificiramo, tako da bo veljalo
 
 \begin{enumerate}
 \item \label{th15:1} $c_{\omega}(v_i) \in C(v_i)$ za vse $ i \le k$,
 \item \label{th15:2} $c(v_i) \neq c(v_k)$ za $v_iv_k \in E$, kjer $i < k$,
 \item \label{th15:3} bodisi $c_{\omega}(v_k) = c(v_k)$ in $\omega(v_kv_j) \in \{2,3\}$ ali $c_{\omega}(v_k) = c(v_k) + 2$ in $\omega(v_kv_j) \in \{3,4\}$.
 \end{enumerate}
-Pri tem je pogoj ~\ref{th15:1} vedno izpolnjen. V primeru, ko $c_{\omega}(v_i) = c(v_i)$ lahko uteži na povezavi $v_iv_k$ prištejemo 2, v nasprotnem primeru ko je $c_{\omega}(v_i) = c(v_i) + 2$ lahko uteži na zgornji povezavi odštejemo 2. Pogoj ~\ref{th15:2} nam lahko blokira največ $2d$ vrednosti v intervalu $[a, a + 2d + 2]$ in pogoj ~\ref{th15:3} kvačjemu blokira krajišči intervala. Tako ostane vsaj ena vrednost za $c_{\omega}(v_k)$. Na tak način lahko konstruiramo množice $W(v_k)$ z želenimi lastnostmi za vse $k < n$.
+Pri tem je pogoj ~\ref{th15:1} vedno izpolnjen. V primeru, ko $c_{\omega}(v_i) = c(v_i)$ lahko uteži na povezavi $v_iv_k$ prištejemo 2. V nasprotnem primeru ko je $c_{\omega}(v_i) = c(v_i) + 2$ lahko uteži na zgornji povezavi odštejemo 2. Pogoj ~\ref{th15:2} nam lahko blokira največ $2d$ vrednosti in pogoj ~\ref{th15:3} kvačjemu blokira krajišči intervala. Tako ostane vsaj ena vrednost za $c_{\omega}(v_k)$. Na tak način lahko konstruiramo množice $W(v_k)$ z želenimi lastnostmi za vse $k < n$.
 
 V zadnjem koraku moramo najti primerno vrednost za $c_{\omega}(v_n)$. V tem primeru nimamo na voljo povezave naprej, ki nam je v prejšnjem primeru pomagala pri določitvi uteži, vendar nam v tem primeru ni potrebno skrbeti za kasnejša vozlišča. Na povezavah $v_iv_n$ za $i < n$ lahko ponovno utež bodisi povečamo bodisi zmanjšamo za 2 in ohranimo $c_{\omega}(v_i) \in C(v_i)$. To nam ponovno da $d(v_n) + 1 \ge 3$ možnosti za $c_{\omega}(v_n)$. V kolikor za najmanjšo izmed teh možnosti $a$ velja $a \in \{2,3\} \mod 4$ potem na vseh povezavah incidenčnih $v_n$ izberemo najnižjo možno utež. S tem bomo poskrbeli, da $c_{\omega}(v_i) = c(v_i) \in \{0,1\} \mod 4$ za $v_i \in N(v_n)$ in tako različna od $a$. V kolikor $a \in \{0,1\} \mod 4$ in obstaja $v_i \in N(v_n)$ z $c(v_i) \neq a$ potem izberemo višjo utež na povezavi $v_iv_n$ in nižjo utež na vseh ostalih povezavah s čimer dobimo $c_{\omega}(v_n) = a + 2$ kar je tudi pravilno barvanje. Nazadnje v kolikor $a \in \{0, 1\} \mod 4$ in $c(v_i) = a$ za vse $v_i \in N(v_n)$ izberemo višjo utež na vsaj dveh povezavah (kar lahko sotrimo, saj je $d(v_n) \ge 2$) in dobimo pravilno barvanje.
 \end{proof}
 
-Na podlagi zgornjega dokaza lahko napišemo algoritem za iskanje takih utežitev za poljuben graf. V  algoritmu spodaj vidimo postopek. Poleg tega, da nam dokaz zagotavlja rešitev za vsak graf je algoritem, ki tako rešitev lahko poišče polinomske časovne zahtevnosti. To res drži, saj lahko notranji del for zanke omejimo z $O(n)$ z uporabo $d(v) \le n-1 $. Torej celoten algoritem potem deluje v $O(n^2)$.
-\begin{algorithm}[H]
- \KwData{graf $G$}
- \KwResult{utežitev $\omega$  }
- V = BFS(G)\;
-C = dict() \;
- $\omega$ = \{\} \;
- \For{$v$ in $V$}{
- used=\{\} \;
-	\For{$u$}{
+Na podlagi zgornjega dokaza lahko napišemo algoritem za iskanje takih utežitev za poljuben graf. Poleg tega, da nam dokaz zagotavlja rešitev za vsak graf je algoritem, ki tako rešitev poišče polinomske časovne zahtevnosti. To res drži, saj moramo za vsako vozlišče pregledati le vse njegove sosede. Ker lahko število sosedov omejimo z $n$, celoten postopek deluje v časovni zahtevnosti $\mathcal{O}(n^2)$.
 
-	$c_i$ = C[u] \;
-	used.Add($c_i$) \;
-	used.Add($c_i + 2$) \;
+\subsection{Izrek 1-2-3-4 za d-regularne grafe}
 
-	}
-m =  min(used) \;
-M = max(used) \;
+V prejšnjem razdelku smo analizirali rezultat za splošne grafe. Kot smo že omenili je to tudi najboljši rezultat do danes, ki ga poznamo za splošne grafe. Prav tako smo opazili, da za nekatere posebne grafe lahko rezultat izboljšamo. Ta razdelek bo namenjen $d$-regularnim grafom. Ugotovili smo že, da za regularne grafe $G$, ki so tudi dvodelni velja $\ec(G) \le 2$. Na podlagi motivacije za domnevo 1-2-3 smo po drugi strani ugotovili, da so morda regularni grafi težki za ta problem saj so zelo ``oddaljeni''  od pojma iregularni graf. Kljub temu vseeno lahko izkoristimo nekatere lastnosti regularnih grafov in izboljšamo rezultat iz prejšnjega razdelka. Ta razdelek v veliki meri sledi članku ~\cite{regular}.
 
-\eIf{$m-1 = 2,3 \mod(4)$}
-{
-	used.Add($m-1$)
-}
-{}
-
-
-\eIf{$M+1 = 0,1 \mod(4)$}
-{
-	used.Add($M+1$)
-}
-{}
-
-
-
-$c = 0$ \;
-
-\For{i = m - 1 to M + 1}{
- \eIf{i not in used}{
-  $c = i$ \;
-   break \;  
-   }
-{}
- }
-}
- 
- \caption{Algoritem za izračun 5-utežitve (še ni končan)}
-\end{algorithm}
-
-V nadaljevanju tega razdelka bi podal kakšen primer $5$ utežitve nekega grafa.
-
-\subsection{1-2-3-4 rezultat za d-regularne grafe}
-
-V prejšnjem razdelku smo analizirali rezultat za splošne grafe. Kot smo že omenili je to tudi najboljši rezultat do danes, ki ga poznamo za splošne grafe. Prav tako smo opazili, da za nekatere posebne grafe lahko rezultat izboljšamo. Ta razdelek bo namenjen $d$-regularnim grafom. Ugotovili smo že, da za regularne grafe $G$, ki so tudi dvodelni velja $\ec(G) \le 2$. Na podlagi motivacije za 1-2-3 domnevo smo po drugi strani ugotovili, da so morda regularni grafi težki za ta problem saj so zelo ``oddaljeni''  od pojma iregularni graf. Kljub temu vseeno lahko izkoristimo nekatere lastnosti regularnih grafov in izboljšamo rezultat iz prejšnjega razdelka. Ta razdelek v veliki meri sledi članku ~\cite{regular}.
-
-\begin{izrek}[1234 izrek za regularne grafe; ~\citet{regular}]
+\begin{izrek}[Izrek 1-2-3-4 za regularne grafe; ~\citet{regular}]
 Za vsak $d$-regularen graf $G$ velja $\ec(G) \le 4$
 \end{izrek}
 
 \begin{proof}
-V dokazu bomo uporabili podobno metodo kot pri dokazu izreka ~\ref{theorem12345}. Izberimo si sedaj neko poljubno maksimalno neodvisno množico  $ I \subset V(G)$. To je taka množica vozlišč kjer ne obstaja niti ena povezava med njenimi elementi ter je izmed vseh možnih takih množic največja po kardinalnosti. Na podlagi množice $I$ definiramo še:
+V dokazu bomo uporabili podobno metodo kot pri dokazu izreka ~\ref{theorem12345}. Izberimo si sedaj neko poljubno maksimalno neodvisno množico $ I \subseteq V(G)$. To je taka množica vozlišč kjer ne obstaja niti ena povezava med njenimi elementi ter je izmed vseh možnih takih množic največja po kardinalnosti. Na podlagi množice $I$ definiramo še:
 \begin{itemize}
 \item $R = V \setminus I$,
 \item $R_1 \subseteq R$ množica izoliranih vozlišč v $G[R]$,
@@ -993,20 +945,19 @@ Preden določimo začetne uteži si bolj podrobno oglejmo strukturo komponent v 
 Začetno utežitev definiramo kot
 
 $$ \omega(e) =\begin{cases}
-	1 & e \text{ je prva povezava naprej za neko vozlišče v } R_2\\ 
-	2 & e \text{ povezava v $G[R_2]$, ki ni prva povezava naprej za nobeno vozlišče} \\
-	3 & e \text{ incidenčna povezava vozlišču v $I$ in ni oporna povezava} \\
-4 & e \text{ je oporna povezava} 
+	1 ,&\text{če je $e$ prva povezava naprej za neko vozlišče v } R_2;\\ 
+	2, &  \text{če je $e$ povezava v $G[R_2]$, ki ni prva povezava naprej}; \\
+	3 ,& \text{če je $e$ incidenčna povezava vozlišču v $I$ in ni oporna povezava}; \\
+4, & \text{če je $e$ oporna povezava.} 
 	\end{cases}
 $$
-in s tem zadoščamo zgornjemu pogoju. Sedaj bomo modificirali uteži na povezavah, tako da odstranimo možne konflikte v $R_2$. Podobno kot v izreku ~\ref{theorem12345} predpostavimo, da trenutno analiziramo komponento $G_i$ ter vozlišče $v_j$. Pri tem smo že analizirali vse prejšnje komponente in vozlišča. Sedaj želimo določiti uteži, tako da bo utež na $v_j$ različna od uteži za $v_1, v_2, \ldots v_{j-1}$. To želimo storiti na tak način, da ne spreminjamo uteži na že analiziranih vozliščih. To bomo izvedli, tako da bomo po potrebi za $1$ spremenili utež na povezavi, ki povezuje $v_j$ z njegovim sosedom nazaj $v_k$ z $k < j$ ter njunima opornima povezavama. Bolj natančno recimo, da je $e = v_kv_j$ povezava nazaj in pokažimo, da lahko utež na njej spremenimo za $1$. Označimo še z $e_{v_k}$ oporno povezavo vozlišča $v_k$. Oglejmo si najprej primer, ko $e$ ni prva povezava naprej. Potem velja $\omega(e) = 2$ in $\omega(e_{v_k}) \in \{3, 4\}$. V kolikor je $\omega(e_{v_k}) = 3$ utež na povezavi $e$ zmanjšamo za $1$ na oporni povezavi pa povečamo za $1$. V drugem primeru ko je $\omega(e_{v_k}) = 4$ storimo ravno obratno. Če je $e$ prva povezava naprej za $v_k$ potem uteži na $e$ in $e_{v_k}$ še nista bili spremenjeni in imata začetno vrednost $1$ in $4$. Zaporedoma jih lahko spremenimo v $2$ in $3$. Sedaj uporabimo enak razmislek kot pri prejšnjem izreku. Recimo, da ima vozlišče $v_j$ $b$ povezav nazaj in vsako izmed teh povezav lahko spremenimo za $1$. To nam da $b + 1$ možnih vrednosti za $c_{\omega}(v_j)$ in torej lahko izberemo še nezasedeno vrednost, glede na predhodnja vozlišča.
+S to utežitvijo zadoščamo zgornjemu pogoju. Sedaj bomo modificirali uteži na povezavah, tako da bomo odstranimo možne konflikte v $R_2$. Podobno kot v izreku ~\ref{theorem12345} predpostavimo, da trenutno analiziramo komponento $G_i$ ter vozlišče $v_j$. Pri tem smo že analizirali vse prejšnje komponente in vozlišča. Sedaj želimo določiti uteži, tako da bo utež na $v_j$ različna od uteži za $v_1, v_2, \ldots v_{j-1}$. To želimo storiti na tak način, da ne spreminjamo uteži na že analiziranih vozliščih. To bomo izvedli, tako da bomo po potrebi za $1$ spremenili utež na povezavi, ki povezuje $v_j$ z njegovim sosedom nazaj $v_k$ ter njunima opornima povezavama. Bolj natančno recimo, da je $e = v_kv_j$ povezava nazaj in pokažimo, da lahko utež na njej spremenimo za $1$. Označimo še z $e_{v_k}$ oporno povezavo vozlišča $v_k$. Oglejmo si najprej primer, ko $e$ ni prva povezava naprej. Potem velja $\omega(e) = 2$ in $\omega(e_{v_k}) \in \{3, 4\}$. V kolikor je $\omega(e_{v_k}) = 3$ utež na povezavi $e$ zmanjšamo za $1$ na oporni povezavi pa povečamo za $1$. V drugem primeru ko je $\omega(e_{v_k}) = 4$ storimo ravno obratno. Če je $e$ prva povezava naprej za $v_k$ potem uteži na $e$ in $e_{v_k}$ še nista bili spremenjeni in imata začetno vrednost $1$ in $4$. Zaporedoma jih lahko spremenimo v $2$ in $3$. Sedaj uporabimo enak razmislek kot pri prejšnjem izreku. Recimo, da ima vozlišče $v_j$ $d$ povezav nazaj in vsako izmed teh povezav lahko spremenimo za $1$. To nam da $d + 1$ možnih vrednosti za $c_{\omega}(v_j)$ in torej lahko izberemo še nezasedeno vrednost, glede na predhodnja vozlišča.
 
-Z zgornjim postopkom smo zagotovili, da ni konfliktov med vozlišči znotraj $R_2$. Sedaj moramo pokazati, da je postopek spreminjanja uteži v skladen z pogoji ~\ref{itm:1}, ~\ref{itm:2} in ~\ref{itm:3}. Opazujmo neko vozlišče $v \in I$. Povezave incidenčne vozlišču $v$ imajo začetno utežitev v množici $\{3,4\}$. Po zgornjem postopku lahko utež na povezavi incidenčni $v$ spremenimo samo v primeru ko je oprona povezava. Ampak vse oporne povezave smo na začetku utežili z $4$ in jih v postopku kvečjemu zmanjšamo za $1$. To pomeni, da so uteži na povezavah incidenčnih $v$ še vedno v množici $\{3,4\}$. Iz tega sledi pogoj ~\ref{itm:2}. V kolikor ima $v$ nekega soseda v $R_1$ je bila začetka utežitev na tej povezavi enaka $3$ in ni bila spremenjena v zgornjem postopku zatorej velja tudi pogoj ~\ref{itm:3}. Pokažimo, da velja tudi pogoj ~\ref{itm:1}. Opazimo najprej, da utež na vsaki povezavi $e$ grafa $G[R_2]$ spremenimo največ enkrat in sicer takrat ko združimo trenutno analizirano vozlišče z njegovim sosedom nazaj. Za vsako vozlišče $v \in R_2$, ki ni zadnjo vozlišče neke komponente velja, da ima njegova prva povezava naprej utež $1$ ter skladno z algoritmom in začetno utežitvijo imajo vse ostale povezave incidenčne $v$ utež največ $3$ razen oporne povezave $e_v$, ki ima utež 4. Iz tega sledi, da $c_{\omega}(v) \le 3d - 1$ ter se ne spreminja ko analiziramo kasnejša vozlišča. Sedaj pokažimo, da enako velja tudi v primeru ko je $v$ zadnje vozlišče neke komponente v $G[R_2]$. To preprosto sledi iz dejstva, da zadnja vozlišča nimajo opornih povezav, kar pomeni da imajo vse povezave incidenčne $v$ utež manjšo ali enako $3$. Poleg tega je povezava $uv$, kjer je $u$ predzadnje vozlišče v zgornji ureditvi prva povezava naprej vozlišča $u$ in je po že uporabljenem premisleku utežena z največ $2$. Iz tega torej sledi pogoj ~\ref{itm:1}.
-Sedaj smo odpravili konflikte v $R_2$ in poskrbeli, da so uteži še vedno konsistentne z začetnimi zahtevami. To nam zagotavlja, da $c_{\omega}(v) \neq c_{\omega}(u)$ za vsako povezavo $uv \in E(I \cap R_2)$. Poskrbimo sedaj še za možne konflikte med $I$ in $R_1$, tako da bo veljal pogoj ~\ref{itm:4}. Ker je vozlišče $v \in R_1$ indidenčno le z vozlišči v $I$ so vse povezave incidenčne $v$ utežene z $3$. Sedaj za vsako vozlišče $v \in R_1$ postopamo na naslednji način. V koliko je $c_{\omega}(u') \ge 3d + 1$ za nekega soseda $u'$ vozlišča $v$, potem spremenimo utež na natanko eni povezavi, recimo $u'v$ iz $3$ na $2$. V nasprotnem primeru, ko je $c_{\omega}(u) = 3d$ za vsako vozlišče $u \in N(v)$ spremenimo utež na vsaki povezavi $uv$ iz $3$ na $4$ za vsak $u \in N(v)$.  Na tak način ohranimo vse pogoje ~\ref{itm:1} - ~\ref{itm:3} ter ko obdelamo vsa vozlišča v $R_1$ velja tudi pogoj ~\ref{itm:4}. S tem smo našli ustrezno $4$-utežitev.
+Z zgornjim postopkom smo zagotovili, da ni konfliktov med vozlišči znotraj $R_2$. Sedaj moramo pokazati, da je postopek spreminjanja uteži v skladen z pogoji~\ref{itm:1},~\ref{itm:2} in~\ref{itm:3}. Opazujmo neko vozlišče $v \in I$. Povezave incidenčne vozlišču $v$ imajo začetno utežitev v množici $\{3,4\}$. Po zgornjem postopku lahko utež na povezavi incidenčni $v$ spremenimo samo v primeru, ko je oprona povezava. Ampak vse oporne povezave smo na začetku utežili z $4$ in jih v postopku kvečjemu zmanjšamo za $1$. To pomeni, da so uteži na povezavah incidenčnih $v$ še vedno v množici $\{3,4\}$. Iz tega sledi pogoj~\ref{itm:2}. V kolikor ima $v$ nekega soseda v $R_1$, je bila začetna utežitev na tej povezavi enaka $3$ in ni bila spremenjena v zgornjem postopku. Zato torej velja tudi pogoj~\ref{itm:3}. Pokažimo, da velja tudi pogoj~\ref{itm:1}. Opazimo najprej, da utež na vsaki povezavi $e$ grafa $G[R_2]$ spremenimo največ enkrat in sicer takrat, ko analizirano vozlišče z enim izmed njegovih sosedov nazaj. Za vsako vozlišče $v \in R_2$, ki ni zadnje vozlišče neke komponente velja, da ima njegova prva povezava naprej utež $1$. Dodatno imajo vse ostale povezave, ki so incidenčne $v$, utež največ $3$. Edina izjema je oporna povezava $e_v$, ki ima utež 4. Iz tega sledi, da $c_{\omega}(v) \le 3d - 1$ ter se ne spreminja ko analiziramo kasnejša vozlišča. Sedaj pokažimo, da enako velja tudi v primeru ko je $v$ zadnje vozlišče neke komponente v $G[R_2]$. To preprosto sledi iz dejstva, da zadnja vozlišča nimajo opornih povezav, kar pomeni da imajo vse povezave incidenčne $v$ utež manjšo ali enako $3$. Poleg tega je povezava $uv$, kjer je $u$ predzadnje vozlišče v zgornji ureditvi prva povezava naprej vozlišča $u$ in je po že uporabljenem premisleku utežena z največ $2$. Iz tega torej sledi pogoj~\ref{itm:1}.
+Sedaj smo odpravili konflikte v $R_2$ in poskrbeli, da so uteži še vedno konsistentne z začetnimi zahtevami. To nam zagotavlja, da je $c_{\omega}(v) \neq c_{\omega}(u)$ za vsako povezavo $uv \in E(I \cap R_2)$. Poskrbimo sedaj še za možne konflikte med $I$ in $R_1$, tako da bo veljal pogoj~\ref{itm:4}. Ker je vozlišče $v \in R_1$ incidenčno le z vozlišči v $I$ so vse povezave incidenčne $v$ utežene z $3$. Sedaj za vsako vozlišče $v \in R_1$ postopamo na naslednji način. V kolikor je $c_{\omega}(u') \ge 3d + 1$ za nekega soseda $u'$ vozlišča $v$, spremenimo utež iz $3$ na $2$ na natanko eni izmed povezav. V nasprotnem primeru, ko je $c_{\omega}(u) = 3d$ za vsako vozlišče $u \in N(v)$ spremenimo utež  iz $3$ na $4$ na vsaki povezavi $uv$. Na tak način ohranimo vse pogoje~\ref{itm:1} -~\ref{itm:3} ter, ko obdelamo vsa vozlišča v $R_1$, velja tudi pogoj~\ref{itm:4}. S tem smo našli ustrezno $4$-utežitev.
 \end{proof}
 
-Za konec tega razdelka komentirajmo dobljene rezultate. Kot smo že omenili sta oba izreka algoritmične narave in tudi uporabljata podobne ideje. Glavna ideja v obeh primerih je neka začetna utežitev ter nato procesiranje vozlišč v primernem vrstnem redu. Pri tem smo morali biti pazljivi, da ohranjamo določene lastnosti pri že procesiranih vozliščih kar nam omogoča neka dodatna povezava iz vozlišča, ki ga trenutno procesiramo. Pri zadnjem vozlišču je bilo nato potrebna malo drugačna ideja vendar je to bilo mogoče v obeh primerih. Oba izreka podajata zelo dobro mejo, ki se precej približa zastavljeni domnevi. Vendar nažalost z podobno idejo težko dosežemo še boljše rezultate saj naprimer pri izreku \ref{theorem12345} nujno potrebujemo $5$ različnih uteži. Podobno kot pri izreku ~\ref{theorem12345} lahko tudi v tem primeru razberemo algoritem, ki bi poiskal ustrezno $4$-utežitev za regularni graf. Vendar v nasprotju z prejšnjim algoritmom, ki je deloval v polinomskem času imamo tukaj opravka z iskanjem največje neodvisne množice, ki je NP poln problem. Na podlagi tega torej še ne vemo, ali za tak problem obstaja polinomski algoritem. Še več splošno prepričanje je, da tak algoritem ne obstaja. Že iz samega dokaza smo opazli, da je malenkost bolj zahteven kot dokaz izreka ~\ref{theorem12345}. Množico vozlišč grafa smo morali razdeliti v različne množice in obravnavati več primerov. To nam je sicer omogočili, da smo uporabili eno utež manj ampak smo ``plačali'' z algoritmom, ki je NP poln.
-	
+Za konec tega razdelka komentirajmo dobljene rezultate. Kot smo že omenili sta oba izreka algoritmične narave in tudi uporabljata podobne ideje. Glavna ideja v obeh primerih je neka začetna utežitev ter nato procesiranje vozlišč v primernem vrstnem redu. Pri tem smo morali biti pazljivi, da ohranjamo določene lastnosti pri že procesiranih vozliščih kar nam omogoča dodatna povezava iz vozlišča, ki ga trenutno procesiramo. Zadnje vozlišče smo v obeh primerih morali obravnavati malo drugače. Oba izreka podajata zelo dobro mejo, ki se precej približa zastavljeni domnevi. Vendar nažalost z podobno idejo težko dosežemo še boljše rezultate. Pri izreku \ref{theorem12345} tako nujno potrebujemo $5$ različnih uteži. Podobno kot pri izreku~\ref{theorem12345} lahko tudi v tem primeru razberemo algoritem, ki bi poiskal ustrezno $4$-utežitev za regularni graf. Vendar v tem primeru ne moremo napisati polinomskega algoritma. Problem je v tem, da moramo poiskati največjo neodvisno množico, ki pa je NP poln problem. Na podlagi tega torej še ne vemo, ali za tak problem obstaja polinomski algoritem. Še več splošno prepričanje je, da tak algoritem ne obstaja. Že iz samega dokaza smo opazli, da je malenkost bolj zahteven kot dokaz izreka ~\ref{theorem12345}. Množico vozlišč grafa smo morali razdeliti v različne množice in obravnavati več primerov. To nam je sicer omogočilo, da smo lahko uporabili eno utež manj.	
  
  \section{Verjetnostne metode}
 
