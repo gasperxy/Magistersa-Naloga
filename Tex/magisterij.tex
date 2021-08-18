@@ -15,8 +15,8 @@
 \newcommand{\naslovdela}{Domneva 1-2-3}
 \newcommand{\letnica}{2020} % letnica magistriranja
 \newcommand{\opis}{Delo obravnava domnevo 1-2-3 ter njene variacije.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
-\newcommand{\kljucnebesede}{teorija grafov\sep kombinatorika} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
-\newcommand{\keywords}{integration\sep complex} % ključne besede v angleščini
+\newcommand{\kljucnebesede}{teorija grafov\sep kombinatorika\sep grafovski polinomi,\sep naključni grafi} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
+\newcommand{\keywords}{graph theory\sep combinatorics\sep graph polynomials\sep random graphs} % ključne besede v angleščini
 \newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
 \newcommand{\literatura}{literatura}  % pot do datoteke z literaturo (brez .bib končnice)
 \newcommand{\sep}{, }  % separator med ključnimi besedami v besedilu
@@ -116,8 +116,8 @@
 
 \newcommand{\ec}{\chi_{\Sigma}^e}
 \newcommand{\ect}{\chi_{\Sigma}^t}
-\newcommand{\ecl}{ch_{\Sigma}^e}
-\newcommand{\eclt}{ch_{\Sigma}^t}
+\newcommand{\ecl}{\ch_{\Sigma}^e}
+\newcommand{\eclt}{\ch_{\Sigma}^t}
 
 \numberwithin{equation}{section}  % števec za enačbe zgleda kot (2.7) in se resetira v vsakem poglavju
 
@@ -143,6 +143,8 @@
 \DeclareMathOperator{\col}{col}
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\s}{s}
+\DeclareMathOperator{\h}{h}
+
 
 % bold matematika znotraj \textbf{ }, tudi v naslovih, kot \omega spodaj
 \makeatletter \g@addto@macro\bfseries{\boldmath} \makeatother
@@ -321,8 +323,8 @@ An abstract of the work is written here. This includes a short description of
 the content and not the structure of your work.
 
 \vfill\noindent
-\textbf{Math.~Subj.~Class.~(2010):} oznake kot 74B05, 65N99, na voljo so na naslovu
-\url{http://www.ams.org/msc/msc2010.html?t=65Mxx} \\[1mm]
+\textbf{Math.~Subj.~Class.~(2020):} 05C15, 05C31, 05C80    
+\url{http://www.ams.org/msc/msc2020.html?t=65Mxx} \\[1mm]
 \textbf{Ključne besede:} \kljucnebesede \\[1mm]
 \textbf{Keywords:} \keywords
 
@@ -1216,19 +1218,19 @@ Kot je razvidno iz zgornje tabele smo za velik del graf v polni verziji uspeli i
 
 
 
-S seznamsko verzijo problema smo se že srečali v začetnem delu, kjer smo predstavili seznamsko verzijo barvanja grafa. Pri tem smo ugotovili, da je rešitev seznamske verzije problema tudi rešitev originalnega primera. Obratno seveda ne drži. V tem razdelku si bomo ogledali seznamsko verzijo 1-2-3 domneve ter nekaj orodij s katerimi se lahko lotimo takega problema. Naj bo $G = (V, E)$ povezan graf in dodelimo vsakemu vozlišču $v \in V$ in vsaki povezavi $e \in E$ seznam $k$ realnih uteži $L_v$ in $L_e$ in naj bo $L$ družina vseh teh seznamov. Rečemo, da je $G$ \textbf{seznamsko utežljiv} iz $L$, če obstaja utežitev $\omega : E \rightarrow \cup_{e \in E} L_e$, tako da $\omega(e) \in L_e$ za vsako povezavo $e$. Graf $G$ je  \textbf{$k$ seznamsko utežljiv}, če je seznamsko utežljiv iz vsake družine seznamov velikosti $k$. Na enak način definiramo tudi \textbf{polno seznamsko utežljivost} grafa. Pri tem opazujemo utežitve $\omega : V \cup E \rightarrow \cup_{L_a} L_a$ za katere velja $\omega(e) \in L_e$ in $\omega(v) \in L_v$ za vsako povezavo $e$ in vsako vozlišče $v$. Najmanjši tak $k$ za katerega je graf $G$ $k$-seznamsko utežljiv oziroma $k$-polno seznamsko utežljiv označimo z $\ecl$ in $\eclt$ zaporedoma.
+S seznamsko verzijo problema smo se že srečali v začetnem delu, kjer smo predstavili seznamsko verzijo barvanja grafa. Pri tem smo ugotovili, da je rešitev seznamske verzije problema tudi rešitev originalnega primera. Obratno seveda ne drži. V tem razdelku si bomo ogledali seznamsko verzijo domneve 1-2-3  ter nekaj orodij s katerimi se lahko lotimo takega problema. Naj bo $G = (V, E)$ povezan graf in dodelimo vsakemu vozlišču $v \in V$ seznam $L_v$ in vsaki povezavi $e \in E$ seznam  $L_e$. Oba seznama naj bosta velikosti $k$. Označimo z $L$ družino vseh takih seznamov za vsa vozlišča in povezave. Rečemo, da je graf $G$ \textbf{seznamsko utežljiv} iz $L$, če obstaja utežitev $\omega : E \rightarrow \cup_{e \in E} L_e$, tako da $\omega(e) \in L_e$ za vsako povezavo $e$. Graf $G$ je  \textbf{$k$ seznamsko utežljiv}, če je seznamsko utežljiv iz vsake družine seznamov velikosti $k$. Na enak način definiramo tudi \textbf{polno seznamsko utežljivost} grafa. Pri tem opazujemo utežitve $\omega : V \cup E \rightarrow \cup_{L_a} L_a$ za katere velja $\omega(e) \in L_e$ in $\omega(v) \in L_v$ za vsako povezavo $e$ in vsako vozlišče $v$. Najmanjši tak $k$ za katerega je graf $G$ $k$-seznamsko utežljiv označimo z $\ecl$. Enako, najmanjši tak $k$ za katerega je graf $G$ $k$-polno seznamsko utežjiv označimo z $\eclt$.
 
-Za analiziranje parametrov $\ecl$ in $\eclt$ bomo uporabili algebraična orodja. Pri tem velja omenit, da je tako linearna kot abstraktna algebra močno povezana z teorijo grafov. Veliko različnih rezultatov in metod iz algebre je možno direktno uporabiti pri analiziranju grafov. Glavni razlog leži v tem, da lahko graf enostavno predstavimo z matriko. Ena izmed osnovnih predstavitev grafa je ravno t.i. \textbf{matrika sosednosti}, ki je kvadratna $0$-$1$ matrika z vrednostjo $1$ v $i,j$-ti vrstici, če obstaja povezava med vozliščema $v_i$ in $v_j$. Matriko sosednosti lahko uporabimo tudi v primeru uteženih ter usmerjenih grafov. Podobno bomo storili tudi v našem primeru. Na primeren način bomo definirali matriko, ki bo pripadala grafu. Nato bomo s pomočjo operacij na matrikah dobili rešitev, ki nam bo podajala seznamsko utežljivost posameznih grafov.
+Za analiziranje parametrov $\ecl$ in $\eclt$ bomo uporabili algebraična orodja. Pri tem velja omenit, da je tako linearna kot abstraktna algebra močno povezana z teorijo grafov. Veliko različnih rezultatov in metod iz algebre je možno direktno uporabiti pri analiziranju grafov. Glavni razlog leži v tem, da lahko graf enostavno predstavimo z matriko. Ena izmed osnovnih predstavitev grafa je ravno t.i.\ \textbf{matrika sosednosti}, ki je kvadratna $0$-$1$ matrika z vrednostjo $1$ v $(i,j)$-ti vrstici, če obstaja povezava med vozliščema $v_i$ in $v_j$. Matriko sosednosti lahko uporabimo tudi v primeru uteženih ter usmerjenih grafov. Podobno bomo storili tudi v našem primeru. Na primeren način bomo definirali matriko, ki bo pripadala grafu. Nato bomo s pomočjo operacij na matrikah dobili rešitev, ki nam bo podajala seznamsko utežljivost posameznih grafov.
 
-Definicijo matrike, ki bo pripadala grafu začnemo, tako da grafu najprej priredimo polinom. Pri tem bomo polinom konstruirali, tako da nam bodo neničelne vrednosti polinoma predstavljale ustrezno utežitev za naš graf. Ugotoviti bomo morali, ali polinom sploh premore kakšno neničelno vrednost. V pomoč nam bo t.i. kombinatorični izrek o ničlah
+Definicijo matrike, ki bo pripadala grafu začnemo, tako da grafu najprej priredimo polinom. Pri tem bomo polinom konstruirali, tako da nam bodo neničelne vrednosti polinoma predstavljale ustrezno utežitev za naš graf. Ugotoviti bomo morali, ali polinom sploh premore kakšno neničelno vrednost. V pomoč nam bo t.i.\ kombinatorični izrek o ničlah
 
 \begin{izrek}[Kombinatorični izrek o ničlah; ~\citet{null}]
 \label{zeros}
-Naj bo $\mathbb{F}$ poljubno polje in naj bo $P = P(x_1, x_2, \ldots, x_l)$ polinom v $\mathbb{F}[x_1, \ldots, x_l]$. Predpostavimo, da je stopnja $deg(P)$ polinoma $P$ enaka $\sum_{i=1}^l k_i$, kjer vsak $k_i$ nenegativno celo število in predpostavimo, da je koeficient pred $x_1^{k_1} \ldots x_l^{k_l}$ neničelen. Potem, če so $S_1, \ldots S_l$ podmnožice $\mathbb{F}$ z $|S_i| > k_i $ potem obstajajo $s_1 \in S_1, \ldots s_l \in S_l$, tako da $P(s_1, \ldots, s_l) \neq 0$.
+Naj bo $\mathbb{F}$ poljubno polje in naj bo $P = P(x_1, x_2, \ldots, x_l)$ polinom v $\mathbb{F}[x_1, \ldots, x_l]$. Predpostavimo, da je stopnja $deg(P)$ polinoma $P$ enaka $\sum_{i=1}^l k_i$, kjer je vsak $k_i$ nenegativno celo število in predpostavimo, da je koeficient pred $x_1^{k_1} \ldots x_l^{k_l}$ neničelen. Potem, če so $S_1, \ldots S_l$ podmnožice $\mathbb{F}$ z $|S_i| > k_i $ obstajajo $s_1 \in S_1, \ldots s_l \in S_l$, tako da $P(s_1, \ldots, s_l) \neq 0$.
 \end{izrek}
 
 \begin{proof}
-Dokaz izreka seveda spada bolj v področje algebre. Vendar sam dokaz ni težak zato ga bomo dokazali. Dokaz bo potekal z indukcijo glede na stopnjo polinoma $P$. V primeru, ko je $deg(P) = 1$ je dokaz preprost, saj je polinom lahko ničelen le v eni sami točki. V kolikor imamo na voljo dve točki bo vsaj porodila neničelno vrednost polinoma. Predpostavimo, da je $deg(P) > 1$ in $P$ zadošča predpostavkam izreka vendar ne obstajajo neničelne vrednosti polinoma. Torej $P(x) = 0$ za vsak $x \in S_1 \times \ldots \times S_l$. Indukcijski korak bomo dokazali s pomočjo protislovja. Brez škode za splošnost lahko predpostavimo, da $k_1 > 0$. Fiksiramo $s \in S_1$ in zapišemo polinom $P$ kot 
+Dokaz izreka seveda spada bolj v področje algebre. Vendar sam dokaz ni težak zato ga bomo dokazali. Dokaz bo potekal z indukcijo glede na stopnjo polinoma $P$. V primeru, ko je $deg(P) = 1$ je dokaz preprost, saj je polinom lahko ničelen le v eni sami točki. V kolikor imamo na voljo dve točki bo vsaj ena porodila neničelno vrednost polinoma. Predpostavimo, da je $deg(P) > 1$ in $P$ zadošča predpostavkam izreka vendar ne obstajajo neničelne vrednosti polinoma. Torej $P(x) = 0$ za vsak $x \in S_1 \times \ldots \times S_l$. Indukcijski korak bomo dokazali s pomočjo protislovja. Brez škode za splošnost lahko predpostavimo, da $k_1 > 0$. Fiksiramo $s \in S_1$ in zapišemo polinom $P$ kot 
 $$ P = (x_1 - s)Q + R $$ 
 z uporabo običajnega deljenja polinomov. Na zgornji polinom lahko tako gledamo kot polinom spremenljivke $x_1$ z koeficienti v $\mathbb{F}[x_2, \ldots, x_l]$. Pri tem velja, da se spremenljivka $x_1$ ne pojavlja v $R$. Ker $P$ zadošča predpostavkam mora polinom $Q$ vsebovati neničelen monom oblike  $x_1^{k_1 - 1} x_2^{k_2} \ldots x_l^{k_l}$. Velja tudi $deg(Q) = deg(P) - 1$.
 
@@ -1237,7 +1239,7 @@ Sedaj vzamemo poljuben $x \in \{s\} \times S_2 \times \ldots \times \S_l$ in ga 
 
 Zgornji izrek ima veliko uporabnih posledic predvsem v kombinatoriki in teoriji grafov. Prav tako obstaja ogromno podobnih oblik izreka, ki so prilagojene za določene probleme.
 
-Oglejmo si raje kako bi tak izrek lahko uporabili v našem primeru. Kot smo že omenili moramo grafu dodeliti primeren polinom, da bomo lahko uporabili zgornji izrek. Naj bo $G = (V, E)$ graf in oštevilčimo povezave kot $E = \{e_1, e_2, \ldots e_m \}$ ter vozlišča kot $V = \{v_1, v_2, \ldots v_n\}$. Sedaj vsaki povezavi $e_i$ dodelimo spremenljivko $x_i$ in vsakemu vozlišču  $v_j$ dodelimo spremenljivko $x_{m + j}$. Definirajmo izraz $X_{v_j} = \sum_{e_i \ni v_j} x_i$ in $Y_{v_j} = x_{m+j} + X_{v_j}$. Predstavljajmo si, da vsaki spremenljivki $x_i$ določimo neko celoštevilsko vrednost. Na podlagi zgornjih definicij ugotovimo, da izraz $X_{v_j}$ tako predstavlja barvo oziroma utež na vozlišču $v_j$ dobljeno kot vsoto uteži na incidenčnih povezavah. Po drugi strani izraz $Y_{v_j}$ predstavlja polno utež vozlišča $v_j$, saj pri tem prištejemo še utež posameznega vozlišča. S pomočjo zgornjih izrazov bomo definirali dva polinoma, enega za povezavno verzijo in drugega za polno verzijo problema. Ker smo pametno izbrali spremenljivke in izraza $X_{v_j}$ in $Y_{v_j}$ pripadajoče polinome definiramo kot
+Oglejmo si raje kako bi tak izrek lahko uporabili v našem primeru. Kot smo že omenili moramo grafu dodeliti primeren polinom, da bomo lahko uporabili zgornji izrek. Naj bo $G = (V, E)$ graf in oštevilčimo povezave kot $E = \{e_1, e_2, \ldots e_m \}$ ter vozlišča kot $V = \{v_1, v_2, \ldots v_n\}$. Sedaj vsaki povezavi $e_i$ dodelimo spremenljivko $x_i$ in vsakemu vozlišču  $v_j$ dodelimo spremenljivko $x_{m + j}$. Definirajmo izraz $X_{v_j} = \sum_{e_i \ni v_j} x_i$ in $Y_{v_j} = x_{m+j} + X_{v_j}$. Predstavljamo si, da vsaki spremenljivki $x_i$ določimo neko celoštevilsko vrednost. Na podlagi zgornjih definicij ugotovimo, da izraz $X_{v_j}$ tako predstavlja barvo oziroma utež na vozlišču $v_j$ dobljeno kot vsoto uteži na incidenčnih povezavah. Po drugi strani izraz $Y_{v_j}$ predstavlja polno utež vozlišča $v_j$, saj pri tem prištejemo še utež posameznega vozlišča. S pomočjo zgornjih izrazov bomo definirali dva polinoma, enega za povezavno verzijo in drugega za polno verzijo problema. Ker smo pametno izbrali spremenljivke in izraza $X_{v_j}$ in $Y_{v_j}$ pripadajoče polinome definiramo kot
 
 \begin{equation*}
 \begin{split}
@@ -1245,29 +1247,29 @@ P_{G}(x_1, \ldots, x_l) &= \prod_{(u, v) \in E(G)} \left( X_v- X_u \right) \\
 T_{G}(x_1, \ldots, x_l) &= \prod_{(u, v) \in E(G)} \left( Y_v- Y_u \right).
 \end{split}
 \end{equation*}
-Polinom $P_G$ seveda pripada povezavni verziji medtem ko polinom $T_G$ pripada polni verziji problema. Kot smo že ugotovili nam posamezne vrednosti izrazov $X_v$ in $Y_v$ predstavljajo dobljene uteži na vozlišču $v$ in zato za neko povezavo $(u,v) \in E(G)$ izraz $X_v - X_u$ predstavlja razliko med utežmi na sosednjih vozliščih. V kolikor imata tako sosednji vozlišči isto utež je vrednost zgoraj definiranih polinomov enaka $0$. Na podlagi zgornjih defincij in ugotovitev se nam izrek \ref{zeros} zdi uporaben saj nam zagotavlja obstoj uteži, ki inducirajo pravilno barvanje. Res, v kolikor obstaja nek nabor spremenljivk za katere zgornja polinoma nista ničelna lahko razberemo ustrezne uteži za posamezne povezave. Tako dobljena utežitev je tudi pravilna saj je polinom neničelen. Seveda moramo pri tem upoštevati vse predpostavke izreka. Če bomo želeli uporabiti zgornji izrek, da dobimo kakšen uporaben rezultat bomo morali v polinomih, ki pripadajo grafu poiskati njegovo stopnjo oziroma natančneje stopnje posameznih spremenljivk v monomih. Pri tem si želimo, da so te stopnje čim manjše, saj potem potrebujemo manjše podmnožice iz izbranega obsega, ki nam še vedno zagotavljajo izbor vrednosti za katere je polinom neničelen.
+Polinom $P_G$ seveda pripada povezavni verziji medtem ko polinom $T_G$ pripada polni verziji problema. Kot smo že ugotovili nam posamezne vrednosti izrazov $X_v$ in $Y_v$ predstavljajo dobljene uteži na vozlišču $v$ in zato za neko povezavo $(u,v) \in E(G)$ izraz $X_v - X_u$ predstavlja razliko med utežmi na sosednjih vozliščih. V kolikor imata tako sosednji vozlišči isto utež je vrednost zgoraj definiranih polinomov enaka $0$. Na podlagi zgornjih defincij in ugotovitev se nam izrek \ref{zeros} zdi uporaben, saj nam zagotavlja obstoj uteži, ki inducirajo pravilno barvanje. Res, v kolikor obstaja nek nabor spremenljivk za katere zgornja polinoma nista ničelna lahko razberemo ustrezne uteži za posamezne povezave. Tako dobljena utežitev je tudi pravilna saj je polinom neničelen. Seveda moramo pri tem upoštevati vse predpostavke izreka. Če bomo želeli uporabiti zgornji izrek, da dobimo kakšen uporaben rezultat bomo morali v polinomih, ki pripadajo grafu poiskati njegovo stopnjo oziroma natančneje stopnje posameznih spremenljivk v monomih. Pri tem si želimo, da so te stopnje čim manjše, saj potem potrebujemo manjše podmnožice iz izbranega obsega. Te podmnožice nam morajo še vedno zagotaljati izbor vrednosti za katere je polinom neničelen.
 
-Recimo sedaj, da imamo nek polinom $ P \in \mathbb[x_1, \ldots, x_l]$ in naj bo $M = cx_1^{k_1} \ldots x_l^{k_l}$ nek neničelen monom v tem polinomu. Z $h(M)$ označimo največji eksponent spremenljivke v $M$. Torej bolj natančno $h(M) = \max_{i = 1, \ldots, l} k_i$. Definirajmo še \textbf{monomični indeks} polinoma $P$ kot najmanjši $h(M)$ čez vse neničelne monome $M$ v $P$ in ga označimo z \textbf{mind(P)}. Različne orientacije grafa $G$ porodijo do predznaka enake polinome $P_G$ in $T_G$, kar ne vpliva na monomični indeks dobljenih polinomov. Označimo $mind(P_G) = mind(G)$ in $mind(T_G) = tmind(G)$. Ker sta ta parametra neodvisna od orientacije jih lahko štejemo kot invarianti grafa $G$ in jima bomo rekli monomični indeks grafa ter polni monomični indeks grafa v tem vrstem redu. 
+Recimo sedaj, da imamo nek polinom $ P \in \mathbb[x_1, \ldots, x_l]$ in naj bo $M = cx_1^{k_1} \ldots x_l^{k_l}$ nek neničelen monom v tem polinomu. Z $\h(M)$ označimo največji eksponent spremenljivke v $M$. Torej bolj natančno $\h(M) = \max_{i = 1, \ldots, l} k_i$. Definirajmo še \textbf{monomični indeks} polinoma $P$ kot najmanjši $\h(M)$ čez vse neničelne monome $M$ v $P$ in ga označimo z \textbf{$\mind(P)$}. Različne orientacije grafa $G$ porodijo do predznaka enake polinome $P_G$ in $T_G$, kar ne vpliva na monomični indeks dobljenih polinomov. Označimo $\mind(P_G) = \mind(G)$ in $\mind(T_G) = \tmind(G)$. Ker sta ta parametra neodvisna od orientacije jih lahko štejemo kot invarianti grafa $G$ in jima bomo rekli monomični indeks grafa ter polni monomični indeks grafa v tem vrstem redu. 
 
-Kot je že v navadi grafov, ki imajo izolirano povezavo ne opazujemo. V tem primeru nam izolirana povezava porodi ničelni polinom in iz tega vidika ni zanimivo. Predpostavimo torej, da graf $G$ nima izolirane povezave. Kako izgledajo polinomi $P_G$ in $T_G$ ko jih zapišemo z vsoto namesto z produktom? Tak polinom ima $m = |E(G)|$ faktorjev kar pomeni, da je stopnja vseh monov enaka $m$, saj ko želimo polinom razširiti v vsoto moramo v vsakem faktorju izbrati natanko eno spremenljivko. To pomeni, da je stopnja obeh polinomov enaka $m$ in oba polinoma sta homogena, saj so stopnje vseh monomov enake. Sedaj opazimo povezavo med monomičnem indeksom grafa $G$ ter izrekom \ref{zeros}. Zapišimo to v obliki naslednje trditve.
+Kot je že v navadi, grafov, ki imajo izolirano povezavo ne opazujemo. V tem primeru nam izolirana povezava porodi ničelni polinom in iz tega vidika ni zanimivo. Predpostavimo torej, da graf $G$ nima izolirane povezave. Kako izgledajo polinomi $P_G$ in $T_G$, ko jih zapišemo z vsoto namesto z produktom? Tak polinom ima $m = |E(G)|$ faktorjev kar pomeni, da je stopnja vseh monov enaka $m$, saj ko želimo polinom razširiti v vsoto moramo v vsakem faktorju izbrati natanko eno spremenljivko. To pomeni, da je stopnja obeh polinomov enaka $m$ in oba polinoma sta homogena, saj so stopnje vseh monomov enake. Sedaj opazimo povezavo med monomičnem indeksom grafa $G$ ter izrekom \ref{zeros}. Zapišimo to v obliki naslednje trditve.
 \begin{trditev}
-V kolikor velja $mind(G) \le k$ potem je $G$ $(k+1)$-seznamsko utežljiv. Prav tako, če $tmind(G) \le k$ potem je $G$ $(k+1)$-polno seznamsko utežljiv.
+V kolikor velja $\mind(G) \le k$ potem je $G$ $(k+1)$-seznamsko utežljiv. Prav tako, če $\tmind(G) \le k$ potem je $G$ $(k+1)$-polno seznamsko utežljiv.
 \end{trditev}
 
 \begin{proof}
 To je pravzaprav preprosta posledica izreka \ref{zeros}. Ker sta oba polinoma $P_G$ in $T_G$ homogena nam njuna monomična indeksa predstavljata najmanjši eksponent izmed največjih eksponentov v vseh monomih. Potem lahko za podmnožice $S_i$ iz izreka vzamemo poljubne podmnožice, ki so večje od monomičnega indeksa. Zadošča že, da so podmnožice za $1$ večje od monomičnega indeksa. In ker so izbire podmnožic popolnoma poljubne ter nam izrek zagotavlja da najdemo ustrezno utežitev je potem graf tudi seznamsko utežljiv ter polno seznamsko utežljiv iz zgornjih množic oziroma seznamov.
 \end{proof}
 
-Na podlagi zgornje trditve velja $\ecl(G) \le mind(G) + 1$ in $\eclt(G) \le tmind(G) + 1$. Tudi za seznamsko verzijo obstaja domneva in sicer v obliki povezavne in polne verzije.
+Na podlagi zgornje trditve velja $\ecl(G) \le \mind(G) + 1$ in $\eclt(G) \le \tmind(G) + 1$. Tudi za seznamsko verzijo obstaja domneva in sicer v obliki povezavne in polne verzije.
 
- \begin{domneva}
+ \begin{domneva}[\cite{alg_org}]
 Za vsak povezan graf $G$, ki ni $K_2$ velja $\ecl(G) \le 3$.
 \end{domneva}
 
- \begin{domneva}
+ \begin{domneva}[\cite{algebraic}]
 Za vsak  graf $G$ velja $\eclt(G) \le 2$.
 \end{domneva}
-Zgornji domnevi sta presenetljivi v kolikor jih primerjamo s seznamsko verzijio kromatičnega števila. Tam smo ugotovili, da sicer veljajo podobne zgornje meje vendar se parametra lahko poljubno razlikujeta. V našem primeru je zastavljena zgornja meja enaka v seznamski in ne seznamski obliki. Pri tem velja izpostavit, da je seznamska verzija problema precej težja in že pri preprostih in majhnih grafih imamo lahko veliko težav pri računanju točnih vrednosti parametrov $\ecl(G)$ in $\eclt(G)$. Vendar s pomočjo orodja, ki smo ga razvili zgoraj to postane precej lažje. Iz vidika zgornjih domnev bi morali pokazati, da velja $mind(G) \le 2 $ in $tmind(G) \le 1$ za vsak graf $G$. Vendar to je v splošnem zelo težko pokazati saj je zelo težko ugotoviti kateri monomi preostanejo v razširitvi polinoma. Preden si ogledamo nekaj primerov moramo razviti še orodje s katerim bomo lažje ocenili kateri monomi ostanejo v polinomih, ki pripadajo grafom. Najprej se bomo osredotočili na povezavno verzijo problema, kjer uteži dodeljujemo samo povezavam. Nato bomo zelo podobno naredili tudi za polno verzijo pri čemer bodo vsi rezultati povezavne verziji bili veljavni tudi za polno verzijo.
+Zgornji domnevi sta presenetljivi v kolikor jih primerjamo s seznamsko verzijio kromatičnega števila. Tam smo ugotovili, da sicer veljajo podobne zgornje meje vendar se parametra lahko poljubno razlikujeta. V našem primeru je zastavljena zgornja meja enaka v seznamski in ne seznamski obliki. Pri tem velja izpostavit, da je seznamska verzija problema precej težja in že pri preprostih in majhnih grafih imamo lahko veliko težav pri računanju točnih vrednosti parametrov $\ecl(G)$ in $\eclt(G)$. Vendar s pomočjo orodja, ki smo ga razvili zgoraj to postane precej lažje. Iz vidika zgornjih domnev bi morali pokazati, da velja $\mind(G) \le 2 $ in $\tmind(G) \le 1$ za vsak graf $G$. Vendar to je v splošnem zelo težko pokazati saj je zelo težko ugotoviti kateri monomi preostanejo v razširitvi polinoma. Preden si ogledamo nekaj primerov moramo razviti še orodje s katerim bomo lažje ocenili kateri monomi ostanejo v polinomih, ki pripadajo grafom. Najprej se bomo osredotočili na povezavno verzijo problema, kjer uteži dodeljujemo samo povezavam. Nato bomo zelo podobno naredili tudi za polno verzijo pri čemer bodo vsi rezultati povezavne verziji bili veljavni tudi za polno verzijo.
 
 \subsubsection{Povezavna verzija}
 Za računanje kateri monomi preživijo v razširitvi polinoma pripadajočega grafu $G$ bomo razvili posebno metodo, ki originalen problem pretvori na problem linearne algebre. Pri tem bo problem navidezno postal bolj preprost saj si morda lažje predstavljamo matrike in računanje z njimi vendar se bo izkazalo, da je problem še vedno težak.
@@ -1277,16 +1279,16 @@ Za računanje kateri monomi preživijo v razširitvi polinoma pripadajočega gra
 a_{ij} = 
 \begin{cases}
 
-1, & \text{če je $e_j$ incidenčna z koncem $e_i$}\\ 
+\phantom{-}1, & \text{če je $e_j$ incidenčna z koncem $e_i$}\\ 
 	-1, & \text{če je $ e_j$ incidenčna z začetkom  $e_i$} \\
 
-0, & \text{če $e_i$ in $e_j$ nista incidenčni}
+\phantom{-}0, & \text{če $e_i$ in $e_j$ nista incidenčni}
 \end{cases}
 \end{equation*}
 S pomočjo zgornje matrike lahko zapišemo polinom $P_G$ kot
 
 $$P_G = \prod_{i=1}^m (a_{i1}x_1 + \ldots a_{im}x_m).$$
-Sedaj bomo nadaljevali, tako da bomo problem računanja $mind(G)$ prevedli na problem iz linearne algebre povezan z matriko $A_G$. 
+Sedaj bomo nadaljevali, tako da bomo problem računanja $\mind(G)$ prevedli na problem iz linearne algebre povezan z matriko $A_G$. 
  \begin{definicija}
 Naj bo $A$ poljubna kvadratna matrika velikosti $m$ in definirajmo permanento matrike $A$ kot 
 $$ \per A = \sum_{\sigma \in S_m} a_{1\sigma(1)} a_{2\sigma(2)} \ldots a_{m\sigma(m)} ,$$
@@ -1378,7 +1380,7 @@ $$
 V obeh primerih smo torej dobili neničelen permanent matrike $L$. Prav tako v obeh primerih velja, da se posamezen stolpec matrike $A_{C_n}$ pojavlja v največ dveh stolpcih matrike $L$. Res, stolpec $A_i$ se pojavi v $i-1$ stolpcu $L$ ter ali v $n$-tem ali $n-1$-tem stolpcu vendar ne obeh. S tem je trditev dokazana.
 \end{proof}
 Zgornja trditev torej dokaže seznamsko verzijo domneve v primeru ciklov. Ali lahko na podoben način dokažemo domnevo še za kakšno drugo družino grafov? Morda je to možno na podoben način vendar bolj kot so zakomplicirani grafi težje je določiti permanentni indeks pripadajoče matrike. V nadaljevanju si bomo ogledali glavni in najpomembnejši rezultat tega razdelka. Omogočal nam bo konstrukcijo grafov z nizkim monomičnim indeksom. Ideja se skriva v tem, da začnemo z nekim grafom, ki ima nizek monomičen indeks ter nato dodajamo vozlišča in povezave na poseben način, tako da pri tem ne zvišamo monomičnega indeksa. Na tak način bomo lahko seznamsko verzijo domneve dokazali še za nekaj družin grafov.
-\begin{izrek}
+\begin{izrek}[~\citet{alg_org}]
 \label{algcons}
 Naj bo $G = (V, E)$ graf z $\mind(G) \le 2$ in naj bo $U$ neprazna podmnožica vozlišč $V$. Z $F$ označimo graf dobljen, tako da grafu $G$ dodamo nova vozlišča $u$ in $v$ ter ju povežemo z vsemi vozlišči v $U$. Graf $H$ naj označuje graf, kjer vozlišči $u$ in $v$ še povežemo. Tedaj velja $\mind(F) \le 2$ in $\mind(H) \le 2$.
 \end{izrek}
