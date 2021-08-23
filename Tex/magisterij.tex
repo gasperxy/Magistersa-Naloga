@@ -1016,21 +1016,23 @@ Naj bo $G =(V, E)$ graf in naj bo $H$ njegov vpet podgraf. V kolikor je graf $H$
 
 \begin{izrek}[~\citet{random12}]
 \label{factor}
-Naj bo $G = (V, E)$ graf in za vse $v \in V$ cela števila $a_v^-$, $a_v^+$, tako da $a_v^- \le \lfloor d(v)/2 \rfloor \le a_v^+ < d(v)$ in $a_v^+ \le min \left( \frac{d(v) + a_v^-}{2} + 1, 2a_v^- + 3 \right)$ Potem obstaja vpet podgraf $H$ grafa $G$, tako da $d_H(v) \in \{ a_v^-, a_v^- + 1, a_v^+, a_v^+ + 1\}$ za vse $v \in V$.
+Naj bo $G = (V, E)$ graf in za vsak $v \in V$ cela števila $a_v^-$ in $a_v^+$, tako da $a_v^- \le \lfloor d(v)/2 \rfloor \le a_v^+ < d(v)$ in $a_v^+ \le min \left( \frac{d(v) + a_v^-}{2} + 1, 2a_v^- + 3 \right)$ Potem obstaja vpet podgraf $H$ grafa $G$, tako da $d_H(v) \in \{ a_v^-, a_v^- + 1, a_v^+, a_v^+ + 1\}$ za vse $v \in V$.
 \end{izrek}
 
 \begin{proof}
 Dokaza se bomo lotili s protislovjem zato predpostavimo, da tak podgraf $H$ ne obstaja. Naj bo dana množica celih števil $\{ a_v  \mid v \in V\}$ in nek podgraf $H$ grafa $G$ ter definiramo \textit{primankljaj} glede na števila $a_v$ kot vrednost
-$$D = \sum_v \max(0, a_v - d_H(v)) .$$ 
+$$D(H)= \sum_v \max(0, a_v - d_H(v)) .$$ 
 Za vsako vozlišče izberemo $a_v \in \{a_v^-, a_v^+\}$ in $b_v = a_v +1$, kjer sta $a_v^-$ in $a_v^+$ kot v formulaciji izreka. Sedaj izberemo še vpet podgraf $H \subseteq G$, tako da za vsak $v \in V$ velja $d_H(v) \le b_v$. Izmed vseh takih možnosti izberemo tisto, ki minimizira primankljaj $D$. Morda obstaja več različnih podgrafov, ki ustrezajo zgornjim omejitvam. Mi izberemo enega izmed njih.  Sedaj trdimo, da obstaja vsaj eno vozlišče $v \in V$ za katerega $d_H(v) < a_v$ ter posledično $D > 0$. To je res, saj v nasprotnem primeru  velja $d_H(v) = a_v$ ali $d_H(v) = b_v = a_v + 1$, kar pa pomeni, da je $H$ iskan podgraf. To je namreč nemogoče saj smo predpostavili nasprotno.
 
-Dokaz bomo sedaj nadaljevali, tako da bomo na podlagi podgrafa $H$ definirali množici $A$ in $B$, ki bosta v protislovju z  \begin{figure}[h!]
+Dokaz bomo sedaj nadaljevali, tako da bomo na podlagi podgrafa $H$ definirali množici $A$ in $B$, ki bosta v protislovju z 
+ \begin{figure}[h!]
 \caption{Primer $H$-alternirajočega spredoda, ki se konča bodisi v $A$, bodisi v $B$.}
 \label{im1}
 \centering
     \includegraphics[scale=0.5]{alt1.png}
-    \end{figure}prejšnjo trditvijo. Iz tega bomo lahko sklepali, da je bila naša predpostvka napačna ter mora obstajati iskan podgraf $H$. 
-Definirajmo množico $A_0 = \{v : d_H(v) < a_v\}$ in \textit{H-alternirajoč sprehod} kot sprehod $P = v_0v_1\ldots v_k$, ki se začne v vozlišču $v_0 \in A_0$ in dodatno velja $v_iv_{i+1} \in G-H$ za sod $i$ ter $v_iv_{i+1} \in H$ za lih $i$. Tak sprehod se torej začne v nekem vozlišču iz $A_0$ nato nadaljuje do nekega vozlišča preko povezave, ki je ni v $H$, nato po povezavi v $H$ in tako dalje. Sedaj označimo množici
+    \end{figure}
+prejšnjo trditvijo. Iz tega bomo lahko sklepali, da je bila naša predpostvka napačna ter mora obstajati iskan podgraf $H$. 
+Definirajmo množico $A_0 = \{v : d_H(v) < a_v\}$ in \textbf{H-alternirajoč sprehod} kot sprehod $P = v_0v_1\ldots v_k$, ki se začne v vozlišču $v_0 \in A_0$ in dodatno velja $v_iv_{i+1} \in G-H$ za sod $i$ ter $v_iv_{i+1} \in H$ za lih $i$. Tak sprehod se torej začne v nekem vozlišču iz $A_0$ nato nadaljuje do nekega vozlišča preko povezave, ki je ni v $H$, nato po povezavi v $H$ in tako dalje. Sedaj označimo množici
 \begin{itemize}
 \item $A = \{v \text{ : obstaja $H$-alternirajoč sprehod sode dolžine, ki se konča z $v$}\}$ in
 \item $B =\{v \text{ : obstaja $H$-alternirajoč sprehod lihe dolžine, ki se konča z $v$}\}.$
@@ -1050,10 +1052,10 @@ Dokaz s protislovjem bomo zaključili, tako da pokažemo še obratno in sicer $S
 
 \end{enumerate}
 Zgornje trditve ne vključujejo direktno podgrafa $H$. Nanašajo se predvsem na množici $A$ in $B$. Pri dokazovanju zgornjih trditev bomo večkrat za posamezno vozlišče spremenili graf $H$, če bo to potrebno. Vendar bomo te spremembe izvajali, tako da ne bomo spreminjali množic $A$ in $B$.
-Trditev ~\ref{fac:1} enostavno dokažemo z dvojnim štetjem. Za vsako vozlišče $v \in A$ preštejemo njegove sosede, ki so v $B$. Pri tem lahko nekatera vozlišča sicer štejemo večkrat vendar to ni težava, saj v tem štetju vsako povezavo med $A$ in $B$ štejemo natanko enkrat. Prav tako vse povezave med $A$ in $B$ dobimo, če za vsako vozlišče $v \in B$ preštejemo vse njegove sosede v $A$. V nadaljevanju bomo večkrat uporabili že uporabljen argument glede minimalnosti grafa $H$.
-Za dokaz trditve ~\ref{fac:2} vzemimo poljuben $v \in A$ in predpostavimo $d_H(v) < a_v$. To lahko storimo za vsako posamezno vozlišče v $A$, saj v nasprotnem primeru, ko velja $d_H(v) = a_v$ zamenjamo povezave, ki so v $H$ tekom alternirajočega sprehoda in s tem ne spremenimo primankljaja $H$ (povečamo za 1 v vozlišču $v$ in zmanjšamo za 1 v začetnem vozlišču sprehoda) prav tako se ne spremenita množici $A$ in $B$. To preprosto vidimo, ker za vozlišče $v$ sedaj velja $v \in A_0$ in je začetno vozlišče sprehodov, tako lihih kot sodih. Sedaj moramo obravnavati dva primera in sicer prvič ko je $a_v = a_v^-$ in drugič ko je $a_v = a_v^+$. V prvem primeru je zadeva preprosta saj $a_v^- \le d(v)/2$ po drugi strani pa velja $d_{G-B}(v) + d_B(v)/2 \ge d(v)/2$ in trditev velja. Oglejmo si še primer ko $a_v = a_v^+ > d(v)/2$. Predpostavljamo lahko dodatno še $d_ {G-B}(v) > a_v^- + 1$ saj v nasprotnem primeru ko nastavimo $a_v = a_v^-$ in odstranimo nekaj povezav med $v$ in $B$, ki so v $H$, zmanjšamo primanjkljaj. S tem prav tako ne spremenimo množic $A$ in $B$. Sedaj na podlagi predpostavke o $a_v^+$ velja
+Trditev~\ref{fac:1} enostavno dokažemo z dvojnim štetjem. Za vsako vozlišče $v \in A$ preštejemo njegove sosede, ki so v $B$. Pri tem lahko nekatera vozlišča sicer štejemo večkrat vendar to ni težava, saj v tem štetju vsako povezavo med $A$ in $B$ štejemo natanko enkrat. Prav tako vse povezave med $A$ in $B$ dobimo, če za vsako vozlišče $v \in B$ preštejemo vse njegove sosede v $A$. V nadaljevanju bomo večkrat uporabili že uporabljen argument glede minimalnosti grafa $H$.
+Za dokaz trditve~\ref{fac:2} vzemimo poljuben $v \in A$ in predpostavimo $d_H(v) < a_v$. To lahko storimo za vsako posamezno vozlišče v $A$, saj v nasprotnem primeru, ko velja $d_H(v) = a_v$ zamenjamo povezave, ki so v $H$ tekom alternirajočega sprehoda in s tem ne spremenimo primankljaja $H$ (povečamo za 1 v vozlišču $v$ in zmanjšamo za 1 v začetnem vozlišču sprehoda) prav tako se ne spremenita množici $A$ in $B$. To preprosto vidimo, ker za vozlišče $v$ sedaj velja $v \in A_0$ in je začetno vozlišče sprehodov, tako lihih kot sodih. Sedaj moramo obravnavati dva primera in sicer prvič ko je $a_v = a_v^-$ in drugič ko je $a_v = a_v^+$. V prvem primeru je zadeva preprosta saj $a_v^- \le d(v)/2$ po drugi strani pa velja $d_{G-B}(v) + d_B(v)/2 \ge d(v)/2$ in trditev velja. Oglejmo si še primer ko $a_v = a_v^+ > d(v)/2$. Predpostavljamo lahko dodatno še $d_ {G-B}(v) > a_v^- + 1$ saj v nasprotnem primeru ko nastavimo $a_v = a_v^-$ in odstranimo nekaj povezav med $v$ in $B$, ki so v $H$, zmanjšamo primanjkljaj. S tem prav tako ne spremenimo množic $A$ in $B$. Sedaj na podlagi predpostavke o $a_v^+$ velja
 $$a_v \le \frac{d(v)}{2} + \frac{a_v^-}{2} + 1 < \frac{d(v)}{2} + \frac{d_{G-B}(v)}{2} + \frac{1}{2} = d_{G-B}(v) + \frac{d_B(v)}{2} + \frac{1}{2}, $$
-ter ker je $a_v$ celo število in je bil $v \in A$ poljuben trditev ~\ref{fac:2} drži. Pokazati torej moramo še trditev ~\ref{fac:3}. Vzemimo poljuben $v \in B$ in predpostavimo, da $a_v = a_v^- < \lfloor d(v)/2 \rfloor$ saj v drugem primeru avtomatsko velja $b_v \ge d(v)/2 \ge d_A(v)/2$. Predpostavimo sedaj, da trditev ne drži torej $2b_v < d_A(v)$ oziroma $d_A(v) \ge 2a_v + 2 + 1$ in s tem tudi $d_A(v) \ge a_v^+$ zaradi predpostavke izreka. Ker velja $b_v = d_H(v)$ in, ker smo ugotovili, če gre neka povezava, ki je v $H$ iz vozlišča $v \in B$ potem mora drugo vozlišče nujno biti v množici $A$, je natanko $d_A(v) - b_v$ povezav med $v$ in množico $A$, ki niso v $H$. Bolj natančno obstaja neko vozlišče $w \in N(v) \cap A$, tako da $uw \notin H$. Kot smo pokazali zgoraj, lahko zagotovimo, da $d_H(w) < a_w$ ter s tem ne spremenimo dejstva, da je $vw \in H$. Ko nastavimo $a_v = a_v^+$ in dodamo $a_v^+ - d_H(v)$ povezav od $v$ do $A$ v $H$ ter s tem tudi povezavo $vw$ znižamo primankljaj in s tem dokažemo trditev ~\ref{fac:3} ter izrek. To preprosto vidimo saj s pomočjo zgornjih trditev velja
+ter ker je $a_v$ celo število in je bil $v \in A$ poljuben trditev~\ref{fac:2} drži. Pokazati torej moramo še trditev~\ref{fac:3}. Vzemimo poljuben $v \in B$ in predpostavimo, da $a_v = a_v^- < \lfloor d(v)/2 \rfloor$ saj v drugem primeru avtomatsko velja $b_v \ge d(v)/2 \ge d_A(v)/2$. Predpostavimo sedaj, da trditev ne drži torej $2b_v < d_A(v)$ oziroma $d_A(v) \ge 2a_v + 2 + 1$ in s tem tudi $d_A(v) \ge a_v^+$ zaradi predpostavke izreka. Ker velja $b_v = d_H(v)$ in, ker smo ugotovili, če gre neka povezava, ki je v $H$ iz vozlišča $v \in B$ potem mora drugo vozlišče nujno biti v množici $A$, je natanko $d_A(v) - b_v$ povezav med $v$ in množico $A$, ki niso v $H$. Bolj natančno obstaja neko vozlišče $w \in N(v) \cap A$, tako da $uw \notin H$. Kot smo pokazali zgoraj, lahko zagotovimo, da $d_H(w) < a_w$ ter s tem ne spremenimo dejstva, da je $vw \in H$. Ko nastavimo $a_v = a_v^+$ in dodamo $a_v^+ - d_H(v)$ povezav od $v$ do $A$ v $H$ ter s tem tudi povezavo $vw$ znižamo primankljaj in s tem dokažemo trditev ~\ref{fac:3} ter izrek. To preprosto vidimo saj s pomočjo zgornjih trditev velja
 $$ S_A =  \sum_{v\in A}a_v - d_{G-B}(v) \le \sum_{v \in A} d_B(v)/2 = \sum_{v \in B} d_A(v) /2 \le \sum_{v \in B} b_v = S_B,$$
 kar je seveda protislovje saj smo malo prej pokazali $S_A > S_B$.
  \end{proof}
@@ -1067,19 +1069,19 @@ Naj bo $G$ naključen graf izbran iz $\mathcal{G}(n,p)$ za konstanten $p \in (0,
 \end{izrek}
 
 \begin{proof}
-Naj bo $G \in \mathcal{G}(n,p)$. Fiksiramo $\epsilon > 0$. Tekom razdelka smo pokazali, da asimptotično skoraj zagotovo veljata naslednji dve dejstvi:
+Naj bo $G \in \mathcal{G}(n,p)$ in fiksirajmo $\epsilon > 0$. Tekom razdelka smo pokazali, da asimptotično skoraj zagotovo veljata naslednji dve dejstvi:
 \begin{itemize}
 \item $\min_v d(v) > (p- \epsilon)n$,
 
 \item $\chi(G) < \frac{\log(1/(1-p))}{2 - \epsilon} \cdot \frac{ n}{\log n}.$
 \end{itemize}
-Ker sta števili $p$ in $\epsilon$ fiksirani lahko preprosto izpeljemo, da velja asimptotično skoraj zagotovo velja $ \chi(G) < \min_vd(v) / 6$ za dovolj velik $n$. Predpostavili bomo, da ta neenakost velja in konstruirali $2$-utežitev, ki bo tudi pravilno barvanje grafa $G$.
+Ker sta števili $p$ in $\epsilon$ fiksirani lahko preprosto izpeljemo, da asimptotično skoraj zagotovo velja $ \chi(G) < \min_vd(v) / 6$ za dovolj velik $n$. Predpostavili bomo, da ta neenakost velja in konstruirali $2$-utežitev, ki bo tudi pravilno barvanje grafa $G$.
 
-Naj bo $\{ V_1, V_2, \ldots, V_{\chi(G)}\}$ particija množice vozlišč v neodvisne množice. Sedaj za vsak $v \in V_i$ izberemo $a_v^- \in [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $a_v^+ \in [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$, tako da $a_v^- + d(v) \equiv a_v^+  d(v) \equiv 2i \mod 2\chi(G)$. Take izbire obstajajo saj intervala $ [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $ [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$ vsebujeta vsaj $2\chi(G)$ zaporednih celih števil. Pri tem je seveda pomembno tudi, da $i \le \chi(G)$. Poleg tega taka izbira za $a_v^-$ in $a_v^+$ zadoščata predpostavkam izreka \ref{factor}, tako da obstaja vpet podgraf $H \subseteq G$ kjer za vsak $v$ velja $d_H(v) \in \{a_v^-,a_v^+,a_v^- + 1 ,a_v^+ + 1\}$.Sedaj konstuiramo utežitev $\omega$ kot 
+Naj bo $\{ V_1, V_2, \ldots, V_{\chi(G)}\}$ particija množice vozlišč v neodvisne množice. Sedaj za vsak $v \in V_i$ izberemo $a_v^- \in [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $a_v^+ \in [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$, tako da $a_v^- + d(v) \equiv a_v^+ +  d(v) \equiv 2i \mod 2\chi(G)$. Take izbire obstajajo saj intervala $ [ \lfloor d(v)/3 \rfloor,\lfloor d(v)/2 \rfloor]$ in $ [ \lfloor d(v)/2 \rfloor,\lfloor 2d(v)/3 \rfloor]$ vsebujeta vsaj $2\chi(G)$ zaporednih celih števil. Pri tem je seveda pomembno tudi, da $i \le \chi(G)$. Poleg tega taka izbira za $a_v^-$ in $a_v^+$ zadoščata predpostavkam izreka \ref{factor}, tako da obstaja vpet podgraf $H \subseteq G$ kjer za vsak $v$ velja $d_H(v) \in \{a_v^-,a_v^+,a_v^- + 1 ,a_v^+ + 1\}$. Sedaj konstruiramo utežitev $\omega$ kot 
 
 $$ \omega(e) = \begin{cases}
-	1, & \textbf{če } e \in E(G) - E(H;)\\ 
-	2, &\textbf{če } e \in E(H) .
+	1, & \textbf{če } e \notin H ;\\ 
+	2, &\textbf{če } e \in H .
 	\end{cases} $$
 Izračunajmo sedaj utež na nekek vozlišču $v \in V_i$ kot
 
@@ -1087,39 +1089,33 @@ $$ \sum_{e \ni v} \omega(e) = 2 d_H(v) + d_{G-H}(v) = d_{G}(v) + d_H(v) \in \{2i
 S tem smo pokazali, da imajo sosednja vozlišča v različnih barvnih razredih $V_i$ različne parnosti in tako konstruirana utežitev porodi pravilno barvanje.
 \end{proof}
 
-Za konec tega razdelka bomo komentirali dobljene rezultate. Definirali smo verjetnostni prostor naključnih grafov, kjer smo naključne grafe generirali, tako da smo za vsako povezavo izvedli \textit{enak poizkus} neodvisno od prejšnjih in z enako verjetnostjo uspeha. S pomočjo tega smo za nekaj grafovskih invariant ocenili kako se obnašajo pri naključnih grafih ter si ogledali njihovo asimptotsko obnašanje. Poleg verjetnostnih metod smo dokazali izrek, ki nam pod določenimi pogoji garantira obstoj posebnega vpetega podgrafa, ki ima omejene stopnje vozlišč. Ta izrek sicer nima nič skupnega z verjetnostnimi metodami, ampak nam je omogočal določiti asimptotsko oceno za parameter $\ec(G)$. Presenetljivo smo pokazali, da velja $\ec(G) = 2$ za skoraj vse grafe kar je še boljše kot pravi 1-2-3 domneva. Presenetljivo je tudi zato, ker smo v začetnem delu dokazali, da za nekatere grafe velja $\ec(G) = 3$. Taki so naprimer že nekateri cikli, polni grafi ter nekateri izmed dvodelnih grafov. Iz vidika našega zadnjega rezultata si to lahko predstavljamo tako, da so zgoraj našteti grafi za katere velja $\ec(G) = 3$ redki v verjetnostnem prostoru naključnih grafov. To torej pomeni, da če naključno izberemo nek graf potem skoraj zagotovo to ne bo polni graf, cikel ali dvodelni graf z $\ec(G) = 3$. Kljub temu, da je asimptotski rezultat pozitiven iz vidika 1-2-3 domneve nam pri dokazovanju domneve ne koristi prav preveč. Problem je v tem, da še vedno obstaja neskončno število grafov za katere lahko velja $\ec(G) > 2$ in z naivnim pristopom ne moremo poiskati vseh takih grafov.
+Za konec tega razdelka bomo komentirali dobljene rezultate. Definirali smo verjetnostni prostor naključnih grafov, kjer smo naključne grafe generirali, tako da smo za vsako povezavo izvedli \textit{enak poizkus} neodvisno od prejšnjih in z enako verjetnostjo uspeha. S pomočjo tega smo za nekaj grafovskih invariant ocenili, kako se obnašajo pri naključnih grafih ter si ogledali njihovo asimptotsko obnašanje. Poleg verjetnostnih metod smo dokazali izrek, ki nam pod določenimi pogoji garantira obstoj posebnega vpetega podgrafa, ki ima omejene stopnje vozlišč. Ta izrek sicer nima nič skupnega z verjetnostnimi metodami, ampak nam je omogočal določiti asimptotsko oceno za parameter $\ec(G)$. Presenetljivo smo pokazali, da velja $\ec(G) = 2$ za skoraj vse grafe, kar je še boljše kot pravi domneva 1-2-3. Presenetljivo je tudi zato, ker smo v začetnem delu dokazali, da za nekatere grafe velja $\ec(G) = 3$. Taki so naprimer že nekateri cikli, polni grafi ter nekateri izmed dvodelnih grafov. Iz vidika našega zadnjega rezultata si to lahko predstavljamo tako, da so zgoraj našteti grafi za katere velja $\ec(G) = 3$ redki v verjetnostnem prostoru naključnih grafov. To torej pomeni, da če naključno izberemo nek graf potem skoraj zagotovo to ne bo polni graf, cikel ali dvodelni graf z $\ec(G) = 3$. Kljub temu, da je asimptotski rezultat pozitiven iz vidika domneve 1-2-3 nam pri dokazovanju domneve ne koristi prav preveč. Problem je v tem, da še vedno obstaja neskončno število grafov za katere lahko velja $\ec(G) > 2$ in z naivnim pristopom ne moremo poiskati vseh takih grafov.
 
-Zgornji rezultat ni edini rezultat v okviru 1-2-3 domneve, ki uporablja verjetnostne metode. Vendar se v magisterski nalogi ne bomo neposredno okvarjali z tem pristopom ampak vseeno bomo uporabili močno orodje, ki izhaja iz verjetnostnih metod.
+Zgornji rezultat ni edini rezultat v okviru domneve 1-2-3, ki uporablja verjetnostne metode. Vendar se ne bomo neposredno ukvarjali z takim pristopom, ampak bomo vseeno uporabili močno orodje, ki izhaja iz verjetnostnih metod.
 
 \section{Polna verzija}
-V tem razdelku se bomo posvetili izpeljani verziji 1-2-3 domneve. Do sedaj smo povezavam grafa dodelili uteži ter nato opazovali dobljene uteži na vozliščih kot vsoto uteži na incidenčnih povezavah. Na enak način bomo definirali \textbf{polno utežitev} grafa, kjer bomo poleg povezavam uteži dodelili tudi vsakemu vozlišču. Dobljena polna utež na vozlišč bo tako vsota uteži na incidinčnih povezavah ter uteži na samem vozlišču. V izogib nejasnostim bomo utežitev, ki smo jo obravnavali v prejšjih razdelkih rekli povezavna utežitev. Poleg tega bomo uporabljali izraz polna utež vozlišča za vsoto uteži na povezavah in vozlišču. Z drugimi besedami gre za barvo vozlišča, ki jo porodi polna utežtev.
-
-\begin{definicija}
-\textbf{Polna $k$-utežitev} grafa $G=(V,E)$ je preslikava
-
+V tem razdelku se bomo posvetili izpeljani verziji domneve 1-2-3. Do sedaj smo povezavam grafa dodelili uteži ter nato opazovali dobljene uteži na vozliščih kot vsoto uteži na incidenčnih povezavah. Na enak način bomo definirali \textbf{polno utežitev} grafa, kjer bomo poleg povezavam uteži dodelili tudi vsakemu vozlišču. Dobljena polna utež na vozlišč bo tako vsota uteži na incidenčnih povezavah ter uteži na samem vozlišču. V izogib nejasnostim bomo utežitev, ki smo jo obravnavali v prejšjih razdelkih rekli povezavna utežitev. Poleg tega bomo uporabljali izraz polna utež vozlišča za vsoto uteži na povezavah in vozlišču. Z drugimi besedami gre za barvo vozlišča, ki jo porodi polna utežtev. Tako lahko definiramo \textbf{polno $k$-utežitev} grafa $G=(V,E)$, kot preslikavo
 $$ \omega : E(G) \cup V(G) \rightarrow [k]. $$
-\end{definicija}
-Na podlagi zgornje utežitve lahko definiramo še \textbf{polno utež} vozlišča $v \in V(G)$ kot
+Na podlagi zgornje utežitve definiramo še \textbf{polno utež} vozlišča $v \in V(G)$ kot
 
 $$c_{\omega}^t(v)  = \omega(v) +  \sum_{u \in N(v)} \omega(vu).$$
-Sedaj se seveda lahko sprašujemo enaka oziroma podobna vprašanja kot pri povezavni utežitvi grafa. Za nas najbolj zanimivo vprašanje je ali obstaja kakšna zgornja meja za $k$, tako da je inducirano barvanje grafa tudi pravilno. Označimo z $\ect(G)$ najmanjši tak $k$ za katerega obstaja polna $k$-utežitev grafa, ki inducira pravilno barvanje. Hitro ugotovimo, da je ta problem malo lažji kot pri povezavni utežitvi saj velja
+Sedaj lohako obravnavamo enake probleme kot pri povezavni utežitvi grafa. Za nas najbolj zanimivo vprašanje je, ali obstaja kakšna zgornja meja za $k$, tako da je inducirano barvanje grafa tudi pravilno. Označimo z $\ect(G)$ najmanjši tak $k$ za katerega obstaja polna $k$-utežitev grafa, ki inducira pravilno barvanje. Hitro ugotovimo, da je ta problem malo lažji kot pri povezavni utežitvi saj velja
 
-$$ \ec \le \ect. $$
+$$ \ect \le \ec. $$
 To preprosto dejstvo opazimo, če imamo neko povezavno utežitev, ki je tudi pravilno barvanje potem vozlišča utežimo z konstantno utežjo $1$ in dobimo polno utežitev, ki je tudi pravilno barvanje. Zato nas zanima, ali lahko rezultate, ki smo jih dosegli za parameter $\ec$ izboljšamo in poiščemo nižjo mejo za parameter $\ect$.
-
 Za začetek si bomo ogledali nekaj preprostih primerov na podoben način kot smo to storili pri parameteru $\ec$. Pred tem pa formulirajmo še domnevo, ki se nanaša na parameter $\ect$.
-\begin{domneva} 
+\begin{domneva} [Domneva 1-2;~\citet{12conj}]
 	\label{12conjecture}
 	Naj bo $G$ povezan graf, ki ni $K_2$. Tedaj je $\ect(G) \le 2.$ 
 \end{domneva}
 Domneva torej pove, da v kolikor dovoljujemo še uteži na vozliščih potem v glavnem potrebujemo eno utež manj, da dobimo pravilno barvanje. Hitro najdemo primer, zakaj v splošnem velja $\ect(G) > 1$. Tak primer je recimo $C_3$ oziroma $K_3$.
-\begin{trditev}
+\begin{trditev}[\citet{12conj}]
 $\ect \le 2$ za dvodelne grafe.
 \end{trditev}
 \begin{proof}
 Dokaz trditve je precej preprost in lažji kot v primeru povezavne utežitvije. Naj bo $G = (A,B, E)$ dvodelni graf. Povezavam  poljubno dodelimo uteži $1$ in $2$ medtem ko vozliščem dodelimo uteži, tako da bodo polne uteži vozlišč v množici $A$ sode in lihe v množici $B$. Preprosto, če ima vozlišče $v \in A$ že sodo utež mu dodelimo $2$ in se mu parnost ne spremeni. V nasprotnem primeru mu dodelimo utež $1$ in mu s tem spremenimo parnost. Enako naredimo za vozlišča v množici $B$.
 \end{proof}
-Zgornja trditev torej dokaže 1-2 domnevo za poti $P_n$ ter drevesa $T_n$. Oglejmo si še naslednjo trditev.
+Zgornja trditev torej dokaže domnevo 1-2 za poti $P_n$ ter drevesa $T_n$. Oglejmo si še naslednjo trditev.
 \begin{trditev}
 $\ect \le 2$ za cikle $C_n$.
 \end{trditev}
@@ -1131,32 +1127,32 @@ Postopamo zelo podobno kot smo na začetku dokazali $\ec(C_n) \le 3$. Oštevilč
 	2, &\text{če } i \equiv 3,4 \pmod{4}
 	\end{cases}
 	\end{equation*}
-V primeru parametra $\ec$ smo morali obravnavali 4 različne možnosti in sicer glede na $ n \pmod{4}$. Zelo podobno bomo naredili tudi sedaj, vendar potencialnih konflikotv ne bomo reševali z tem, da neko povezavo utežimo z $3$ ampak bomo z $2$ utežili nekaj vozlišč. Ta postopek je bolj preprost zato ga bomo samo skicirali. Vsa vozlišča začetno utežmo z $1$. Recimo, da pride do nekega konflikta med dvema vozliščema v ciklu. Izberemo si enega izmed teh vozlišč ter mu dodelimo utež $2$ s čimer smo rešili originalen konflikt, vendar smo pri tem lahko ustvarili novega. Nadaljujemo z istim postopkom, kjer pazimo, da se ne zaciklamo, tako da vozliščem dodeluje utež $2$ vedno v isti smeri. Naprimer izberemo si smer urinega kazalca. Na tak način, bomo morali utež vozlišču popraviti največ trikrat, saj bomo slej ko prej prišli do vozlišča, ki bo imel na obeh povezavah utež $2$ prav tako pa bo tudi sam nosil utež $2$ in bo s tem imel skupno utež $6$. Vendar take uteži nima nobeno ostalo vozlišče zato se zgornji postopek konča po največ treh korakih.
+V primeru parametra $\ec$ smo morali obravnavali 4 različne možnosti in sicer glede na $ n \pmod{4}$. Zelo podobno bomo naredili tudi sedaj, vendar potencialnih konfliktov ne bomo reševali, tako da neko povezavo utežimo z $3$, ampak bomo z $2$ utežili nekaj vozlišč. Ta postopek je bolj preprost zato ga bomo samo skicirali. Vsa vozlišča začetno utežimo z $1$. Recimo, da pride do nekega konflikta med dvema vozliščema v ciklu. Izberemo si enega izmed teh vozlišč ter mu dodelimo utež $2$ s čimer smo rešili originalen konflikt, vendar smo pri tem lahko ustvarili novega. Nadaljujemo z istim postopkom, kjer pazimo, da se ne zaciklamo, tako da vozliščem dodeluje utež $2$ vedno v isti smeri. Naprimer izberemo si smer urinega kazalca. Na tak način, bomo morali utež vozlišču popraviti največ trikrat, saj bomo slej ko prej prišli do vozlišča, ki bo imel na obeh povezavah utež $2$ prav tako pa bo tudi sam nosil utež $2$ in bo s tem imel skupno utež $6$. Vendar take uteži nima nobeno ostalo vozlišče zato se zgornji postopek konča po največ treh korakih.
 \end{proof}
 
-\begin{trditev}
+\begin{trditev}[\citet{12conj}]
 $\ect(K_n) = 2$.
 \end{trditev}
 
 \begin{proof}
-Z indukcijo bomo pokazali, da obstaja polna utežitev z utežmi iz $1$ in $2$, tako da bodo dobljene barve vozlišč zaporedna cela števila od $n$ do $2n - 1$ ali od $n+1$ do $2n$. 
+Z indukcijo bomo pokazali, da obstaja polna utežitev z utežmi $1$ in $2$, tako da bodo dobljene barve vozlišč zaporedna cela števila od $n$ do $2n - 1$ ali od $n+1$ do $2n$. 
 
 Za $n=2$ preprosto najdemo ustrezno utežitev. Predpostavimo, da je $n \ge 3$ in smo že našli ustrezno polno utežitev za $K_{n-1}$. Sedaj dodamo novo vozlišče $v$ in ga povežemo z vsemi ostalimi vozlišči $K_{n-1}$. Za $K_{n-1}$ velja, da so barve vozlišč zaporedna števila iz intervala $[n-1, 2n - 2]$, seveda je pri tem ali levo ali desno krajišče intervala še nezasedeno. V kolikor je nezasedena barva $2n - 2$ na vse nove povezave in vozlišče $v$ damo utež $2$. V nasprotnem primeru, ko je nezasedeno levo krajišče zgornjega intervala damo na vse nove povezave in na vozlišče $v$ utež $1$.
 \end{proof}
 
-Kot smo opazli se za osnovne družine grafov brez večjih težav pokaže veljavnost 1-2 domneve. Na tem mestu bi se lahko vprašali smiselno vprašanje, kako je s splošnimi grafi? Izkaže se, da tudi za splošne grafa obstaja precej dober rezultat, ki je v neki meri bližje domnevi kot v primeru 1-2-3 domneve, ko smo dokazali tako imenovan 1-2-3-4-5 izrek.
-\begin{izrek}[123 izrek za parameter $\ect$]
+Kot smo opazli se za osnovne družine grafov brez večjih težav pokaže veljavnost domneve 1-2. Na tem mestu bi se lahko vprašali, kako je s splošnimi grafi? Izkaže se, da tudi za splošne grafa obstaja precej dober rezultat, ki je v neki meri bližje domnevi kot v primeru domneve 1-2-3, ko smo dokazali tako imenovan izrek 1-2-3-4-5.
+\begin{izrek}[1-2-3 izrek za parameter $\ect$]
 \label{theorem123}
 Naj bo $G$ povezan graf. Tedaj velja $\ect(G) \le 3$.
  \end{izrek}
 
 \begin{proof}
-Dokaz zgornjega izreka je zelo podoben dokazu izreka \ref{theorem12345}. Glavna ideja je bila v tem, da smo vozlišča procesirali v nekem vrstnem redu ter smo lahko zagotovili, da ima trenutno procesirano vozlišče drugačno skupno utež kot njegovi sosedi med že procesiranimi vozlišči. To smo lahko storili zato ker smo lahko popravljali uteži na določenih povezavah in sicer tako, da pri tem nismo povzročali konfliktov.
+Dokaz zgornjega izreka je zelo podoben dokazu izreka \ref{theorem12345}. Glavna ideja je bila v tem, da smo vozlišča procesirali v nekem vrstnem redu ter smo lahko zagotovili, da ima trenutno procesirano vozlišče drugačno skupno utež kot njegovi sosedje med že procesiranimi vozlišči. To smo lahko storili zato, ker smo lahko popravljali uteži na določenih povezavah in sicer, tako da pri tem nismo povzročali konfliktov.
 
 Konstruirali bomo utežitev $\omega$, ki uporablja uteži $\{1,2,3\}$ na povezavah ter uteži $\{1,2\}$ na vozliščih. S tem bomo dokazali malenkost močnejšo obliko izreka. V ta namen označimo z $c_{\omega}^t(v)$ končno barvo oziroma polno utež vozlišča $v \in V(G)$, ki jo določimo ko procesiramo vozlišče $v$ in jo kasneje ne spremenimo. Med samo konstrukcijo bomo to utež večkrat spremenili, zato označimo še $c(v)$ kot začasno utež vozlišča $v$. Začnemo z poljubno ureditvijo vozlišč $v_1, v_2, \ldots, v_n$ in nastavimo začetno utež $2$ na vse povezave ter utež $1$ na vsa vozlišča. Med procesiranjem vozlišč bomo vsako povezavo spremenili največ enkrat. Tako velja $c_{\omega}^t(v_1) = c(v_1) = 2d(v_1) + 1$. Za vsako trenutno procesirano vozlišče $v_i$, $2\le i \le n$ predpostavljamo,
 \begin{enumerate}
 \item $c(v_j) = c_{\omega}^t(v_j) $ ali $c(v_j) = c_{\omega}^t(v_j)  - 1$, za $j < i$,
-\item $c_{\omega}^t(v_j) \neq c_{\omega}^t(v_l)$, če $(v_j,v_l) \in E(G)$ in $j,l < i$,
+\item $c_{\omega}^t(v_j) \neq c_{\omega}^t(v_l)$, če $(v_j,v_l) \in E(G)$ in $l < i$,
 \item $\omega(e) = 2$ za vsako povezavo $e = (v_i, v_l)$.
 \end{enumerate}
 Predpostavimo še, da ima vozlišče $v_i$ $d$ sosedov v množici že procesiranih vozlišč $\{v_1, v_2, \ldots, v_{i-1}\}$. Na tem koraku moramo določiti končno barvo $c_{\omega}^t(v_i)$ vozlišča $v_i$, tako da bo razližna od njegovih sosedov v množici procesiranih vozlišč. To lahko storimo z modifikacijo uteži na povezavah do že procesiranih vozlišč. In sicer lahko za vsako povezavo $e = (v_j, v_i)$ z $j < i$,
@@ -1165,22 +1161,21 @@ Predpostavimo še, da ima vozlišče $v_i$ $d$ sosedov v množici že procesiran
 \item dodamo $1$ v kolikor $c(v_j) = c_{\omega}^t(v_j)   - 1$ ali
 \item odštejemo $1$ v koliko $c(v_j) = c_{\omega}^t(v_j) $.
 \end{itemize}
-Podobno kot v dokazu izreka \ref{theorem12345} lahko na tak način ustvarimo $d+1$ različnih zaporednih možnih vrednosti za $c(v_i)$. Res, ena možnost je, če nič ne spreminjamo. Nato dobimo po eno možnost za spremembo na vsaki povezavi nazaj. Lahko si predstavljamo tudi drugače. Na vseh povezavah nazaj poizkušajmo zmanjšati utež, tam kjer je to seveda mogoče. Na tak način dobimo minimalno potencialno utež za $v_i$, označimo jo z  $c_m$. Na enak način povečamo vse uteži in dobimo maksimalno utež za $v_i$, ki jo označimo z $c_M$. Tako se vse potencialne vrednosti za $c(v_i)$ nahajajo v intervalu $[c_m, c_M]$, ki ima $d+1$ elementov. Ker ima vozlišče $v_i$ $d$ sosedov v procesiranih vozliščih lahko tako najdemo vsaj eno prosto utež za vozlišče $v_i$, ki jo nastavimo kot njegovo končno utež. Na tak način torej izberemo $c_{\omega}^t(v_i)$, popravimo uteži na ustreznih povezavah in nastavimo $c_{\omega}^t(v_i) = c(v)$. Postopek ponavljamo, dokler ne sprocesiramo vseh vozlišč. Na koncu procesiranja imamo naslednje lastnosti:
+Podobno kot v dokazu izreka \ref{theorem12345} lahko na tak način ustvarimo $d+1$ različnih zaporednih možnih vrednosti za $c(v_i)$. Res, ena možnost je, če nič ne spreminjamo. Nato dobimo po eno možnost za spremembo na vsaki povezavi nazaj. Lahko si predstavljamo tudi drugače. Na vseh povezavah nazaj zmanjšamo utež tam, kjer je to seveda mogoče. Na tak način dobimo minimalno potencialno utež za $v_i$, označimo jo z  $c_m$. Na enak način povečamo vse uteži in dobimo maksimalno utež za $v_i$, ki jo označimo z $c_M$. Tako se vse potencialne vrednosti za $c(v_i)$ nahajajo v intervalu $[c_m, c_M]$, ki ima $d+1$ elementov. Ker ima vozlišče $v_i$ $d$ sosedov v procesiranih vozliščih lahko tako najdemo vsaj eno prosto utež za vozlišče $v_i$, ki jo nastavimo kot njegovo končno utež. Na tak način torej izberemo $c_{\omega}^t(v_i)$, popravimo uteži na ustreznih povezavah in nastavimo $c_{\omega}^t(v_i) = c(v)$. Postopek ponavljamo, dokler ne sprocesiramo vseh vozlišč. Na koncu procesiranja imamo naslednje lastnosti:
 \begin{itemize}
 \item vsako vozlišče $v \in V(G)$ ima začasno barvo $c(v) = c_{\omega}^t(v)$ ali $c(v) = c_{\omega}^t(v) - 1$,
 \item nobena sosednja vozlišča nimata dodeljene enake končne barve $c_{\omega}^t(v)$,
 \item vsaka povezava ima utež iz množice $\{1,2,3\}$,
 \item vsako vozlišče ima utež $1$.
 \end{itemize}
-Za konec povečamo za $1$ utež na vseh vozliščih za katere velja $c(v) = c_{\omega}^t(v) - 1$. To lahko storimo saj imajo vsa vozlišče utež $1$ in s tem zagotovimo, da imajo vsa vozlišča njihovo končno barvo.
+Za konec povečamo za $1$ utež na vseh vozliščih za katere velja $c(v) = c_{\omega}^t(v) - 1$. To lahko storimo, saj imajo vsa vozlišče utež $1$ in s tem zagotovimo, da imajo vsa vozlišča njihovo končno barvo.
 
 \end{proof}
-Kot je razvidno iz zgornjega dokaza obstaja ogromno podobnosti med dokazom izreka \ref{theorem12345}. Pri polni verziji smo sicer imeli več svobode saj smo lahko vozlišča uredili in procesirali v poljubnem vrstnem redu. To izhaja iz tega, da v tem primeru ne potrebujemo povezave naprej, da dosežemo želene pogoje. Pri tem so seveda zahtevani pogoji manj strogi saj ne zahtevamo, da imajo vsa procesirana vozlišča že končno barvo, ker jih lahko popravimo na koncu z utežitvijo posameznih vozlišč. V samem dokazu izreka \ref{theorem123} smo dejansko dokazali močnejši izrek, saj uteži z vrednostjo $3$ nismo uporabili na vozliščih. Poleg tega smo ugotovili še nekaj. Do zadnjega koraka v dokazu je bila utež na vseh vozliščih enaka $1$. Kaj se zgodi, če to utež popolnoma odstranimo in opazujemo samo dobljeno povezavno utežitev? Dobljena povezavna utežitev sicer ne porodi nujno pravilnega barvanja ampak od tega ni daleč oddaljena saj se dobljeno barvanje razlikuje največ za $1$ od pravilnega barvanja. Uporabili smo tudi samo uteži $\{1,2,3\}$ kar je skladno z 1-2-3 domnevo. Vendar je ravno to težak del problema. Kako torej iz neke povezavne utežitve, ki skoraj porodi pravilno barvanje, dobiti ustrezno utežitev. Do tega trenutka je to mogoče samo z metodami, ki smo si jih ogledali. V povezavni verziji nujno potrebujemo še uteži $4$ in $5$ na povezavah medtem ko moramo v polni verziji dodati utež $2$ na nekatera vozlišča.
+Kot je razvidno iz zgornjega dokaza obstaja ogromno podobnosti med dokazom izreka \ref{theorem12345}. Pri polni verziji smo sicer imeli več svobode, saj smo lahko vozlišča uredili in procesirali v poljubnem vrstnem redu. To izhaja iz tega, da v tem primeru ne potrebujemo povezave naprej, da dosežemo zahtevane pogoje. Pri tem so seveda zahtevani pogoji manj strogi, saj ne zahtevamo, da imajo vsa procesirana vozlišča že končno barvo, ker jih lahko popravimo na koncu z utežitvijo posameznih vozlišč. V samem dokazu izreka \ref{theorem123} smo dejansko dokazali močnejši izrek, saj uteži z vrednostjo $3$ nismo uporabili na vozliščih. Poleg tega smo ugotovili še nekaj. Do zadnjega koraka v dokazu je bila utež na vseh vozliščih enaka $1$. Kaj se zgodi, če to utež popolnoma odstranimo in opazujemo samo dobljeno povezavno utežitev? Dobljena povezavna utežitev sicer ne porodi nujno pravilnega barvanja, ampak od tega ni daleč oddaljena, saj se dobljeno barvanje razlikuje za največ $1$ od pravilnega barvanja. Uporabili smo le uteži iz množice $\{1,2,3\}$, kar je skladno z domnevo 1-2-3. Vendar je ravno to težak del problema. Kako torej iz neke povezavne utežitve, ki skoraj porodi pravilno barvanje, dobiti ustrezno utežitev. Do tega trenutka je to mogoče samo z metodami, ki smo si jih ogledali. V povezavni verziji nujno potrebujemo še uteži $4$ in $5$ na povezavah medtem ko moramo v polni verziji dodati utež $2$ na nekatera vozlišča.
 
 
 Za zaključek tega razdelka dopolnimo tabelo, ki smo jo izpolnili že po koncu začetnega dela. V tabelo bomo dodali parameter $\ect$ ter ga direktno primerjali z parametrom $\ec$.
 \begin{table}[H]
-
 \caption{\label{tab:tab2} Izračun $\ec(G)$ in $\ect(G)$ za znane grafe. }
 \centering
 \begin{tabular}{|l|l|l|}
@@ -1206,7 +1201,7 @@ dvodelni   & $\le 3$  & 2\\ \hline
 splošni   & $\le 5$  &$ \le 3$\\ \hline
 \end{tabular}
 \end{table}
-Kot je razvidno iz zgornje tabele smo za velik del graf v polni verziji uspeli izboljšati rezultate. V nekaterih primerih smo že v originalni verziji dosegli najnižjo možno mejo t.j. 2 in se je seveda neda izboljšati v polni verziji.
+Kot je razvidno iz zgornje tabele smo za velik del grafov v polni verziji uspeli izboljšati rezultate. V nekaterih primerih smo že v povezavni verziji dosegli najnižjo možno mejo t.j.\ 2 in se je seveda neda izboljšati v polni verziji.
 
 
 \section{Seznamska verzija} 
