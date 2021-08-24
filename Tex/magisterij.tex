@@ -15,12 +15,13 @@
 \newcommand{\naslovdela}{Domneva 1-2-3}
 \newcommand{\letnica}{2020} % letnica magistriranja
 \newcommand{\opis}{Delo obravnava domnevo 1-2-3 ter njene variacije.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
-\newcommand{\kljucnebesede}{teorija grafov\sep kombinatorika\sep grafovski polinomi,\sep naključni grafi} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
+\newcommand{\kljucnebesede}{teorija grafov\sep kombinatorika\sep grafovski polinomi\sep naključni grafi} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
 \newcommand{\keywords}{graph theory\sep combinatorics\sep graph polynomials\sep random graphs} % ključne besede v angleščini
 \newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
 \newcommand{\literatura}{literatura}  % pot do datoteke z literaturo (brez .bib končnice)
 \newcommand{\sep}{, }  % separator med ključnimi besedami v besedilu
 % KONEC PODATKOV
+
 
 \usepackage{bibentry}         % za navajanje literature v programu dela s celim imenom
 \nobibliography{\literatura}
@@ -29,10 +30,10 @@
 \usepackage{filecontents}  % za pisanje datoteke s PDF metapodatki
 \usepackage{silence} \WarningFilter{latex}{Overwriting file}  % odstrani annoying warning o obstoju datoteke
 % datoteka s PDF metapodatki, zgenerira se kot magisterij.xmpdata
-\begin{filecontents*}{\jobname.xmpdata}
+\begin{filecontents*}[overwrite]{\jobname.xmpdata}
   \Title{\naslovdela}
   \Author{\imeavtorja}
-  \Keywords{\kljucnebesede}
+  \Keywords{graph theory\sep combinatorics\sep graph polynomials\sep random graphs}
   \Subject{\opis}
   \Org{\organization}
 \end{filecontents*}
@@ -162,7 +163,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%           DOCUMENT           %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\makeatletter
+\def\sep{; }
+\pdfx@topdfstring\pdfx@Author\xmp@Author
+\pdfx@topdfstring\pdfx@Keywords\xmp@Keywords
+\makeatother
 \begin{document}
 
 \pagenumbering{roman} % začnemo z rimskimi številkami
@@ -392,7 +397,7 @@ Oglejmo si primer grafa ter opazujmo njegove osnovne lastnosti.
 \caption{Primer grafa G.}
 \label{basic_ex}
 \centering
-    \includegraphics[scale=1]{b_ex_1.png}
+    \includegraphics[scale=1]{b_ex_1.jpg}
     \end{figure}
 Graf na sliki \ref{basic_ex} ima $9$ vozlišč in $10$ povezav ter je povezan. Njegova najmanjša stopnja je $\delta(G) = 1$ ter največja stopnja $\Delta(G) = 5$. Graf ne pripada nobeni izmed zgoraj opisanih osnovnih družin. Zaradi tega zadošča predpostavkam Brooksovega izreka zaradi katerega velja $\chi(G) \le 5$. Ali je to dobra ocena za podan graf? Hitro tudi opazimo, da graf ni dvodelen saj vsebuje lih cikel zaradi katerega velja $\chi(G) \ge 3$. Preprosto lahko preverimo, da graf lahko požrešno pobarvamo z tremi barvami torej velja $\chi(G) = 3$.
 \end{primer}
@@ -407,7 +412,7 @@ Dodatno se izkaže, da veliko zgornjih mej za kromatično število velja tudi za
 \caption{Primer grafa $K_{2, 4}$ s seznami velikosti $2$.}
 \label{list_ex_1}
 \centering
-    \includegraphics[scale=0.75]{list_ex_1.png}
+    \includegraphics[scale=0.75]{list_ex_1.jpg}
     \end{figure}
 Na sliki~\ref{list_ex_1} vidimo primer takega grafa. Ker je graf dvodelen ga lahko pobarvamo z dvema barvama. Vendar grafa ne moremo seznamsko pobarvat s seznami velikosti $2$. Protiprimer je prikazan na sliki ~\ref{list_ex_1}. Ne glede na to, kakšne barve izberemo za vozlišči v levi množici, ne bomo mogli pravilno pobarvat vseh vozlišč v desni množici. Zato velja $\ch(K_{2, 4}) > 2$. Podobno lahko konstruiramo večje protiprimere. Velja namreč $\ch(K_{n, n^n}) > n$, kar pokaže, da je lahko razlika med kromatičnim številom in njegovo seznamsko verzijo poljubno velika.
 
@@ -434,7 +439,7 @@ Na primeru si sedaj oglejmo kako deluje barvanje grafa z utežmi.
 \caption{Primer grafa G z utežmi na povezavah ter induciranim barvanjem.}
 \label{basic_ex1}
 \centering
-    \includegraphics[scale=1]{b_ex_2.png}
+    \includegraphics[scale=1]{b_ex_2.jpg}
     \end{figure}
 V prejšnjem primeru smo ugotovili, da velja $\chi(G) = 3$. Kot je razvidno iz slike ~\ref{basic_ex1} smo graf uspeli utežiti le z dvema utežema. Iz tega sledi, da je $\ec(G) \le 2$. Vendar graf vsebuje sosednja vozlišča, ki imata isto stopnjo zato lahko sklepamo $\ec(G) = 2$. Pri konkretni utežitvi sicer vidimo, da inducirano barvanje porabi $6$ različnih barv. Koliko različnih barv dobimo nas v okviru domneve 1-2-3 sicer ne zanima ampak, vseeno omenimo kot zanimivost. Z primerno izbiro utežitve lahko induciramo barvanje, ki je optimalno torej zavzame le $3$ različne vrednosti. Vendar v tem primeru ne zadostujeta le uteži $\{1,2\}$ vendar potrebujemo še tretjo utež.
 \end{primer}
@@ -529,135 +534,135 @@ Naj bo $C_n$ cikel. Tedaj velja $\ec(C_n) \le 3.$
 	\end{cases}
 	\end{equation*}
 	
-\begin{figure}[]
-	\centering 
-	\begin{subfigure}{0.475\textwidth}
-		\centering 
-		\begin{tikzpicture}
-	
-		[scale=.8,auto=left,main node/.style={draw=none,fill=none}]
-		\def \n {7}
-		\node[
-		regular polygon,
-		regular polygon sides=\n,
-		minimum size=4cm,
-		rotate=180/\n,
-		] (a) {};
-		
-		\node[draw=none,fill=none] (1) at (a.corner 1) [] { $v_1$};
-		\node[draw=none,fill=none] (2) at (a.corner 2) [] { $v_2$};
-		\node[draw=none,fill=none] (3) at (a.corner 3) [] { $v_3$};
-		
-		\node[draw=none,fill=none] (4) at (a.corner 5) [] { $v_{n-2}$};
-		\node[draw=none,fill=none] (5) at (a.corner 6) [] { $v_{n-1}$};
-		\node[draw=none,fill=none] (6) at (a.corner 7) [] { $v_n$};
-		
-		\draw[] (1) to node [above left] {1}  (2);
-		\draw[] (2) to node [left] {1}  (3);
-		\draw[bend right, dashed] (3) to node [] {}  (4);
-		\draw[] (4) to node [ right] {1}  (5);
-		\draw[] (5) to node [above right] {2}  (6);
-	
-		\draw[] (6) to node [above] {2}  (1);
-		\end{tikzpicture}
-		\caption{Primer $n = 4k$. Zadoščata 2 uteži}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.475\textwidth}
-		\centering 
-		\begin{tikzpicture}
-		[scale=.6,auto=left,main node/.style={draw=none,fill=none}]
-		\def \n {7}
-		\node[
-		regular polygon,
-		regular polygon sides=\n,
-		minimum size=4cm,
-		rotate=180/\n,
-		] (a) {};
-		
-		\node[main node] (1) at (a.corner 1) [] { $v_1$};
-		\node[main node] (2) at (a.corner 2) [] { $v_2$};
-		\node[main node] (3) at (a.corner 3) [] {\ $v_3$};
-		
-		\node[main node] (4) at (a.corner 5) [] { $v_{n-2}$};
-		\node[main node] (5) at (a.corner 6) [] { $v_{n-1}$};
-		\node[main node] (6) at (a.corner 7) [] { $v_n$};
-		
-		\draw[] (1) to node [above left] {1}  (2);
-		\draw[] (2) to node [left] {1}  (3);
-		\draw[bend right, dashed] (3) to node [] {}  (4);
-		\draw[] (4) to node [ right] {2}  (5);
-		\draw[] (5) to node [above right] {2}  (6);
-		\
-		\draw[] (6) to node [text=red,above] {3}  (1);
-		\end{tikzpicture}
-		\caption{Primer $n = 4k + 1$. Potrebno je dodati utež $3$ na zadnjo povezavo.}
-	\end{subfigure}
-	\vskip\baselineskip
-		\begin{subfigure}{0.475\textwidth}
-			\centering 
-		\begin{tikzpicture}
-		[scale=.6,auto=left,main node/.style={draw=none,fill=none}]
-		\def \n {7}
-		\node[
-		regular polygon,
-		regular polygon sides=\n,
-		minimum size=4cm,
-		rotate=180/\n,
-		] (a) {};
-		
-		\node[main node] (1) at (a.corner 1) [] { $v_1$};
-		\node[main node] (2) at (a.corner 2) [] { $v_2$};
-		\node[main node] (3) at (a.corner 3) [] {\ $v_3$};
-		
-		\node[main node] (4) at (a.corner 5) [] { $v_{n-2}$};
-		\node[main node] (5) at (a.corner 6) [] { $v_{n-1}$};
-		\node[main node] (6) at (a.corner 7) [] { $v_n$};
-		
-		\draw[] (1) to node [above left] {1}  (2);
-		\draw[] (2) to node [left] {1}  (3);
-		\draw[bend right, dashed] (3) to node [] {}  (4);
-		\draw[] (4) to node [ right] {2}  (5);
-		\draw[] (5) to node [above right] {1}  (6);
-	
-		\draw[] (6) to node [text=red,above] {3}  (1);
-		\end{tikzpicture}
-		\caption{Primer $n = 4k + 2$.}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{0.475\textwidth}
-		\centering 
-		\begin{tikzpicture}
-		[scale=.6,auto=left,main node/.style={draw=none,fill=none}]
-		\def \n {7}
-		\node[
-		regular polygon,
-		regular polygon sides=\n,
-		minimum size=4cm,
-		rotate=180/\n,
-		] (a) {};
-		
-		\node[main node] (1) at (a.corner 1) [] { $v_1$};
-		\node[main node] (2) at (a.corner 2) [] { $v_2$};
-		\node[main node] (3) at (a.corner 3) [] {\ $v_3$};
-		
-		\node[main node] (4) at (a.corner 5) [] { $v_{n-2}$};
-		\node[main node] (5) at (a.corner 6) [] { $v_{n-1}$};
-		\node[main node] (6) at (a.corner 7) [] { $v_n$};
-		
-		\draw[] (1) to node [above left] {1}  (2);
-		\draw[] (2) to node [left] {1}  (3);
-		\draw[bend right, dashed] (3) to node [] {}  (4);
-		\draw[] (4) to node [ right] {1}  (5);
-		\draw[] (5) to node [text=red,above right] {3}  (6);
-
-		\draw[] (6) to node [text=red,above] {$\{2,3\}$}  (1);
-		\end{tikzpicture}
-		\caption{Primer $n = 4k + 3$. Poleg zadnje povezave moramo popraviti še predzadnjo.}
-	\end{subfigure}
-\caption{Primer utežitve cikla $C_n$ glede na različne vrednosti $n$. Uteži, obarvano rdeče so potrebni popravki popravki utežitve $\omega$, da dobimo pravilno barvanje cikla.}
-\label{fig:cnall}
-\end{figure}
+%\begin{figure}[]
+%	\centering 
+%	\begin{subfigure}{0.475\textwidth}
+%		\centering 
+%		\begin{tikzpicture}
+%	
+%		[scale=.8,auto=left,main node/.style={draw=none,fill=none}]
+%		\def \n {7}
+%		\node[
+%		regular polygon,
+%		regular polygon sides=\n,
+%		minimum size=4cm,
+%		rotate=180/\n,
+%		] (a) {};
+%		
+%		\node[draw=none,fill=none] (1) at (a.corner 1) [] { $v_1$};
+%		\node[draw=none,fill=none] (2) at (a.corner 2) [] { $v_2$};
+%		\node[draw=none,fill=none] (3) at (a.corner 3) [] { $v_3$};
+%		
+%		\node[draw=none,fill=none] (4) at (a.corner 5) [] { $v_{n-2}$};
+%		\node[draw=none,fill=none] (5) at (a.corner 6) [] { $v_{n-1}$};
+%		\node[draw=none,fill=none] (6) at (a.corner 7) [] { $v_n$};
+%		
+%		\draw[] (1) to node [above left] {1}  (2);
+%		\draw[] (2) to node [left] {1}  (3);
+%		\draw[bend right, dashed] (3) to node [] {}  (4);
+%		\draw[] (4) to node [ right] {1}  (5);
+%		\draw[] (5) to node [above right] {2}  (6);
+%	
+%		\draw[] (6) to node [above] {2}  (1);
+%		\end{tikzpicture}
+%		\caption{Primer $n = 4k$. Zadoščata 2 uteži}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}{0.475\textwidth}
+%		\centering 
+%		\begin{tikzpicture}
+%		[scale=.6,auto=left,main node/.style={draw=none,fill=none}]
+%		\def \n {7}
+%		\node[
+%		regular polygon,
+%		regular polygon sides=\n,
+%		minimum size=4cm,
+%		rotate=180/\n,
+%		] (a) {};
+%		
+%		\node[main node] (1) at (a.corner 1) [] { $v_1$};
+%		\node[main node] (2) at (a.corner 2) [] { $v_2$};
+%		\node[main node] (3) at (a.corner 3) [] {\ $v_3$};
+%		
+%		\node[main node] (4) at (a.corner 5) [] { $v_{n-2}$};
+%		\node[main node] (5) at (a.corner 6) [] { $v_{n-1}$};
+%		\node[main node] (6) at (a.corner 7) [] { $v_n$};
+%		
+%		\draw[] (1) to node [above left] {1}  (2);
+%		\draw[] (2) to node [left] {1}  (3);
+%		\draw[bend right, dashed] (3) to node [] {}  (4);
+%		\draw[] (4) to node [ right] {2}  (5);
+%		\draw[] (5) to node [above right] {2}  (6);
+%		\
+%		\draw[] (6) to node [text=red,above] {3}  (1);
+%		\end{tikzpicture}
+%		\caption{Primer $n = 4k + 1$. Potrebno je dodati utež $3$ na zadnjo povezavo.}
+%	\end{subfigure}
+%	\vskip\baselineskip
+%		\begin{subfigure}{0.475\textwidth}
+%			\centering 
+%		\begin{tikzpicture}
+%		[scale=.6,auto=left,main node/.style={draw=none,fill=none}]
+%		\def \n {7}
+%		\node[
+%		regular polygon,
+%		regular polygon sides=\n,
+%		minimum size=4cm,
+%		rotate=180/\n,
+%		] (a) {};
+%		
+%		\node[main node] (1) at (a.corner 1) [] { $v_1$};
+%		\node[main node] (2) at (a.corner 2) [] { $v_2$};
+%		\node[main node] (3) at (a.corner 3) [] {\ $v_3$};
+%		
+%		\node[main node] (4) at (a.corner 5) [] { $v_{n-2}$};
+%		\node[main node] (5) at (a.corner 6) [] { $v_{n-1}$};
+%		\node[main node] (6) at (a.corner 7) [] { $v_n$};
+%		
+%		\draw[] (1) to node [above left] {1}  (2);
+%		\draw[] (2) to node [left] {1}  (3);
+%		\draw[bend right, dashed] (3) to node [] {}  (4);
+%		\draw[] (4) to node [ right] {2}  (5);
+%		\draw[] (5) to node [above right] {1}  (6);
+%	
+%		\draw[] (6) to node [text=red,above] {3}  (1);
+%		\end{tikzpicture}
+%		\caption{Primer $n = 4k + 2$.}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}{0.475\textwidth}
+%		\centering 
+%		\begin{tikzpicture}
+%		[scale=.6,auto=left,main node/.style={draw=none,fill=none}]
+%		\def \n {7}
+%		\node[
+%		regular polygon,
+%		regular polygon sides=\n,
+%		minimum size=4cm,
+%		rotate=180/\n,
+%		] (a) {};
+%		
+%		\node[main node] (1) at (a.corner 1) [] { $v_1$};
+%		\node[main node] (2) at (a.corner 2) [] { $v_2$};
+%		\node[main node] (3) at (a.corner 3) [] {\ $v_3$};
+%		
+%		\node[main node] (4) at (a.corner 5) [] { $v_{n-2}$};
+%		\node[main node] (5) at (a.corner 6) [] { $v_{n-1}$};
+%		\node[main node] (6) at (a.corner 7) [] { $v_n$};
+%		
+%		\draw[] (1) to node [above left] {1}  (2);
+%		\draw[] (2) to node [left] {1}  (3);
+%		\draw[bend right, dashed] (3) to node [] {}  (4);
+%		\draw[] (4) to node [ right] {1}  (5);
+%		\draw[] (5) to node [text=red,above right] {3}  (6);
+%
+%		\draw[] (6) to node [text=red,above] {$\{2,3\}$}  (1);
+%		\end{tikzpicture}
+%		\caption{Primer $n = 4k + 3$. Poleg zadnje povezave moramo popraviti še predzadnjo.}
+%	\end{subfigure}
+%\caption{Primer utežitve cikla $C_n$ glede na različne vrednosti $n$. Uteži, obarvano rdeče so potrebni popravki popravki utežitve $\omega$, da dobimo pravilno barvanje cikla.}
+%\label{fig:cnall}
+%\end{figure}
 Potreben in zadosten pogoj, ki smo ga uporabili že za primer poti velja tudi za cikle. Pri ciklu moramo opazovati dodatno povezavo med $v_1$ in $v_n$. Kot je razvidno iz slike~\ref{fig:cnall} moramo ločit primere glede na vrednost $n \pmod{4}$. Ugotovimo, da za pravilno utežitev cikla $C_n$ potrebujemo največ 3 uteži, torej $\ec(C_n) \le 3$. Pokažimo sedaj, da je ta meja tudi natančna za $n \neq 4k$. Recimo torej nasprotno, da je $\ec(C_n) = 2$ in naj bo $\omega$ utežitev, ki zadošča temu pogoju. Potem iz $c_{\omega}(v_i) \neq c_{\omega}(v_{i+1})$ sledi $\omega(v_i v_{i+1}) \neq \omega({v_{i+2} v_{i+3}})$. To je pogoj, da se uteži na razdalji $2$ razlikujejo. Ampak to pomeni, ker imamo na voljo samo uteži 1 in 2, da mora veljati $\omega(v_i v_{i+1}) = \omega({v_{i+4} v_{i+5}})$. To pa je protislovje v primeru ko $n \neq 4k$.
 
 Nahitro ocenimo še parameter $s(C_n)$. V tem primeru prav tako vzamemo idejo, ki smo jo dobili pri uteževanju poti. Zopet začnemo nekje na sredini in v tem primeru poizkušamo dosečti, da se uteži na vozliščih nahajajo na intervalu $[2, n+1]$. Podobno kot pri poti je potrebno biti pazljiv pri robnih primerih vendar zagotovo velja enaka ocena in sicer $\s(G) \ge \lceil \frac{n}{2} \rceil$.
@@ -808,7 +813,7 @@ Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru cik
 \caption{Popravljanje utežitve z liho potjo.}
 \label{im1}
 \centering
-    \includegraphics[scale=0.5]{3col.png}
+    \includegraphics[scale=0.5]{3col.jpg}
     \end{figure}
 	
 	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$. Zato v tem primeru postopamo malo drugače. Ker je graf dvodelen, lahko zapišemo njegovo množico vozlišč kot $V(G) = A \cup B$, kjer sta $A$ in $B$ biparticija. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$ ter na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru na dve poljubni povezavi incidenčni $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
@@ -869,7 +874,7 @@ Na podlagi zgornje trditve lahko, iz grafov za katere smo domnevo 1-2-3 že doka
 \caption{Hiperkocke $Q_n$ za $n=1,2,3$.}
 \label{hip}
 \centering
-    \includegraphics[scale=0.4]{car_ex_1.png}
+    \includegraphics[scale=0.4]{car_ex_1.jpg}
     \end{figure}
 Primer $Q_1 = K_2$ izpustimo saj v tem primeru rešitev ne obstaja. Za ostale primere iz slike \ref{hip}  ročno preverimo $\ec(Q_2) = \ec(Q_3) \le 2.$ Nato za vsak $n > 3$ zapišemo hiperkocko kot
  $$Q_n = Q_{\lfloor n/2 \rfloor}  \cart Q_{\lceil n/2 \rceil}.$$
@@ -1029,7 +1034,7 @@ Dokaz bomo sedaj nadaljevali, tako da bomo na podlagi podgrafa $H$ definirali mn
 \caption{Primer $H$-alternirajočega spredoda, ki se konča bodisi v $A$, bodisi v $B$.}
 \label{im1}
 \centering
-    \includegraphics[scale=0.5]{alt1.png}
+    \includegraphics[scale=0.5]{alt1.jpg}
     \end{figure}
 prejšnjo trditvijo. Iz tega bomo lahko sklepali, da je bila naša predpostvka napačna ter mora obstajati iskan podgraf $H$. 
 Definirajmo množico $A_0 = \{v : d_H(v) < a_v\}$ in \textbf{H-alternirajoč sprehod} kot sprehod $P = v_0v_1\ldots v_k$, ki se začne v vozlišču $v_0 \in A_0$ in dodatno velja $v_iv_{i+1} \in G-H$ za sod $i$ ter $v_iv_{i+1} \in H$ za lih $i$. Tak sprehod se torej začne v nekem vozlišču iz $A_0$ nato nadaljuje do nekega vozlišča preko povezave, ki je ni v $H$, nato po povezavi v $H$ in tako dalje. Sedaj označimo množici
@@ -1262,7 +1267,7 @@ Za vsak  graf $G$ velja $\eclt(G) \le 2$.
 \end{domneva}
 Zgornji domnevi sta presenetljivi v kolikor jih primerjamo s seznamsko verzijio kromatičnega števila. Tam smo ugotovili, da sicer veljajo podobne zgornje meje vendar se parametra lahko poljubno razlikujeta. V našem primeru je zastavljena zgornja meja enaka v seznamski in ne seznamski obliki. Pri tem velja izpostavit, da je seznamska verzija problema precej težja in že pri preprostih in majhnih grafih imamo lahko veliko težav pri računanju točnih vrednosti parametrov $\ecl(G)$ in $\eclt(G)$. Vendar s pomočjo orodja, ki smo ga razvili zgoraj to postane precej lažje. Iz vidika zgornjih domnev bi morali pokazati, da velja $\mind(G) \le 2 $ in $\tmind(G) \le 1$ za vsak graf $G$. Vendar to je v splošnem zelo težko pokazati saj je zelo težko ugotoviti kateri monomi preostanejo v razširitvi polinoma. Preden si ogledamo nekaj primerov moramo razviti še orodje s katerim bomo lažje ocenili kateri monomi ostanejo v polinomih, ki pripadajo grafom. Najprej se bomo osredotočili na povezavno verzijo problema, kjer uteži dodeljujemo samo povezavam. Nato bomo zelo podobno naredili tudi za polno verzijo pri čemer bodo vsi rezultati povezavne verziji bili veljavni tudi za polno verzijo.
 
-\subsubsection{Povezavna verzija}
+\subsection{Povezavna verzija}
 Za računanje kateri monomi preživijo v razširitvi polinoma pripadajočega grafu $G$ bomo razvili posebno metodo, ki originalen problem pretvori na problem linearne algebre. Pri tem bo problem navidezno postal bolj preprost saj si morda lažje predstavljamo matrike in računanje z njimi vendar se bo izkazalo, da je problem še vedno težak.
  V ta namen bomo vsakemu grafu priredili posebno matriko $A_G = (a_{ij})$. Fiksirajmo poljubno orientacijo grafa in definiramo elemente matrike kot 
 
@@ -1303,7 +1308,7 @@ Oglejmo si graf na sliki \ref{ex_1}. Za orientacijo kot je na sliki je polinom p
 \caption{Primer orientacije grafa.}
 \label{ex_1}
 \centering
-    \includegraphics[scale=0.8]{alg_ex_1.png}
+    \includegraphics[scale=0.8]{alg_ex_1.jpg}
     \end{figure}
 Zapišimo sedaj še matriko pripadajočo temu polinomu. Ko imamo enkrat zapisan celoten polinom dobimo matriko na zelo preprost način. Za $i$-to vrstico pogledamo $i$-ti faktor v polinomu in v to vrstico zapišemo koeficiente pred spremenljivkami, ki se v njem pojavljajo. Tako dobimo naslednjo matriko 
 $$ A_G = \left[ \begin{matrix} 0 & 1 & 0 & 1 \\ -1 & 0 & 1 & -1 \\ 0 & -1 & 0 & 1 \\ -1 & 1 & -1 & 0 \end{matrix} \right] .$$
@@ -1362,11 +1367,11 @@ $$\left[
 \end{matrix} \right].  $$
 Dokaz bomo nadaljevali, tako da se bomo probali vrednosti $-1$, ki se nahajajo nad diagonalo potisniti čim bolj navzdol. Nakoncu bomo lahko izračunali permanent nastale matrike in pokazali, da je različen od nič. Predpostavimo najprej, da je $n = 2k + 1$ lih. V tem primeru definiramo stolpce matrike $L$ kot $L_i = A_{i+1}$ posebaj pa definiramo zadnja dva stolpca in sicer $L_{n-1} =A_n + A_2 + A_4 + \ldots A_{2k}$ ter $L_n = A_1 + A_3 + \ldots A_{2k-1}$. Na tak način vrednost $-1$ v predzadnjem stolpcu prestavili pod diagonalo v zadnjem stolpcu pa se nahaja ravno nad diagonalo. Tako je permanent matrike $L$ enak produktu diagonalnih elementov, ki so vsi enaki $1$ ter permanentu spodnjega $2 \times 2$ bloka
 $$
-perL = per \left[ \begin{matrix} 1 & -1 \\ -1 & 1 \end{matrix} \right] = 2 \neq 0.
+\per L = \per \left[ \begin{matrix} 1 & -1 \\ -1 & 1 \end{matrix} \right] = 2 \neq 0.
  $$
 Oglejmo si še primer ko je $n=2k$ sod. Ideja ostane enaka, vrednosti $-1$ nad diagonalo si želimo spravit čim bližje diagonali in zopet bomo v tam namen seštevali stolpce iste parnosti. V tem primeru moramo biti malo bolj pazljivi, saj lahko ustvarimo stolpec, ki vsebuje same ničle in bo s tem permanent celotne matrike enak $0$. Temu se bomo izognili, da bomo pri seštevanju stoplcev enega izpustili. Enako definiramo $L_i = A_{i+1}$ ter $L_{n-1} =  A_n + A_2 + A_4 + \ldots A_{2k - 2}$ in $L_{n} = A_1 + A_3 + \ldots A_{2k - 3}$. Na enak način kot v prejšnjem primeru sedaj dobimo na diagonali enice in ničle nad diagonalo razen v spodnjem desnem $4 \times 4$ bloku. Tako je permanent celotne matrike $L$ enak permanentu spodnjega bloka oblike
 $$
-\per L = \left( \begin{matrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 0 & -1 \\ -1 & 0 & 1 & 0 \\ 0 & -1 & 0 & 1 \end{matrix} \right) = 2 \neq 0 .
+\per L = \left[ \begin{matrix} 1 & 0 & -1 & 0 \\ 0 & 1 & 0 & -1 \\ -1 & 0 & 1 & 0 \\ 0 & -1 & 0 & 1 \end{matrix} \right] = 2 \neq 0 .
  $$
 V obeh primerih smo torej dobili neničelen permanent matrike $L$. Prav tako v obeh primerih velja, da se posamezen stolpec matrike $A_{C_n}$ pojavlja v največ dveh stolpcih matrike $L$. Res, stolpec $A_i$ se pojavi v $i-1$ stolpcu $L$ ter ali v $n$-tem ali $n-1$-tem stolpcu vendar ne obeh. S tem je trditev dokazana.
 \end{proof}
@@ -1474,7 +1479,7 @@ Sedaj razvijemo po zadnji vrstici in dobimo $\per A_T(K') = \per  A_{T-e-f}(K) \
 
 Za zaključek tega razdelka povzemimo, da smo seznamsko verzijo domneve dokazali za kar nekaj družin grafov za kateremo smo v prejšnjih razdelkih dokazali originalno domnevo. Kljub dobro razvitemu orodju za obravnavanje seznamske verzije za splošne grafe težko potegnemo kakšne uporabne zaključke. To sledi iz dejstva, da smo v večini primerov uporabili posebno strukturo grafov kar nam je porodilo matriko posebne oblike in smo z primernimi transformacijami lahko izračunali njen permanentni indeks. Prav tako si z izrekom \ref{algcons} v primeru splošnih grafov ne moremo pomagati kaj dosti saj z konstrukcijo kot je opisana v izreku seveda ne moremo generirati vseh grafov. Zato konstantna zgornja meja za seznamsko verzijo ostaja odprt problem.
 
-\subsubsection{Polna verzija}
+\subsection{Polna verzija}
 Oglejmo si še kako postopamo v primeru polne verzije. Vse ideje prejšnjega razdelka so seveda veljavne tudi tukaj zaradi enakega razloga kot v ne seznamski verziji. Tudi za polno verzijo bomo grafu priredili matriko $A_G^t = (a_{ij})$ velikosti $m \times (m+n)$. Zopet fiksiramo poljubno orientacijo grafo in definiramo matriko $A_G^t$ kot
 
 \begin{equation*}
@@ -1503,7 +1508,7 @@ Oglaejmo si enak primer grafa kot prej le da sedaj oštevilčimo še vozlišča.
 \caption{Primer orientacije grafa z označenimi vozlišči.}
 \label{ex_2}
 \centering
-    \includegraphics[scale=0.8]{alg_ex_2.png}
+    \includegraphics[scale=0.8]{alg_ex_2.jpg}
     \end{figure}
 pripadajoč grafu oblike $T_G(x_1, \ldots, x_8) = (x_2 + x_4 + x_6 - x_5)(x_3 + x_7 - x_1 - x_4 - x_6)(x_4 + x_8 - x_2 - x_7)(x_1 + x_2 + x_6 - x_3 - x_8)$ ter matrika 
 
@@ -1513,7 +1518,7 @@ Sedaj moramo izračunami $\pind(A_G^t)$. Označimo $A =A_G^t$ in izračunajmo:
 \begin{equation*}
 \begin{split}
  \per([A_1, A_3, A_5, A_7]) &= \per\left[ \begin{matrix} 0 & 0 & -1 & 0 \\ -1 & 1 & 0 & 1 \\ 0 & 0 & 0 & -1 \\ 1 & -1 & 0 & 1 \end{matrix} \right] \\
-&= -\per\left[ \begin{matrix} 0 & 0 & -1 \\ -1 & 1 & 0 \\ 1 & -1 & 0 \end{matrix} \right) =\per\left( \begin{matrix} -1 & 1 \\ 1 & -1 \end{matrix} \right] \\
+&= -\per\left[ \begin{matrix} 0 & 0 & -1 \\ -1 & 1 & 0 \\ 1 & -1 & 0 \end{matrix} \right] =\per\left[ \begin{matrix} -1 & 1 \\ 1 & -1 \end{matrix} \right] \\
 &=2 \neq 0.
 \end{split}
 \end{equation*}
@@ -1709,7 +1714,7 @@ Kot smo omenili bo moral algoritem v najslabšem primeru predelati vse možne ut
 \caption{Primer razvejitve problema preko povezave $e$.}
 \label{alg_rec}
 \centering
-    \includegraphics[scale=0.75]{alg_rec.png}
+    \includegraphics[scale=0.75]{alg_rec.jpg}
     \end{figure}
 Shema take delitve oziroma razvejitve je prikazana na sliki ~\ref{alg_rec}. Na tak način lahko torej preverimo vse možne utežitve za dan graf. V kolikor nobena izmed njih ne inducira pravilnega barvanja smo odkrili protiprimer za domnevo 1-2-3. Torej za razvejitev problema si moramo izbrati neko povezavo. Katera izbira je najboljše? Odgovor na to vprašanje je preprost. Ne vemo. Zato na tej točki potrebujemo hevristiko, ki nam bo na podlagi trenutnega stanja podala povezavo na kateri izvedemo delitev. V našem primeru bomo uporabljali naslednje hevristike za izbiro povezave.
 \begin{enumerate}
@@ -1726,7 +1731,7 @@ Recimo, da ima graf $G = (V, E)$ neko utežitev $\omega$, ki ne inducira praviln
 \caption{Primer odprave konflikta $e$ z modifikacijo uteži na sosednji povezavi.}
 \label{alg_loc}
 \centering
-    \includegraphics[scale=0.6]{alg_loc.png}
+    \includegraphics[scale=0.6]{alg_loc.jpg}
     \end{figure}
 Na sliki ~\ref{alg_loc} lahko vidimo primer odprave takega konflikta. Vendar s spremembo uteži $\sigma \mapsto\sigma'$, smo lahko ustvarili kakšen nov konflikt in sicer v soseščini vozlišča $x$ in $u$. V našem algoritmu zato poizkušamo konflikt odpravit, tako da spremenimo uteži na vseh povezavah, ki so incidenčne $u$ in $v$. Pri tem izpustimo povezavo $e$, saj na konflikt nima vpliva. Za vsako spremembo uteži zabeležimo skupno število konflikov. Na koncu se odločimo za tisto spremembo uteži, ki ustvari najmanjše skupno število konfliktov. Po odpravi konflikta nadaljujemo in iz vrste vzamemo naslednji konflikt. Algoritem končamo, če odpravimo vse konflikte, ali nobena sprememba uteži ne zniža števila konfliktov. V tem primeru zaključimo, da je minimizacija konfliktov neuspešna ter nadaljujemo z rekurzivnim algoritmom. Zaradi tega, ker algoritem poizkuša minimizirati število konfliktov in ker zato uporablja le sosednje povezave bomo ta postopek imenovali lokalno iskanje (rešiteve) oziroma lokalna minimizacija konfliktov.
 
@@ -1799,7 +1804,7 @@ Algoritem ni imel večjih težav pri iskanju ustreznih rešitev za vse možne po
 \caption{Primerjava med različnimi rešitvami za grafe do stopnje $10$ v odvisnosti od števila vozlišč}
 \label{chart_10_1}
 \centering
-    \includegraphics[scale=0.8]{chart_10_1.png}
+    \includegraphics[scale=0.8]{chart_10_1.jpg}
     \end{figure}
 
 Pri analiziranju rešitev se bomo osredotočili na to, kako je algoritem našel rešitev. Pričakujemo lahko, da bo naključna utežitev in lokalno iskanje boljše delovalo na grafih z manjšim številom povezav in vozlišč. To je razumljivo, saj je pri manjšem število povezav tudi manj vseh možnih utežitev. Zato naključna utežitev lahko prinese uspešne rezultate. Prav tako lokalno iskanje deluje dobro pri manjših grafih saj je manj možnosti za konflikte. Na sliki ~\ref{chart_10_1} vidimo rezultate izvajanja algoritma na vseh grafih do stopnje $10$. Kot je razvidno se delež grafov, ki so bili rešeni naključno, zamnjšuje ko povečujemo stopnje vozlišč. Po drugi strani opazimo, da se delež lokalno rešljivih grafov povečuje. Vendar je to posledica tega, da se s številom vozlišč zelo hitro povečuje število grafov. Pri je še vedno velika večina grafov rešljivih z lokalnim iskanjem.
@@ -1807,7 +1812,7 @@ Pri analiziranju rešitev se bomo osredotočili na to, kako je algoritem našel 
 \caption{Primerjava med različnimi rešitvami za grafe do stopnje $10$ v odvisnosti od števila povezav.}
 \label{chart_10_2}
 \centering
-    \includegraphics[scale=0.8]{chart_10_2.png}
+    \includegraphics[scale=0.8]{chart_10_2.jpg}
     \end{figure}
 Po drugi strani se s številom vozlišč povečuje tudi možno število povezav. Na sliki ~\ref{chart_10_2} prikazujemo delež rešitev v odvisnosti od števila povezav. Opazimo, da se delež lokalno rešljivih grafov nekaj časa povečuje ter nato začne padati. Razlog za naraščanje leži v tem, da se število naključno rešljivih grafov zmanjšuje. Nato število povezav in število možnih utežitev postane veliko ter grafov skoraj ne moremo več rešiti naključno. Opazi se tudi, da lokalno iskanje ne najde vedno rešitve in je potrebna razvejitev problema.
 
@@ -1816,7 +1821,7 @@ Poleg analiziranja vseh možnih grafov do stopnje $10$ smo algoritem pognali tud
 \caption{Primerjava med različnimi rešitvami za grafe višjih stopenj.}
 \label{chart_big_1}
 \centering
-    \includegraphics[scale=0.8]{chart_big_1.png}
+    \includegraphics[scale=0.8]{chart_big_1.jpg}
     \end{figure}
 To smo storili, da dobimo boljšo oceno za naključno generiran graf. Vsak graf smo na začetku utežili z naključnimi utežmi ter uporabili hevristiko, ki izbere naključno povezavo za razvejitev. Pričakovano je, da bo algoritem za večje grafe potreboval več časa, da najde rešitev. Prav tako bomo opazovali na kakšen način algoritem najde rešitev. 
 
@@ -1825,7 +1830,7 @@ Na sliki ~\ref{chart_big_1} lahko opazimo, da se število naključno rešljivih 
 \caption{Škatlasti diagrami rekurzivne globine glede na število vozlišč.}
 \label{chart_big_2}
 \centering
-    \includegraphics[scale=0.67]{chart_big_2.png}
+    \includegraphics[scale=0.67]{chart_big_2.jpg}
     \end{figure}
 Na sliki ~\ref{chart_big_2} vidimo, kako se spreminja rekurzivna globina s številom vozlišč. Rekurzivno globino smo ponazorili z t.i. škatlastim diagramom, ki prikazuje povprečje, mediano, prvi in tretji kvartil ter minimalne in maksimalne vrednosti. S pomočjo škatlastih diagramov lažje opazujemo porazdelitev neke slučajne spremenljivke. Opazimo, da rekurzivna globina narašča. Hitrost naraščanja težko ocenimo. Kot smo že omenili je razumljivo, da se rekurzivna globina povečuje saj se s številom vozlišč povečuje tudi število povezav. Ravno število povezav je tisto, kar najbolj vpliva na delovanje algoritma. Poleg tega, da rekurzivna globina narašča se povečuje tudi razpon rekurzivnih globin po posameznih velikostih grafov. To si morda lahko predstavljamo na naslednji način. Več kot ima graf vozlišč več različnih grafov obstaja in pri tem obstajajo grafi, ki so za algoritem težji ter tudi lažji. Ravno zaradi tega je razpon vrednosti večji pri večjih grafih. V sosednjem diagramu smo poizkušali uravnotežit naraščanje števila povezav, tako da smo rekurzivno globino delili s številom povezav. To smo storili preden smo izrisali škatlaste diagrame, saj smo za vsak graf utežili njegovo rekurzivno globino. Rezultati so zelo zanimivi, saj med drugim opazimo, da utežena rekurzivna globina na začetku celo pada nato pa narašča zelo počasi. Poleg tega se stabilizirajo tudi razponi vrednosti pri večjih grafih. Zelo zanimivo je tudi dejstvo, da za grafe z več kot $30$ vozlišči nikoli nismo razvejili algoritma na več kot $10\%$ vseh povezav grafa. V povprečju smo celo razvejili na manj kot $5\%$ vseh povezav. Ena izmed možnih razlag je v tem, da algoritem pravzaprav odreže velik del celotnega iskalnega drevesa. Algoritem konča z neko vejo, takoj ko ugotovi, da nekega konflikta ne more odpravit saj bi nujno moral spremeniti utež na eni izmed povezav na kateri je že bila izvedena delitev. To seveda ni mogoče zato v tisti veji ne išče več rešitev.  Ker smo grafe generirali naključno je seveda možno tudi to, da smo imeli srečo in generirali grafe, ki so za algoritem ``ugodni''. Prav tako bi morali analizirati še grafe večjih stopenj, da bi lahko potrdili kako se spreminja število delitev oziroma delež povezav na katerih se opravi delitev.
 
@@ -1834,7 +1839,7 @@ Oglejmo si nahitro še kako se spreminja čas, ki ga algoritem porabi za analizi
 \caption{Škatlasti diagrami časa izvajanja algoritma.}
 \label{chart_big_3}
 \centering
-    \includegraphics[scale=0.73]{chart_big_3.png}
+    \includegraphics[scale=0.73]{chart_big_3.jpg}
     \end{figure}
 Seveda je razumljivo, da se bo čas izvajanja povečeval saj se hitro povečuje tudi število povezav v grafu. Ko smo analizirali lokalno iskanje rešitve smo ocenili tudi njegovo časovno zahtevnost, ki je bila polinomska v odvisnosti od števila vozlišč. To potrdimo tudi z diagramom na sliki ~\ref{chart_big_3}. Na isti sliki imamo tudi diagram časa izvajanje rekurzivnega algoritma. Seveda bo za rekurzivno rešitev algoritem potreboval več časa kot za lokalno rešitev saj mora pred vsako delitvijo opravit lokalno iskanje. Iz vidika prejšnjih ugotovitev lahko sklepamo, da rekurzivni algoritem vseeno ne porabi toliko več časa kot lokalno iskanje. Če bi lahko omejili število delitev rekurzivnega algoritma z $\mathcal{O}(m)$ bi njegova celotna časovna zahtevnost postala polinomska. Vendar kaj takega ne moremo sklepati le na podlagi dobljenih rezultatov saj ne vemo, kako bi se algoritem obnašal na precej večjih grafih.
 
@@ -1843,14 +1848,14 @@ Pri vseh grafih, ki smo ji analizirali smo uporabili naključno povezavo za razv
 \caption{Škatlasti diagrami rekurzivne globine glede na hevristike.}
 \label{chart_h_1}
 \centering
-    \includegraphics[scale=0.8]{chart_h_1.png}
+    \includegraphics[scale=0.8]{chart_h_1.jpg}
     \end{figure}
 V diagramu ~\ref{chart_h_1} so prikazani škatlasti diagrami rekurzivne globine glede na različne tipe hevristike. Pri tem smo generirali $10000$ naključnih grafov na $60$ vozliščih in algoritem pognali na vsakem grafu z uporabo vseh treh hevristik. Med hevristikami ni opaziti večjih razli. Vendar vseeno se morda delovanje hevristik razlikuje, če rezultate pogledamo bolj natančno. V diagramu  ~\ref{chart_h_2} vidimo kako je rekurzivna globina odvisna od minimalne stopnje vozlišča v grafu.
  \begin{figure}[h!]
 \caption{Rekurzivna globina glede na hevristiko v osvisnosti od minimalne stopnje grafa.}
 \label{chart_h_2}
 \centering
-    \includegraphics[scale=0.7]{chart_h_2.png}
+    \includegraphics[scale=0.7]{chart_h_2.jpg}
     \end{figure}
 Pri tem opazimo, da max hevristika deluje malo boljše za grafe z večjo minimalno stopnjo medtem ko min hevristika deluje bolje za grafe z manjšo  minimalno stopnjo. Naključna hevristika generalno deluje podobno kot ostali dve. Kljub temu, da je na diagramu videti male razlike med samimi hevristikami so te razlike majhne in verjetno nimajo velikega vpliva na izvajanje algoritma.
 
