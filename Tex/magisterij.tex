@@ -10,13 +10,13 @@
 % NASLEDNJE UKAZE USTREZNO POPRAVI
 \newcommand{\program}{Matematika} % ime studijskega programa
 \newcommand{\imeavtorja}{Gašper Domen Romih} % ime avtorja
-\newcommand{\imementorja}{prof.~dr.~Nino Bašić} % akademski naziv in ime mentorja, uporabi poln naziv, prof.~dr.~, doc.~dr., ali izr.~prof.~dr.
+\newcommand{\imementorja}{doc.~dr.~Nino Bašić (UP)} % akademski naziv in ime mentorja, uporabi poln naziv, prof.~dr.~, doc.~dr., ali izr.~prof.~dr.
 \newcommand{\imesomentorja}{} % akademski naziv in ime somentorja, če ga imate
 \newcommand{\naslovdela}{Domneva 1-2-3}
-\newcommand{\letnica}{2020} % letnica magistriranja
+\newcommand{\letnica}{2021} % letnica magistriranja
 \newcommand{\opis}{Delo obravnava domnevo 1-2-3 ter njene variacije.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
-\newcommand{\kljucnebesede}{teorija grafov\sep kombinatorika\sep grafovski polinomi\sep naključni grafi} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
-\newcommand{\keywords}{graph theory\sep combinatorics\sep graph polynomials\sep random graphs} % ključne besede v angleščini
+\newcommand{\kljucnebesede}{teorija grafov\sep kombinatorika\sep grafovski polinomi\sep naključni grafi\sep permanenta\sep kombinatorični izrek o ničlah} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
+\newcommand{\keywords}{graph theory\sep combinatorics\sep graph polynomials\sep random graphs\sep permanent\sep combinatorial nullstellensatz} % ključne besede v angleščini
 \newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
 \newcommand{\literatura}{literatura}  % pot do datoteke z literaturo (brez .bib končnice)
 \newcommand{\sep}{, }  % separator med ključnimi besedami v besedilu
@@ -33,7 +33,7 @@
 \begin{filecontents*}[overwrite]{\jobname.xmpdata}
   \Title{\naslovdela}
   \Author{\imeavtorja}
-  \Keywords{graph theory\sep combinatorics\sep graph polynomials\sep random graphs}
+  \Keywords{teorija grafov\sep kombinatorika\sep grafovski polinomi\sep naključni grafi\sep permanenta\sep kombinatorični izrek o ničlah}
   \Subject{\opis}
   \Org{\organization}
 \end{filecontents*}
@@ -164,7 +164,7 @@
 %%%%%%           DOCUMENT           %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeatletter
-\def\sep{; }
+
 \pdfx@topdfstring\pdfx@Author\xmp@Author
 \pdfx@topdfstring\pdfx@Keywords\xmp@Keywords
 \makeatother
@@ -271,8 +271,13 @@ FAKULTETA ZA MATEMATIKO IN FIZIKO\\[5mm]
 % zahvala
 \pdfbookmark[1]{Zahvala}{zahvala} %
 \section*{Zahvala}
-Neobvezno.
-Zahvaljujem se \dots
+Na tem mestu bi se rad zahvalil družini ter prijateljem, ki so me tekom študija vedno podpirali ter mi stali ob strani. Z njihovo pomočjo je bil študij zanimiv ter zabaven, tudi v težjih časih.
+
+Zahvalil bi se mentorju doc.~dr.~Nino Bašiću za vse komentarje, popravke, razlage in nasvete ter potrpežljivost in voljo na koncu.
+
+Dodatno bi se zahvalil Domnu Muhi sošolcu in prijatelju že od prvih gimnazijskih dni. V tem obdobju je bil vedno pripravljen pomagat, tako s študijskimi kot neštudijskimi zadevami.
+
+Zahvalil bi se tudi Igorju Smirnovu, ki mi je omogočil delo ob študiju ter me pri tem vedno podpiral.
 % end zahvala -- izbriši vse med zahvala in end zahvala, če je ne rabiš
 
 \cleardoublepage
@@ -317,20 +322,18 @@ okolje itemize in ukaz plancite, saj je celotna literatura oštevilčena na konc
 \textbf{\naslovdela} \\[3mm]
 \textsc{Povzetek} \\[2mm]
 \end{center}
-Povezavam grafa $G$ priredimo uteži z vrednostmi $1,2,\ldots,k$. Uteži na povezavah porodijo pravilno barvanje grafa $G$, če se vsote uteži incedenčnih povezav razlikujejo za vsaki sosednji vozlišči. V nalogi se osredotočimo na zgornjo mejo za $k$ za splošne grafe. Obravnavamo tudi polne ter $d$-regularne grafe. 
+Povezavna utežitev $\omega : E \rightarrow \{1,2, \ldots, k\}$ grafa $G = (V, E)$ porodi pravilno barvanje, če se vsote uteži na incidenčnih povezavah razlikujejo za vsaki dve sosednji vozlišči. V nalogi se osredotočimo na zgornjo mejo za $k$ za katero lahko za vsak graf najdemo utežitev, ki porodi ustrezno barvanje. Obravnavamo tudi cikle, drevesa ter polne in regularne grafe.
 
 \vfill
 \begin{center}
-\textbf{English translation of the title} \\[3mm] % prevod slovenskega naslova dela
+\textbf{1-2-3 Conjecture} \\[3mm] % prevod slovenskega naslova dela
 \textsc{Abstract}\\[2mm]
 \end{center}
-
-An abstract of the work is written here. This includes a short description of
-the content and not the structure of your work.
+An edge weighting $\omega : E \rightarrow \{1,2, \ldots, k\}$ of a graph $G = (V, E)$ induces proper coloring if sums of incident edges are different for any two adjacent vertices. We focuse on upper bound for $k$ where we can find for any graph a weighting which induces a proper coloring. We also consider cycles, trees, complete and regular graphs.
 
 \vfill\noindent
-\textbf{Math.~Subj.~Class.~(2020):} 05C15, 05C31, 05C80    
-\url{http://www.ams.org/msc/msc2020.html?t=65Mxx} \\[1mm]
+\textbf{Math.~Subj.~Class.~(2020):} 05C15, 05C31, 05C80, 05C78, 05C85
+\ \\[1mm]
 \textbf{Ključne besede:} \kljucnebesede \\[1mm]
 \textbf{Keywords:} \keywords
 
@@ -374,7 +377,7 @@ Ampak pri tem vsako povezavo štejemo ravno dvakrat, kar je točno desna stran e
 Barvanje grafa je zagotovo eden izmed najbolj popularnih grafovskih problemov. Poleg tega, da je bil ta problem eden izmed prvih grafovskih problemov za katerega so dokazali NP-polnost je povezan še z mnogo drugimi podobnimi problemi. Tako se je oblikovalo več različnih in izpeljanih načinov barvanja grafov. Vsem oblikam barvanja je skupno to, da je za splošne grafe to težak problem.
 \textbf{Vozliščno barvanje} grafa $G=(V, E)$ je preslikava $ c: V \rightarrow S$. V kolikor za vsako povezavo $uv \in E$ velja $c(v) \neq c(u)$ rečemo, da je barvanje pravilno. Množica $S$ je množica razpoložljivih barv, ki je ponavadi oblike $ \{1,2,\ldots, k\}$. Poleg vozliščnega barvanja poznamo tudi povezavno barvanje, vendar nas to tukaj ne bo zanimalo. Zato bomo od sedaj dalje z barvanjem grafa vedno mislili vozliščno barvanje. Pri barvanju nas ponavadi zanima velikost množice $S$. Drugače povedano, zanima nas najmanjši $k \in \mathbb{N}$, tako da G premore $k$-barvanje $c : V \rightarrow \{1,2,\ldots, k\}$. 
 
-Tak najmanjši $k$ označimo z $\chi(G)$ in ga imenujemo \textbf{kromatično število} grafa $G$. Z lahkoto preverimo, da je to invarianta grafa. V kolikor je $ \chi(G) \le k$ rečemo, da je graf $k$-obarljiv. Za podan graf $G$ nas ponavadi zanima zgornja meja za  $\chi(G)$. Konstantna zgornja meja za splošne grafe ne obstaja. Preprost primer, ki podpre to dejstvo so polni grafi $K_n$ saj za njih potrebujemo $n$ barv. Obstaja pa preprosta meja, ki vključuje maksimalno stopnjo $\Delta$ in sicer velja  $\chi(G) \le \Delta + 1$. To lahko preprosto vidimo, če analiziramo vozlišča grafa v poljubnem vrstnem redu, recimo $v_1, v_2, \dots, v_n$ ter jih požrešno barvamo. V najslabšem primeru, bodo vsi sosedi trenutnega vozlišča pobarvani z različnimi barvami, kar pomeni, da moramo trenutno vozlišče pobartvati z dodatno barvo. Na tak način nikoli ne porabimo več kot $\Delta + 1$ barv. Izkaže se, da je ta zgornja meja v večini primerov slaba, ter se jo da izboljšati. Ideja leži v tem, da ko barvamo vozlišče $v_i$ zadošča opazovati le število tistih sosedov $v_j$, kjer je $j < i$. S pomočjo te opazke lahko konstruiramo posebno razvrstitev vozlišč za katero bo veljalo, da ima $v_i$ minimalno stopnjo v grafu induciranem z $v_1, v_2, \ldots, v_i$. Tako razvrstitev lahko dosežemo, tako da najprej vzamemo $v_n$ za katerega velja $d(v_n) = \delta(G)$. Postopek nadaljujemo, tako da izberemo $v_{n-1}$ kot vozlišče z najmanjšo stopnjo v $G - v_n$ ter tako naprej.
+Tak najmanjši $k$ označimo z $\chi(G)$ in ga imenujemo \textbf{kromatično število} grafa $G$. Z lahkoto preverimo, da je to invarianta grafa. V kolikor je $ \chi(G) \le k$ rečemo, da je graf $k$-obarvljiv. Za podan graf $G$ nas ponavadi zanima zgornja meja za  $\chi(G)$. Konstantna zgornja meja za splošne grafe ne obstaja. Preprost primer, ki podpre to dejstvo so polni grafi $K_n$ saj za njih potrebujemo $n$ barv. Obstaja pa preprosta meja, ki vključuje maksimalno stopnjo $\Delta$ in sicer velja  $\chi(G) \le \Delta + 1$. To lahko preprosto vidimo, če analiziramo vozlišča grafa v poljubnem vrstnem redu, recimo $v_1, v_2, \dots, v_n$ ter jih požrešno barvamo. V najslabšem primeru, bodo vsi sosedi trenutnega vozlišča pobarvani z različnimi barvami, kar pomeni, da moramo trenutno vozlišče pobartvati z dodatno barvo. Na tak način nikoli ne porabimo več kot $\Delta + 1$ barv. Izkaže se, da je ta zgornja meja v večini primerov slaba, ter se jo da izboljšati. Ideja leži v tem, da ko barvamo vozlišče $v_i$ zadošča opazovati le število tistih sosedov $v_j$, kjer je $j < i$. S pomočjo te opazke lahko konstruiramo posebno razvrstitev vozlišč za katero bo veljalo, da ima $v_i$ minimalno stopnjo v grafu induciranem z $v_1, v_2, \ldots, v_i$. Tako razvrstitev lahko dosežemo, tako da najprej vzamemo $v_n$ za katerega velja $d(v_n) = \delta(G)$. Postopek nadaljujemo, tako da izberemo $v_{n-1}$ kot vozlišče z najmanjšo stopnjo v $G - v_n$ ter tako naprej.
 
 Najmanjši tak $k$ za katerega ima graf $G$ tako ureditev vozlišč za katerega velja, da ima vsako volišče manj kot $k$ sosedov v množici prejšnjih vozlič  imenujemo \textbf{barvno število} ter jo označimo kot $\col(G)$. Očitno velja $\chi(G) \le \col(G)$. S pomočjo zgornje ureditve vozlišč lahko dodatno omejimo $\col(G) \le  \max_{H \subseteq G} \delta(H) + 1$. Ampak očitno velja tudi obratno ter velja $\col(G) \ge \col(H)$, kjer je $H$ poljuben podgraf v $G$. Dokazali smo torej 
 
@@ -403,8 +406,8 @@ Graf na sliki \ref{basic_ex} ima $9$ vozlišč in $10$ povezav ter je povezan. N
 \end{primer}
 
 \subsection{Seznamsko barvanje grafa}
-Sedaj bomo definirali posplošitev barvanja grafa. Na zelo podoben način se posploši tudi druge grafovske probleme, kar bomo videli v naslednjih razdelkih. Naj bo $G = (V, E)$ graf in naj bo $(S_v)_{v \in V}$ družina množic. Vozliščno barvanje $c$ grafa $G$, kjer dodatno velja $c(v) \in S_v$ za vse $v$ imenujemo \textbf{seznamsko barvanje} s seznami $S_v$. Graf $G$ je $k$-seznamsko obarljiv, če za vsako družino  $(S_v)_{v \in V}$ za katero velja $|S_v| = k$ za vse $v$, obstaja pravilno vozliščno barvanje s seznami $S_v$. Najmanjši tak $k$ imenujemo \textbf{seznamsko kromatično število} oziroma izbirno število (eng.\ choice number) in jo označimo kot $\ch(G)$.
-Definicija je bolj zapletena kot definicija navadnega barvanja zato si oglejmo kakšna je povezava med njima. Da je seznamsko barvanje res posplošitev preprosto ugotovimo, tako da za družino  $(S_v)_{v \in V}$ vzamemo kar enake množice, naprimer $S_v = \{1,2, \ldots, k\}$ za vsak $v \in V$.  S tem ugotovimo, da v kolikor je graf $k$-seznamsko obarljiv je tudi $k$-obarljiv. Torej velja, 
+Sedaj bomo definirali posplošitev barvanja grafa. Na zelo podoben način se posploši tudi druge grafovske probleme, kar bomo videli v naslednjih razdelkih. Naj bo $G = (V, E)$ graf in naj bo $(S_v)_{v \in V}$ družina množic. Vozliščno barvanje $c$ grafa $G$, kjer dodatno velja $c(v) \in S_v$ za vse $v$ imenujemo \textbf{seznamsko barvanje} s seznami $S_v$. Graf $G$ je $k$-seznamsko obarvljiv, če za vsako družino  $(S_v)_{v \in V}$ za katero velja $|S_v| = k$ za vse $v$, obstaja pravilno vozliščno barvanje s seznami $S_v$. Najmanjši tak $k$ imenujemo \textbf{seznamsko kromatično število} oziroma izbirno število (eng.\ choice number) in jo označimo kot $\ch(G)$.
+Definicija je bolj zapletena kot definicija navadnega barvanja zato si oglejmo kakšna je povezava med njima. Da je seznamsko barvanje res posplošitev preprosto ugotovimo, tako da za družino  $(S_v)_{v \in V}$ vzamemo kar enake množice, naprimer $S_v = \{1,2, \ldots, k\}$ za vsak $v \in V$.  S tem ugotovimo, da v kolikor je graf $k$-seznamsko obarvljiv je tudi $k$-obarvljiv. Torej velja, 
 $$ \ch(G) \ge \chi(G).$$
 Dodatno se izkaže, da veliko zgornjih mej za kromatično število velja tudi za seznamsko verzijo. Konkretno reformulacija Brooksovega izreka velja tudi za seznamsko barvanje. To pomeni, da v kolikor $G$ ni poln graf ali lih cikler velja $\ch(G) \le \Delta(G)$.  Prav tako velja ista zgornja meja s pomočjo barvnega števila in sicer $\ch(G) \le \col(G)$. Vendar to še ne pomeni, da sta si $\chi(G)$ in $\ch(G)$ blizu. Obstajajo preprosti grafi, kjer je razlika med parametroma lahko poljubna. Klasični primeri tega so polni dvodelni grafi. Polni dvodelni graf označimo z $K_{m,n}$. To je graf, ki ima za biparticijo množici velikosti $m$ in $n$ ter vse možne povezave med njima. Oglejmo si bolj podrobno graf $K_{2, 4}$.
 
@@ -678,13 +681,13 @@ Naj bo $K_n$ polni graf na vsaj treh vozliščih. Tedaj velja $\ec(K_n) = 3$.
 
 Poglejmo najprej zakaj velja $\ec(K_n) \ge 3$. Recimo, da to ne drži. Torej imamo neko $2$-utežitev $\omega$ za $K_n$ iz česar sledi, da je $c_{\omega}(v_i) \neq c_{\omega}(v_j)$ za vsak $ i \neq j$. To pomeni, da mora vsak $c_{\omega}(v_i)$ za $i=1,2,\ldots,n$ pripadati eni izmed $n$ različnih vrednosti v množici$\{n-1, n, \ldots, 2(n-1)\}$. Tako lahko najdemo vozlišče $v'$ za katerega $c_{\omega}(v') = n-1$ in vozlišče $u'$ za katerega $c_{\omega}(u') = 2(n-1)$, to pa je protislovje saj $\omega(v'u') = 1$ zaradi vozlišča $v'$ in $\omega(v'u') = 2$ zaradi $u'$.
 
- Pozkusimo sedaj najti $3$-utežitev $\omega$, ki je pravilno barvanje z utežmi. Sedaj imamo za $c_{\omega}(v_i)$ na voljo eno izmed $3n$ vrednosti izmed $\{n-1, n, \ldots, 3(n-1)\}$. Skonstruirali bomo utežitev $\omega$ na naslednji način. Najprej oštevilčimo vozlišča kot $v_1, v_2, \ldots, v_n$. V prvem koraku nastavimo vse uteži na 1. Uteži z vrednostjo 2 in 3 dodelimo povezavam, tako da dobimo strogo naraščajoče zaporedje $\left(c_{\omega}(v_i)\right)_{i \in [n]}$. Označimo še $N_j = \{n, n-1, \ldots, n - j + 1\} \setminus \{v_j\}$ in nastavimo
+ Pozkusimo sedaj najti $3$-utežitev $\omega$, ki je pravilno barvanje z utežmi. Sedaj imamo za $c_{\omega}(v_i)$ na voljo eno izmed $3n$ vrednosti izmed $\{n-1, n, \ldots, 3(n-1)\}$. Skonstruirali bomo utežitev $\omega$ na naslednji način. Najprej oštevilčimo vozlišča kot $v_1, v_2, \ldots, v_n$. V prvem koraku nastavimo vse uteži na 1. Uteži z vrednostjo 2 in 3 dodelimo povezavam, tako da dobimo strogo naraščajoče zaporedje $\left(c_{\omega}(v_i)\right)_{i \in [n]}$. Označimo še $N_j = \{n, n-1, \ldots, n - j + 1\} \setminus \{j\}$ in nastavimo
  \begin{equation*}
  \begin{split}
  \omega(v_1 v_i) &= 2 \text{ za } i \in N_1 \\
  \omega(v_2v_i) &=2 \text{ za } i \in N_2\\
  \vdots \\
- \omega(v_jv_i) &= 2 \text{ za } i \in N_j .
+ \omega(v_nv_i) &= 2 \text{ za } i \in N_n .
  \end{split}
  \end{equation*}
 Sedaj velja 
@@ -694,7 +697,7 @@ $$ c_{\omega}(v_i) = \underbrace{n-1}_{\text{Uteži z vr. 1}} + \underbrace{|N_i
  i, & \text{če } i\notin N_i \iff i < n - i +1; \\
   i - 1, & \text{če } i \in N_i \iff i \ge n - i + 1.
 \end{cases} $$
-Iz zgornje enačbe vidimo, da zaporedje strogo narašča do največjega $i$, za katerega velja$ i < n - i +1$. To pa je natanko tedaj, ko $ i =  \lfloor \frac{n}{2}\rfloor$. Takrat velja
+Iz zgornje enačbe vidimo, da zaporedje strogo narašča do največjega $i$, za katerega velja $ i < n - i +1$. To pa je natanko tedaj, ko $ i =  \lfloor \frac{n}{2}\rfloor$. Takrat velja
 $$|N_{i}|  =| N_{i+1}| \implies c_{\omega}(v_i) = c_{\omega}(v_{i+1}).$$
 Te enakosti se znebimo, tako da dodamo uteži $\omega(v_iv_n) = 3$ za $\lfloor \frac{n}{2}\rfloor < i < n$ in dobimo
 $$c_{\omega}(v_i) =
@@ -710,7 +713,7 @@ Ker je graf poln mora seveda vsako vozlišče imeti svojo barvo. To pomeni, da v
 
 \end{proof}
  
- \subsection{Dvodelni in $3$-obarljivi grafi}
+ \subsection{Dvodelni in $3$-obarvljivi grafi}
 V prejšnjem razdelku smo obravnavali grafe, ki imajo podobno strukturo. Sedaj se bomo osredotočili na grafe, z nizkim kromatičnim številom. Najnižje možno kromatično število je $2$ zato bomo najprej obravnavali dvodelne grafe. Medtem ko bomo domnevo dokazali za splošne dvodelne grafe bomo v nekaterih posebnih primerih to mejo še izboljšali.
 
  
@@ -719,8 +722,8 @@ Obravnavajmo najprej polne dvodelne grafe $K_{m,n}$ z biparticijo $(A, B)$. Enos
 $$
 \omega(v_i u_j) = 
 \begin{cases}
-1 , &\text {če } (i, j) \in [n-1] \times [n]; \\
-2, & \text{če } i=n; j \in [n].
+1 , &\text {če } i \le n-1; \\
+2, & \text{če } i=n.
 \end{cases}
 $$
 Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) =n + 1$ vozlišča $v_i$ pa $c_{\omega}(v_i) = n$ z izjemo $c_{\omega}(v_n) = 2n$. To je torej pravilno barvanje in $\ec(K_{n,n}) = 2$. Sedaj bomo obravnavali še nekaj bolj splošnih dvodelnih grafov.
@@ -733,8 +736,8 @@ Naj bo $G =(A,B,E)$ dvodelen graf. V kolikor je $|A|$ ali $|B|$ sodo, potem $\ec
 \begin{proof}
 Brez škode za splošnost bomo predpostavili $|A|$ sodo. Trditev bomo dokazali, tako da bomo skonstruirali $2$-utežitev $\omega$ za katero bo veljalo, da je $c_{\omega}(u)$ sodo za $u \in A$ in liho za $u \in B$. S tem bo trditev dokazana. Označimo vozlišča v množici $A$ kot $a_1, a_2, \ldots, a_{2r}$ in naj bo $P_i$ pot od $a_i$ do $a_{i + r}$. Take poti obstajajo za vsak $i = 1, 2, \ldots, r$ saj je graf povezan. Utežitev $\omega$ konstruiramo, tako da začnemo z $\omega(e) = 0$ za vsako povezavo $e$. Vsakič ko neka pot $P_i$ vsebuje povezavo $e$ utež na tej povezavi povečamo za 1. Barvanje $c_{\omega}$, ki ga inducira utežitev $\omega$ ima naslednjo lastnost:
 \begin{itemize}
-\item $c_{\omega}(u) = 1 \pmod{2}$ za $u \in A$,
-\item $c_{\omega}(u) = 0 \pmod{2}$ za $u \in B$.
+\item $c_{\omega}(u) \equiv 1 \pmod{2}$ za $u \in A$,
+\item $c_{\omega}(u) \equiv 0 \pmod{2}$ za $u \in B$.
 \end{itemize}
 To izhaja iz dejstava, da se vsaka pot $P_i$ začne in konča v množici $A$ in s tem za vsako vozlišče $u \in B$, ki se nahaja na poti, poveča vrednost $c_{\omega}(u)$ za $2$. Seveda enako velja za vmesna vozlišča $u \in A$ medtem ko začetnemu in končnemu vozlišču poveča vrednost barvanja le za 1. Ker smo poti $P_i$ definirali na tak način, da je vsako vozlišče v $A$ natanko enkrat začetek ali konec neke poti sledi zgornja lastnost. Sedaj uteži na povezavah zreduciramo $\pmod{2}$, kar še vedno ohranja zgornjo lastnost. Tako dobljena utežitev še vedno inducira pravilno barvanje in uporablja uteži z vrednostmi  v $\{0,1\}$. Preprosto spremenimo uteži z vrednostjo $0$ v $2$ in dobimo ustrezno $2$-utežitev grafa $G$.
 \end{proof}
@@ -743,7 +746,7 @@ To izhaja iz dejstava, da se vsaka pot $P_i$ začne in konča v množici $A$ in 
 Za dvodelen graf $G = (A, B, E)$ z $\delta(G)=1$ velja $\ec(G)  \le 2$.
 \end{posledica}
 \begin{proof}
-Po zgornji trditvi lahko predpostavimo, da sta tako $|A|$ in $|B|$ lihi. Brez škode za splošnost predpostavimo, da $d(x) = 1$ za nek $x \in A$. Ker je graf povezan obstaja povezava $xy \in E$ do nekega vozlišča $y \in B$. Dodatno velja, da je $d(y) > 1$, saj je graf povezan. Potem za graf $G - x$ velja, da je povezan dvodelen graf  za katerega je $|A -  \{x\}|$ sodo. Po prejšnji trditvi za ta graf obstaja $2$-utežitev $\omega'$, ki inducira pravilno barvanje. Sedaj utežimo povezavo $xy$ z 2 in dobimo ustrezno utežitev $\omega$, saj velja $c_{\omega}(x) = 2$ in $c_{\omega}(y) > 2$ ter še vedno sodo.
+Po trditvi~\ref{dvosodo} lahko predpostavimo, da sta tako $|A|$ in $|B|$ lihi. Brez škode za splošnost predpostavimo, da $d(x) = 1$ za nek $x \in A$. Ker je graf povezan obstaja povezava $xy \in E$ do nekega vozlišča $y \in B$. Dodatno velja, da je $d(y) > 1$, saj je graf povezan. Potem za graf $G - x$ velja, da je povezan dvodelen graf  za katerega je $|A -  \{x\}|$ sodo. Po prejšnji trditvi za ta graf obstaja $2$-utežitev $\omega'$, ki inducira pravilno barvanje. Sedaj utežimo povezavo $xy$ z 2 in dobimo ustrezno utežitev $\omega$, saj velja $c_{\omega}(x) = 2$ in $c_{\omega}(y) > 2$ ter še vedno sodo.
 \end{proof}
 Kot smo že omenili so vsa drevesa dvodelni grafi, kjer imajo vsi listi stopnjo ena. Na podlagi tega dejstva sledi naslednja posledica.
 \begin{posledica}
@@ -757,7 +760,7 @@ Naj bo $G = (A,B, E)$ dvodelen graf. V kolikor za vsako povezavo $uv \in E$ velj
 Preden se lotimo dokaza zgornjega izreka bomo pokazali pomožno trditev, ki velja za splošne dvodelne povezane grafe.
 \begin{trditev}[~\citet{examples}]
 \label{t1}
-V grafu $G = (A, B, E)$ obstaja vozlišče $x$, tako da so vozlišča $G - N[x]$ v množici $A$ vsa v isti povezani komponenti grafa $G -  N[x]$.
+V grafu $G = (A, B, E)$ obstaja vozlišče $x$, tako da so vozlišča $A \setminus N[x]$ vsa v isti povezani komponenti grafa $G -  N[x]$.
 \end{trditev}
 
 \begin{proof}[Dokaz trditve \ref{t1}]
@@ -768,7 +771,7 @@ brez škode za splošnst predpostavimo $x \in B$. Izberimo vozlišče $x \in B$,
 Po trditvi \ref{dvosodo} predpostavimo, da sta tako $|A|$ kot $|B|$ lihi.
 Po trditvi \ref{t1} lahko sklepamo, da ima graf $G - N[x]$ komponento $G_1 = (A_1, B_1, E_1)$, kjer je $A_1 = A \setminus N(x)$, vse ostale komponente pa so izolirana vozlišča v $B$. Sedaj obravnavajmo dva primera.
 
-V kolikor je $d(x)$ liho je potem $|A_1|$ sodo. Po trditvi \ref{dvosodo} ima graf $G_1$ $2$-utežitev $\omega'$ z lastnostjo $f_{\omega'}(u)$ je liho za $u \in A_1$ in  $f_{\omega'}(u)$ je sodo za $v \in B_1$. Sedaj $\omega'$ razširimo do $\omega$, tako da utežimo povezave incidenčne $x$ z 1 ter z 2 vse ostale povezave. Za $\omega$ velja $c_{\omega}(u)$ je liho za $u \in A$  in $c_{\omega}(v)$ je sodo za $B \setminus \{x\}$. Prav tako velja $c_{\omega}(x) = d(x)$ in $c_{\omega}(u) = 2d(u) - 1$ za $u \in N(x)$. Po predpostavki izreka tako velja tudi $c_{\omega}(x) \neq c_{\omega}(u)$ za $u \in N(x)$. Tako je $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi.
+V kolikor je $d(x)$ liho je potem $|A_1|$ sodo. Po trditvi \ref{dvosodo} ima graf $G_1$ $2$-utežitev $\omega'$ z lastnostjo $c_{\omega'}(u)$ je liho za $u \in A_1$ in  $c_{\omega'}(u)$ je sodo za $v \in B_1$. Sedaj $\omega'$ razširimo do $\omega$, tako da utežimo povezave incidenčne $x$ z 1 ter z 2 vse ostale povezave. Za $\omega$ velja $c_{\omega}(u)$ je liho za $u \in A$  in $c_{\omega}(v)$ je sodo za $B \setminus \{x\}$. Prav tako velja $c_{\omega}(x) = d(x)$ in $c_{\omega}(u) = 2d(u) - 1$ za $u \in N(x)$. Po predpostavki izreka tako velja tudi $c_{\omega}(x) \neq c_{\omega}(u)$ za $u \in N(x)$. Tako je $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi.
 
 V koliko je $d(x)$ sodo je $|A_1|$ liho. Ker je graf $G$ povezan obstaja vozlišče $u^* \in N(x)$, ki je soseden $v^* \in B_1$. Označimo sedaj graf $G'$, kot graf, ki ga dobimo iz $G_1$, tako da dodamo povezavo $u^*v^*$. V tem primeru lahko za $G' = (A_1 \cup \{u^*\}, B_1, E_1 \cup \{u^*v^*\})$ uporabimo trditev \ref{dvosodo}, ter dobimo $2$-utežitev $\omega'$ z že znano lastnostjo. Sedaj $\omega'$ razširimo v $\omega$, tako da utežimo povezave incidenčne $x$, razen $xu^*$ z 1, ter vse ostale povezave z 2. Sedaj velja $c_{\omega}(x) = d(x) + 1$ in $c_{\omega}(u) = 2d(u) - 1$ za vse $u \in N(x) \setminus \{u^*\}$. Po predpostavki izreka tako zopet velja $c_{\omega}(x) \neq c_{\omega}(u)$ ter je $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi. S tem je izrek dokazan.
 \end{proof}
@@ -779,8 +782,8 @@ Za vsak dvodelen $d$-regularen graf $G$ z $d \ge 3$ velja $\ec(G) = 2$.
 
 Za regularne grafe predpostavka izreka \ref{dvoreg} avtomatsko velja, izjema so le $2$-regularni grafi oziroma cikli. Preprost proti primer je $C_6$, ki je dvodelen ter $2$-regularen graf vendar velja $\ec(C_6) = 3$. Zato je pogoj $d \ge 3$ v posledici nujno potreben.
 
- Kot smo ugotovili lahko nekatere dvodelne grafe utežimo le z utežema $1$ in $2$ vendar to ne velja za vse dvodelne grafe. Zato karakterizacija dvodelnih grafov $G$ za katere velja $\ec(G) \le 2$ ostaja odprt problem. Naravno naslednje sledijo $3$-obarljivi grafi. 
-  V članku~\citet{base}  sta  avtorja zastavila vprašanje, ki je nato pripeljalo do domneve 1-2-3 in ga v njem tudi dokazala za primer $3$-obarljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res, saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje, lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem delu bo malenkost močnejši. Pri tem bo ena izmed njegovih posledic dokaz domneve 1-2-3 v primeru 3-obarljivih grafov. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
+ Kot smo ugotovili lahko nekatere dvodelne grafe utežimo le z utežema $1$ in $2$ vendar to ne velja za vse dvodelne grafe. Zato karakterizacija dvodelnih grafov $G$ za katere velja $\ec(G) \le 2$ ostaja odprt problem. Naravno naslednje sledijo $3$-obarvljivi grafi. 
+  V članku~\citet{base}  sta  avtorja zastavila vprašanje, ki je nato pripeljalo do domneve 1-2-3 in ga v njem tudi dokazala za primer $3$-obarvljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarvljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res, saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje, lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem delu bo malenkost močnejši. Pri tem bo ena izmed njegovih posledic dokaz domneve 1-2-3 v primeru 3-obarvljivih grafov. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
   \begin{trditev}
   	Naj bo $\Gamma$ Abelova grupa z $|\Gamma| = n$ in naj $0$ označuje enoto. Tedaj za vsak $g \in \Gamma$ velja $n g = 0$.
   \end{trditev}
@@ -804,7 +807,7 @@ Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru cik
 
 
   \begin{izrek}[~\citet{base}]
-  	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-obarljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
+  	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-obarvljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
   \end{izrek}
 
 \begin{proof}
@@ -845,7 +848,7 @@ V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin graf
 	1 ,& \text{če } nm \neq n\\ 
 	2 & sicer;
 	\end{cases}$  \\ \hline
- 3 obarljivi& 3  \\ \hline
+ 3 obarvljivi& 3  \\ \hline
 $T_n$ & 2  \\ \hline
 dvodelni in $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
 \end{tabular}
@@ -1205,7 +1208,7 @@ Za zaključek tega razdelka dopolnimo tabelo, ki smo jo izpolnili že po koncu z
 	1 & m \neq n\\ 
 	2 & sicer;
 	\end{cases}$ \\ \hline
- 3 obarljivi& 3 & $\le 3$ \\ \hline
+ 3 obarvljivi& 3 & $\le 3$ \\ \hline
 $T_n$ & 2 & 2\\ \hline
 dvodelni in $d$ -regularni z $d \ge 3 $ & 2  & 2\\ \hline
 dvodelni   & $\le 3$  & 2\\ \hline
@@ -1314,7 +1317,7 @@ Oglejmo si graf na sliki \ref{ex_1}. Za orientacijo kot je na sliki je polinom p
 \caption{Primer orientacije grafa.}
 \label{ex_1}
 \centering
-    \includegraphics[scale=0.7]{alg_ex_1.jpg}
+    \includegraphics[scale=0.6]{alg_ex_1.jpg}
     \end{figure}
 Zapišimo sedaj še matriko pripadajočo temu polinomu. Ko imamo enkrat zapisan celoten polinom dobimo matriko na zelo preprost način. Za $i$-to vrstico pogledamo $i$-ti faktor v polinomu in v to vrstico zapišemo koeficiente pred spremenljivkami, ki se v njem pojavljajo. Tako dobimo naslednjo matriko 
 $$ A_G = \left[ \begin{matrix} 0 & 1 & 0 & 1 \\ -1 & 0 & 1 & -1 \\ 0 & -1 & 0 & 1 \\ -1 & 1 & -1 & 0 \end{matrix} \right] .$$
@@ -1332,7 +1335,7 @@ $$ A_G = \left[ \begin{matrix} 0 & 1 & 0 & 1 \\ -1 & 0 & 1 & -1 \\ 0 & -1 & 0 & 
 Pri tem smo permanento računali tako kot računamo determinanto in sicer z razvojem po vrstici ali stolpcu. Pri nam niti ni treba paziti na predznak, ker tukaj ni pomemben. Ugotovili smo torej, da $\pind(A_G) = 2$ iz česar sledi $\mind(G) \le 3$ in graf $G$ je torej utežljiv iz seznamov velikosti $3$. Na enak način se lahko problema lotimo za poljuben podan graf.
 \end{primer}
 V zgornjem primeru smo videli uporabo metode, ki smo jo razvili do sedaj. Direkten izračun, brez uporabne kombinatoričnega izreka o ničlah bi bil lahko že za zelo preproste grafe zahteven problem. Navidezno se nam sicer zdi, da smo problem že dobro rešili vendar izkaže se, da je računanje permanent in permanentnega indeksa poljubnih grafov lahko zahtevno. Prak tako ni enostavno računati permanentnih indeksov matrik za posebne družine grafov kot so naprimer cikli ali polni grafi. V ta namen si bomo ogledali preprosto trditev s pomočjo katere bomo malo lažje računali permanentne indekse nekaterih matrik.
-\begin{trditev}
+\begin{trditev}[~\citet{alg_org}]
 \label{pind}
 Naj bo $A$ matrika velikost $m \times l$ in $L$ kvadratna matrika velikosti $m$, tako da so stolpci matrike $L$ linearna kombinacija stolpcev matrike $A$. Naj bo $n_j$ število tistih stolpcev v $L$ v katerih $j$-ti stolpec $A_j$ nastopa z neničelnim koeficientom. Če je $n_j \le r$ in $\per L \neq 0$ potem $\pind (A) \le r$.
 \end{trditev}
@@ -1457,13 +1460,13 @@ Sledi torej $\per S = -2n(2n-1)! = -(2n)! \neq0$. Torej potem velja tudi $perR' 
 
 \end{proof}
 V dokazovanju zgornjega izreka ter nasploh trditev v tem razdelku smo uporabili ogromno linearne algebre ter premetavanja in transformiranja matrik. S tem smo se malo oddaljili od same teorije grafov. Kljub temu je zgornji izrek močno orodje, ki nam omogoča generiranje grafov z nizkim monomičnim indeksom. Ideja je, da začnemo z nekim majhnim grafom $G_0$ za katerega velja $\mind(G_0) \le 2$ ter nato postopoma dodajamo pare novih vozlišč v skladu z zgornjim izrekom. Tako lahko ustvarimo ogromno grafov za katere velja, da je njihov monomični indeks manjši od $2$. Oglejmo si direktno uporabo za nekatere že znane družine grafov.
-\begin{trditev}
+\begin{trditev}[~\citet{alg_org}]
 Če $G \neq K_2$ je polni graf ali polni dvodelni graf potem $\mind(G) \le 2$.
 \end{trditev}
 \begin{proof}
 Dokaz je takojšnja posledica izreka \ref{algcons} ko preverimo da imajo grafi $K_3$, $K_4$, $K_{1,2}$, $K_{1,3}$, $K_{2,2}$ monomične indekse manjše kot $2$. Nato z indukcijo dokažemo trditev. Res, za vsak polni graf $K_n$ začnemo z $K_3$ v kolikor je $n$ lih ter nato dodajamo po dva vozlišča in jih povežemo z vsemi obstoječimi vozliči ter tako nadaljujemo. Ko je $n$ sod začnemo z $K_4$ ter nadaljujemo na enak način. V primeru polnih dvodelnih grafov $K_{n,m}$ postopamo enako. Glede na parnost $n$ in $m$ si izberemo začetni graf ter dodajamo nova vozlišča, ki jih sedaj povežemo le z eno biparticijo obstoječega polnega dvodelnega grafa.
 \end{proof}
-\begin{trditev}
+\begin{trditev}[~\citet{alg_org}]
 Naj bo $T$ drevo na vsaj treh vozliščih. Potem velja $\mind(T) \le 2$.
 \end{trditev}
 
@@ -1539,7 +1542,7 @@ Iz tega torej sledi $\pind(A_G^t) = 1 =\tmind(G)$, kar pomeni $\eclt(G) = 2$ in 
 \end{primer}
 
 Oglejmo si še kako lahko rezultat izboljšamo v primeru ciklov.
-\begin{trditev}
+\begin{trditev}[~\citet{algebraic}]
 Za vsak $n$ velja $\tmind(C_n) = 1$.
 \end{trditev}
 
@@ -1602,7 +1605,7 @@ V obeh primerih smo torej dobili, da je permanent največje kvadratne podmatrike
 V primeru totalne verzije smo uspeli izboljšati rezultat za cikle in kot je razvidno iz dokaza je velik del tega pripadal dodatnim stolpcev v matriki, ki pripadajo utežem na vozliščih. Res, pri računanju permanente smo vse stolpce razen enega vzeli iz drugega dela matrike. Podobno smo naredili tudi v ne seznamski verziji problema. Uteži na vozliščih so zmanjšale potrebo po dodatnih utežeh na povezavah, kar je nekako splošna ideja pri totalni verziji domneve 1-2-3.
 
 V ne seznamski verziji problema je očitno veljalo $\ect \le \ec$, saj smo iz veljavne povezavne utežitve preprosto konstruirali totalno utežitev, tako da smo vozliščem dodelili poljubno konstantno utež. V seznamski verziji ne moremo uporabiti istega premisleka, saj ni nujno, da imajo vsa vozlišča isti seznam za izbiro uteži. Vendar kljub temu tudi v seznamski verziji velja enaka ocena.
-\begin{trditev}
+\begin{trditev}[~\citet{algebraic}]
 Za vsak graf $G \neq K_2$ velja $\tmind(G) \le \mind(G).$
 \end{trditev}
 \begin{proof}
@@ -1613,7 +1616,7 @@ Na podlagi zgornje trditve in konstrukcijskega izreka \ref{algcons} iz prejšnje
 Če je $G$ polni graf, polni dvodelni graf ali drevo velja $\tmind(G) \le 2$.
 \end{trditev}
 Dodatno nas zanima, ali lahko v polni verziji rezultate za zgornje grafe še izboljšamo. Kot bomo videli v nadaljevanju je to mogoče v primeru dreves in polnih grafov. V primeru dreves si bomo ogledali konstrukcijski izrek, kjer gradimo grafe z dodajanjem ene nove povezave med obstoječim in novim  vozliščem. Za polne grafe si bomo ogledali postopek, ki ne uporablja kombinatoričnega izreka o ničlah temveč direktno konstruira ustrezne utežitve iz poljubnih seznamov. Seveda bi tudi za polne grafe lahko postopali s pomočjo polinomov in matrik vendar se izkaže, da je dokaz na tak način precej dolg in zahteven in predvsem zahteva veliko dela z matrikami.
-\begin{trditev}
+\begin{trditev}[~\citet{algebraic}]
 Naj bo $G=(V,E)$ graf za katerega velja $\tmind(G) = 1$. Naj bo $v \notin V$ novo vozlišče ter $u \in V$. Definiramo graf $G' = G + uv$. Tedaj velja $\tmind(G') =1$.
 \end{trditev}
  \begin{proof}
@@ -1640,7 +1643,7 @@ M(L) &= \max \Big\{ \sum_{e \ni v} M_L(e) + M_L(v) \text{ : } v \in V\Big \}
 \end{split}
 \end{equation*}
 Zgornja izraza predstavljata najmanjšo in največjo možno utež, ki jo lahko dobim vozlišče v grafu v kolikor ga utežujemo iz seznamov. V primeru polnih grafov bomo dokazali malenkost  močnejši izrek, ki nam bo podal dve različni utežitvi polnega grafa.
-\begin{izrek}
+\begin{izrek}[~\citet{algebraic}]
 Naj bo $G = K_n$ polni graf in naj bo $L$ nabor seznamov velikosti $2$ dodeljen vozliščem in povezavam polnega grafa. Potem obstajata vsaj dve različni veljavni totalni utežitvi grafa $G$ z utežmi iz seznamov v $L$. Pri tem je ena izmed totalnih utežitev brez $m(L)$ in druga brez $M(L)$ končne uteži na vozliščih.
 \end{izrek}
 \begin{proof}
@@ -1682,7 +1685,7 @@ V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo se
 	1 & m \neq n\\ 
 	2 & sicer;
 	\end{cases}$ &3 & $\le 3$\\ \hline
- 3 obarljivi& 3 & $\le 3$& & \\ \hline
+ 3 obarvljivi& 3 & $\le 3$& & \\ \hline
 $T_n$ & 2 & 2& 3 & 2\\ \hline
 dvodelni, $d$-regularni, $d \ge 3 $ & 2  & 2& &\\ \hline
 dvodelni   & $\le 3$  & 2 & &\\ \hline
@@ -1765,9 +1768,9 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
     \Fn{\FMain{$G$}}{
        
 
-       \text{$G$.LocalSsolve()} \;
+       \text{$G$.LocalSolve()} \;
 
-\uIf{\text{len($G.conflicts$)} = 0}{
+\uIf{\text{len(G.conflicts)} = 0}{
     \textbf{return} $G$\;
   }
 
@@ -1790,7 +1793,7 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
 
 
  
- \caption{Algoritem za izračun 5-utežitve (še ni končan)}
+ \caption{Algoritem za izračun 3-utežitve poljubnega grafa.}
 \end{algorithm}
 
 \subsection{Rezultati izvajanja}
