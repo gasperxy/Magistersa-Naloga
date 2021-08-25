@@ -93,8 +93,12 @@
 \usepackage{subcaption}
 \usepackage{mwe}
 \usepackage{float}
-\usepackage[]{algorithm2e}
+\usepackage[ruled,vlined]{algorithm2e}
 
+
+\makeatletter
+\renewcommand{\algorithmcfname}{Algoritem}
+\makeatother
 
 
 \setlength{\overfullrule}{50pt} % označi predlogo vrstico
@@ -147,7 +151,7 @@
 \DeclareMathOperator{\h}{h}
 \DeclareMathOperator{\cart}{\Box}
 
-
+\floatname{algorithm}{Algoritem}
 % bold matematika znotraj \textbf{ }, tudi v naslovih, kot \omega spodaj
 \makeatletter \g@addto@macro\bfseries{\boldmath} \makeatother
 
@@ -669,8 +673,6 @@ Naj bo $C_n$ cikel. Tedaj velja $\ec(C_n) \le 3.$
 Potreben in zadosten pogoj, ki smo ga uporabili že za primer poti velja tudi za cikle. Pri ciklu moramo opazovati dodatno povezavo med $v_1$ in $v_n$. Kot je razvidno iz slike~\ref{fig:cnall} moramo ločit primere glede na vrednost $n \pmod{4}$. Ugotovimo, da za pravilno utežitev cikla $C_n$ potrebujemo največ 3 uteži, torej $\ec(C_n) \le 3$. Pokažimo sedaj, da je ta meja tudi natančna za $n \neq 4k$. Recimo torej nasprotno, da je $\ec(C_n) = 2$ in naj bo $\omega$ utežitev, ki zadošča temu pogoju. Potem iz $c_{\omega}(v_i) \neq c_{\omega}(v_{i+1})$ sledi $\omega(v_i v_{i+1}) \neq \omega({v_{i+2} v_{i+3}})$. To je pogoj, da se uteži na razdalji $2$ razlikujejo. Ampak to pomeni, ker imamo na voljo samo uteži 1 in 2, da mora veljati $\omega(v_i v_{i+1}) = \omega({v_{i+4} v_{i+5}})$. To pa je protislovje v primeru ko $n \neq 4k$.
 
 Nahitro ocenimo še parameter $s(C_n)$. V tem primeru prav tako vzamemo idejo, ki smo jo dobili pri uteževanju poti. Zopet začnemo nekje na sredini in v tem primeru poizkušamo dosečti, da se uteži na vozliščih nahajajo na intervalu $[2, n+1]$. Podobno kot pri poti je potrebno biti pazljiv pri robnih primerih vendar zagotovo velja enaka ocena in sicer $\s(G) \ge \lceil \frac{n}{2} \rceil$.
-	
-	
 \end{proof}
 Do sedaj smo obravnavali grafe z precej nizkimi stopnjami vozlišč. Na podlagi tega bi lahko sklepali, da je v tem primeru enostavno računati parameter $\ec$, saj je malo možnih konflikov med vozlišči. Vendar poleg manjšega števila sosedov imajo vozlišča seveda tudi manjše število incidenčnih povezav in s tem manj svobode kakšne vrednosti lahko zasedejo. Sedaj si bomo ogledali iskanje primerne utežitve na polnih grafih $K_n$. 
 \begin{trditev}[Domneva 1-2-3 za $K_n$~\citet{examples} ]
@@ -709,8 +711,6 @@ n + 1 + i, & \text{če } i < n; \\
  To pa je pravilno barvanje $K_n$ in zato $\ec(K_n) = 3$.
 
 Ker je graf poln mora seveda vsako vozlišče imeti svojo barvo. To pomeni, da v primeru polnih grafov velja $\s(K_n) = \ec(K_n) = 3$.
- 
-
 \end{proof}
  
  \subsection{Dvodelni in $3$-obarvljivi grafi}
@@ -782,7 +782,7 @@ Za vsak dvodelen $d$-regularen graf $G$ z $d \ge 3$ velja $\ec(G) = 2$.
 
 Za regularne grafe predpostavka izreka \ref{dvoreg} avtomatsko velja, izjema so le $2$-regularni grafi oziroma cikli. Preprost proti primer je $C_6$, ki je dvodelen ter $2$-regularen graf vendar velja $\ec(C_6) = 3$. Zato je pogoj $d \ge 3$ v posledici nujno potreben.
 
- Kot smo ugotovili lahko nekatere dvodelne grafe utežimo le z utežema $1$ in $2$ vendar to ne velja za vse dvodelne grafe. Zato karakterizacija dvodelnih grafov $G$ za katere velja $\ec(G) \le 2$ ostaja odprt problem. Naravno naslednje sledijo $3$-obarvljivi grafi. 
+ Kot smo ugotovili lahko nekatere dvodelne grafe utežimo le z utežema $1$ in $2$ vendar to ne velja za vse dvodelne grafe. Zato karakterizacija dvodelnih grafov $G$ za katere velja $\ec(G) \le 2$ ostaja odprt problem. Nadaljujemo z obravnavanjem $3$-obarvljivih grafov. 
   V članku~\citet{base}  sta  avtorja zastavila vprašanje, ki je nato pripeljalo do domneve 1-2-3 in ga v njem tudi dokazala za primer $3$-obarvljivih grafov. Glavna ideja, zakaj domneva velja za 3-obarvljive grafe je v tem, da v tem primeru uteži lahko gledamo po modulu 3. To je res, saj v primeru ko imamo neko utežitev z poljubnimi utežmi, ki inducira pravilno 3-barvanje, lahko vse uteži reduciramo po modulu 3 in še vedno ohranimo pravilno 3-barvanje. Izrek, ki ga bomo dokazali v tem delu bo malenkost močnejši. Pri tem bo ena izmed njegovih posledic dokaz domneve 1-2-3 v primeru 3-obarvljivih grafov. Za množico uteži bomo dovolili poljubno Abelovo grupo $\Gamma$. V ta namen bomo dokazali nekaj lastnosti Abelovih grup, ki jih bomo kasneje uporabili v dokazu glavnega izreka.
   \begin{trditev}
   	Naj bo $\Gamma$ Abelova grupa z $|\Gamma| = n$ in naj $0$ označuje enoto. Tedaj za vsak $g \in \Gamma$ velja $n g = 0$.
@@ -796,41 +796,40 @@ Za regularne grafe predpostavka izreka \ref{dvoreg} avtomatsko velja, izjema so 
 
 
 \begin{trditev}
-	Naj bo sedaj $\Gamma$ Abelova grupa lihe moči in $|\Gamma| = n$. Tedaj za vsak element $g \in \Gamma$ obstaja $h \in \Gamma$, tako da $g = 2h$.
+	Naj bo sedaj $\Gamma$ Abelova grupa lihega reda $|\Gamma| = n$. Tedaj za vsak element $g \in \Gamma$ obstaja $h \in \Gamma$, tako da $g = 2h$.
 \end{trditev}
 
 \begin{proof}
 	Ker je $\Gamma$ Abelova grupa po prejšnji trditvi vemo, da $ 0 = ng$. Prištejemo $g$ na obeh straneh in dobimo $g = (n+1)g$. Sedaj označimo $h = \frac{n + 1}{2}g$ in očitno velja $g = 2h$.
 \end{proof}
 
-Podobno ne velja za Abelove grupe sode moči. To preprosto vidimo na primeru ciklične grupe $\mathbb{Z}_4 = \{0,1,2,3\}$, kjer elementa $3$ ne moremo zapisat na tak način.
+Podobno ne velja za Abelove grupe sodega reda. To preprosto vidimo na primeru ciklične grupe $\mathbb{Z}_4 = \{0,1,2,3\}$, kjer elementa $3$ ne moremo zapisat na tak način.
 
 
   \begin{izrek}[~\citet{base}]
-  	Naj bo $\Gamma$ Abelova grupa lihe moči in G ne-trivialen $|\Gamma|$-obarvljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
+  	Naj bo $\Gamma$ Abelova grupa lihega reda in G ne-trivialen $|\Gamma|$-obarvljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
   \end{izrek}
 
 \begin{proof}
-	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \le 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \in \Gamma$, tako da $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$. Na vse preostale povezave damo utež $0$. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč konstantno ( = $2h$), dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g$ in velja $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \ldots n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$, tako kot je prikazano na sliki \ref{im1}. Tak popravek utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$, kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
+	Označimo $\Gamma = \{g_1, g_2, \ldots, g_k\}$. Naj bo $c$ neko barvanje grafa $G$ z največ $k$ barvami in označimo z $n_i \ge 0$ število vozlišč barve $i$ za $1 \le i \le k$. Po zadnji trditvi vemo, da obstaja $h \in \Gamma$, tako da $n_1g_1 + n_2g_2 + \cdots + n_kg_k = 2h$. Sedaj na poljubno povezavo grafa dodamo utež $h$. Na vse preostale povezave damo utež $0$. Tako je vsota vseh uteži na vozliščih enaka $2h$. V nadaljevanju bomo spremenili utežitev, tako da ohranjamo skupno utežitev vozlišč konstantno ( = $2h$), dokler vsa vozlišča barve $i$ nimajo uteži $g_i$. Recimo torej, da obstaja vozlišče $u$ barve $i$, ki ima napačno utež $g$ in velja $g \neq g_i$. Ker je vsota uteži na vozliščih ves čas konstantna in $n_1g_1 + n_2g_2 + \cdots + n_kg_k = 2h$ obstaja vsaj še eno drugo vozlišče $v$ z napačno utežitvijo. Sedaj najprej obravnavajmo primer, ko $G$ ni dvodelen graf. V tem primeru lahko najdemo sprehod lihe dolžine med $u$ in $v$. Potujemo po sprehodu od $u$ do $v$ in utežem na povezavah zaporedoma prištevamo $g_i - g, g - g_i, \ldots, g_i - g$, tako kot je prikazano na sliki~\ref{3col_1}. Tak popravek utežitve ohranja skupno utežitev vozlišč ter spremeni le uteži za $u$ in $v$. Po končanem postopku ima vozlišče $u$ sedaj utež $g_i$, kar je željen rezultat. Ta postopek ponavljamo, dokler nimajo vsa vozlišča pravilne utežitve. Sprehod lihe dolžine je nujno potreben, če želimo ohraniti skupno utežitev vozlišč.
  \begin{figure}[h!]
 \caption{Popravljanje utežitve z liho potjo.}
-\label{im1}
+\label{3col_1}
 \centering
     \includegraphics[scale=0.35]{3col.jpg}
     \end{figure}
 	
-	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$. Zato v tem primeru postopamo malo drugače. Ker je graf dvodelen, lahko zapišemo njegovo množico vozlišč kot $V(G) = A \cup B$, kjer sta $A$ in $B$ biparticija. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$ ter na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru na dve poljubni povezavi incidenčni $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
+	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$. Zato v tem primeru postopamo malo drugače. Ker je graf dvodelen, lahko zapišemo njegovo množico vozlišč kot $V(G) = A \cup B$, kjer sta $A$ in $B$ biparticija. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$ ter na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g_2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. V kolikor $(1 - n_1)g_1 \neq 0$ smo končali saj smo konstruirali pravilno barvanje. V nasprotnem primeru na dve poljubni povezavi incidenčni $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
 \end{proof}
 
 Iz zgornjega izreka torej sledi, da domneva velja za $3$-obraljive grafe. Preprosto za take grafe uporabimo ciklično grupo $\mathbb{Z}_3 = \{0,1,2\}$. Nato vse uteži z vrednostjo $0$ zamenjamo z utežjo $3$. S tem še vedno ohranimo pravilno barvanje. Iz utežitve povezav smo na naraven način prišli do barvanja na grafu. Vprašanje je bilo potem ali je to barvanje pravilno. Zgornji izrek pove nekako obratno. Torej, če imamo neko $k$-barvanje in je $k$ liho število potem lahko eksplicitno konstruiramo utežitev z $k$ elementi, ki porodi tako barvanje. Velja torej
-$$ \ec(G) \le \chi(G) + 1.$$
-Pri tem potrebujemo plus ena na desni strani v primeru, ko ima graf sodo kromatično število.
+$$ \ec(G) \le \chi(G) + \begin{cases}
+1, &\text{če } \chi(G) \text{ sodo};\\
+0, & \text{če } \chi(G) \text{ liho}.
+\end{cases}$$ 
 
 
- 
-
-
-V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin grafov ter za grafe z nekaj dodatnimi pogoji. V vseh primerih smo 1-2-3 domnevo potrdili v posebnih primerih smo lahko zgornjo mejo še celo malo izboljšali. Rezultate tega razdelka lahko predstavimo s spodnjo tabelo.
+V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin grafov ter za grafe z nekaj dodatnimi pogoji. V vseh primerih smo domnevo 1-2-3 potrdili v posebnih primerih smo lahko zgornjo mejo še celo malo izboljšali. Rezultate tega razdelka lahko predstavimo s spodnjo tabelo.
 \begin{table}[H]
 
 \caption{\label{tab:tab1} Izračun $\ec(G)$ za znane grafe. }
@@ -840,17 +839,17 @@ V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin graf
  Graf $G$ & $\ec(G)$  \\ \hline
  $P_n$ & 2  \\ \hline
  $C_n$ & $\begin{cases}
-	2 ,& \text{če } n = 4k;\\ 
-	3 & sicer;
+	2 ,& \text{če } n \equiv 0 (mod 4);\\ 
+	3, & \text{sicer};
 	\end{cases}$  \\ \hline
  $K_n$& 3  \\ \hline
  $K_{m,n}$& $\begin{cases}
-	1 ,& \text{če } nm \neq n\\ 
-	2 & sicer;
+	1 ,& \text{če } m \neq n;\\ 
+	2 ,& \text{sicer};
 	\end{cases}$  \\ \hline
- 3 obarvljivi& 3  \\ \hline
+ $3$-obarvljivi& 3  \\ \hline
 $T_n$ & 2  \\ \hline
-dvodelni in $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
+dvodelni $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1012,12 +1011,32 @@ barv.
 
 Zgornjo trditev bomo kasneje uporabili ko bomo analizirali utežitve na naključnih grafih. V primeru ko $\epsilon$ zamenjamo z $-\epsilon$ gre eksponent v zgornjem dokazu proti $0$ ko povečujemo $n$. Posledično gre celoten izraz proti $1$. Na podoben način kot v dokazu zgornje trditve iz tega sledi, da skoraj vsako barvanje vsebuje manj kot $n/k$ barv kar nam podaja zgornjo mejo za kromatično število. Ta zgornja meja je torej $\chi(G) < \frac{\log(1/q)}{2 - \epsilon} \cdot \frac{n}{\log n}$ in jo bomo uporabili pri dokazu glavnega izreka v tem razdelku. Poleg tega bomo potrebovali še eno asimptotsko oceno in sicer za minimalno stopnjo vozlišč. Naj bo $p \in (0, 1)$ in vzemimo graf $G \in  \mathcal{G}(n, p)$ ter opazujmo poljubno vozlišče $v \in V(G)$. Kaj lahko povemo o $d(v)$? Mislimo si lahko, da izvedemo eksperiment za vsakega izmed preostalih $n - 1$ vozlišč ter povečamo stopnjo vozlišča $v$, če je bil eksperiment uspešen. Na podlagi tega lahko ocenimo pričakovano stopnjo vozlišča kot $(n-1)p$. Za nadaljno oceno potrebujemo posebno mejo iz verjetnosti.
 \begin{trditev}[Chernoffova meja]
-Naj bodo $X_1, X_2, \ldots, X_n$ neodvisne in enako porazdeljene slučajne spremenljivke z vrednostmi v $\{0, 1\}$. Naj za vsak $i = 1, \ldots, n$ velja $E[X_i] = p$. Definirajmo slučajno spremenljivko $X = \sum_{i=1}^n X_i$. Označimo še $\mu = E[X] = np$. Tedaj velja za vsak $0 \le\delta \le 1$ velja
+Naj bodo $X_1, X_2, \ldots, X_n$ neodvisne in enako porazdeljene slučajne spremenljivke z vrednostmi v $\{0, 1\}$. Naj za vsak $i = 1, \ldots, n$ velja $E[X_i] = p$. Definirajmo slučajno spremenljivko $X = \sum_{i=1}^n X_i$. Označimo še $\mu = E[X] = np$. Tedaj velja za vsak $0 <\delta < 1$ velja
 $$P[X \le (1-\delta) \mu] \le e ^{\frac{\delta^2 \mu}{2}}. $$
+
+
 \end{trditev}
-Dokaz zgornje trditve bralec lahko najde v~\cite{chernov}, kjer je formulirana kot izrek 4.4.
-V našem primeru spremenljivke $X_i$ definiramo, tako da velja $X_i = 1$ v kolikor obstaja povezava med $v$ in $i$-tim vozliščem v grafu in $0$ sicer. Vsota $X = \sum_{i=1}^{n-1}$ nam predstavlja stopnjo vozlišča $v$. Na tem mestu lahko uporabimo Chernoffovo mejo ter ugotovimo, da velja $P[d(v) \le (p - \epsilon)n] \rightarrow 0$ ko pošljemo $n$ v neskončnost. V ta namen nastavimo $\delta = \frac{n}{n-1}(1-p-\epsilon)$ pri čemer izberemo $\epsilon$, tako da bo $\delta$ v mejah trditve. Ker verjetnosti padajo eksponentno lahko enako storimo za vsa vozlišča in še vedno dobimo enak rezultat. Tako lahko sklepamo, da ima skoraj vsak graf $G \in  \mathcal{G}(n, p)$ naslednjo lastnost
-$$ d(G) \ge (p - \epsilon)n .$$
+Dokaz zgornje trditve bralec lahko najde v~\cite{chernov}, kjer je formulirana kot izrek~4.5. Oglejmo si raje eno izmed možnih uporab Chernoffove meje.
+\begin{trditev}
+Za vsako konstanto $p \in(0,1)$ in $\epsilon > 0$ ima skoraj vsak graf $G \in \mathcal{G}(n, p)$ minimalno stopnjo enako
+$$\delta(G) \ge (p - \epsilon)n  $$
+\end{trditev}
+
+\begin{proof}
+Naj bo  $G \in \mathcal{G}(n, p)$ izbran naključno. Označimo množico vozlišč grafa $G$ kot $V = \{v_1, v_2, \ldots, v_n\}$ in definirajmo slučajne spremenljivke $X_{ij}$ kot
+$$ X_{ij} =
+\begin{cases}
+1, & \text{če } v_iv_j \in E(G); \\
+0, & sicer.
+\end{cases}$$
+Dodatno definiramo še slučajno spremenljivko $X_i = \sum_{j=1; j\neq i}^n X_{ij}$, ki predstavlja stopnjo vozlišča $v_i$ v grafu. Ker velja $E[X_{ij}] = p$ lahko pričakovano stopnjo vozlišča zapišemo kot $E[X_i] = (n-1)p \approx np$. Tukaj vzamemo približek zaradi enostavnejšega računanja, kar ne vpliva na končen rezultat. Na tem koraku lahko uporabimo Chernoffovo mejo za posamezno vozlišče $v_i$. Velja torej
+$$
+P[X_i \le (p - \epsilon)n]  \le e^{-\frac{n \epsilon^2}{2p}} \to 0 \text{, če } n \to \infty.
+$$
+Pri tem smo uporabili $\delta =  \frac{\epsilon}{p}$. To je sedaj ocena za posamezno vozlišče. Spodnjo mejo za minimalno stopnjo vozlišča lahko razumemo, tako da nobeno vozlišče v grafu nima nižje stopnje od željene meje. To pa je pravzaprav ravno unija dogodkov $X_i \ge (p- \epsilon)n$. Zapišemo lahko 
+$$ P\left[\bigcup_{i=1}^n X_i \le (p -\epsilon)n \right] \le ne^{-\frac{n \epsilon^2}{2p}} \to 0 \text{, če } n \to \infty. $$
+Za omejitev verjetnosti unije dogodkov smo uporabili oceno $P[A \cup B] \le P[A] + P[B]$, ki velja tudi v primeru odvisnih dogodkov. V našem primeru so dogodki seveda odvisni, ampak to ni pomembno za sam izračun. 
+\end{proof}
 Glavni namen tega razdelka je podati neko asimptotsko oceno za parameter $\ec(G)$ oziroma bolj natančno podali bomo trditev, ki bo pokazala, da skoraj za vse grafe velja $\ec(G) = 2$, kar je zelo preseneltjiv rezultat saj, je še boljši kot zahteva domneva 1-2-3. Da nam bo uspelo pokazati zgornje si moramo ogledati še nek rezultat, ki nima nič opravit z verjetnostnimi metodami ampak z iskanjem posebnih faktorjev v grafu. Nato bomo uporabili vse rezultate iz tega razdelka in formulirali ter dokazali končno trditev.
 
 \subsection{Podgrafi z omejenimi stolpnjami}
@@ -1183,7 +1202,6 @@ Podobno kot v dokazu izreka \ref{theorem12345} lahko na tak način ustvarimo $d+
 \item vsako vozlišče ima utež $1$.
 \end{itemize}
 Za konec povečamo za $1$ utež na vseh vozliščih za katere velja $c(v) = c_{\omega}^t(v) - 1$. To lahko storimo, saj imajo vsa vozlišče utež $1$ in s tem zagotovimo, da imajo vsa vozlišča njihovo končno barvo.
-
 \end{proof}
 Kot je razvidno iz zgornjega dokaza obstaja ogromno podobnosti med dokazom izreka \ref{theorem12345}. Pri totalni verziji smo sicer imeli več svobode, saj smo lahko vozlišča uredili in procesirali v poljubnem vrstnem redu. To izhaja iz tega, da v tem primeru ne potrebujemo povezave naprej, da dosežemo zahtevane pogoje. Pri tem so seveda zahtevani pogoji manj strogi, saj ne zahtevamo, da imajo vsa procesirana vozlišča že končno barvo, ker jih lahko popravimo na koncu z utežitvijo posameznih vozlišč. V samem dokazu izreka \ref{theorem123} smo dejansko dokazali močnejši izrek, saj uteži z vrednostjo $3$ nismo uporabili na vozliščih. Poleg tega smo ugotovili še nekaj. Do zadnjega koraka v dokazu je bila utež na vseh vozliščih enaka $1$. Kaj se zgodi, če to utež popolnoma odstranimo in opazujemo samo dobljeno povezavno utežitev? Dobljena povezavna utežitev sicer ne porodi nujno pravilnega barvanja, ampak od tega ni daleč oddaljena, saj se dobljeno barvanje razlikuje za največ $1$ od pravilnega barvanja. Uporabili smo le uteži iz množice $\{1,2,3\}$, kar je skladno z domnevo 1-2-3. Vendar je ravno to težak del problema. Kako torej iz neke povezavne utežitve, ki skoraj porodi pravilno barvanje, dobiti ustrezno utežitev. Do tega trenutka je to mogoče samo z metodami, ki smo si jih ogledali. V povezavni verziji nujno potrebujemo še uteži $4$ in $5$ na povezavah medtem, ko moramo v totalni verziji dodati utež $2$ na nekatera vozlišča.
 
@@ -1197,20 +1215,20 @@ Za zaključek tega razdelka dopolnimo tabelo, ki smo jo izpolnili že po koncu z
  Graf $G$ & $\ec(G)$ & $\ect(G) $ \\ \hline
  $P_n$ & 2 & 2 \\ \hline
  $C_n$ & $\begin{cases}
-	2 & n = 4k;\\ 
-	3 & sicer;
+	2, & n \equiv 0 \pmod{4};\\ 
+	3, & \text{sicer};
 	\end{cases}$ & 2 \\ \hline
  $K_n$& 3 & 2 \\ \hline
  $K_{m,n}$& $\begin{cases}
-	1 & m \neq n\\ 
-	2 & sicer;
+	1 ,& m \neq n;\\ 
+	2 ,& \text{sicer};
 	\end{cases}$ &$\begin{cases}
-	1 & m \neq n\\ 
-	2 & sicer;
+	1, & m \neq n;\\ 
+	2, & \text{sicer};
 	\end{cases}$ \\ \hline
- 3 obarvljivi& 3 & $\le 3$ \\ \hline
+ $3$-obarvljivi& 3 & $\le 3$ \\ \hline
 $T_n$ & 2 & 2\\ \hline
-dvodelni in $d$ -regularni z $d \ge 3 $ & 2  & 2\\ \hline
+dvodelni $d$ -regularni z $d \ge 3 $ & 2  & 2\\ \hline
 dvodelni   & $\le 3$  & 2\\ \hline
 splošni   & $\le 5$  &$ \le 3$\\ \hline
 \end{tabular}
@@ -1317,7 +1335,7 @@ Oglejmo si graf na sliki \ref{ex_1}. Za orientacijo kot je na sliki je polinom p
 \caption{Primer orientacije grafa.}
 \label{ex_1}
 \centering
-    \includegraphics[scale=0.6]{alg_ex_1.jpg}
+    \includegraphics[scale=0.5]{alg_ex_1.jpg}
     \end{figure}
 Zapišimo sedaj še matriko pripadajočo temu polinomu. Ko imamo enkrat zapisan celoten polinom dobimo matriko na zelo preprost način. Za $i$-to vrstico pogledamo $i$-ti faktor v polinomu in v to vrstico zapišemo koeficiente pred spremenljivkami, ki se v njem pojavljajo. Tako dobimo naslednjo matriko 
 $$ A_G = \left[ \begin{matrix} 0 & 1 & 0 & 1 \\ -1 & 0 & 1 & -1 \\ 0 & -1 & 0 & 1 \\ -1 & 1 & -1 & 0 \end{matrix} \right] .$$
@@ -1457,7 +1475,6 @@ $$\per A = (n - 1 - n)(2n-1)! = -(2n-1)!. $$
 Zelo podobno ima matrika $B$ povsod enice razen v prvem stolpcu, kjer ima eno ničlo ter $n-1$ minus enic. Zopet jo razvijemo po prvem stolpcu in dobimo
 $$\per B = (n + 1 -n)(2n-1)! = (2n-1)!. $$
 Sledi torej $\per S = -2n(2n-1)! = -(2n)! \neq0$. Torej potem velja tudi $perR' \neq 0 $ in je izrek s tem dokazan.
-
 \end{proof}
 V dokazovanju zgornjega izreka ter nasploh trditev v tem razdelku smo uporabili ogromno linearne algebre ter premetavanja in transformiranja matrik. S tem smo se malo oddaljili od same teorije grafov. Kljub temu je zgornji izrek močno orodje, ki nam omogoča generiranje grafov z nizkim monomičnim indeksom. Ideja je, da začnemo z nekim majhnim grafom $G_0$ za katerega velja $\mind(G_0) \le 2$ ter nato postopoma dodajamo pare novih vozlišč v skladu z zgornjim izrekom. Tako lahko ustvarimo ogromno grafov za katere velja, da je njihov monomični indeks manjši od $2$. Oglejmo si direktno uporabo za nekatere že znane družine grafov.
 \begin{trditev}[~\citet{alg_org}]
@@ -1517,7 +1534,7 @@ Oglejmo si enak primer grafa kot prej le, da sedaj oštevilčimo še vozlišča.
 \caption{Primer orientacije grafa z označenimi vozlišči.}
 \label{ex_2}
 \centering
-    \includegraphics[scale=0.6]{alg_ex_2.jpg}
+    \includegraphics[scale=0.5]{alg_ex_2.jpg}
     \end{figure}
 pripadajoč grafu oblike 
 \begin{equation*}
@@ -1660,36 +1677,36 @@ Za vsak graf $G$ velja $\ch_{\Sigma}^t(G) \le  \Delta(G) + 1$
 \begin{proof}
 Trditev bomo dokazali s pomočjo seznamskega barvanja grafa. Spomnimo se razdelka o barvanju ter seznamskem barvanju grafa. Predstavili smo požrešno metodo, ki za barvanje uporabi največ $\Delta(G) + 1$ barv. Enako seveda velja tudi za seznamsko verzijo barvanja. Velja torej $\ch(G) \le \Delta(G) +1$ za vsak graf $G$. Zgornjo trditev bomo tako dokazali, če pokažemo $\ch_{\Sigma}^t(G) \le \ch(G)$.
 Naj bo $\{L_1, L_2, \ldots, L_n\}$ nabor seznamov uteži za vozlišča velikosti največ $\Delta(G) + 1$. Na povezavah v tem primeru niti ne potrebujemo veliko izbire zato predpostavimo, da imamo na povezavah sezname velikosti ena oziroma imamo podano povezavno utežitev $\omega$. Označimo z $\{\omega(e) | e \in E(G)\}$ množico uteži na povezavah. Sedaj definiramo nov nabor seznamov za vozlišča, tako da za vsako vozlišče $v \in V(G)$ definiramo
-$$L_{v}^+ = \{ w + \sum_{e\ni v} \omega(e) | w \in L_v\}. $$
+$$L_{v}^+ = \{ w + \sum_{e\ni v} \omega(e) \mid w \in L_v\}. $$
 Zgornji nabor seznamov prevzaprav predstavlja vse možne barve za posamezno vozlišče. Ker so bili originalni seznami velikosti $\Delta(G) + 1$ velja $|L_{v}^+| =\Delta(G) + 1$. Ampak, ker velja $\ch(G) \le \Delta(G) +1$ lahko iz tega nabora seznamov izberemo pravilno barvanje. Ker smo sezname definirali na pameten način smo s tem izbrali tudi ustrezno utežitev za originalen problem.
 \end{proof}
 V zgornji trditvi smo uporabili enostavno mejo $\ch(G) \le \Delta(G) + 1$. Pravzaprav se to mejo lahko še malenkost izboljša. Kot smo že omenili za seznamsko barvanje velja Brooksov izrek oziroma njegova modifikacija. V kolikor torej $G$ ni polni graf ali lih cikel velja $\ch(G) \le \Delta(G)$. Ker smo v primeru ciklov in polnih grafov že pokazali $\ch_{\Sigma}^t \le 2$ lahko zaključimo da velja $\ch_{\Sigma}^t(G) \le \Delta(G)$ za poljubne grafe $G$.
 V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo seznamske verzije problema. Poleg tega je vsaka rešitev seznamske verzije tudi rešitev originalne verzije in celo zastavljena domneva za seznamsko verzijo je enaka kot domneva originalne verzije. Če torej uspešno rešimo seznamsko verzijo rešimo tudi originalno verzijo. Vendar v kolikor odkrijemo proti primer za seznamsko verzijo domneve s tem ne ovržemo tudi originalne domneve. Dopolnimo sedaj tabelo rezultatov.
 \begin{table}[H]
 
-\caption{\label{tab:tab3} Izračun $\ec(G)$,  $\ect(G)$, $\ch_{\Sigma}^e$, $\ch_{\Sigma}^t$ za znane grafe. Z * so označena polja, ki jih nismo direktno dokazali.}
+\caption{\label{tab:tab3} Izračun $\ec(G)$,  $\ect(G)$, $\ch_{\Sigma}^e$, $\ch_{\Sigma}^t$ za znane grafe.}
 \centering
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  Graf $G$ & $\ec(G)$ & $\ect(G) $ & $ch_{\Sigma}^e$ & $ch_{\Sigma}^t$\\ \hline
  $P_n$ & 2 & 2 & $\le 3$ & 2\\ \hline
  $C_n$ & $\begin{cases}
-	2 & n = 4k;\\ 
-	3 & sicer;
+	2 ,& n \equiv 0 \pmod{4};\\ 
+	3, & \text{sicer};
 	\end{cases}$ & 2 & 3 & 2\\ \hline
  $K_n$& 3 & 2 & 3 &2\\ \hline
  $K_{m,n}$& $\begin{cases}
-	1 & m \neq n\\ 
-	2 & sicer;
+	1, & m \neq n;\\ 
+	2 ,& \text{sicer};
 	\end{cases}$ &$\begin{cases}
-	1 & m \neq n\\ 
-	2 & sicer;
+	1 ,& m \neq n;\\ 
+	2, & \text{sicer};
 	\end{cases}$ &3 & $\le 3$\\ \hline
- 3 obarvljivi& 3 & $\le 3$& & \\ \hline
+ $3$-obarvljivi& 3 & $\le 3$& & \\ \hline
 $T_n$ & 2 & 2& 3 & 2\\ \hline
-dvodelni, $d$-regularni, $d \ge 3 $ & 2  & 2& &\\ \hline
+dvodelni $d$-regularni & 2  & 2& &\\ \hline
 dvodelni   & $\le 3$  & 2 & &\\ \hline
-splošni   & $\le 5$  &$ \le 3$ & $ 2\Delta(G) + 1$ * & $\Delta(G)$ \\ \hline
+splošni   & $\le 5$  &$ \le 3$ & $ 2\Delta(G) + 1$ & $\Delta(G)$ \\ \hline
 \end{tabular}
 \end{table}
 Kot je razvidno iz tabele smo se tudi s seznamsko verzijo problema zelo približali oziroma dobilo celo enake rezultate kot v originalni verziji. Največja razlika v primerjavi s seznamsko verzijo problema so seveda splošni grafi. V tem primeru za seznamsko verzijo problema še ne obstaja nobena konstantna zgornja meja in ostaja odprt problem. Vendar glede na to, da je podobno veljalo za originalno verzijo ob postavitvi domneve smo lahko optimistični, da se bo meja za seznamsko verzijo v prihodnosti še izboljšala.
@@ -1747,7 +1764,7 @@ Recimo, da ima graf $G = (V, E)$ neko utežitev $\omega$, ki ne inducira praviln
 \caption{Primer odprave konflikta $e$ z modifikacijo uteži na sosednji povezavi.}
 \label{alg_loc}
 \centering
-    \includegraphics[scale=0.3]{alg_loc.jpg}
+    \includegraphics[scale=0.33]{alg_loc.jpg}
     \end{figure}
 Na sliki~\ref{alg_loc} lahko vidimo primer odprave takega konflikta. Vendar smo s spremembo uteži $\sigma \mapsto\sigma'$, lahko ustvarili kakšen nov konflikt in sicer v soseščini vozlišč $x$, $v$ ali $u$. V našem algoritmu zato poizkusimo konflikt odpravit, tako da spremenimo uteži na vseh povezavah, ki so incidenčne $u$ in $v$. Pri tem izpustimo povezavo $e$, saj na konflikt nima vpliva. Za vsako spremembo uteži zabeležimo skupno število konflikov. Na koncu se odločimo za tisto spremembo uteži, ki ustvari najmanjše skupno število konfliktov. Po odpravi konflikta postopek nadaljujemo in iz vrste vzamemo naslednji konflikt. Algoritem končamo, če odpravimo vse konflikte, ali pa nobena sprememba uteži ne zniža števila konfliktov. V tem primeru zaključimo, da je minimizacija konfliktov neuspešna ter nadaljujemo z rekurzivnim algoritmom. Zaradi tega, ker algoritem poizkuša minimizirati število konfliktov in ker zato uporablja le sosednje povezave bomo ta postopek imenovali lokalno iskanje (rešitve) oziroma lokalna minimizacija konfliktov.
 
@@ -1781,7 +1798,7 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
 \uIf{\text{result}}{
  \textbf{return} \text{result} \;
 }
-\Else{}
+
 
     }
 \textbf{return} $ False $ \;
@@ -1811,10 +1828,10 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
 \multicolumn{1}{|l|}{HCdebQk}      & \multicolumn{1}{l|}{$9$}          & \multicolumn{1}{l|}{$15$}         & \multicolumn{1}{l|}{$0.0011$}        & \multicolumn{1}{l|}{1}          & \multicolumn{1}{l|}{$0$}                & \multicolumn{1}{l|}{$0$}              & \multicolumn{1}{l|}{$1$}              & \multicolumn{1}{l|}{5}              \\ \hline
                                    & $\vdots$                          &                                   &                                      &                                 &                                         &                                       & $\vdots$                              &                                    
 \end{tabular}
-\label{tbl:res}
+\label{tbl_res_3}
 \caption{Primer rezultatov izvajanja algoritma. Stolpec $H$ predstavlja uporabljeno hevristiko pri razvejitvi. V kolikor algoritem najde rešitev že pred razvejitvijo zabeležimo uporabljeno hevristiko kot Null ter prav tako rekurzivno globino $d_r$.}
 \end{table}
-Primer tabele z rezultati lahko vidimo~\ref{tbl:res}. V enakem formatu smo shranili tudi vse ostale rezultate.
+Primer tabele z rezultati lahko vidimo~\ref{tbl_res_3}. V enakem formatu smo shranili tudi vse ostale rezultate.
 Algoritem ni imel večjih težav pri iskanju ustreznih rešitev za vse možne povezane grafe do stopnje $10$. Zaradi velikega števila grafov velikosti $10$ smo algoritem izvajali vzporedno in sicer smo grafe razdelili glede na število povezav.
  \begin{figure}[h!]
 \caption{Primerjava med različnimi rešitvami za grafe do stopnje $10$ v odvisnosti od števila vozlišč}
@@ -1837,7 +1854,7 @@ Poleg analiziranja vseh možnih grafov do stopnje $10$ smo algoritem pognali tud
 \caption{Primerjava med različnimi rešitvami za grafe višjih stopenj.}
 \label{chart_big_1}
 \centering
-    \includegraphics[scale=0.5]{chart_big_1.jpg}
+    \includegraphics[scale=0.8]{chart_big_1.jpg}
     \end{figure}
 To smo storili, da dobimo boljšo oceno za naključno generiran graf. Vsak graf smo na začetku utežili z naključnimi utežmi ter uporabili hevristiko, ki izbere naključno povezavo za razvejitev. Pričakovano je, da bo algoritem za večje grafe potreboval več časa, da najde rešitev. Prav tako bomo opazovali na kakšen način algoritem najde rešitev. 
 
@@ -1846,7 +1863,7 @@ Na sliki~\ref{chart_big_1} lahko opazimo, da se število naključno rešljivih g
 \caption{Škatlasti diagrami rekurzivne globine glede na število vozlišč.}
 \label{chart_big_2}
 \centering
-    \includegraphics[scale=0.3]{chart_big_2.jpg}
+    \includegraphics[scale=0.65]{chart_big_2.jpg}
     \end{figure}
 Na sliki~\ref{chart_big_2} vidimo, kako se spreminja rekurzivna globina glede na število vozlišč. Rekurzivno globino smo ponazorili z t.i. škatlastim diagramom, ki prikazuje povprečje, mediano, prvi in tretji kvartil ter minimalne in maksimalne vrednosti. S pomočjo škatlastih diagramov lažje opazujemo porazdelitev neke slučajne spremenljivke. Opazimo, da rekurzivna globina narašča. Hitrost naraščanja težko ocenimo. Kot smo že omenili je razumljivo, da se rekurzivna globina povečuje saj se s številom vozlišč povečuje tudi število povezav. Ravno število povezav je tisto, kar najbolj vpliva na delovanje algoritma. Poleg tega, da rekurzivna globina narašča se povečuje tudi razpon rekurzivnih globin. To si morda lahko predstavljamo na naslednji način. Več kot ima graf vozlišč več različnih grafov obstaja in pri tem obstajajo grafi, ki so za algoritem težji ter tudi lažji. Ravno zaradi tega je razpon vrednosti večji pri grafih z večjim redom. V sosednjem diagramu smo poizkušali uravnotežit naraščanje števila povezav, tako da smo rekurzivno globino delili s številom povezav. To smo storili preden smo izrisali škatlaste diagrame, saj smo za vsak graf utežili njegovo rekurzivno globino. Rezultati so zelo zanimivi, saj med drugim opazimo, da utežena rekurzivna globina na začetku celo pada nato pa narašča zelo počasi. Poleg tega se stabilizirajo tudi razponi vrednosti pri večjih grafih. Zelo zanimivo je tudi dejstvo, da za grafe z več kot $30$ vozlišči nikoli nismo razvejili algoritma na več kot $10\%$ vseh povezav grafa. V povprečju smo razvejili celo na manj kot $5\%$ vseh povezav. Ena izmed možnih razlag je v tem, da algoritem pravzaprav odreže velik del celotnega iskalnega drevesa. Algoritem konča z neko vejo, takoj ko ugotovi, da nekega konflikta ne more odpravit, saj bi nujno moral spremeniti utež na eni izmed povezav na kateri je že bila izvedena delitev. To seveda ni mogoče zato v tisti veji ne išče več rešitev.  Ker smo grafe generirali naključno je seveda možno tudi to, da smo imeli srečo in generirali grafe, ki so za algoritem ``ugodni''. Prav tako bi morali analizirati še grafe večjih redov, da bi lahko potrdili kako se spreminja število delitev oziroma delež povezav na katerih se opravi delitev.
 
@@ -1855,7 +1872,7 @@ Oglejmo si še kako se spreminja čas, ki ga algoritem porabi za analiziranje po
 \caption{Škatlasti diagrami časa izvajanja algoritma.}
 \label{chart_big_3}
 \centering
-    \includegraphics[scale=0.4]{chart_big_3.jpg}
+    \includegraphics[scale=0.45]{chart_big_3.jpg}
     \end{figure}
 Seveda je razumljivo, da se bo čas izvajanja povečeval saj se hitro povečuje tudi število povezav v grafu. Ko smo analizirali lokalno iskanje rešitve smo ocenili tudi njegovo časovno zahtevnost, ki je bila polinomska v odvisnosti od števila vozlišč. To potrdimo tudi z diagramom na sliki~\ref{chart_big_3}. Na isti sliki imamo tudi diagram časa izvajanje rekurzivnega algoritma. Seveda bo za rekurzivno rešitev algoritem potreboval več časa kot za lokalno rešitev saj mora pred vsako delitvijo opravit lokalno iskanje. Iz vidika prejšnjih ugotovitev lahko sklepamo, da rekurzivni algoritem vseeno ne porabi toliko več časa kot lokalno iskanje. Če bi lahko omejili število delitev rekurzivnega algoritma z $\mathcal{O}(m)$ bi njegova celotna časovna zahtevnost postala polinomska. Vendar kaj takega ne moremo sklepati le na podlagi dobljenih rezultatov, saj ne vemo, kako bi se algoritem obnašal na večjih grafih.
 
