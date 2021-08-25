@@ -95,9 +95,10 @@
 \usepackage{float}
 \usepackage[ruled,vlined]{algorithm2e}
 
-
+\SetKw{KwData}{Vhod \\}
 \makeatletter
 \renewcommand{\algorithmcfname}{Algoritem}
+%\renewcommand{\KwData}{Vhod}
 \makeatother
 
 
@@ -326,14 +327,22 @@ okolje itemize in ukaz plancite, saj je celotna literatura oštevilčena na konc
 \textbf{\naslovdela} \\[3mm]
 \textsc{Povzetek} \\[2mm]
 \end{center}
-Povezavna utežitev $\omega : E \rightarrow \{1,2, \ldots, k\}$ grafa $G = (V, E)$ porodi pravilno barvanje, če se vsote uteži na incidenčnih povezavah razlikujejo za vsaki dve sosednji vozlišči. V nalogi se osredotočimo na zgornjo mejo za $k$ za katero lahko za vsak graf najdemo utežitev, ki porodi ustrezno barvanje. Obravnavamo tudi cikle, drevesa ter polne in regularne grafe.
+Povezavna utežitev $\omega : E \rightarrow \{1,2, \ldots, k\}$ grafa $G = (V, E)$ določa barvanje grafa, kjer barvo za vozlišče dobimo kot vsoto uteži na incidenčnih povezavah. Najmanjši tak $k$ za katerega obstaja utežitev, ki porodi pravilno barvanje označimo z $\ec(G)$. To ni mogoče, če graf vsebuje izolirano povezavo. Zato obravnavamo samo grafe brez izoliranih povezav. V nalogi se osredotočimo na iskanje zgornje meje za parameter $\ec(G)$, ki je neodvisna od grafa $G$. Domneva 1-2-3 pravi, da velja $\ec(G) \le 3$ za vsak graf $G$.
+
+Domnevo potrdimo v primeru poti, ciklov, dvodelnih, $3$-obarvljivih in polnih grafov. Poleg tega pokažemo t.i.\ izrek 1-2-3-4-5, ki pokaže $\ec(G) \le 5$ za vsak graf $G$. To je tudi najboljši rezultat do sedaj. V primeru regularnih grafov rezultat malenkost izboljšamo in pokažemo $\ec(G) \le 4$ za vsak regularen graf. Obravnavamo tudi asimptotsko obnašanje parametra na naključnih grafih. Poleg tega obravnavamo tudi totalno in seznamsko posplošitev problema.
+
+Razvijemo in analiziramo tudi algoritem, ki proba domnevo potrditi za poljuben graf. To storimo z iskanjem ustrezne povezavne utežitve.
 
 \vfill
 \begin{center}
 \textbf{1-2-3 Conjecture} \\[3mm] % prevod slovenskega naslova dela
 \textsc{Abstract}\\[2mm]
 \end{center}
-An edge weighting $\omega : E \rightarrow \{1,2, \ldots, k\}$ of a graph $G = (V, E)$ induces proper coloring if sums of incident edges are different for any two adjacent vertices. We focuse on upper bound for $k$ where we can find for any graph a weighting which induces a proper coloring. We also consider cycles, trees, complete and regular graphs.
+An edge weighting $\omega : E \rightarrow \{1,2, \ldots, k\}$ induces a vertex coloring where vertex color is defined as a sum of weights on incident edges. Smallest $k$ for which there exists edge weighting which induces a proper coloring is denoted as $\ec(G)$. If a graph contains an isolated edge such a weighting does not exist. Therefore we only consider graphs without isolated edges. We focus on providing upper bounds for parameter $\ec(G)$ which are independent of graph $G$. 1-2-3 conjecture states that $\ec(G) \le 3$ for any graph.
+
+Conjecture is confirmed in case of paths, cycles, bipartite graphs,  $3$-colorable graphs and complete graphs. We also prove the so called 1-2-3-4-5 theorem which states that $\ec(G) \le 5$ for any graph. In the case of regular graphs we improve the result and show that $\ec(G) \le 4$ for regular graphs. We also analyze asymptotic behaviour of parameter on random graphs. Results for the total and list version of a problem are also presented.
+We developed and analyzed an algorithm that tries to solve conjecture by constructing a proper edge weighting for arbitrary graphs.
+
 
 \vfill\noindent
 \textbf{Math.~Subj.~Class.~(2020):} 05C15, 05C31, 05C80, 05C78, 05C85
@@ -477,6 +486,7 @@ Za začetek si bomo ogledali nekaj osnovnih primerov grafov ter na njih izračun
 
 Večina tega razdelka je povzeta po~\cite{examples}.
 \begin{trditev}[Domneva 1-2-3 za $P_n$]
+\label{path_e}
 Naj bo $P_n$ pot na vsaj treh vozliščih. Tedaj velja $\ec(P_n) = 2.$
 \end{trditev}
 
@@ -529,6 +539,7 @@ Premislimo sedaj še to kako bi izračunali iregularnostno moč za $P_n$. Zgornj
 \end{proof}
 Naravno nadaljujemo z grafom, ki ga iz poti dobimo, tako da združimo krajšiča poti z novo povezavo. Tedaj seveda ustvarimo cikel $C_n$. Kljub temu, da grafu dodamo le eno novo povezavo, pri tem strogo povečamo parameter $\ec.$
 \begin{trditev}[Domneva 1-2-3 za cikle $C_n$]
+\label{res_cycle}
 Naj bo $C_n$ cikel. Tedaj velja $\ec(C_n) \le 3.$
 \end{trditev}
 \begin{proof}
@@ -677,6 +688,7 @@ Nahitro ocenimo še parameter $s(C_n)$. V tem primeru prav tako vzamemo idejo, k
 Do sedaj smo obravnavali grafe z precej nizkimi stopnjami vozlišč. Na podlagi tega bi lahko sklepali, da je v tem primeru enostavno računati parameter $\ec$, saj je malo možnih konflikov med vozlišči. Vendar poleg manjšega števila sosedov imajo vozlišča seveda tudi manjše število incidenčnih povezav in s tem manj svobode kakšne vrednosti lahko zasedejo. Sedaj si bomo ogledali iskanje primerne utežitve na polnih grafih $K_n$. 
 \begin{trditev}[Domneva 1-2-3 za $K_n$~\citet{examples} ]
 \end{trditev}
+\label{res_complete}
 Naj bo $K_n$ polni graf na vsaj treh vozliščih. Tedaj velja $\ec(K_n) = 3$.
 	\begin{proof}
 
@@ -718,7 +730,18 @@ V prejšnjem razdelku smo obravnavali grafe, ki imajo podobno strukturo. Sedaj s
 
  
  Dvodelne grafe označimo kot $G=(A, B, E)$, kjer sta $A$ in $B$ biparticija vozlišč.
-Obravnavajmo najprej polne dvodelne grafe $K_{m,n}$ z biparticijo $(A, B)$. Enostavni primer je, ko velja $m \neq n$. V tem primeru lahko vse povezave utežimo z 1 in dobimo pravilno barvanje, kar pomeni $\ec(K_{m,n}) = 1$. V kolikor je $m=n$ oštevilčimo vozlišča v $A$ kot $v_1, v_2, \ldots, v_n$ in vozlišča v $B$ kot $u_1, u_2, \ldots, u_n$. Sedaj definiramo utežitev kot
+Obravnavajmo najprej polne dvodelne grafe $K_{m,n}$ z biparticijo $(A, B)$.
+\begin{trditev}
+\label{res_dvo_complete}
+Za polni dvodelni graf $K_{m,n}$ velja
+
+$$\ec(K_{m,n}) = \begin{cases}
+	1 ,& m \neq n;\\ 
+	2 ,& \text{sicer};
+	\end{cases} $$
+\end{trditev}
+\begin{proof}
+ Enostavni primer je, ko velja $m \neq n$. V tem primeru lahko vse povezave utežimo z 1 in dobimo pravilno barvanje, kar pomeni $\ec(K_{m,n}) = 1$. V kolikor je $m=n$ oštevilčimo vozlišča v $A$ kot $v_1, v_2, \ldots, v_n$ in vozlišča v $B$ kot $u_1, u_2, \ldots, u_n$. Sedaj definiramo utežitev kot
 $$
 \omega(v_i u_j) = 
 \begin{cases}
@@ -726,7 +749,9 @@ $$
 2, & \text{če } i=n.
 \end{cases}
 $$
-Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) =n + 1$ vozlišča $v_i$ pa $c_{\omega}(v_i) = n$ z izjemo $c_{\omega}(v_n) = 2n$. To je torej pravilno barvanje in $\ec(K_{n,n}) = 2$. Sedaj bomo obravnavali še nekaj bolj splošnih dvodelnih grafov.
+Zgornja utežitev poskrbi, da imajo vozlišča $u_i$ vrednost $c_{\omega}(u_i) =n + 1$ vozlišča $v_i$ pa $c_{\omega}(v_i) = n$ z izjemo $c_{\omega}(v_n) = 2n$. To je torej pravilno barvanje in $\ec(K_{n,n}) = 2$.
+\end{proof}
+ Sedaj bomo obravnavali še nekaj bolj splošnih dvodelnih grafov.
 
 
 \begin{trditev}[\citet{examples}]
@@ -750,6 +775,7 @@ Po trditvi~\ref{dvosodo} lahko predpostavimo, da sta tako $|A|$ in $|B|$ lihi. B
 \end{proof}
 Kot smo že omenili so vsa drevesa dvodelni grafi, kjer imajo vsi listi stopnjo ena. Na podlagi tega dejstva sledi naslednja posledica.
 \begin{posledica}
+\label{res_tree}
 Za drevo $T$ z vsaj tremi vozlišči velja $\ec(T) \le 2$.
 \end{posledica}
 Zgornja posledica izhaja iz dejstva, da ima vsako drevo vsaj 1 list ter posledično vozlišče s stopnjo 1. Sedaj si bomo ogledali še eno trditev, ki nam bo omogočala izračuna $\ec(G)$ za dvodelne regularne grafe.
@@ -776,7 +802,7 @@ V kolikor je $d(x)$ liho je potem $|A_1|$ sodo. Po trditvi \ref{dvosodo} ima gra
 V koliko je $d(x)$ sodo je $|A_1|$ liho. Ker je graf $G$ povezan obstaja vozlišče $u^* \in N(x)$, ki je soseden $v^* \in B_1$. Označimo sedaj graf $G'$, kot graf, ki ga dobimo iz $G_1$, tako da dodamo povezavo $u^*v^*$. V tem primeru lahko za $G' = (A_1 \cup \{u^*\}, B_1, E_1 \cup \{u^*v^*\})$ uporabimo trditev \ref{dvosodo}, ter dobimo $2$-utežitev $\omega'$ z že znano lastnostjo. Sedaj $\omega'$ razširimo v $\omega$, tako da utežimo povezave incidenčne $x$, razen $xu^*$ z 1, ter vse ostale povezave z 2. Sedaj velja $c_{\omega}(x) = d(x) + 1$ in $c_{\omega}(u) = 2d(u) - 1$ za vse $u \in N(x) \setminus \{u^*\}$. Po predpostavki izreka tako zopet velja $c_{\omega}(x) \neq c_{\omega}(u)$ ter je $\omega$ $2$-utežitev, ki je pravilno barvanje z utežmi. S tem je izrek dokazan.
 \end{proof}
 \begin{posledica}
-
+\label{pos_dvo}
 Za vsak dvodelen $d$-regularen graf $G$ z $d \ge 3$ velja $\ec(G) = 2$. 
 \end{posledica}
 
@@ -807,6 +833,7 @@ Podobno ne velja za Abelove grupe sodega reda. To preprosto vidimo na primeru ci
 
 
   \begin{izrek}[~\citet{base}]
+\label{res_3col}
   	Naj bo $\Gamma$ Abelova grupa lihega reda in G ne-trivialen $|\Gamma|$-obarvljiv graf. Potem obstaja utežitev $\omega$ z elementi iz $\Gamma$, tako da je inducirano barvanje $c_{\omega}$ pravilno.
   \end{izrek}
 
@@ -855,9 +882,9 @@ dvodelni $d$ -regularni z $d \ge 3 $ & 2  \\ \hline
 
 \subsection{Konstrukcija grafov G z nizkim parametrom $\ec(G)$}
 
-Spoznali smo že kar nekaj grafov z nizko vrednostjo parametra $\ec$. Z nizko vrednostjo imamo v mislih seveda čim nižjo zgornjo mejo. Sedaj si bomo ogledali kako lahko neko ``dobro'' utežitev razširimo na večji graf. V ta namen najprej ponovimo definicijo kartezičnega produkta dveh grafov. Naj bosta $G =(V, E)$ in $G' = (V', E')$ grafa.  \textbf{Kartezični produkt} grafov $G$ in $G'$ je graf, ki ga označimo z $G \cart G'$. Množica vozlišč grafa  $G \cart G'$ je enaka kartezičnemu produktu $V(G) \times V(G')$ iz česar tudi sledi ime za ta produkt. Dve vozlišči $(u, u')$ in $(v, v')$ sta sosednji v $G  \cart G'$ natanko tedaj ko $u=v$ in $u'v' \in E(G')$, ali $u' = v'$ in $uv \in E(G)$. Vozlišče $(u, u')$ v kartezičnem produktu ima po zgornji definiciji toliko incidenčnih povezav kot jih ima $u$ v grafu $G$ plus toliko kot $u'$ v grafu $G'$. Velja torej formula $d_{G  \cart G'}((u, u')) = d_G(u) + d_{G'}(u')$.
+Spoznali smo že kar nekaj grafov z nizko vrednostjo parametra $\ec$. Z nizko vrednostjo imamo v mislih seveda čim nižjo zgornjo mejo. Sedaj si bomo ogledali kako lahko neko ``dobro'' utežitev razširimo na večji graf. V ta namen najprej ponovimo definicijo kartezičnega produkta dveh grafov. Naj bosta $G =(V, E)$ in $G' = (V', E')$ grafa.  \textbf{Kartezični produkt} grafov $G$ in $G'$ je graf, ki ga označimo z $G \cart G'$. Množica vozlišč grafa  $G \cart G'$ je enaka kartezičnemu produktu $V(G) \times V(G')$ iz česar tudi sledi ime za ta produkt. Dve vozlišči $(u, u')$ in $(v, v')$ sta sosednji v $G  \cart G'$ natanko tedaj ko $u=v$ in $u'v' \in E(G')$, ali $u' = v'$ in $uv \in E(G)$. Vozlišče $(u, u')$ v kartezičnem produktu ima po zgornji definiciji toliko incidenčnih povezav kot jih ima $u$ v grafu $G$ plus toliko kot $u'$ v grafu $G'$. Velja torej $d_{G  \cart G'}((u, u')) = d_G(u) + d_{G'}(u')$.
 \begin{trditev}
-Za vsaka grafa $G$ in $H$ velja $\ec(G \Box H) \le \max \{\ec(g), \ec(H)\}$.
+Za vsaka grafa $G$ in $H$ velja $\ec(G \cart H) \le \max \{\ec(g), \ec(H)\}$.
 \end{trditev}
 \begin{proof}
 Trditev bomo dokazali, tako da bomo konstruirali utežitev kartezičnega produkta  $G \cart H$. Naj bo $k =\max \{\ec(g), \ec(H)\} $. Tedaj obstajata utežitvi $\omega_1 : E(G) \rightarrow \{1, \ldots, k\}$ in $\omega_2 : E(H)\rightarrow \{1, \ldots, k\}$, ki porodita pravilno barvanje za grafa $G$ in $H$. Sedaj sestavimo utežitev $\omega : E(G \cart H) \rightarrow \{1, \ldots, k\}$, tako da definiramo 
@@ -867,11 +894,11 @@ Trditev bomo dokazali, tako da bomo konstruirali utežitev kartezičnega produkt
 	\omega_2(u'v'), &\text{če } u = v.
 	\end{cases}
 \end{equation*}
-Poglejmo sedaj kakšno barvanje porodi zgornja utežitev. Podobno kot pri stopnjah vozlišč v kartezičnem produktu grafov velja $c_{\omega}((u, u')) = c_{\omega_1}(u) + c_{\omega_2}(u')$. Pokazati moramo, da imata vozlišči na vsaki povezavi kartezičnega produkta različne barve. Ampak povezava v kartezičnem produktu obstaja le ko se vozliči ujemata vsaj na eni koordinati. V kolikor se ujemata na prvi koordinati trditev sledi ker $\omega_2$ inducira pravilno barvanje v kolikor pa se ujemata na drugi koordinati trditev sledi ker $\omega_1$ inducira pravilno barvanje.
+Poglejmo sedaj kakšno barvanje porodi zgornja utežitev. Podobno kot pri stopnjah vozlišč v kartezičnem produktu grafov velja $c_{\omega}((u, u')) = c_{\omega_1}(u) + c_{\omega_2}(u')$. Pokazati moramo, da imata vozlišči na vsaki povezavi kartezičnega produkta različne barve. Ampak povezava v kartezičnem produktu obstaja le ko se vozlišči ujemata vsaj na eni koordinati. V kolikor se ujemata na prvi koordinati trditev sledi ker $\omega_2$ inducira pravilno barvanje v kolikor pa se ujemata na drugi koordinati trditev sledi ker $\omega_1$ inducira pravilno barvanje.
 \end{proof}
 Na podlagi zgornje trditve lahko, iz grafov za katere smo domnevo 1-2-3 že dokazali, konstruiramo nove grafe za katere domneva tudi velja. Oglejmo si nekaj primerov.
 \begin{primer}
-\textbf{Hiperkocka} je graf $Q_n$ z $2^n$ vozlišči dobljen kot kartezični produkt $n$ kopij grafov $K_2$. Na sliki \ref{hip} vidimo nekaj začetnih hiperkock.
+\textbf{Hiperkocka} $Q_n$ je graf z $2^n$ vozlišči dobljen kot kartezični produkt $n$ kopij grafa $K_2$. Na sliki \ref{hip} vidimo nekaj manjših hiperkock.
  \begin{figure}[h!]
 \caption{Hiperkocke $Q_n$ za $n=1,2,3$.}
 \label{hip}
@@ -880,9 +907,9 @@ Na podlagi zgornje trditve lahko, iz grafov za katere smo domnevo 1-2-3 že doka
     \end{figure}
 Primer $Q_1 = K_2$ izpustimo saj v tem primeru rešitev ne obstaja. Za ostale primere iz slike \ref{hip}  ročno preverimo $\ec(Q_2) = \ec(Q_3) \le 2.$ Nato za vsak $n > 3$ zapišemo hiperkocko kot
  $$Q_n = Q_{\lfloor n/2 \rfloor}  \cart Q_{\lceil n/2 \rceil}.$$
- To lahko naredimo saj je operacija kartezičnega produkta asociativna. Ker $n > 3$ je tako dimenzija obeh hiperkock na desni strani zgornje enakosti vsaj $2$. Z uporabo indukcije nato dokažemo $\ec(Q_n) = 2$ za $ n \ge 2$. Izračuna $\ec(Q_n)$ bi se lahko lotili tudi na drug način in sicer z orodjem, ki smo ga do sedaj že uporabili. Namreč za hiperkocko velja, da je dvodelen graf. To lahko pokažemo na več načinov.  Eden izmed njih je indukcija na $n$, kjer zapišemo $Q_n = Q_{n-1}  \cart K_2$ ter induktivno uporabimo $2$-barvanje $Q_{n-1}$. V kartezičnem produktu za posamezni kopiji $Q_{n-1}$ uporabimo ravno obratno barvanje. Poleg tega je hiperkocka $Q_n$ tudi $(n)$-regularen graf, kar zopet lahko preverimo z indukcijo. Sedaj lahko uporabimo posledico izreka~\ref{dvoreg} in direktno dobimo $\ec(Q_n) = 2$.
+ To lahko naredimo saj je operacija kartezičnega produkta asociativna. Ker $n > 3$ je tako dimenzija obeh hiperkock na desni strani zgornje enakosti vsaj $2$. Z uporabo indukcije nato dokažemo $\ec(Q_n) = 2$ za $ n \ge 2$. Izračuna $\ec(Q_n)$ bi se lahko lotili tudi na drug način in sicer z orodjem, ki smo ga do sedaj že uporabili. Namreč za hiperkocko velja, da je dvodelen graf. To lahko pokažemo na več načinov.  Eden izmed njih je indukcija na $n$, kjer zapišemo $Q_n = Q_{n-1}  \cart K_2$ ter induktivno uporabimo $2$-barvanje $Q_{n-1}$. V kartezičnem produktu za posamezni kopiji $Q_{n-1}$ uporabimo ravno obratno barvanje. Poleg tega je hiperkocka $Q_n$ tudi $n$-regularen graf, kar zopet lahko preverimo z indukcijo. Sedaj lahko uporabimo posledico~\ref{pos_dvo} in direktno dobimo $\ec(Q_n) = 2$.
 
-Na podoben način lahko generiramo tudi t.i.\ torus grafe. \textbf{Torus graf} označimo z $T_{m,n} = C_m  \cart C_n$. Direktna posledica zgornje trditve je torej $\ec(T_{m,n}) \le 3$ v kolikor $n,m \ge 3$. Torus graf $T_{m,n}$ si lahko predstavljamo kot $m \times n$ mrežo kjer povežemo sosednje točke ter prav tako povežemo levi in desni rob ter zgornji in spodnji rob. Tako dobimo $4$-regularen graf z $mn$ vozlišči. Vendar na tak način ne moremo dobiti vseh $4$-regularnih grafov na $mn$ vozliščih, saj tak graf ni enolično določen.
+Na podoben način lahko generiramo tudi t.i.\ torus mreže. \textbf{Torus mrežo} označimo z $T_{m,n} = C_m  \cart C_n$. Direktna posledica zgornje trditve je torej $\ec(T_{m,n}) \le 3$ v kolikor $n,m \ge 3$. Torus mreža $T_{m,n}$ si lahko predstavljamo kot $m \times n$ mrežo kjer povežemo sosednje točke ter prav tako povežemo levi in desni rob ter zgornji in spodnji rob. Tako dobimo $4$-regularen graf z $mn$ vozlišči. Vendar so torus mreže le poseben primer $4$-regularnih grafov. Vseh neizomorfnih $4$-regularnih grafov na $nm$ vozliščih je namreč ogromno.
 \end{primer}
 
 
@@ -927,6 +954,7 @@ Na podlagi zgornjega dokaza lahko napišemo algoritem za iskanje takih utežitev
 
 V prejšnjem razdelku smo predstavili rezultat za splošne grafe. Kot smo že omenili je to tudi najboljši rezultat do danes, ki ga poznamo za splošne grafe. Prav tako smo opazili, da lahko za nekatere družine grafov rezultat izboljšamo. Ta razdelek bo namenjen $d$-regularnim grafom. Ugotovili smo že, da za regularne grafe $G$, ki so tudi dvodelni velja $\ec(G) \le 2$. Na podlagi motivacije za domnevo 1-2-3 smo ugotovili, da so morda regularni grafi težki za ta problem saj so zelo ``oddaljeni''  od pojma iregularni graf. Kljub temu vseeno lahko izkoristimo nekatere lastnosti regularnih grafov in izboljšamo rezultat iz prejšnjega razdelka.
 \begin{izrek}[Izrek 1-2-3-4 za regularne grafe;~\citet{regular}]
+\label{regular_4}
 Za vsak $d$-regularen graf $G$ velja $\ec(G) \le 4$
 \end{izrek}
 
@@ -1143,6 +1171,7 @@ Za začetek si bomo ogledali nekaj preprostih primerov na podoben način kot smo
 \end{domneva}
 Domneva torej pove, da v kolikor dovoljujemo še uteži na vozliščih potem v glavnem potrebujemo eno utež manj, da dobimo pravilno barvanje. Hitro najdemo primer, zakaj v splošnem velja $\ect(G) > 1$. Tak primer je recimo $C_3$ oziroma $K_3$.
 \begin{trditev}[\citet{12conj}]
+\label{total_dvo}
 $\ect \le 2$ za dvodelne grafe.
 \end{trditev}
 \begin{proof}
@@ -1150,6 +1179,7 @@ Dokaz trditve je precej preprost in lažji kot v primeru povezavne utežitvije. 
 \end{proof}
 Zgornja trditev torej dokaže domnevo 1-2 za poti $P_n$ ter drevesa $T_n$. Oglejmo si še naslednjo trditev.
 \begin{trditev}
+\label{total_cycle}
 $\ect \le 2$ za cikle $C_n$.
 \end{trditev}
 \begin{proof}
@@ -1164,6 +1194,7 @@ V primeru parametra $\ec$ smo morali obravnavali 4 različne možnosti in sicer 
 \end{proof}
 
 \begin{trditev}[\citet{12conj}]
+\label{total_complete}
 $\ect(K_n) = 2$.
 \end{trditev}
 
@@ -1176,6 +1207,7 @@ Za $n=2$ preprosto najdemo ustrezno utežitev. Predpostavimo, da je $n \ge 3$ in
 Kot smo opazli se za osnovne družine grafov brez večjih težav pokaže veljavnost domneve 1-2. Na tem mestu bi se lahko vprašali, kako je s splošnimi grafi? Izkaže se, da tudi za splošne grafa obstaja precej dober rezultat, ki je v neki meri bližje domnevi kot v primeru domneve 1-2-3, ko smo dokazali tako imenovan izrek 1-2-3-4-5.
 \begin{izrek}[1-2-3 izrek za parameter $\ect$]
 \label{theorem123}
+
 Naj bo $G$ povezan graf. Tedaj velja $\ect(G) \le 3$.
  \end{izrek}
 
@@ -1366,6 +1398,7 @@ Seveda enak razvoj velja za vse stolpce. V zgornjem primeru smo zaradi lažje ra
 Kot smo že omenili je računanje permanent zahtevno predvsem zato ker ne moremo uporabiti Gausovih eliminacij kot pri determinantah. Seveda je zaradi tega računaje permanentnega indeksa matrike še toliko težji problem saj niti ne vemo ali je permanentni indeks končen. S pomočjo zgornje trditve lahko permanentni indeks računamo na podoben način kot računamo determinante s pomočjo  Gaussovih eliminacij. Oglejmo si uporabno zgornje trditve.
 
 \begin{trditev}
+\label{list_e_cycle}
 Za vsak $n \ge 3$ velja $\mind(C_n) \le 2$. Torej vsak cikel je utežljiv iz seznamov velikosti $3$.
 \end{trditev}
 
@@ -1478,12 +1511,14 @@ Sledi torej $\per S = -2n(2n-1)! = -(2n)! \neq0$. Torej potem velja tudi $perR' 
 \end{proof}
 V dokazovanju zgornjega izreka ter nasploh trditev v tem razdelku smo uporabili ogromno linearne algebre ter premetavanja in transformiranja matrik. S tem smo se malo oddaljili od same teorije grafov. Kljub temu je zgornji izrek močno orodje, ki nam omogoča generiranje grafov z nizkim monomičnim indeksom. Ideja je, da začnemo z nekim majhnim grafom $G_0$ za katerega velja $\mind(G_0) \le 2$ ter nato postopoma dodajamo pare novih vozlišč v skladu z zgornjim izrekom. Tako lahko ustvarimo ogromno grafov za katere velja, da je njihov monomični indeks manjši od $2$. Oglejmo si direktno uporabo za nekatere že znane družine grafov.
 \begin{trditev}[~\citet{alg_org}]
-Če $G \neq K_2$ je polni graf ali polni dvodelni graf potem $\mind(G) \le 2$.
+\label{list_e_complete}
+Če je $G \neq K_2$ polni graf ali polni dvodelni graf potem $\mind(G) \le 2$.
 \end{trditev}
 \begin{proof}
 Dokaz je takojšnja posledica izreka \ref{algcons} ko preverimo da imajo grafi $K_3$, $K_4$, $K_{1,2}$, $K_{1,3}$, $K_{2,2}$ monomične indekse manjše kot $2$. Nato z indukcijo dokažemo trditev. Res, za vsak polni graf $K_n$ začnemo z $K_3$ v kolikor je $n$ lih ter nato dodajamo po dva vozlišča in jih povežemo z vsemi obstoječimi vozliči ter tako nadaljujemo. Ko je $n$ sod začnemo z $K_4$ ter nadaljujemo na enak način. V primeru polnih dvodelnih grafov $K_{n,m}$ postopamo enako. Glede na parnost $n$ in $m$ si izberemo začetni graf ter dodajamo nova vozlišča, ki jih sedaj povežemo le z eno biparticijo obstoječega polnega dvodelnega grafa.
 \end{proof}
 \begin{trditev}[~\citet{alg_org}]
+\label{list_e_tree}
 Naj bo $T$ drevo na vsaj treh vozliščih. Potem velja $\mind(T) \le 2$.
 \end{trditev}
 
@@ -1560,6 +1595,7 @@ Iz tega torej sledi $\pind(A_G^t) = 1 =\tmind(G)$, kar pomeni $\eclt(G) = 2$ in 
 
 Oglejmo si še kako lahko rezultat izboljšamo v primeru ciklov.
 \begin{trditev}[~\citet{algebraic}]
+\label{list_t_cycle}
 Za vsak $n$ velja $\tmind(C_n) = 1$.
 \end{trditev}
 
@@ -1634,6 +1670,7 @@ Na podlagi zgornje trditve in konstrukcijskega izreka \ref{algcons} iz prejšnje
 \end{trditev}
 Dodatno nas zanima, ali lahko v polni verziji rezultate za zgornje grafe še izboljšamo. Kot bomo videli v nadaljevanju je to mogoče v primeru dreves in polnih grafov. V primeru dreves si bomo ogledali konstrukcijski izrek, kjer gradimo grafe z dodajanjem ene nove povezave med obstoječim in novim  vozliščem. Za polne grafe si bomo ogledali postopek, ki ne uporablja kombinatoričnega izreka o ničlah temveč direktno konstruira ustrezne utežitve iz poljubnih seznamov. Seveda bi tudi za polne grafe lahko postopali s pomočjo polinomov in matrik vendar se izkaže, da je dokaz na tak način precej dolg in zahteven in predvsem zahteva veliko dela z matrikami.
 \begin{trditev}[~\citet{algebraic}]
+\label{list_t_tree}
 Naj bo $G=(V,E)$ graf za katerega velja $\tmind(G) = 1$. Naj bo $v \notin V$ novo vozlišče ter $u \in V$. Definiramo graf $G' = G + uv$. Tedaj velja $\tmind(G') =1$.
 \end{trditev}
  \begin{proof}
@@ -1661,6 +1698,7 @@ M(L) &= \max \Big\{ \sum_{e \ni v} M_L(e) + M_L(v) \text{ : } v \in V\Big \}
 \end{equation*}
 Zgornja izraza predstavljata najmanjšo in največjo možno utež, ki jo lahko dobim vozlišče v grafu v kolikor ga utežujemo iz seznamov. V primeru polnih grafov bomo dokazali malenkost  močnejši izrek, ki nam bo podal dve različni utežitvi polnega grafa.
 \begin{izrek}[~\citet{algebraic}]
+\label{list_t_complete}
 Naj bo $G = K_n$ polni graf in naj bo $L$ nabor seznamov velikosti $2$ dodeljen vozliščem in povezavam polnega grafa. Potem obstajata vsaj dve različni veljavni totalni utežitvi grafa $G$ z utežmi iz seznamov v $L$. Pri tem je ena izmed totalnih utežitev brez $m(L)$ in druga brez $M(L)$ končne uteži na vozliščih.
 \end{izrek}
 \begin{proof}
@@ -1672,6 +1710,7 @@ Opazimo, da velja $m(L') \ge m(L)$ saj uteži iz odstranjenih povezav prištejem
 
 Do sedaj smo se v seznamski verziji problema ukvarjali samo z posebnimi družinami grafov. Posebne strukture takih družin so nam omogočale računanje permanentnega indeksa matrik pripadajočim tem družinam. Ali lahko kaj povemu tudi o splošnih grafih? Kot smo že omenili je težko kar koli povedati direktno iz matrike poljubnega grafa. Tako je v splošnem potrebno uporabiti kakšno posebno konstrukcijo in uporabiti indukcijo na število vozlišč v grafu. Pri postopku moramo biti pozorni, da ohranjamo zadano mejo, ko povečujemo graf. Z tako metodo je mogoče izpeljat zgornjo mejo za parameter $\ch_{\Sigma}^e$ in sicer velja $\ch_{\Sigma}^e(G) \le 2 \Delta(G) + 1$, kar je bilo dokazano v~\cite{listbounds}. Dokaz je sorazmerno dolg vendar uporablja zelo podbne ideje, ki smo jih že spoznali in sicer je dokaz konstrukcijske narave. Precej bolj preprosta zgornja meja obstaja v primeru totalne verzije.
 \begin{trditev}
+\label{list_t_gen}
 Za vsak graf $G$ velja $\ch_{\Sigma}^t(G) \le  \Delta(G) + 1$
 \end{trditev}
 \begin{proof}
@@ -1684,29 +1723,38 @@ V zgornji trditvi smo uporabili enostavno mejo $\ch(G) \le \Delta(G) + 1$. Pravz
 V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo seznamske verzije problema. Poleg tega je vsaka rešitev seznamske verzije tudi rešitev originalne verzije in celo zastavljena domneva za seznamsko verzijo je enaka kot domneva originalne verzije. Če torej uspešno rešimo seznamsko verzijo rešimo tudi originalno verzijo. Vendar v kolikor odkrijemo proti primer za seznamsko verzijo domneve s tem ne ovržemo tudi originalne domneve. Dopolnimo sedaj tabelo rezultatov.
 \begin{table}[H]
 
-\caption{\label{tab:tab3} Izračun $\ec(G)$,  $\ect(G)$, $\ch_{\Sigma}^e$, $\ch_{\Sigma}^t$ za znane grafe.}
+\caption{\label{tab:tab3} Vrednosti $\ec(G)$,  $\ect(G)$, $\ch_{\Sigma}^e$, $\ch_{\Sigma}^t$ za znane družine grafov.}
 \centering
 \begin{tabular}{|l|l|l|l|l|}
 \hline
- Graf $G$ & $\ec(G)$ & $\ect(G) $ & $ch_{\Sigma}^e$ & $ch_{\Sigma}^t$\\ \hline
- $P_n$ & 2 & 2 & $\le 3$ & 2\\ \hline
+ Graf $G$ & $\ec(G)$ & $\ect(G) $ & $\ch_{\Sigma}^e$ & $\ch_{\Sigma}^t$\\ \hline
+ $P_n$ & 2 & 2 & $\le 3$ & 2\\ 
+ & \footnotesize Trditev~\ref{path_e} &  &\footnotesize Trditev~\ref{list_e_tree} &\footnotesize Trditev~\ref{list_t_tree}\\ \hline
  $C_n$ & $\begin{cases}
-	2 ,& n \equiv 0 \pmod{4};\\ 
+	2 ,& 4 \mid n;\\ 
 	3, & \text{sicer};
-	\end{cases}$ & 2 & 3 & 2\\ \hline
- $K_n$& 3 & 2 & 3 &2\\ \hline
+	\end{cases}$ & 2 & 3 & 2\\ 
+& \footnotesize Trditev~\ref{res_cycle} & \footnotesize Trditev~\ref{total_cycle} &\footnotesize Trditev~\ref{list_e_cycle} &\footnotesize Trditev~\ref{list_t_cycle}\\ \hline
+ $K_n$& 3 & 2 & 3 &2\\ 
+& \footnotesize(Trditev~\ref{res_complete}& \footnotesize Trditev~\ref{total_complete} &\footnotesize Izrek~\ref{list_e_complete} &\footnotesize Izrek~\ref{list_t_complete}\\ \hline
  $K_{m,n}$& $\begin{cases}
 	1, & m \neq n;\\ 
 	2 ,& \text{sicer};
 	\end{cases}$ &$\begin{cases}
 	1 ,& m \neq n;\\ 
 	2, & \text{sicer};
-	\end{cases}$ &3 & $\le 3$\\ \hline
- $3$-obarvljivi& 3 & $\le 3$& & \\ \hline
-$T_n$ & 2 & 2& 3 & 2\\ \hline
-dvodelni $d$-regularni & 2  & 2& &\\ \hline
-dvodelni   & $\le 3$  & 2 & &\\ \hline
-splošni   & $\le 5$  &$ \le 3$ & $ 2\Delta(G) + 1$ & $\Delta(G)$ \\ \hline
+	\end{cases}$ &3 & $\le 3$\\
+& \footnotesize Trditev~\ref{res_dvo_complete} &  &\footnotesize Trditev~\ref{list_e_complete} & \\ \hline
+ $3$-obarvljivi& 3 & $\le 3$& & \\ 
+& \footnotesize Trditev~\ref{res_3col} & & & \\ \hline
+$T_n$ & 2 & 2& 3 & 2\\ 
+& \footnotesize Trditev~\ref{res_tree} & \footnotesize Trditev~\ref{total_dvo} &\footnotesize Trditev~\ref{list_e_tree} &\footnotesize Trditev~\ref{list_t_tree}\\ \hline
+\footnotesize dvodelni $d$-regularni & 2  & 2& &\\ 
+& \footnotesize Trditev~\ref{pos_dvo} & & & \\ \hline
+dvodelni   & $\le 3$  & 2 & &\\ 
+& \footnotesize Trditev~\ref{res_3col} &\footnotesize Trditev~\ref{total_dvo} & & \\ \hline
+splošni   & $\le 5$  &$ \le 3$ & $ 2\Delta(G) + 1$ & $\Delta(G)$ \\
+& \footnotesize Izrek~\ref{theorem12345}& \footnotesize Izrek~\ref{theorem123} & &\footnotesize Trditev~\ref{list_t_gen}\\ \hline
 \end{tabular}
 \end{table}
 Kot je razvidno iz tabele smo se tudi s seznamsko verzijo problema zelo približali oziroma dobilo celo enake rezultate kot v originalni verziji. Največja razlika v primerjavi s seznamsko verzijo problema so seveda splošni grafi. V tem primeru za seznamsko verzijo problema še ne obstaja nobena konstantna zgornja meja in ostaja odprt problem. Vendar glede na to, da je podobno veljalo za originalno verzijo ob postavitvi domneve smo lahko optimistični, da se bo meja za seznamsko verzijo v prihodnosti še izboljšala.
