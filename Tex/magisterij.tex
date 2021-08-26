@@ -1492,7 +1492,7 @@ $$ R'= \left[ \begin{matrix}
  \phantom{-}\vdots & \phantom{-}\vdots  &  & \phantom{-}\vdots &\phantom{-} \ddots &\\
  -1 & -1 & \phantom{-}1 &\phantom{-}1  & &\phantom{-}1
 \end{matrix} \right] .$$
-Vse kar nam preostane za dokazati je $\per R' \neq 0$. Po istem premisleku bo nato veljalo $\per N \neq 0$ in $\pind(A_H) \le 2$. Dokažimo torej $\per R' \neq 0$. Kot smo že omenili je permanenta multilinearna funkcija stolpcev in ker transponiranje ne vpliva na permanento je tudi multilinearna funkcija v vrsticah. Iz tega razloga bomo določene vrstice matrike $R'$ pomnožili s primerno izbranimi konstantami ter tako dobili novo matriko, ki jo bomo označili $S$. Tako pomnožimo prvo vrstico matrike $R'$ z $1/2$ ter vsako liho vrstico z $-1$. Dobljena matrike $S$ tako izgleda kot 
+Dokazati je potrebno še $\per R' \neq 0$. Po istem premisleku bo nato veljalo $\per N \neq 0$ in $\pind(A_H) \le 2$. Dokažimo torej $\per R' \neq 0$. Kot smo že omenili je permanenta multilinearna funkcija stolpcev. Ker transponiranje ne vpliva na permanento je tudi multilinearna funkcija v vrsticah. Iz tega razloga bomo določene vrstice matrike $R'$ pomnožili s primerno izbranimi konstantami ter tako dobili novo matriko, ki jo bomo označili $S$. Tako pomnožimo prvo vrstico matrike $R'$ z $1/2$ ter vsako liho vrstico z $-1$. Dobljena matrike $S$ tako izgleda kot 
 $$ S= \left[ \begin{matrix} 
  \phantom{-}0 & \phantom{-}0 & \phantom{-}1 &\phantom{-}1  &\hdots & \phantom{-}1 \\
  \phantom{-}1 &  \phantom{-}1 &  \phantom{-}1 &    \phantom{-}1 & &  \phantom{-}1 \\ 
@@ -1596,7 +1596,7 @@ Iz tega torej sledi $\pind(A_G^t) = 1 =\tmind(G)$, kar pomeni $\eclt(G) = 2$ in 
 Oglejmo si še kako lahko rezultat izboljšamo v primeru ciklov.
 \begin{trditev}[\citet{algebraic}]
 \label{list_t_cycle}
-Za vsak $n$ velja $\tmind(C_n) = 1$.
+Za vsak $n\ge 3$ velja $\tmind(C_n) = 1$.
 \end{trditev}
 
 \begin{proof}
@@ -1733,7 +1733,7 @@ V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo se
  $\normalsize C_n$ &\normalsize $\begin{cases}
 	2 ,& 4 \mid n;\\ 
 	3, & \text{sicer};
-	\end{cases}$ & v 2 & \normalsize3 & \normalsize2 \rule{0pt}{2.6ex} \\ 
+	\end{cases}$ & 2 & \normalsize3 & \normalsize2 \rule{0pt}{2.6ex} \\ 
 \footnotesize\text{   Referenca}& \footnotesize \ref{res_cycle} & \footnotesize \ref{total_cycle} &\footnotesize \ref{list_e_cycle} &\footnotesize \ref{list_t_cycle}\\ \hline
  $\normalsize K_n$& \large3 & \normalsize2 & \normalsize3 &\normalsize2 \rule{0pt}{2.6ex} \\ 
 \footnotesize\text{   Referenca}& \footnotesize ~\ref{res_complete}& \footnotesize ~\ref{total_complete} &\footnotesize ~\ref{list_e_complete} &\footnotesize ~\ref{list_t_complete}\\ \hline
@@ -1749,7 +1749,7 @@ V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo se
 \footnotesize\text{   }& \footnotesize ~\ref{res_3col} & & & \\ \hline
 $\normalsize T_n$ & \normalsize 2 & \normalsize 2& \normalsize 3 & \normalsize 2 \rule{0pt}{2.6ex}\\ 
 \footnotesize\text{   Referenca}& \footnotesize ~\ref{res_tree} & \footnotesize ~\ref{total_dvo} &\footnotesize ~\ref{list_e_tree} &\footnotesize ~\ref{list_t_tree}\\ \hline
-\footnotesize dvodelni $d$-regularni & \large2  & \large2& & \rule{0pt}{2.6ex}\\
+\footnotesize dvodelni $d$-regularni, $d\ge 3$ & \large2  & \large2& & \rule{0pt}{2.6ex}\\
  \footnotesize\text{   Referenca}& \footnotesize ~\ref{pos_dvo} & & & \\ \hline
 \normalsize dvodelni   & \normalsize $\le 3$  & \normalsize 2 & & \rule{0pt}{2.6ex} \\ 
 \footnotesize\text{   Referenca}& \footnotesize ~\ref{res_3col} &\footnotesize ~\ref{total_dvo} & & \\ \hline
