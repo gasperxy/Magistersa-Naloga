@@ -856,7 +856,7 @@ Podobno ne velja za Abelove grupe sodega reda. To preprosto vidimo na primeru ci
 \caption{Popravljanje utežitve z liho potjo.}
 \label{3col_1}
 \centering
-    \includegraphics[scale=0.35]{3col.jpg}
+    \includegraphics[scale=0.3]{3col.jpg}
     \end{figure}
 	
 	Oglejmo si sedaj še primer, ko je graf $G$ dvodelen. V primeru nedvodelnega grafa smo vsakemu vozlišču barve $i$ dodelili utež $g_i$. Kljub temu, da je dvodelne grafe lahko pobarvamo z dvema barvama le tega ne moremo vedno storiti z utežitvijo povezav z elementi $\Gamma$. To bi pomenilo $n_1 g_1 = n_2 g_2$, kjer $n_1 g_1$ predstavlja skupno utež vozlišč ene barve in $n_2 g_2$ skupno utež druge barve. Seveda mora enakost držati, saj vsaka povezava pripomore isti delež tako prvi kot drugi vsoti. Ta enačba pa ni vedno rešljiva za $g_1 \neq g_2$. Zato v tem primeru postopamo malo drugače. Ker je graf dvodelen, lahko zapišemo njegovo množico vozlišč kot $V(G) = A \cup B$, kjer sta $A$ in $B$ biparticija. Sedaj si izberemo vozlišče $x \in A$, ki ima stopnjo vsaj 2. Zaradi predpostavke lahko to vedno naredimo. Sedaj izberemo $g_1 = 2h$ in $g_1 \neq g_2 = 0$ ter na vse povezave damo utež 0 oziroma $g_2$. Sedaj na enak način popravljamo utežitev, tako da ohranjamo skupno utež 0 (oz. $g_2$). V tem primeru smo že dosegli, da imajo vsa vozlišča iz $B$ utež 0. Popraviti moramo torej le uteži za vozlišča v množici $A$. To storimo, tako da za vsako vozlišče $u \neq x \in A$, ki ima utež 0 najdemo pot sode dolžine od $u$ do $x$. Na poti popravljamo povezave, tako da jim priševamo uteži $g_1 - g_2, g_2 - g_1, \ldots, g_2 - g_1$. S tem poskrbimo, da je vozlišče $u$ pravilno uteženo. Ko končamo postopek imajo vsa vozlišča v $A$ utež $g_1$ razen vozlišče $x$, ki ima utež $g = -(n_1 - 1) g_1 = (1 - n_1) g_1$. Če velja $(1 - n_1)g_1 \neq 0$ smo končali, saj smo konstruirali pravilno barvanje. V nasprotnem primeru na dve poljubni povezavi incidenčni $x$ dodamo utež $h$. S tem poskrbimo, da imajo vsa vozlišča v $A$ utež $g_1$, vozlišča v $B$ pa uteži $g_2 = 0$ in $h$.
@@ -869,8 +869,8 @@ $$ \ec(G) \le \chi(G) + \begin{cases}
 \end{cases}$$ 
 
 
-V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin grafov ter za grafe z nekaj dodatnimi pogoji. V vseh primerih smo domnevo 1-2-3 potrdili v posebnih primerih smo lahko zgornjo mejo še celo malo izboljšali. Rezultate tega razdelka lahko predstavimo s spodnjo tabelo.
-\begin{table}[H]
+V tem razdelku smo izračunali parameter $\ec(G)$ za nekaj posebnih družin grafov ter za grafe z nekaj dodatnimi pogoji. V vseh primerih smo domnevo 1-2-3 potrdili v posebnih primerih smo lahko zgornjo mejo še celo malo izboljšali. Rezultate tega razdelka lahko predstavimo z tabelo~\ref{tab:tab1}.
+\begin{table}[h]
 
 \caption{\label{tab:tab1} Izračun $\ec(G)$ za znane grafe. }
 \centering
@@ -1011,7 +1011,7 @@ Za konec tega razdelka komentirajmo dobljene rezultate. Kot smo že omenili sta 
  
  \section{Verjetnostne metode}
 
-Rezultati, ki smo jih obravnavali do sedaj, so nam eksplicitno podali neko utežitev, ki je zadoščla zahtevanim pogojem. Najboljši rezultat za splošne grafe je izrek \ref{theorem12345}, ki konstruira $5$-utežitev. Ugotovili smo tudi, da lahko v primeru regularnih grafov rezultat v splošnem še malo izboljšamo. V tem razdelku bomo problem obravnavali malenkost drugače. Prav tako bomo poizkusili konstruirati primerno utežitev vendar tokrat ta utežitev morda ne bo delovala za vse grafe. V tem primeru bo dovolj, da je rešitev ``dobra'' za večino grafov. Trenutno še ni jasno kaj pomeni izraz ``dobra'' rešitev za večino grafov. To zahtevo si lahko intuitivno predstavljamo na naslednji način. Izberimo si nek $n$ in opazujmo grafe na množici vozlišč $V = \{1,2, \ldots, n\}$. Sedaj nas zanima, ali lahko za poljuben graf na $n$ vozliščih najdemo ``dobro'' utežitev? Na to vprašanje v splošnem še ne znamo odgovoriti, saj se po tem sprašuje tudi domneva 1-2-3. Lahko pa se vprašamo kakšna je verjetnost, da za naključen graf na $n$ vozliščih najdemo ustrezno utežitev. Tekom razdelka bomo definirali pojem ``naključnega grafa'' ter si ogledali nekaj preprostih trditev, ki veljajo za njih. Z uporabo preprostih trditev bomo formulirali in dokazali izrek, ki bo za veliko večino grafov podal ustrezno $1$-$2$ utežitev. Pri tem bomo v veliki meri sledili knjigi \citet{maingraph}.
+Rezultati, ki smo jih obravnavali do sedaj, so nam eksplicitno podali neko utežitev, ki je zadoščla zahtevanim pogojem. Najboljši rezultat za splošne grafe je izrek \ref{theorem12345}, ki konstruira $5$-utežitev. Ugotovili smo tudi, da lahko v primeru regularnih grafov rezultat v splošnem še malo izboljšamo. V tem razdelku bomo problem obravnavali malenkost drugače. Prav tako bomo poizkusili konstruirati primerno utežitev vendar tokrat ta utežitev morda ne bo delovala za vse grafe. V tem primeru bo dovolj, da je rešitev ``dobra'' za večino grafov. Trenutno še ni jasno kaj pomeni izraz ``dobra'' rešitev za večino grafov. To zahtevo si lahko intuitivno predstavljamo na naslednji način. Izberimo si nek $n$ in opazujmo grafe na množici vozlišč $V = \{1,2, \ldots, n\}$. Sedaj nas zanima, ali lahko za poljuben graf na $n$ vozliščih najdemo ``dobro'' utežitev? Na to vprašanje v splošnem še ne znamo odgovoriti, saj se po tem sprašuje tudi domneva 1-2-3. Lahko pa se vprašamo kakšna je verjetnost, da za naključen graf na $n$ vozliščih najdemo ustrezno utežitev. Tekom razdelka bomo definirali pojem ``naključnega grafa'', ter si ogledali nekaj preprostih trditev, ki veljajo za njih. Z uporabo preprostih trditev bomo formulirali in dokazali izrek, ki bo za veliko večino grafov podal ustrezno $1$-$2$ utežitev. Pri tem bomo v veliki meri sledili knjigi Diestel~\cite{maingraph}.
 
 \subsection{Naključni grafi}
 Vzemimo ponovno fiksno število $n$ in naj bo $V = \{1,2, \ldots, n\}$ množica $n$ vozlišč. Z oznako $\mathcal{G}$ označimo množico vseh grafov na množici vozlišč $V$.  Ideja je, da množico $\mathcal{G}$ spremenimo v verjetnostni prostor. Nato se lahko vprašamo kakšna je verjetnost, da ima nek $G \in \mathcal{G}$ določeno lastnost. Oziroma kolikšna je pričakovana vrednost neke invariante, recimo kromatično število na grafu $G$.
@@ -1253,7 +1253,7 @@ Kot je razvidno iz zgornjega dokaza obstaja ogromno podobnosti med dokazom izrek
 
 Za zaključek tega razdelka dopolnimo tabelo, ki smo jo izpolnili že po koncu začetnega dela. V tabelo bomo dodali parameter $\ect$ ter ga direktno primerjali z parametrom $\ec$.
 \begin{table}[H]
-\caption{\label{tab:tab2} Izračun $\ec(G)$ in $\ect(G)$ za znane grafe. }
+\caption{\label{tab:tab2} Izračun $\ec(G)$ in $\ect(G)$ za znane grafe. \label{tab_second}}
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
@@ -1278,7 +1278,7 @@ dvodelni   & $\le 3$  & 2\\ \hline
 splošni   & $\le 5$  &$ \le 3$\\ \hline
 \end{tabular}
 \end{table}
-Kot je razvidno iz zgornje tabele smo za velik del grafov v totalni verziji uspeli izboljšati rezultate. V nekaterih primerih smo že v povezavni verziji dosegli najnižjo možno mejo t.j.\ 2 in se je seveda neda izboljšati v totalni verziji.
+Kot je razvidno iz tabele~\ref{tab_second} smo za velik del grafov v totalni verziji uspeli izboljšati rezultate. V nekaterih primerih smo že v povezavni verziji dosegli najnižjo možno mejo t.j.\ 2 in se je seveda neda izboljšati v totalni verziji.
 
 
 \section{Seznamska verzija} 
@@ -1844,14 +1844,14 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
  \KwResult{Graf $G$ z utežitvijo $\omega$  }
 
 \SetKwFunction{FMain}{Solve123}
-    \SetKwProg{Fn}{Funkcija}{:}{}
+    \SetKwProg{Fn}{Function}{:}{}
     \Fn{\FMain{$G$}}{
        
 
        \text{$G$.LocalSolve()} \;
 
 \uIf{G.Solved()}{
-    \textbf{vrni} $G$\;
+    \textbf{return} $G$\;
   }
 
 \Else{
@@ -1859,16 +1859,16 @@ Kot smo že opisali bo končen algoritem deloval kot kombinacija lokalnega iskan
  \For{$w= 1$ \KwTo $3$}{
    result = \text{Solve123(G.Split(e))} \;
 \uIf{\text{result}}{
- \textbf{vrni} \text{result} \;
+ \textbf{return} \text{result} \;
 }
 
 
     }
-\textbf{vrni} $ False $ \;
+\textbf{return} $ False $ \;
   }
 
 }
-\textbf{Konec Funkcije}
+\textbf{End Function}
 
 
 
@@ -1964,7 +1964,7 @@ V začetnem delu magisterske naloge smo predstavili najboljše rezultate do seda
 
 Poleg točnih rezultatov smo si ogledali tudi kako poiskati ustrezno rešitev na velikih in naključnih grafih. Pri tem smo odkrili, da zadoščata že uteži $1$ in $2$ skoraj vedno. S tem je mišljeno, da ima skoraj vsak graf izbran naključno pravilno $2$-utežitev. To je posledica asimptotskih rezultatov za kromatično število ter minimalno stopnjo. Potrebujemo tudi poseben izrek o podgrafih z omejenimi stopnjami. Rezultat je presenetljiv in nam poenostavi računanje parametra za večje grafe, če zadoščajo določenim lastnostim. Pri smo pokazali, da skoraj vsak graf tem lastnostim res zadošča. Izrek, ki smo ga pokazali za take grafe eksplicitno konstruira ustrezno utežitev.
 
-Domneva 1-2-3 je bila zastavljena leta 2004. V tem času je bilo narejeno ogromno napredka. Pri tem so bile uporabljene različne metode iz različnih vej matematike. Kljub velikemu napredku proti rešitvi domneve je težko oceniti kako hitro bo rešena. Za primerjavo, kromatično število za ravninske grafe je bil dolgo časa odprt problem. Domneva je bila zastavljena že v 19.\ stoletju vendar je dokaz prišel šele proti koncu 20.\ stoletja. Pri tem je bilo mnogo neuspelih poizkusov. Zanimivo je tudi to, da je bil izrek petih barv dokazan že v 19.\ stoletju in je minilo skoraj 100 let preden je bil dokazan izrek štirih barv. Prav tako je moral računalnik opravit del dokaza, kar je bila tudi ena izmed prvih uporab računalnika v dokazovanju. Trenutno uporabe domneve 1-2-3 oziroma njenih rezultatov v praksi nisem zasledil in je zato zanimiva zgolj teoretično, saj nam podaja neko lastnost grafov, ki je bila do sedaj še neraziskana. Kljub temu je domneva 1-2-3 močno povezana z barvanjem grafov, kar je verjetno eden izmed najbolj znanih problemov na grafih. Poleg tega ima ogromno uporabnih posledic na različnih področjih. Zato bo nekoč morda domneva 1-2-3 dobila uporabno vrednost tudi v praksi ne glede na to, ali bo ovržena ali dokazana. Rezultati, zbrani do sedaj podajajo velik vpogled v to, kako lahko s pomočjo celoštevilskih uteži na povezavah konstruiramo pravilna barvanja grafov. To lahko storimo že sedaj z obstoječimi rezultati in pri tem potrebuje le uteži $\{1,2,3,4,5\}$.
+Domneva 1-2-3 je bila zastavljena leta 2004. V tem času je bilo narejeno ogromno napredka. Pri tem so bile uporabljene različne metode iz različnih vej matematike. Kljub velikemu napredku proti rešitvi domneve je težko oceniti kako hitro bo rešena. Za primerjavo, kromatično število za ravninske grafe je bil dolgo časa odprt problem. Domneva je bila zastavljena že v 19.\ stoletju vendar je dokaz prišel šele proti koncu 20.\ stoletja. Pri tem je bilo mnogo neuspelih poizkusov. Zanimivo je tudi to, da je bil izrek petih barv dokazan že v 19.\ stoletju in je minilo skoraj 100 let preden je bil dokazan izrek štirih barv. Prav tako je moral računalnik opravit del dokaza, kar je bila tudi ena izmed prvih uporab računalnika v dokazovanju. Trenutno uporabe domneve 1-2-3 oziroma njenih rezultatov v praksi nisem zasledil in je zato zanimiva zgolj teoretično, saj nam podaja neko lastnost grafov, ki je bila do sedaj še neraziskana. Kljub temu je domneva 1-2-3 močno povezana z barvanjem grafov, kar je verjetno eden izmed najbolj znanih problemov na grafih. Poleg tega ima ogromno uporabnih posledic na različnih področjih. Zato bo nekoč morda domneva 1-2-3 dobila uporabno vrednost tudi v praksi ne glede na to, ali bo ovržena ali dokazana. Rezultati, zbrani do sedaj podajajo velik vpogled v to, kako lahko s pomočjo celoštevilskih uteži na povezavah konstruiramo pravilna barvanja grafov. To lahko storimo že sedaj z obstoječimi rezultati in pri tem potrebujemo le uteži $\{1,2,3,4,5\}$.
 
 
  
