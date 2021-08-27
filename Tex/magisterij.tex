@@ -302,18 +302,29 @@ Zahvalil bi se tudi Igorju Smirnovu, ki mi je omogočil delo ob študiju ter me 
 
 \section*{Program dela}
 \addcontentsline{toc}{section}{Program dela} % dodajmo v kazalo
-Tu naj bi mentor napisal program dela, skupaj z osnovno literaturo spodaj. To je v template-u, ki ga iamo na spletni učilnici za seminar. Verjetno tega ni v končno verziji. Okviren osnutek z povezavami na določene reference bom napisal kar v glavnem delu dokumenta.
+Magisterij naj obravnava znane rezultate iz literature, ki se nanašajo na domnevo 1-2-3,
+ki je še vedno odprt problem v teoriji grafov. Domeneva pravi, da lahko povezave
+vsakega enostavnega grafa utežimo z elementi množice $\{1, 2, 3\}$, tako da ta utežitev
+inducira pravilno barvanje vozlišč. Kot izhodišče naj vam služijo spodaj navedeni članki.
 
+Najprej predstavite osnovne pojme, ki jih bralec potrebuje za razumevanje same domneve.
+Nato izračunajte vrednost parametra $\ec(G)$ za preproste enoparametrične 
+družine grafov (npr. polni grafi in cikli). Zatem naredite kolikor se da popoln pregled znanih rezultatov.
+Znani (delni) rezultati so dveh vrst: po eni strani je domneva 1-2-3 dokazana za nekatere
+posebne družine grafov, po drugi strani pa je v splošnem dokazana šibkejša verzija domneve.
+Predstavite tudi rezultate, ki se nanašajo na seznamsko in totalno verzijo domneve 1-2-3.
+
+Magisterij naj vsebuje tudi praktični del. Zasnujte in implementirajte algoritem za iskanje
+utežitve povezav z vrednostmi $\{1, 2, 3\}$, ki porodi pravilno barvanje vozlišč. Algoritem
+tudi preizkusite, tako da ga poženete na vseh grafih do reda $n$, za smiselno izbrano
+vrednost $n$.
 \section*{Osnovna literatura}
-Literatura mora biti tukaj posebej samostojno navedena (po pomembnosti) in ne
-le citirana. V tem razdelku literature ne oštevilčimo po svoje, ampak uporabljamo
-okolje itemize in ukaz plancite, saj je celotna literatura oštevilčena na koncu.
 \begin{itemize}
-  \plancite{maingraph}
   \plancite{base}
   \plancite{regular}
-  \plancite{examples}
   \plancite{proof12345}
+\plancite{alg_org}
+\plancite{random12}
 \end{itemize}
 
 \vspace{2cm}
@@ -1039,7 +1050,7 @@ $$ \frac{n}{k} = \frac{\log (1/q)}{2 + \epsilon} \cdot \frac{n}{\log n} $$
 barv.
 \end{proof}
 
-Zgornjo trditev bomo kasneje uporabili ko bomo analizirali utežitve na naključnih grafih. Potrebovali bomo zgornjo mejo za kromatično število. Dobimo jo lahko na podoben način. V zgornjem primeru v definiciji vrednosti $k$ zamenjamo $\epsilon$ z $-\epsilon$. V tem primeru nam rezultat z največjo neodvisno množico pove, da v grafu z veliko verjetnostjo obstaja neodvisna množica $I$ večja od $k$. Ideja je sedaj, da to množico odstranimo ter v preostanku grafa zopet poiščemo neodvisno množico večjo od $k$. To lahko storimo, saj preostanek grafa $G - I$ lahko gledamo kot neodvisno kopijo v $\mathcal{G}(n - |I|, p)$. Izkaže se, da tak postopek lahko nadaljujemo dokler imamo več kot $\frac{n}{\log^2n}$ vozlišč. Vsaki neodvisni množici dodelimo svojo barvo ter vsakemu izmed preostalih $\frac{n}{\log^2n}$ vozlišč dodelimo svojo barvo. Na tak način dobimo zgornjo mejo za kromatično število. Ta zgornja meja je torej $\chi(G) < \frac{\log(1/q)}{2 - \epsilon} \cdot \frac{n}{\log n}$ in jo bomo uporabili pri dokazu glavnega izreka v tem razdelku. Poleg tega bomo potrebovali še eno asimptotsko oceno in sicer za minimalno stopnjo vozlišč. Naj bo $p \in (0, 1)$ in vzemimo graf $G \in  \mathcal{G}(n, p)$ ter opazujmo poljubno vozlišče $v \in V(G)$. Kaj lahko povemo o $d(v)$? Mislimo si lahko, da izvedemo eksperiment za vsakega izmed preostalih $n - 1$ vozlišč ter povečamo stopnjo vozlišča $v$, če je bil eksperiment uspešen. Na podlagi tega lahko ocenimo pričakovano stopnjo vozlišča kot $(n-1)p$. Za nadaljno oceno potrebujemo posebno mejo iz verjetnosti.
+Zgornjo trditev bomo kasneje uporabili ko bomo analizirali utežitve na naključnih grafih. Potrebovali bomo zgornjo mejo za kromatično število. Dobimo jo lahko na podoben način. V zgornjem primeru v definiciji vrednosti $k$ zamenjamo $\epsilon$ z $-\epsilon$. V tem primeru nam rezultat z največjo neodvisno množico pove, da v grafu z veliko verjetnostjo obstaja neodvisna množica $I$ večja od $k$. Ideja je sedaj, da to množico odstranimo ter v preostanku grafa zopet poiščemo neodvisno množico večjo od $k$. To lahko storimo, saj preostanek grafa $G - I$ lahko gledamo kot neodvisno kopijo v $\mathcal{G}(n - |I|, p)$. Izkaže se, da tak postopek lahko nadaljujemo dokler imamo več kot $\frac{n}{\log^2n}$ vozlišč. Vsaki neodvisni množici dodelimo svojo barvo ter vsakemu izmed preostalih $\frac{n}{\log^2n}$ vozlišč dodelimo svojo barvo. Na tak način dobimo zgornjo mejo za kromatično število. Bolj natančen postopek lahko bralec najde v~\cite{random_col}. Ta zgornja meja je torej $\chi(G) < \frac{\log(1/q)}{2 - \epsilon} \cdot \frac{n}{\log n}$ in jo bomo uporabili pri dokazu glavnega izreka v tem razdelku. Poleg tega bomo potrebovali še eno asimptotsko oceno in sicer za minimalno stopnjo vozlišč. Naj bo $p \in (0, 1)$ in vzemimo graf $G \in  \mathcal{G}(n, p)$ ter opazujmo poljubno vozlišče $v \in V(G)$. Kaj lahko povemo o $d(v)$? Mislimo si lahko, da izvedemo eksperiment za vsakega izmed preostalih $n - 1$ vozlišč ter povečamo stopnjo vozlišča $v$, če je bil eksperiment uspešen. Na podlagi tega lahko ocenimo pričakovano stopnjo vozlišča kot $(n-1)p$. Za nadaljno oceno potrebujemo posebno mejo iz verjetnosti.
 \begin{trditev}[Chernoffova meja]
 Naj bodo $X_1, X_2, \ldots, X_n$ neodvisne in enako porazdeljene slučajne spremenljivke z vrednostmi v $\{0, 1\}$. Naj za vsak $i = 1, \ldots, n$ velja $E[X_i] = p$. Definirajmo slučajno spremenljivko $X = \sum_{i=1}^n X_i$. Označimo še $\mu = E[X] = np$. Tedaj velja za vsak $0 <\delta < 1$ velja
 $$P[X \le (1-\delta) \mu] \le e ^{-\frac{\delta^2 \mu}{2}}. $$
@@ -1747,13 +1758,13 @@ V tem razdelku smo spoznali močno orodje s pomočjo katerega se lahko lotimo se
 	2, & \text{sicer};
 	\end{cases}$ &\normalsize3 & \normalsize$\le 3$ \rule{0pt}{2.6ex} \\
 \footnotesize\text{   Referenca}& \footnotesize ~\ref{res_dvo_complete} &  &\footnotesize ~\ref{list_e_complete} & \\ \hline
- \normalsize $3$-obarvljivi& \normalsize3 & \normalsize$\le 3$& & \rule{0pt}{2.6ex} \\ 
-\footnotesize\text{   }& \footnotesize ~\ref{res_3col} & & & \\ \hline
+ \normalsize $3$-obarvljivi& \normalsize3 & \normalsize$\le 3$& / & / \rule{0pt}{2.6ex} \\ 
+\footnotesize\text{   Referenca}& \footnotesize ~\ref{res_3col} &  &  & \\ \hline
 $\normalsize T_n$ & \normalsize 2 & \normalsize 2& \normalsize 3 & \normalsize 2 \rule{0pt}{2.6ex}\\ 
 \footnotesize\text{   Referenca}& \footnotesize ~\ref{res_tree} & \footnotesize ~\ref{total_dvo} &\footnotesize ~\ref{list_e_tree} &\footnotesize ~\ref{list_t_tree}\\ \hline
-\footnotesize dvodelni $d$-regularni, $d\ge 3$ & \large2  & \large2& & \rule{0pt}{2.6ex}\\
+\footnotesize dvodelni $d$-regularni, $d\ge 3$ & \large2  & \large2& / & / \rule{0pt}{2.6ex}\\
  \footnotesize\text{   Referenca}& \footnotesize ~\ref{pos_dvo} & & & \\ \hline
-\normalsize dvodelni   & \normalsize $\le 3$  & \normalsize 2 & & \rule{0pt}{2.6ex} \\ 
+\normalsize dvodelni   & \normalsize $\le 3$  & \normalsize 2 & / & / \rule{0pt}{2.6ex} \\ 
 \footnotesize\text{   Referenca}& \footnotesize ~\ref{res_3col} &\footnotesize ~\ref{total_dvo} & & \\ \hline
 \normalsize splošni   & \normalsize $\le 5$  &\normalsize $ \le 3$ & \normalsize$ 2\Delta(G) + 1$ & \normalsize $\Delta(G)$ \rule{0pt}{2.6ex} \\
 \footnotesize\text{   Referenca}& \footnotesize ~\ref{theorem12345}& \footnotesize ~\ref{theorem123} & &\footnotesize ~\ref{list_t_gen}\\ \hline
@@ -1762,7 +1773,7 @@ $\normalsize T_n$ & \normalsize 2 & \normalsize 2& \normalsize 3 & \normalsize 2
 Kot je razvidno iz tabele smo se tudi s seznamsko verzijo problema zelo približali oziroma dobilo celo enake rezultate kot v originalni verziji. Največja razlika v primerjavi s seznamsko verzijo problema so seveda splošni grafi. V zadnjem času je bila dokazana konstantna zgornja meja za totalno seznamsko verzijo. V~\cite{list_best} so pokazali, da velja $\ch_{\Sigma}^t(G) \le 17$. Vendar glede na to, da je podobno veljalo za originalno verzijo ob postavitvi domneve smo lahko optimistični, da se bo meja za seznamsko verzijo v prihodnosti še izboljšala.
 
 \section{Algoritem za računanje $3$-utežitve grafa}
-Predstavili smo kar nekaj izrekov in dokazov, ki uporabljajo algoritmične pristope. V glavnem smo s tem uspeli pokazati najboljše zgornje meje za parametra $\ec$ in $\ect$. V tem primeru je zadoščal polinomski algoritem, ki je poiskal ustrezno utežitev za poljuben graf. V tem razdelku bomo predstavili algoritem, ki bo probal najti pravilno $3$-utežitev za poljuben graf. Pod predpostavko domneve 1-2-3 bi se moral tak algoritem vedno uspešno končati. Torej bi moral vedno najti ustrezno $3$-utežitev. Ampak, ker domneva še ni dokazana, ne vemo, ali bomo res uspeli najti rešitev za vsak graf. Kaj to pomeni? V najslabšem primeru bomo morali poizkusiti vse možne utežitve grafa $G$. Takih utežitev je seveda ogromno in sicer $3^{|E(G)|}$. Poleg tega vemo, da je število povezav kvadratno odvisno od števila vozlišč in s tem težavnost problema v odvisnosti od števila vozlišč zelo hitro raste. Na podlagi zgornjih premislekov se nam zdi, da bomo lahko tak problem rešili le za majhne grafe. Za hiter premislek si oglejmo graf z $15$ vozlišči in $75$ povezavami. Tak graf ima torej $3^{75} \approx 6 \times 10^{35}$ različnih utežitev, kar je ogromno število za relativno majhen graf. Poleg računanja $3$-utežitve za poljuben graf je iz vidika domneve zanimivo tudi analiziranje vseh grafov do nekega reda. Tako morda odkrijemo kakšen graf, za katerega ne obstaja pravilna $3$-utežitev. S tem bi našli protiprimer za domnevo 1-2-3. Vendar tukaj pridemo do naslednjega problema. Poleg tega, da za posamezen graf predvidevamo eksponentno časovno zahtevnost, število vseh grafov na $n$ vozliščih tudi raste eksponentno v odvisnosti od $n$. Izberimo si fiksno število vozlišč $n$. Koliko povezanih grafov na $n$ vozliščih obstaja? Pravzaprav je to precej težko vprašanje. Oglejmo si najprej koliko je vseh grafov na $n$ vozliščih, tudi takih, ki niso nujno povezani. Vseh možnih povezav je $ {n \choose 2}$ in ker vsako povezavo lahko bodisi vključimo bodisi ne, lahko tako generiramo $2^{n \choose 2}$ grafov. Vendar pri tem lahko dobimo grafe, ki niso povezani ter so med seboj lahko tudi izomorfni. V tabeli~\ref{tbl:gnumb} vidimo, kako hitro raste število povezanih neizomorfnih grafov.
+Predstavili smo kar nekaj izrekov in dokazov, ki uporabljajo algoritmične pristope. V glavnem smo s tem uspeli pokazati najboljše zgornje meje za parametra $\ec$ in $\ect$. V tem primeru je zadoščal polinomski algoritem, ki je poiskal ustrezno utežitev za poljuben graf. V tem razdelku bomo predstavili algoritem, ki bo probal najti pravilno $3$-utežitev za poljuben graf. Bralec lahko izvorno kodo za algoritem najde na repozitoriju~\cite{github}. Pod predpostavko domneve 1-2-3 bi se moral tak algoritem vedno uspešno končati. Torej bi moral vedno najti ustrezno $3$-utežitev. Ampak, ker domneva še ni dokazana, ne vemo, ali bomo res uspeli najti rešitev za vsak graf. Kaj to pomeni? V najslabšem primeru bomo morali poizkusiti vse možne utežitve grafa $G$. Takih utežitev je seveda ogromno in sicer $3^{|E(G)|}$. Poleg tega vemo, da je število povezav kvadratno odvisno od števila vozlišč in s tem težavnost problema v odvisnosti od števila vozlišč zelo hitro raste. Na podlagi zgornjih premislekov se nam zdi, da bomo lahko tak problem rešili le za majhne grafe. Za hiter premislek si oglejmo graf z $15$ vozlišči in $75$ povezavami. Tak graf ima torej $3^{75} \approx 6 \times 10^{35}$ različnih utežitev, kar je ogromno število za relativno majhen graf. Poleg računanja $3$-utežitve za poljuben graf je iz vidika domneve zanimivo tudi analiziranje vseh grafov do nekega reda. Tako morda odkrijemo kakšen graf, za katerega ne obstaja pravilna $3$-utežitev. S tem bi našli protiprimer za domnevo 1-2-3. Vendar tukaj pridemo do naslednjega problema. Poleg tega, da za posamezen graf predvidevamo eksponentno časovno zahtevnost, število vseh grafov na $n$ vozliščih tudi raste eksponentno v odvisnosti od $n$. Izberimo si fiksno število vozlišč $n$. Koliko povezanih grafov na $n$ vozliščih obstaja? Pravzaprav je to precej težko vprašanje. Oglejmo si najprej koliko je vseh grafov na $n$ vozliščih, tudi takih, ki niso nujno povezani. Vseh možnih povezav je $ {n \choose 2}$ in ker vsako povezavo lahko bodisi vključimo bodisi ne, lahko tako generiramo $2^{n \choose 2}$ grafov. Vendar pri tem lahko dobimo grafe, ki niso povezani ter so med seboj lahko tudi izomorfni. V tabeli~\ref{tbl:gnumb} vidimo, kako hitro raste število povezanih neizomorfnih grafov.
 \begin{table}[h!]
 
 \caption{Število povezanih grafov na $n$ vozliščih.}
